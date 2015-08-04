@@ -46,8 +46,8 @@
 							<p class="justified">
 								Data is read into the <spring:message code="application.title" /> portal in <!--a href=""-->Darwin Core Archive<!--/a--> format.
 								A Darwin Core Archive is a zip file containing one or more delimited (e.g. CSV) files, and a metadata file which defines
-								what data type each column contains.  Darwin Core Archives can be produced by Scratchpads, BioCASe, the GBIF IPT system,
-								or manually.  GBIF provide a <a href="http://tools.gbif.org/dwca-validator/">Darwin Core Archive Validator</a>.
+								what data type each column contains.  Darwin Core Archive can be produced by Scratchpads, BioCASe, the GBIF IPT system,
+								or manually.  GBIF provides a <a href="http://tools.gbif.org/dwca-validator/">Darwin Core Archive Validator</a>.
 							</p>
 							<p class="justified">
 								Darwin Core defines many terms (data types / column headings).  The portal only recognises some terms; these
@@ -91,7 +91,7 @@
 							</p>
 							<ul>
 								<li><code>http://purl.org/dc/terms/type</code>: the type of description, one of "general", "distribution", "habitat", "morphology", "literature".</li>
-								<li><code>http://purl.org/dc/terms/source</code>: ¿not used by eFloras?</li>
+								<li><code>http://purl.org/dc/terms/source</code>: the source of the description text</li>
 								<li><code>http://purl.org/dc/terms/description</code>: the descriptive text</li>
 							</ul>
 							<p class="justified">Additional terms can be included, they will be ignored.</p>

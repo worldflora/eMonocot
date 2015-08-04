@@ -5,48 +5,20 @@
 	<jsp:output omit-xml-declaration="true" />
 	<div class="navbar-inner">
 		<div class="container">
-			<div id="footer-icons" class="row visible-desktop no-print">
-				<c:forEach var="footOrgs" items="${footerOrganisations}">
-					<ul class="nav">
-						<c:forEach var="footOrg" items="${footOrgs}">
-							<li><a href="${footOrg.uri}"><img src="${footOrg.logoUrl}" height="60" alt="${footOrg.title}" target="_blank" /></a></li>
-						</c:forEach>
-					</ul>
-				</c:forEach>
-			</div>
-			<div id="footer-icons-mobile" class="row visible-phone visible-tablet no-print">
-				<c:forEach var="footOrgs" items="${footerOrganisations}">
-					<ul class="nav">
-						<c:forEach var="footOrg" items="${footOrgs}">
-							<li><a href="${footOrg.uri}"><img src="${footOrg.logoUrl}" width="72" alt="${footOrg.title}" target="_blank" /></a></li>
-						</c:forEach>
-					</ul>
-				</c:forEach>
-			</div>
-			<div id="footer-brand" class="row">
-				<c:url value="/" var="brandUrl"/>
-				<a href="${brandUrl}">
-					<div id="footer-logo"><!-- --></div>
-				</a>
-			</div>
 			<div class="row">
 				<ul class="span12 nav no-print">
 					<li>
 						<ul class="footerColumn span3">
 							<li>
 								<c:url value="/about" var="aboutUrl" />
-								<a href="${aboutUrl}"><spring:message code="about.title" /></a>
+								<a href="https://www.worldfloraonline.org"><spring:message code="about.title" /></a>
 							</li>
 							<li>								
-								<a class="contactLinkOverlay" href="mailto:enquiries@e-monocot.org?subject=eMonocot Portal enquiry" alt="eMonocot email"><spring:message code="contact.title" />&#160;<i class="halflings-icon white envelope"><!--  --></i></a>
+								<a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=WFO Demonstration Portal" alt="WFO email"><spring:message code="contact.title" />&#160;<i class="halflings-icon white envelope"><!--  --></i></a>
 							</li>
 							<li>
 								<c:url var="twitterImageUrl" value="/css/images/glyphicons_white_twitter.png"/>
-								<a href="https://twitter.com/eMonocot" alt="eMonocot twitter"> <spring:message code="twitter.title" /><img src="${twitterImageUrl}"/></a>
-							</li>
-							<li>
-								<c:url var="githubImageUrl" value="/css/images/github_white.png"/>
-								<a href="https://github.com/RBGKew/eMonocot"><spring:message code="source.code" /> <img src="${githubImageUrl}" alt="GitHub"/></a>
+								<a href="https://twitter.com/TheWorldFlora" alt="WFO twitter"> <spring:message code="twitter.title" /><img src="${twitterImageUrl}"/></a>
 							</li>
 						</ul>
 					</li>
@@ -78,9 +50,6 @@
 					<li>
 						<ul class="footerColumn span3">
 							<li>
-								<a class="helpLinkOverlay" href="http://families.e-monocot.org/emonocot-guide"><spring:message code="help.title" /></a>
-							</li>
-							<li>
 								<c:url value="/tour" var="tourUrl" />
 								<a href="${tourUrl}"><spring:message code="eMonocot.tools" /></a>
 							</li>
@@ -95,10 +64,7 @@
 			<div class="row">
 				<ul class="nav no-print">
 					<li>
-						<a href="${aboutUrl}"><spring:message code="application.title"/> <spring:message code="application.version" /></a>
-					</li>
-					<li>
-						<spring:message code="design.by.designers" />
+						<a href="${aboutUrl}"><spring:message code="application.title"/> </a>
 					</li>
 				</ul>
 			</div>
