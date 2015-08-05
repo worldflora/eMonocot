@@ -32,7 +32,7 @@
 
 // Scaffolding
 // -------------------------
-@bodyBackground:        #eff2ea;  // emonocot - was white
+@bodyBackground:        lighten(@navbarBackgroundHighlight, 50%);  //#eff2ea;  // emonocot - was white
 @textColor:             @grayDark;
 
 
@@ -88,7 +88,7 @@
 @btnBackgroundHighlight:            darken(@white, 10%);
 @btnBorder:                         #ccc;
 
-@btnPrimaryBackground:              @linkColor;
+@btnPrimaryBackground:              #d8811a;
 @btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 20%);
 
 @btnInfoBackground:                 #5bc0de;
@@ -186,7 +186,7 @@
 @navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
 
 @navbarHeight:                    48px; //e-monocot. Originally it was40px
-@navbarBackgroundHighlight:       #ffffff;
+@navbarBackgroundHighlight:       #3AAD48;
 @navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
 @navbarBorder:                    darken(@navbarBackground, 12%);
 
@@ -200,9 +200,9 @@
 @navbarBrandColor:                @navbarLinkColor;
 
 // Inverted navbar
-@navbarInverseBackground:                #616668; //e-monocot. Originally it was #111111
-@navbarInverseBackgroundHighlight:       #616668; //e-monocot. Originally it was #222222
-@navbarInverseBorder:                    #616668; //e-monocot. Originally it was #252525
+@navbarInverseBackground:                darken(@navbarInverseBackgroundHighlight, 5%); //#616668; //e-monocot. Originally it was #111111
+@navbarInverseBackgroundHighlight:       #3AAD48; //#616668; //e-monocot. Originally it was #222222
+@navbarInverseBorder:                    darken(@navbarInverseBackgroundHighlight, 12%);  //#616668; //e-monocot. Originally it was #252525
 
 @navbarInverseText:                      @white; //e-monocot. Originally it was @grayLight
 @navbarInverseLinkColor:                 @white; //e-monocot. Originally it was @grayLight
