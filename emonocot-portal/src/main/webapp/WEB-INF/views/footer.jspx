@@ -20,6 +20,12 @@
 								<c:url var="twitterImageUrl" value="/css/images/glyphicons_white_twitter.png"/>
 								<a href="https://twitter.com/TheWorldFlora" alt="WFO twitter"> <spring:message code="twitter.title" /><img src="${twitterImageUrl}"/></a>
 							</li>
+							<li>
+								<c:url var="facebookLogoUrl" value="/css/images/facebook.png"/>
+								<a href="https://www.facebook.com/WorldFloraOnline" alt="WFO Facebook"><img src="${facebookLogoUrl}"/></a>
+								<c:url var="twitterLogoUrl" value="/css/images/twitter.png"/>
+								<a href="https://twitter.com/TheWorldFlora" alt="WFO twitter"><img src="${twitterLogoUrl}"/></a>
+							</li>
 						</ul>
 					</li>
 					
