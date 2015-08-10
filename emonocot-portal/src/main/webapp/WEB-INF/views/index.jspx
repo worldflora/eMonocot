@@ -15,39 +15,46 @@
             </div>
         </div>
 	<div class="row">
-		<div class="span4">
-			<div class="inner">
-				<div id="identify-box" class="box">
-					<c:url var="identifyUrl" value="/tour"/>
-					<c:url value="/css/images/identify.png" var="identifyImg"/>
-					<a href="${identifyUrl}#identify"><img src="${identifyImg}" height="160" width="260" alt="Identify"/></a>
-					<h2><spring:message code="identify.title"/></h2>
-					<p><spring:message code="identify.message" arguments="${identifyUrl}"/></p>
-				</div>
+		<div class="span6">			
+			<div id="identify-box" class="box-rounded-corners identify-box">
+				<c:url var="identifyUrl" value="/tour"/>
+				<c:url value="/css/images/identify.png" var="identifyImg"/>					
+				<h2><spring:message code="identify.title"/></h2>
+				<!-- <p><spring:message code="identify.message" arguments="${identifyUrl}"/></p> -->				
+				<a href="${identifyUrl}#identify"><img src="${identifyImg}" height="160" width="260" alt="Identify"/></a>
 			</div>
 		</div>
-		<div class="span4">
-			<div class="inner">
-				<div id="classify-box" class="box">
-					<c:url value="/css/images/classify.png" var="classifyImg"/>
-					<c:url var="classifyUrl" value="/tour"/>
-					<a href="${classifyUrl}#classify"><img src="${classifyImg}" height="160" width="260" alt="Classify"/></a>
-					<h2><spring:message code="classify.title"/></h2>
-					<p><spring:message code="classify.message" arguments="${classifyUrl}"/></p>
-				</div>
+		<div class="span6">
+			<div id="classify-box" class="box-rounded-corners classify-box">
+				<c:url value="/css/images/classify.png" var="classifyImg"/>
+				<c:url var="classifyUrl" value="/tour"/>				
+				<h2><spring:message code="classify.title"/></h2>
+				<!-- <p><spring:message code="classify.message" arguments="${classifyUrl}"/></p>  -->
+				<a href="${classifyUrl}#classify"><img src="${classifyImg}" height="160" width="260" alt="Classify"/></a>
 			</div>
 		</div>
-		<div class="span4">
-			<div class="inner">
-				<div id="explore-box" class="box">
-					<c:url value="/css/images/explore.png" var="exploreImg"/>
-					<c:url var="exploreUrl" value="/tour"/>
-					<a href="${exploreUrl}#explore"><img src="${exploreImg}" height="160" width="260" alt="Explore"/></a>
-					<h2><spring:message code="explore.title"/></h2>
-					<p><spring:message code="explore.message" arguments="${exploreUrl}"/></p>
-				</div>
+		<div class="span6">
+
+			<div id="explore-box" class="box-rounded-corners explore-box">
+				<c:url value="/css/images/explore.png" var="exploreImg"/>
+				<c:url var="exploreUrl" value="/tour"/>				
+				<h2><spring:message code="explore.title"/></h2>
+				<!-- <p><spring:message code="explore.message" arguments="${exploreUrl}"/></p> -->
+				<a href="${exploreUrl}#explore"><img src="${exploreImg}" height="160" width="260" alt="Explore"/></a>
 			</div>
+			
 		</div>
+		
+		<div class="span6">
+			<div id="contribute-box" class="box-rounded-corners contribute-box">
+				<c:url value="/css/images/contribute.png" var="contributeImg"/>
+				<c:url var="contributeUrl" value="/tour"/>				
+				<h2><spring:message code="contribute.title"/></h2>
+				<!-- <p><spring:message code="explore.message" arguments="${exploreUrl}"/></p> -->
+				<a href="${contributeUrl}#explore"><img src="${contributeImg}" height="160" width="260" alt="Explore"/></a>
+			</div>			
+		</div>
+
 	</div>
 	<div class="row">
 		<div id="news" class="span8">
@@ -90,35 +97,6 @@
 							<spring:message code="more.news"/>
 						</a>
 					</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="" class="span4">
-			<div class="inner">
-				<div class="box">
-					<h2><i class="glyphicons-icon comments"><!--  --></i> <spring:message code="comments.title"/></h2>
-					<c:choose>
-					  <c:when test="${not empty comments}">
-					    <ul class="media-list">
-						  <c:forEach var="comment" items="${comments.records}">
-							<tags:comment comment="${comment}"/>
-						  </c:forEach>
-					    </ul>
-					  </c:when>
-					  <c:otherwise>
-					    <div class="span6">
-					      <spring:message code="comments.unavailable"/>
-					    </div>
-					  </c:otherwise>
-					</c:choose>
-					<div class="row">
-						<div class="span6">
-							<c:url var="commentsUrl" value="/comment"/>
-							<a href="${commentsUrl}">
-								<spring:message code="more.comments"/>
-							</a>
-						</div>
 					</div>
 				</div>
 			</div>
