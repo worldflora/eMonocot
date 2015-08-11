@@ -22,7 +22,7 @@
 		</c:otherwise>
 	</c:choose>		
 	<link type="images/x-icon" href="${baseUrl}/css/images/favicon.ico" rel="shortcut icon" />
-	<link rel="stylesheet" type="text/css" media="screen" href="${baseUrl}/css/style.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>
 	
 	<!-- TODO - remove once there is no need to support ie9 -->
 	&lt;!--[if lt IE 10]&gt;
