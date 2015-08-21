@@ -18,7 +18,7 @@
 		<div class="span6">			
 			<div id="identify-box" class="box-rounded-corners identify-box">
 				<c:url var="identifyUrl" value="/tour"/>
-				<c:url value="/css/images/identify.png" var="identifyImg"/>					
+				<c:url value="/css/images/identify-glyph.png" var="identifyImg"/>					
 				<h2><spring:message code="identify.title"/></h2>
 				<!-- <p><spring:message code="identify.message" arguments="${identifyUrl}"/></p> -->				
 				<a href="${identifyUrl}#identify"><img src="${identifyImg}" height="160" width="260" alt="Identify"/></a>
@@ -26,7 +26,7 @@
 		</div>
 		<div class="span6">
 			<div id="classify-box" class="box-rounded-corners classify-box">
-				<c:url value="/css/images/classify.png" var="classifyImg"/>
+				<c:url value="/css/images/classify-glyph.png" var="classifyImg"/>
 				<c:url var="classifyUrl" value="/tour"/>				
 				<h2><spring:message code="classify.title"/></h2>
 				<!-- <p><spring:message code="classify.message" arguments="${classifyUrl}"/></p>  -->
@@ -36,7 +36,7 @@
 		<div class="span6">
 
 			<div id="explore-box" class="box-rounded-corners explore-box">
-				<c:url value="/css/images/explore.png" var="exploreImg"/>
+				<c:url value="/css/images/explore-glyph.png" var="exploreImg"/>
 				<c:url var="exploreUrl" value="/tour"/>				
 				<h2><spring:message code="explore.title"/></h2>
 				<!-- <p><spring:message code="explore.message" arguments="${exploreUrl}"/></p> -->
@@ -47,7 +47,7 @@
 		
 		<div class="span6">
 			<div id="contribute-box" class="box-rounded-corners contribute-box">
-				<c:url value="/css/images/contribute.png" var="contributeImg"/>
+				<c:url value="/css/images/contribute-glyph.png" var="contributeImg"/>
 				<c:url var="contributeUrl" value="/tour"/>				
 				<h2><spring:message code="contribute.title"/></h2>
 				<!-- <p><spring:message code="explore.message" arguments="${exploreUrl}"/></p> -->
