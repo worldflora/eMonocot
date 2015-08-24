@@ -26,13 +26,15 @@
 	
 	<div class="navbar-inner">
 		<div class="container">
+		     <div>
 			<c:url value="/" var="brandUrl"/>
-			<a href="${brandUrl}" class="brand"><span><spring:message code="application.title" /></span></a>
+			<a class="brand" href="${brandUrl}"><span><spring:message code="application.title" /></span></a>
 			<button type="button" class="btn btn-navbar no-print" data-toggle="collapse" data-target=".nav-collapse">
 				<span class="icon-bar"><!--  --></span>
 				<span class="icon-bar"><!--  --></span>
 				<span class="icon-bar"><!--  --></span>
 			</button>
+		     </div>
 			<div class="no-print">
 				<tiles:insertAttribute name="searchBox" ignore="true"/>
 				<div class="pull-right no-print">
@@ -152,6 +154,10 @@
 					</li>
 				</ul>
 			</div>
+			<div id="message-nav">
+				<p><spring:message code="logo.message"/></p>
+			</div>
 		</div>
 	</div>
 </div>
+
