@@ -51,7 +51,6 @@
   display: block;
   // Vertically center the text given @navbarHeight
   padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
-  margin-top: 5px;
   margin-left: -20px; // negative indent to left-align the text down the page
   font-size: 20px;
   font-weight: 200;
@@ -66,12 +65,14 @@
 #message-nav{
  	width: 600px;
 	float: left;
+	margin-top: 50px;
+	position: absolute;
 }
 
 #message-nav p{
-	padding: 0px 20px;
+	padding: 3px 20px;
 	color: #ffffff;
-	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family:"Bree serif";
 	font-size: 11px;
 }
 
@@ -242,7 +243,7 @@
   left: 0;
   display: block;
   float: left;
-  margin: 5px 10px 0 0;
+  //margin: 5px 10px 0 0;
 }
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity

@@ -11,20 +11,20 @@
 						<ul class="footerColumn span3">
 							<li>
 								<c:url value="/about" var="aboutUrl" />
-								<a href="https://www.worldfloraonline.org"><spring:message code="about.title" /></a>
+								<a href="http://www.worldfloraonline.org"><spring:message code="about.title" /></a>
 							</li>
 							<li>								
 								<a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=WFO Demonstration Portal" alt="WFO email"><spring:message code="contact.title" />&#160;<i class="halflings-icon white envelope"><!--  --></i></a>
 							</li>
 							<li>
 								<c:url var="twitterImageUrl" value="/css/images/glyphicons_white_twitter.png"/>
-								<a href="https://twitter.com/TheWorldFlora" alt="WFO twitter"> <spring:message code="twitter.title" /><img src="${twitterImageUrl}"/></a>
+								<a href="http://twitter.com/TheWorldFlora" alt="WFO twitter"> <spring:message code="twitter.title" /><img src="${twitterImageUrl}"/></a>
 							</li>
 							<li>
 								<c:url var="facebookLogoUrl" value="/css/images/facebook.png"/>
-								<a href="https://www.facebook.com/WorldFloraOnline" alt="WFO Facebook"><img src="${facebookLogoUrl}"/></a>
+								<a href="http://www.facebook.com/WorldFloraOnline" alt="WFO Facebook"><img src="${facebookLogoUrl}"/></a>
 								<c:url var="twitterLogoUrl" value="/css/images/twitter.png"/>
-								<a href="https://twitter.com/TheWorldFlora" alt="WFO twitter"><img src="${twitterLogoUrl}"/></a>
+								<a href="http://twitter.com/TheWorldFlora" alt="WFO twitter"><img src="${twitterLogoUrl}"/></a>
 							</li>
 						</ul>
 					</li>
