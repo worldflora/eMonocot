@@ -14,7 +14,7 @@
                 <iframe width="100%" height="340px" frameborder="0" src="http://www.youtube.com/embed/yOJWXQ4A_eQ?feature=player_detailpage" allowfullscreen="true"><!-- Preserving the iframe --></iframe>
             </div>
         </div>
-	<div class="row">
+	<div class="row row-center">
 		<div class="span6">			
 			<div id="identify-box" class="box-rounded-corners identify-box">
 				<c:url var="identifyUrl" value="/tour"/>
