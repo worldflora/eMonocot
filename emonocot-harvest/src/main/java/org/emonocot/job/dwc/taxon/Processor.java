@@ -198,10 +198,10 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				taxon.setAuthority(getSource());
 				taxon.setIdentifier(identifier);
 				taxon.setScientificName(scientificName);
-				logger.info("Didn't find taxon " + scientificName + " with identifier " + identifier + " from service returning new taxon");
+                logger.info("Didn't find taxon " + scientificName + " with identifier " + identifier + " from service, returning new taxon");
 				bindTaxon(taxon);
 			} else {
-				logger.info("Found taxon " + scientificName + "with identifier " + identifier + " from service returning taxon with id " + taxon.getId());
+                  logger.info("Found taxon " + scientificName + "with identifier " + identifier + " from service, returning taxon with id " + taxon.getId());
 				bindTaxon(taxon);
 			}
 			return taxon;

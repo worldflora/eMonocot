@@ -10,7 +10,7 @@
 .navbar {
   overflow: visible;
   margin-bottom: @baseLineHeight;
-
+  font-family: 'Bree serif';
   // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
   *position: relative;
   *z-index: 2;
@@ -51,7 +51,7 @@
   display: block;
   // Vertically center the text given @navbarHeight
   padding: ((@navbarHeight - @baseLineHeight) / 2) 20px ((@navbarHeight - @baseLineHeight) / 2);
-  margin-left: -20px; // negative indent to left-align the text down the page
+  margin-left: 3px; // negative indent to left-align the text down the page
   font-size: 20px;
   font-weight: 200;
   color: @navbarBrandColor;
@@ -61,6 +61,23 @@
     text-decoration: none;
   }
 }
+
+#message-nav{
+  width: 600px;
+  float: left;
+  //margin-top: 50px;
+  position: absolute;
+  padding-top: 42px;
+}
+
+#message-nav p{
+  padding: 3px 8px;
+  color: #ffffff;
+  font-family:"Bree serif";
+  font-size: 11px;
+
+}
+
 
 // Plain text in topbar
 // -------------------------
@@ -228,7 +245,7 @@
   left: 0;
   display: block;
   float: left;
-  margin: 0 10px 0 0;
+  //margin: 5px 10px 0 0;
 }
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
@@ -392,7 +409,7 @@
 .navbar-inverse {
 
   .navbar-inner {
-    #gradient > .vertical(@navbarInverseBackgroundHighlight, @navbarInverseBackground);
+    #gradient > .horizontal(@navbarInverseBackgroundHighlight, @navbarInverseBackground);
     border-color: @navbarInverseBorder;
   }
 

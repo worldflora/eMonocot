@@ -3,6 +3,7 @@
 <tiles-definitions>
   <definition name="index" extends="frontPage">
   	<put-attribute name="pageTitle" value="indexTitle" cascade="true" />
+    <!--<put-attribute name="hero" value="/WEB-INF/views/hero.jspx" /> //TODO: Remove after migration to new UI -->
     <put-attribute name="hero" value="/WEB-INF/views/hero.jspx" />
     <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
   </definition>

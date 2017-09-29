@@ -32,7 +32,7 @@
 
 // Scaffolding
 // -------------------------
-@bodyBackground:        #eff2ea;  // emonocot - was white
+@bodyBackground:        lighten(@navbarBackgroundHighlight, 50%);  //#eff2ea;  // emonocot - was white
 @textColor:             @grayDark;
 
 
@@ -74,6 +74,8 @@
 @borderRadiusLarge:     6px;
 @borderRadiusSmall:     3px;
 
+@boxBorderRadius:       25px;
+
 
 // Tables
 // -------------------------
@@ -88,7 +90,7 @@
 @btnBackgroundHighlight:            darken(@white, 10%);
 @btnBorder:                         #ccc;
 
-@btnPrimaryBackground:              @linkColor;
+@btnPrimaryBackground:              #d8811a;
 @btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 20%);
 
 @btnInfoBackground:                 #5bc0de;
@@ -158,7 +160,7 @@
 // -------------------------
 @imagePath:				  "./images";
 @fontPath:				  "./fonts";
-		
+
 
 // Input placeholder text color
 // -------------------------
@@ -185,9 +187,9 @@
 @navbarCollapseWidth:             979px;
 @navbarCollapseDesktopWidth:      @navbarCollapseWidth + 1;
 
-@navbarHeight:                    48px; //e-monocot. Originally it was40px
-@navbarBackgroundHighlight:       #ffffff;
-@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
+@navbarHeight:                    60px; //e-monocot. Originally it was40px
+@navbarBackgroundHighlight:       #4D883D;
+@navbarBackground:                #4D883D; //darken(@navbarBackgroundHighlight, 5%);
 @navbarBorder:                    darken(@navbarBackground, 12%);
 
 @navbarText:                      #777;
@@ -200,9 +202,9 @@
 @navbarBrandColor:                @navbarLinkColor;
 
 // Inverted navbar
-@navbarInverseBackground:                #616668; //e-monocot. Originally it was #111111
-@navbarInverseBackgroundHighlight:       #616668; //e-monocot. Originally it was #222222
-@navbarInverseBorder:                    #616668; //e-monocot. Originally it was #252525
+@navbarInverseBackground:                #8bcd91; //darken(@navbarInverseBackgroundHighlight, 5%); //#616668; //e-monocot. Originally it was #111111
+@navbarInverseBackgroundHighlight:       #4D883D; //#616668; //e-monocot. Originally it was #222222
+@navbarInverseBorder:                    darken(@navbarInverseBackgroundHighlight, 12%);  //#616668; //e-monocot. Originally it was #252525
 
 @navbarInverseText:                      @white; //e-monocot. Originally it was @grayLight
 @navbarInverseLinkColor:                 @white; //e-monocot. Originally it was @grayLight

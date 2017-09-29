@@ -45,7 +45,7 @@ public class ClassificationController {
 	 *
 	 */
 	private TaxonService taxonService;
-	private static final int NUM_CHILDREN=70;
+	private static final int NUM_CHILDREN=585; //TODO: the number of classifications on classification page.
 
 	/**
 	 * @param service Set the taxon service

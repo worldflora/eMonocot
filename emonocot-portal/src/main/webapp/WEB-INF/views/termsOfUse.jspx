@@ -1,11 +1,11 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
-	xmlns:form="http://www.springframework.org/tags/form"
-	xmlns:spring="http://www.springframework.org/tags">
+	 xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	 xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
+	 xmlns:form="http://www.springframework.org/tags/form"
+	 xmlns:spring="http://www.springframework.org/tags">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
-    <jsp:output omit-xml-declaration="yes" />
+	<jsp:output omit-xml-declaration="yes" />
 	<tags:pageheader>
 		<h2 id="page-title">
 			<spring:message code="termsOfUse.title" />
@@ -17,61 +17,49 @@
 			<div class="span6">
 				<div class="inner">
 					<div class="box">
-						<h1>Disclaimer</h1>
-						<p class="justified">eMonocot cannot guarantee the accuracy or
-							completeness of the information in this portal. Be aware that
-							eMonocot is still incomplete and undoubtedly contains errors.
-							Neither Royal Botanic Gardens, Kew, The University of Oxford, the
-							Natural History Museum nor any of the contributing data sources
-							can be made liable for any direct or indirect damage arising from
-							the use of eMonocot</p>
-						<p class="justified">While every effort has been taken to
-							ensure that the information held in the database is reliable and
-							complete, eMonocot is not responsible for any errors or omissions
-							in the data or any damages arising from the use of the data.</p>
-						<p class="justified">The Material displayed on our Website is
-							provided without any guarantees, conditions or warranties as to
-							its accuracy. To the extent permitted by law, we, other members
-							of our group and third parties connected to us hereby expressly
-							exclude:</p>
-						<ul class="unstyled">
-							<li>All conditions, warranties and other terms which might
-								otherwise be implied by statute, common law or the law of
-								equity.</li>
-							<li>Any liability for any direct, indirect or consequential
-								loss or damage incurred by you or any user in connection with
-								our Website, Materials or in connection with the use, inability
-								to use, or results of the use of our Website, any websites
-								linked to it and any materials (including the Materials) posted
-								on it, including, without limitation any liability for loss of
-								income or revenue; loss of business; loss of profits or
-								contracts; loss of anticipated savings; loss of data; loss of
-								goodwill; wasted management or office time and for any other
-								loss or damage of any kind, however arising and whether caused
-								by tort (including negligence), breach of contract or otherwise,
-								even if foreseeable.</li>
-						</ul>
+						<h1>Terms of Use</h1>
+						<p class="justified">All nomenclatural, taxonomic status and taxonomic hierarchical classifications in the WFO Taxonomic Backbone are provided with a CC0, or Public Domain, designation.</p>
+						<p class="justified">Content available on this site has been provided by World Flora Online (WFO) content providers, who may have placed restrictions on how you can re-use that content.</p>
+						<p class="justified">Please note that a single page may be made up of many different data elements, each covered by a different license. You are required to check to see which license applies to any portion(s) of the page you wish to re-use and to abide by any restrictions on that content.</p>
+						<p class="justified">The Creative Commons has set up a robust, free, easy-to-use set of protocols by which content owners can easily mark their creative work with the freedoms or restrictions that they want the information to carry. Click <a href="http://wiki.creativecommons.org/Marking/Users">here</a> for detailed instructions for marking CC licensed content.</p>
+
+						<p class="justified">If the WFO content providers have made content available under different licenses, this  license will be stated on the page.</p>
+						<p class="justified">If the content provider has assigned a CC0 or Public Domain designation to the content, you are free to use this content as you wish.</p>
+						<p class="justified">If you wish to re-use any content for purposes other than those allowed by the associated Creative Commons license, you must get permission to do so from the copyright holder.</p>
+						<p class="justified">If you use any of the text or images displayed in the World Flora Online, please
+							clearly acknowledge the original source (e.g. source system, literature,
+							photographer) of the material as well as the World Flora Online.</p>
 					</div>
 				</div>
 			</div>
 			<div class="span6">
 				<div class="inner">
 					<div class="box">
-						<h1>Copyright</h1>
-						<p class="justified">Content available on this site has been
-							provided by eMonocot data partners who retain the copyright of
-							their work and may have placed restrictions on how the content
-							can be reused. Every effort has been made to obtain permission
-							to use content in eMonocot. If you feel your rights have been
-							infringed please contact the maintainers of the relevant source
-							system immediately.</p>
-						<p class="justified">If you use any of the text or images
-							displayed in eMonocot please clearly acknowledge the original
-							source (e.g. Source system, literature, photographer) of the
-							material as well as eMonocot.</p>
+						<h1>Disclaimer</h1>
+						<p class="justified">The World Flora Online (WFO) cannot guarantee the accuracy or completeness of the information in this portal.
+							Be aware that WFO is still incomplete and undoubtedly contains errors. None of the partners in the WFO
+							Consortium nor any of the contributing data sources can be made liable for any direct or indirect damage
+							arising from the use of The World Flora Online.</p>
+						<p class="justified">While every effort has been taken to ensure that the information held in the database is reliable and complete,
+							the World Flora Online is not responsible for any errors or omissions in the data or any damages arising from
+							the use of the data.</p>
+						<p class="justified">The Material displayed on this Website is provided without any guarantees, conditions or warranties as to its
+							accuracy. To the extent permitted by law, the World Flora Online hereby expressly excludes:</p>
+						<ul class="unstyled">
+							<li>All conditions, warranties and other terms which might otherwise be implied by statute, common law or the
+								law of equity.</li>
+							<li>Any liability for any direct, indirect or consequential loss or damage incurred by you or any user in connection
+								with this Website, Materials or in connection with the use, inability to use, or results of the use of this Website,
+								any websites linked to it and any materials (including the Materials) posted on it, including, without limitation
+								any liability for loss of income or revenue; loss of business; loss of profits or contracts; loss of anticipated
+								savings; loss of data; loss of goodwill; wasted management or office time and for any other loss or damage of
+								any kind, however arising and whether caused by tort (including negligence), breach of contract or otherwise,
+								even if foreseeable.</li>
+						</ul>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
 </div>
