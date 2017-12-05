@@ -39,7 +39,6 @@
 								<c:url value="/resource" var="resourceUrl" />
 								<a href="${resourceUrl}"><spring:message code="resources.title" />&#160;<i class="halflings-icon white file"><!--  --></i></a>
 							</li>
-
 							<!--<li>-->
 							<!--<c:url value="/user" var="userUrl" />-->
 							<!--<a href="${userUrl}"><spring:message code="users.title" /></a>-->

@@ -18,7 +18,6 @@
 					<li><a href="#identify"><spring:message code="identification.tools" /></a></li>
 					<li><a href="#classify"><spring:message code="classify.header" /></a></li>
 					<li><a href="#explore"><spring:message code="search.tools" /></a></li>
-					<li><a href="#videoGallery"><spring:message code="videos" /></a></li>
 				</ul>
 			</div>
 		</header>
@@ -232,126 +231,7 @@
 							</dl>
 						</div>
 					</div>
-					<div class="inner">
-						<div class="box">
-							<h1 id="videoGallery">
-								<spring:message code="videos" />
-							</h1>
-							<div data-target="#modal-gallery" data-toggle="modal-gallery" id="videoGallery">
-								<div class="row">
-									<div id="carousel" class="carousel slide span11">
-										<div class="carousel-inner">
-											<div class="item active">
-												<ul class="thumbnails videoGallery">
-													<li>
-														<c:url value="/css/images/videoPoster/keyPlayerPoster.png" var="keyPlayerPoster"/>
-														<a class="thumbnail" href="#keyPlayerVideo" role="button" data-toggle="modal">
-															<img class="img-polaroid thumbnail videoThumb" rel="gallery" src="${keyPlayerPoster}"/>
-															<div class="caption videoCaption"><h4>Key player</h4><p>Show how to use the identification key player.</p></div>
-														</a>
-													</li>
-													<li>
-														<c:url value="/css/images/videoPoster/searchPoster.png" var="searchPoster"/>
-														<a class="thumbnail" href="#searchVideo" role="button" data-toggle="modal">
-															<img class="img-polaroid thumbnail videoThumb" rel="gallery" src="${searchPoster}"/>
-															<div class="caption videoCaption"><h4>Search</h4><p>Explain how to use the search.</p></div>
-														</a>
-													</li>
-													<li>
-														<c:url value="/css/images/videoPoster/mapSearchPoster.png" var="mapSearchPoster"/>
-														<a class="thumbnail" href="#mapSearchVideo" role="button" data-toggle="modal">
-															<img class="img-polaroid thumbnail videoThumb" rel="gallery" src="${mapSearchPoster}"/>
-															<div class="caption videoCaption"><h4>Map Search</h4><p>Show how to use the spatial search.</p></div>
-														</a>
-													</li>
-													<li>
-														<c:url value="/css/images/videoPoster/visualisePoster.png" var="visualisePoster"/>
-														<a class="thumbnail" href="#visualiseVideo" role="button" data-toggle="modal">
-															<img class="img-polaroid thumbnail videoThumb" rel="gallery" src="${visualisePoster}"/>
-															<div class="caption videoCaption"><h4>Visualise</h4><p>Explain how to use the data visualisation tool.</p></div>
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-				
-							<div id="keyPlayerVideo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#120;</button>
-									<h3 id="myModalLabel">Key player Tutorial</h3>
-								</div>
-								<div class="modal-body">
-									<c:url value="/css/video/keyTutorial.mp4" var="key_mp4" />
-									<c:url value="/css/video/keyTutorial.ogv" var="key_ogg" />
-									<c:url value="/css/video/keyTutorial.webm" var="key_webm" />
-									<video width="100%" controls="true">
-										<source src="${key_mp4}" type="video/mp4"><!--  --></source>
-										<source src="${key_ogg}" type="video/ogg"><!--  --></source>
-										<source src="${key_webm}" type="video/webm"><!--  --></source>
-										Your browser does not support the video tag.
-									</video>
-								</div>
-							</div>
-							
-							<div id="searchVideo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#120;</button>
-									<h3 id="myModalLabel">Search Tutorial</h3>
-								</div>
-								<div class="modal-body">
-									<c:url value="/css/video/searchTutorial.mp4" var="search_mp4" />
-									<c:url value="/css/video/searchTutorial.ogv" var="search_ogg" />
-									<c:url value="/css/video/searchTutorial.webm" var="search_webm" />
-									<video width="100%" controls="true">
-										<source src="${search_mp4}" type="video/mp4"><!--  --></source>
-										<source src="${search_ogg}" type="video/ogg"><!--  --></source>
-										<source src="${search_webm}" type="video/webm"><!--  --></source>
-										Your browser does not support the video tag.
-									</video>
-								</div>
-							</div>
-							
-							<div id="mapSearchVideo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#120;</button>
-									<h3 id="myModalLabel">Map search Tutorial</h3>
-								</div>
-								<div class="modal-body">
-									<c:url value="/css/video/mapSearchTutorial.mp4" var="map_mp4" />
-									<c:url value="/css/video/mapSearchTutorial.ogv" var="map_ogg" />
-									<c:url value="/css/video/mapSearchTutorial.webm" var="map_webm" />
-									<video width="100%" controls="true">
-										<source src="${map_mp4}" type="video/mp4"><!--  --></source>
-										<source src="${map_ogg}" type="video/ogg"><!--  --></source>
-										<source src="${map_webm}" type="video/webm"><!--  --></source>
-										Your browser does not support the video tag.
-									</video>
-								</div>
-							</div>
-							
-							<div id="visualiseVideo" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&#120;</button>
-									<h3 id="myModalLabel">Visualise Data Tutorial</h3>
-								</div>
-								<div class="modal-body">
-									<c:url value="/css/video/visualiseTutorial.mp4" var="vis_mp4" />
-									<c:url value="/css/video/visualiseTutorial.ogv" var="vis_ogg" />
-									<c:url value="/css/video/visualiseTutorial.webm" var="vis_webm" />
-									<video width="100%" controls="true">
-										<source src="${vis_mp4}" type="video/mp4"><!--  --></source>
-										<source src="${vis_ogg}" type="video/ogg"><!--  --></source>
-										<source src="${vis_webm}" type="video/webm"><!--  --></source>
-										Your browser does not support the video tag.
-									</video>
-								</div>
-							</div>
-							
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
