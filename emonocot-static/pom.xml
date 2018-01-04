@@ -186,7 +186,7 @@
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}/compiled-less/</outputDirectory>
-              <lessJS>${basedir}/src/main/js/less-1.3.0.min.js</lessJS>
+              <lessJs>${basedir}/src/main/js/less-1.3.0.min.js</lessJs>
               <includes>
                 <include>bootstrap.less</include>
               </includes>

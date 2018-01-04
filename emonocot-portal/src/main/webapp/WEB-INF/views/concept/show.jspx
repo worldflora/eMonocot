@@ -7,6 +7,7 @@
 	xmlns:security="http://www.springframework.org/security/tags"
 	xmlns:spring="http://www.springframework.org/tags">
 
+	<spring:message code="harvester.externalBaseUrl" var="harvesterExternalBaseUrl"/>
 	<tags:pageheader>
 		<h2 id="page-title"><i class="glyphicons-icon book_open"><!--  --></i> ${concept.prefLabel}</h2>
 		<div class="span1 pull-right">
@@ -30,12 +31,12 @@
 															<c:set var="imageLicense" value="All right reserved" />
 														</c:otherwise>
 													</c:choose>
-													<c:url var="fullsize" value="/images/fullsize/${concept.prefSymbol.id}.${concept.prefSymbol.format}" />
+													<c:url var="fullsize" value="${harvesterExternalBaseUrl}/images/fullsize/${concept.prefSymbol.id}.${concept.prefSymbol.format}" />
 													<c:url var="imageUrl" value="/image/${concept.prefSymbol.id}"/>
 													<a class="slideshow" href="${fullsize}" 
 														data-link="${imageUrl}" data-icon="icon-white icon-picture" 
 														data-creator="${image.creator}" data-license="${imageLicense}" title="${em:stripXml(concept.prefSymbol.title)}">
-														<c:url var="thumbnail" value="/images/thumbnails/${concept.prefSymbol.id}.${concept.prefSymbol.format}" />
+														<c:url var="thumbnail" value="${harvesterExternalBaseUrl}/images/thumbnails/${concept.prefSymbol.id}.${concept.prefSymbol.format}" />
 														<img class="thumbnail" src="${thumbnail}" title="${em:stripXml(concept.prefSymbol.title)}" />
 													</a>
 												</li>

@@ -572,10 +572,10 @@
         <batch:listener ref="stepStatusListener" />
       </batch:listeners>
     </batch:step>
-    <batch:step id="deleteAbsentReferences">
+    <batch:step id="deleteAbsentReferences"> <!-- TODO:-->
       <batch:description>Delete the references which we expected to be present in the archive but which were absent</batch:description>
       <batch:tasklet>
-        <batch:chunk reader="deleteReferencesReader" writer="deletingWriter" commit-interval="100" />
+        <batch:chunk reader="deleteReferencesReader" writer="deletingWriter" commit-interval="10" />
       </batch:tasklet>
       <batch:next on="COMPLETED" to="checkIdentifierProcessingMode" />
       <batch:listeners>
