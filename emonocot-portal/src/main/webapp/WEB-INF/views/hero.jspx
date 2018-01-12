@@ -36,14 +36,11 @@
 							<c:when test="${s.name eq 'org.emonocot.model.PhylogeneticTree'}">
 								<fmt:formatNumber type="NUMBER" groupingUsed="true" var="phylogeneticTrees" value="${s.count}"/>
 							</c:when>
-							<c:when test="${s.name eq 'org.emonocot.model.Description'}">
-								<fmt:formatNumber type="NUMBER" groupingUsed="true" var="descriptions" value="${s.count}"/>
-							</c:when>
-							<c:when test="${s.name eq 'org.emonocot.model.Taxon'}">
-								<fmt:formatNumber type="NUMBER" groupingUsed="true" var="descriptions" value="${s.count}"/>
-							</c:when>
 						</c:choose>
 					</c:forEach>
+					<c:if test="${not empty descriptionsCount}">
+						<fmt:formatNumber type="NUMBER" groupingUsed="true" var="descriptions" value="${descriptionsCount}"/>
+					</c:if>
 					<c:url var="taxaUrl" value="/search">
 						<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
 					</c:url>
@@ -57,7 +54,7 @@
 						<c:param name="facet" value="base.class_s:org.emonocot.model.PhylogeneticTree"/>
 					</c:url>
 					  <c:url var="descriptionsUrl" value="/search">
-						  <c:param name="facet" value="base.class_s:org.emonocot.model.Description"/>
+						  <c:param name="facet" value="taxon.descriptions_not_empty_b:true"/>
 					  </c:url>
 					  <c:url var="familiesUrl" value="/search">
 						  <c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>

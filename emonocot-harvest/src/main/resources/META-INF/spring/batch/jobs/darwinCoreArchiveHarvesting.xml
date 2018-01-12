@@ -578,6 +578,7 @@
         <batch:chunk reader="deleteReferencesReader" writer="deletingWriter" commit-interval="10" />
       </batch:tasklet>
       <batch:next on="COMPLETED" to="checkIdentifierProcessingMode" />
+      <batch:fail on="FAILED" />
       <batch:listeners>
         <batch:listener ref="processingExceptionProcessListener" />
         <batch:listener ref="stepStatusListener" />
