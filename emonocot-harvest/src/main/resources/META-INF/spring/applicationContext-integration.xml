@@ -35,7 +35,7 @@
     <property name="jobLauncher" ref="readWriteJobLauncher" />
     <property name="jobLocator" ref="jobRegistry" />
     <property name="jobStatusNotifier" ref="jobStatusNotifier"/>
-    <property name="baseUrl" value="${harvester.baseUrl}" />
+    <property name="baseUrl" value="${harvester.baseUrl}" /> <!--TODO: add externalBaseUrl property of change the value of this property.-->
   </bean>
 
   <!-- Outgoing Read write job launcher -->

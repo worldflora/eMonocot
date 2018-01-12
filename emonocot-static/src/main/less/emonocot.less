@@ -1,16 +1,16 @@
 /**
  * eMonocot customization
  */
- 
-body{
-	padding-top: @navbarHeight;
-}
+
+//body{
+//	padding-top: @navbarHeight; removed the body top-padding by commenting this block out.
+//}
 
 
 /**
  * cookiebar customisation
  */
- #cookie-bar a.cb-enable:active {
+#cookie-bar a.cb-enable:active {
 	color: rgba(255,255,255,.75) !important;
 }
 
@@ -31,15 +31,125 @@ a:focus {
 	.buttonBackground(@btnSuccessBackground, @btnSuccessBackgroundHighlight);
 }
 
+/**
+ * Carousel Customization
+ */
+.img-carousel {
+	display: block;
+	margin: auto;
+	max-width: none;
+}
+.image-text-left {
+	padding-left: 80px;
+	position: absolute;
+	left: 0;
+	top: 450px;
+	width: 95%;
+	text-align: left;
+	font-size: 14px;
+	//font-style: italic;
+	color: white;
+}
+#bs3-hero-unit {
+	padding-top: 61px;
+	height: 500px;
+}
+#myCarousel {
+	object-fit: none; /* Do not scale the image */
+	object-position: center;
+	margin-bottom: 0px; /*The footer top-links will not get highlighted if removed.  */
+	width: 100%;
+	z-index: -1;
+
+}
+#heroTitle {
+	width: 100%;
+	position: absolute;
+	z-index: 300;
+}
+#header-button-1 {
+	/*background-image: linear-gradient(to bottom, #00a485, #42b0e6);*/
+	color: brown;
+	width: 75px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 35%;
+	border-bottom-right-radius: 35%;
+	border-top-style: hidden;
+}
+#header-button-2 {
+	color: white;
+	width: 75px;
+	/*background-image: linear-gradient(to bottom, #e4e646, #e6e173);*/
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 35%;
+	border-bottom-right-radius: 35%;
+	border-top-style: hidden;
+}
+#header-button-3 {
+	color: white;
+	width: 75px;
+	/*background-image: linear-gradient(to bottom, #e6492d, #e63740);*/
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 35%;
+	border-bottom-right-radius: 35%;
+	border-top-style: hidden;
+}
+#header-button-4 {
+	color: white;
+	width: 75px;
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
+
+	/*background-image: linear-gradient(to bottom, #2cd5e6, #42b0e6);*/
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 35%;
+	border-bottom-right-radius: 35%;
+	border-top-style: hidden;
+}
+/* navbar customization*/
+.navbar .navbar-inner {
+	padding: 0;
+	background-color: #2f96b4;
+}
+.navbar .nav {
+	margin: 0;
+	display: table;
+	/*width: 100%;*/
+}
+.header .navbar .nav>li {
+	display: table-cell;
+	/*width: 1%;*/
+	float: none;
+}
+.header .navbar .nav>li>a {
+	font-weight: bold;
+	text-align: center;
+	color: white;
+	border-left: 1px solid rgba(255,255,255,.75);
+	border-right: 1px solid rgba(0,0,0,.1);
+}
+.header .navbar .nav li:first-child a {
+	border-left: 0;
+	border-radius: 3px 0 0 3px;
+}
+.header .navbar .nav li:last-child a {
+	border-right: 0;
+	border-radius: 0 3px 3px 0;
+}
 
 /**
  * BUG # 301: As a user of eMonocot I do not expect there to be gaps where it looks like there are missing images when looking at the images in a grid
- * Explicitly set the width and height of thumbnails to avoid the odd 
- * divide-by-zero error when a thumbnail has been resized to 101px or 99px 
- * 
+ * Explicitly set the width and height of thumbnails to avoid the odd
+ * divide-by-zero error when a thumbnail has been resized to 101px or 99px
+ *
  * Also, set max-width to none to prevent chrome squishing images in tables.
  */
- 
+
 img.thumbnail {
 
 	height: 100px;
@@ -85,7 +195,6 @@ img.videoThumb{
 .pull-right img{
 	height: 150px;
 	width: 150px;
-	
 }
 
 .videoCaption{
@@ -114,7 +223,7 @@ img.videoThumb{
 	text-align:justify;
 }
 
-.header-icon { 
+.header-icon {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 }
@@ -124,78 +233,78 @@ img.videoThumb{
 }
 
 .halflings-icon.keys{
-background-image:url(./images/glyphicons/fullsize/glyphicons_044_keys.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
-  &.white{
-  background-image:url(./images/glyphicons_halflings-white-keys.png);
-  }
+	background-image:url(./images/glyphicons/fullsize/glyphicons_044_keys.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
+	&.white{
+		background-image:url(./images/glyphicons_halflings-white-keys.png);
+	}
 }
 .halflings-icon.charts{
-  background-image:url(./images/glyphicons/fullsize/glyphicons_041_charts.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
+	background-image:url(./images/glyphicons/fullsize/glyphicons_041_charts.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
 }
 .halflings-icon.pie_chart{
-  background-image:url(./images/glyphicons/fullsize/glyphicons_042_pie_chart.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
+	background-image:url(./images/glyphicons/fullsize/glyphicons_042_pie_chart.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
 }
 
 .halflings-icon.browse_images{
-  background-image:url(./images/glyphicons_halflings-browse_images.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
-  &.white{
-  background-image:url(./images/glyphicons_halflings-white-browse_images.png);
-  }
+	background-image:url(./images/glyphicons_halflings-browse_images.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
+	&.white{
+		background-image:url(./images/glyphicons_halflings-white-browse_images.png);
+	}
 }
 
 .halflings-icon.classify{
-  background-image:url(./images/glyphicons_halflings-classify.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
-  &.white{
-  background-image:url(./images/glyphicons_halflings-white-classify.png);
-  }
+	background-image:url(./images/glyphicons_halflings-classify.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
+	&.white{
+		background-image:url(./images/glyphicons_halflings-white-classify.png);
+	}
 }
 
 .halflings-icon.phylogeny{
-  background-image:url(./images/glyphicons_halflings-phylogeny.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
-  &.white{
-  background-image:url(./images/glyphicons_halflings-white-phylogeny.png);
-  }
+	background-image:url(./images/glyphicons_halflings-phylogeny.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
+	&.white{
+		background-image:url(./images/glyphicons_halflings-white-phylogeny.png);
+	}
 }
 
 .halflings-icon.phylogeny_circle{
-  background-image:url(./images/glyphicons_halflings-phylogeny_circle.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
+	background-image:url(./images/glyphicons_halflings-phylogeny_circle.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
 }
 
 .halflings-icon.search_keys{
-  background-image:url(./images/glyphicons_halflings-search_keys.png);
-  background-position: 0 0;
-  background-size: 14px 14px;
-  &.white{
-  background-image:url(./images/glyphicons_halflings-white-search_keys.png);
-  }
+	background-image:url(./images/glyphicons_halflings-search_keys.png);
+	background-position: 0 0;
+	background-size: 14px 14px;
+	&.white{
+		background-image:url(./images/glyphicons_halflings-white-search_keys.png);
+	}
 }
 
 .glyphicons-icon.classify{
-  background-image:url(./images/glyphicons-classify.png);
-  background-position: 0 0;
-  background-size: 24px 24px;
+	background-image:url(./images/glyphicons-classify.png);
+	background-position: 0 0;
+	background-size: 24px 24px;
 }
 
 .glyphicons-icon.phylogeny{
-  background-image:url(./images/glyphicons-phylogeny.png);
-  background-position: 0 0;
-  background-size: 24px 24px;
+	background-image:url(./images/glyphicons-phylogeny.png);
+	background-position: 0 0;
+	background-size: 24px 24px;
 }
-	
+
 .tabbable-bordered {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -229,110 +338,110 @@ background-image:url(./images/glyphicons/fullsize/glyphicons_044_keys.png);
  * Phylogenetic Tree
  */
 #phylogeny-container {
-     border: solid thin black;
-     margin-top: 10px;
-     overflow: auto;
-     position:relative;
- }
- #phylogeny {
-   max-width: 100%;
-   max-height: 600px;
-   overflow: hidden;
- }
- #phylogeny-panzoombar {
-     position: absolute;
-     left: 10px;
-     top: 10px;
-     z-index: 1;
- }
- #phylogeny-panup {
-     position: absolute; 
-     left: 22px;
-     top: 4px; 
-     width: 18px; 
-     height: 18px; 
-     cursor: pointer;
-     background-image: url('./images/OpenLayers/north-mini.png');
- }
- #phylogeny-reset {
-     position: absolute;
-     left: 22px;
-     top: 22px; 
-     width: 18px;
-     height: 18px;
-     cursor: pointer;
-     background-image: url('./images/OpenLayers/zoom-world-mini.png');
- }
- #phylogeny-panright {
-     position: absolute;
-     left: 40px;
-     top: 22px;
-     width: 18px;
-     height: 18px;
-     cursor: pointer;
-     background-image: url('./images/OpenLayers/east-mini.png');
- }
- #phylogeny-panleft {
-   position: absolute;
-   left: 4px;
-   top: 22px;
-   width: 18px;
-   height: 18px;
-   cursor: pointer;
-   background-image: url('./images/OpenLayers/west-mini.png');
- }
- #phylogeny-pandown {
-     position: absolute;
-     left: 22px;
-     top: 40px;
-     width: 18px;
-     height: 18px;
-     cursor: pointer;
-     background-image: url('./images/OpenLayers/south-mini.png');
- }
- #phylogeny-zoomin {
-     position: absolute;
-     left: 22px;
-     top: 63px;
-     width: 18px;
-     height: 18px;
-     cursor: pointer;
-     background-image: url('./images/OpenLayers/zoom-plus-mini.png');
- }
- #phylogeny-zoomout {
-     position: absolute;
-     left: 22px;
-     top: 81px;
-     width: 18px;
-     height: 18px;
-     cursor: pointer;
-     background-image: url('./images/OpenLayers/zoom-minus-mini.png');
- }
- .phylogeny-key {
-    display: inline-block;
-    height: 10px;
-    margin-right: 10px;
-    width: 10px;
+	border: solid thin black;
+	margin-top: 10px;
+	overflow: auto;
+	position:relative;
+}
+#phylogeny {
+	max-width: 100%;
+	max-height: 600px;
+	overflow: hidden;
+}
+#phylogeny-panzoombar {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	z-index: 1;
+}
+#phylogeny-panup {
+	position: absolute;
+	left: 22px;
+	top: 4px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/north-mini.png');
+}
+#phylogeny-reset {
+	position: absolute;
+	left: 22px;
+	top: 22px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/zoom-world-mini.png');
+}
+#phylogeny-panright {
+	position: absolute;
+	left: 40px;
+	top: 22px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/east-mini.png');
+}
+#phylogeny-panleft {
+	position: absolute;
+	left: 4px;
+	top: 22px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/west-mini.png');
+}
+#phylogeny-pandown {
+	position: absolute;
+	left: 22px;
+	top: 40px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/south-mini.png');
+}
+#phylogeny-zoomin {
+	position: absolute;
+	left: 22px;
+	top: 63px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/zoom-plus-mini.png');
+}
+#phylogeny-zoomout {
+	position: absolute;
+	left: 22px;
+	top: 81px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	background-image: url('./images/OpenLayers/zoom-minus-mini.png');
+}
+.phylogeny-key {
+	display: inline-block;
+	height: 10px;
+	margin-right: 10px;
+	width: 10px;
 }
 #phylogeny-key {
-    list-style: none outside none;
+	list-style: none outside none;
 }
 
 #phylogeny-key li {
-    float: left;
-    margin-left: 10px;
+	float: left;
+	margin-left: 10px;
 }
 /**
  * Identification Key
  */
- 
+
 li.descriptiveConcept > div > div.media-body >  a > i.halflings-icon.plus{
-  background-position: -433px -96px;
+	background-position: -433px -96px;
 }
 li.descriptiveConcept > div.collapsed > div.media-body > a > i.halflings-icon.plus {
-  background-position: -408px -96px;
+	background-position: -408px -96px;
 }
- 
+
 #unselectedCharacters ul.unstyled {
 	padding-left: 25px;
 }
@@ -378,7 +487,7 @@ li.character h4.pull-left {
 
 .small-icon {
 	width:13px;
-	height:13px; 
+	height:13px;
 }
 
 .selectedCharacter, .character, .descriptiveCharacter, .descriptiveConcept{
@@ -391,8 +500,8 @@ li.character h4.pull-left {
 .spatial-container{
 	margin-top:40px;
 }
- 
-.full-width-map { 
+
+.full-width-map {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -401,18 +510,18 @@ li.character h4.pull-left {
 	width:100%
 }
 
-.olMap { 
+.olMap {
 	img {
-	max-width:none !important;
+		max-width:none !important;
 	}
-} 
+}
 
 .olPopupCloseBox {
-  background: url('./images/OpenLayers/close.gif') no-repeat !important;
+	background: url('./images/OpenLayers/close.gif') no-repeat !important;
 }
 
 div.olMap {
-    z-index: 1014 !important;
+	z-index: 1014 !important;
 }
 .olControlOverviewMapElement {
 	background-color: #616668 !important;
@@ -422,7 +531,7 @@ div.olMap {
 	border: 2px dotted #FE3A7F !important;
 }
 
-/*********** CLASS CSS ***********/ 
+/*********** CLASS CSS ***********/
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'ms500', Helvetica, Arial, sans-serif;
@@ -438,10 +547,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar {
 	.brand {
-		height: @navbarHeight; 
-		width: 172px;
+		height: @navbarHeight;
+		width: 300px;
 		padding: 0 20px 0;
-		background: url('@{imagePath}/logo.png') no-repeat center;
+		background: url('@{imagePath}/logo.png') no-repeat left;
 
 		span {
 			display: none;
@@ -451,25 +560,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-unit {
 	position: relative;
-	height: @heroUnitHeight;  
+	height: @heroUnitHeight;
 	margin: 0 0 20px;
 	padding: 0;
 	/* #gradient > .vertical(@heroBackground, @heroBackgroundHighlight);*/
 	background-color: @heroBackground;
-    background-image: url('@{imagePath}/WFO_hero_image.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+	//background-image: url('@{imagePath}/WFO_hero_image.png'); //not required for carousel YN:
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 
-    /*
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
-        
-	background-repeat: repeat, no-repeat, no-repeat, repeat-x, no-repeat, no-repeat, repeat-x, repeat-x, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
-	background-position: center center, bottom right, bottom left, bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, bottom right, bottom left, bottom center, bottom center, bottom center, bottom center, center center;
+	/*
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/pond.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/trees-right.png'), url('@{imagePath}/banner/trees-left.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
+
+    background-repeat: repeat, no-repeat, no-repeat, repeat-x, no-repeat, no-repeat, repeat-x, repeat-x, no-repeat, no-repeat, no-repeat, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
+    background-position: center center, bottom right, bottom left, bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, bottom right, bottom left, bottom center, bottom center, bottom center, bottom center, center center;
         */
 	border-radius: 0 0 0 0;
 
@@ -486,10 +595,10 @@ h1, h2, h3, h4, h5, h6 {
 	p {
 		margin-bottom: 9px;
 		text-align: center;
-		color: #333; 
-		text-shadow: 0 1px 0 #fff; 
-		font-family: 'ms500', Helvetica, Arial, sans-serif; 
-		font-size: 24px; 
+		color: #333;
+		text-shadow: 0 1px 0 #fff;
+		font-family: 'ms500', Helvetica, Arial, sans-serif;
+		font-size: 24px;
 		line-height: 30px;
 	}
 
@@ -497,7 +606,7 @@ h1, h2, h3, h4, h5, h6 {
 		text-align: center;
 	}
 
-	input[type='text'] { 
+	input[type='text'] {
 		padding: 11px;
 		margin-right: 10px;
 	}
@@ -517,12 +626,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* boxes */
 
-.box { 
+.box {
 	background: #fff;
 	border: 1px solid #e8e8e8;
 	min-height: 20px;
 	padding: 19px;
-	margin-bottom: 20px; 
+	margin-bottom: 20px;
 	position: relative;
 	-webkit-box-shadow: inset 1px 1px 30px 1px #f9f9f9;
 	-moz-box-shadow: inset 1px 1px 30px 1px #f9f9f9;
@@ -530,17 +639,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .box-rounded-corners {
-
-    border: 2px solid  #D3893B;
-    border-radius: @boxBorderRadius;
-    color: #ffffff;
-    padding: 10px;
-    margin: 20px 30px 40px 0;
+	border: 2px solid  #D3893B;
+	border-radius: @boxBorderRadius;
+	color: #ffffff;
+	padding: 10px;
+	margin: 20px 30px 40px 0;
 }
 
 .identify-box {
-    background-color: #D7B55B;
-    //width: 270px;
+	background-color: #D7B55B;
+	//width: 270px;
+
 }
 
 .identify-box p{
@@ -549,8 +658,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .classify-box {
-    background-color: #DA8429;
-    //width: 270px;
+	background-color: #DA8429;
+	//width: 270px;
 }
 
 .classify-box p{
@@ -559,8 +668,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .explore-box {
-    background-color: #1E512A;
-    //width: 270px;
+	background-color: #1E512A;
+	//width: 270px;
 }
 
 .explore-box p{
@@ -569,8 +678,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .contribute-box {
-    background-color: #45A2D9;
-   // width: 270px; 
+	background-color: #45A2D9;
+	// width: 270px;
 }
 
 .contribute-box p{
@@ -578,38 +687,38 @@ h1, h2, h3, h4, h5, h6 {
 	margin-top: 10px;
 }
 
-.inner { 
+.inner {
 	position: relative;
 	/*z-index: 1;  Deleted due to problems with bootstrap tour */
 }
 
-.inner:before, .inner:after { 
-	position: absolute; 
-	width: 50%; 
-	height: 4px; 
-	content: ' '; 
+.inner:before, .inner:after {
+	position: absolute;
+	width: 50%;
+	height: 4px;
+	content: ' ';
 	left: 12px;
-	background: transparent; 
+	background: transparent;
 	-webkit-transform: skew(-5deg) rotate(-3deg);
 	-moz-transform: skew(-5deg) rotate(-3deg);
 	-ms-transform: skew(-5deg) rotate(-3deg);
 	-o-transform: skew(-5deg) rotate(-3deg);
-	transform: skew(-5deg) rotate(-3deg); 
+	transform: skew(-5deg) rotate(-3deg);
 	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
 	-moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
-	z-index: -1; 
+	z-index: -1;
 }
 
-.inner:after  { 
-	left: auto; 
+.inner:after  {
+	left: auto;
 	right: 12px;
-	-webkit-transform: skew(5deg) rotate(3deg); 
-	-moz-transform: skew(5deg) rotate(3deg); 
-	-ms-transform: skew(5deg) rotate(3deg); 
-	-o-transform: skew(5deg) rotate(3deg); 
+	-webkit-transform: skew(5deg) rotate(3deg);
+	-moz-transform: skew(5deg) rotate(3deg);
+	-ms-transform: skew(5deg) rotate(3deg);
+	-o-transform: skew(5deg) rotate(3deg);
 	transform: skew(5deg) rotate(3deg);
-} 
+}
 
 .span12 .inner:before, .span12 .inner:after, .span11 .inner:before, .span11 .inner:after { bottom: 16px; }
 .span10 .inner:before, .span10 .inner:after, .span9 .inner:before, .span9 .inner:after { bottom: 12px; }
@@ -619,50 +728,50 @@ h1, h2, h3, h4, h5, h6 {
 .span2 .inner:before, .span2 .inner:after, .span1 .inner:before, .span1 .inner:after { bottom: 8px; }
 
 .box h1, .box h2, .box h3, .box h4, .box h5, .box h6 {
-	color: #5b5b5b; 
+	color: #5b5b5b;
 }
 
-.box h2 { 
-	font-size: 16px; 
+.box h2 {
+	font-size: 16px;
 	line-height: 28px;
- }
- 
-.box a h2 { 
-	color: #5b5b5b; 
+}
+
+.box a h2 {
+	color: #5b5b5b;
 	text-decoration: none;
 }
 
-.box a:hover h2 { 
+.box a:hover h2 {
 	text-decoration: none !important
 }
 
 .box {
-  p {
-	color: #888;
-  }
-  ul {
-	color: #888;
-  }
+	p {
+		color: #888;
+	}
+	ul {
+		color: #888;
+	}
 }
 
 .description-with-citations {
-  overflow: auto;
-  clear:both;
-  width: 100%;
-  margin-bottom:30px;
+	overflow: auto;
+	clear:both;
+	width: 100%;
+	margin-bottom:30px;
 }
 
 .description-with-citations:last-child {
-  margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .description-with-citations  p {
-  margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 
 /**
- * footer 
+ * footer
  */
 
 .container > footer p{
@@ -677,18 +786,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 footer.navbar {
-	margin-bottom: 0; 
+	margin-bottom: 0;
 
 	.navbar-inner {
 		border-radius: 0;
-		
+
 		.container {
 			#grid > .core > .span(@gridColumns);
-			
+
 			div.row {
 				margin: 0;
 			}
-			
+
 			ul.nav {
 				margin: 0 auto;
 				float: none;
@@ -709,26 +818,26 @@ footer.navbar {
 /**
  * page-banner
  */
- 
- #page-title {
- 	line-height: 65px
- }
+
+#page-title {
+	line-height: 65px
+}
 
 .page-banner {
-	position: relative; 
+	position: relative;
 	overflow: hidden;
 	margin-bottom: 20px;
 	margin-top: 40px;
 	/* #gradient > .vertical(@heroBackground, @heroBackgroundHighlight);*/
 	background-color: @heroBackground;
-    /*
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-	background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
-	background-repeat: repeat, no-repeat, no-repeat, repeat-x;
-	background-position: center center, bottom right, bottom left, center center;
+	/*
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+    background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right.png'), url('@{imagePath}/banner/bamboo-left.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
+    background-repeat: repeat, no-repeat, no-repeat, repeat-x;
+    background-position: center center, bottom right, bottom left, center center;
         */
 	.page-header {
 		border-bottom: none
@@ -752,16 +861,16 @@ footer.navbar {
 
 /* sub heading */
 
-.sub-title { 
-	color: #5b5b5b; 
-	font-size: 24px; 
-	line-height: 30px; 
-	margin: 10px 0 20px; 
-	text-align: center; 
+.sub-title {
+	color: #5b5b5b;
+	font-size: 24px;
+	line-height: 30px;
+	margin: 10px 0 20px;
+	text-align: center;
 }
 
 /**
- * Taxon Page 
+ * Taxon Page
  */
 
 .protologueText{
@@ -785,29 +894,29 @@ section {
 	margin: 18px 0;
 }
 #map-wrapper {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 .distribution-map-key {
-    display: inline-block;
-    height: 10px;
-    margin-right: 10px;
-    width: 10px;
+	display: inline-block;
+	height: 10px;
+	margin-right: 10px;
+	width: 10px;
 }
 #distribution-map-key {
-    list-style: none outside none;
+	list-style: none outside none;
 }
 
 .distribution-textual {
 	list-style:none;
-	margin:0px; padding-left:0; 
-	text-indent:0; 
+	margin:0px; padding-left:0;
+	text-indent:0;
 	clear: both;
 
 	li {
-		float:left; 
+		float:left;
 		padding-left:0.5em;
 		* {
-		    float:left;
+			float:left;
 		}
 		&:first-child {
 			&:before {
@@ -829,18 +938,18 @@ ul.citations {
 	list-style: none;
 	margin: 0px;
 	float: right;
-	
+
 	&:before {
 		content: "[";
 	}
-	
+
 	&:after {
 		content: "]";
 	}
-	
+
 	li {
 		display: inline-block;
-		
+
 		&:last-child {
 			&:after {
 				content: "";
@@ -858,13 +967,13 @@ ul.citations {
 }
 
 td ul.citations {
-   &:before {
+	&:before {
 		content: "";
 	}
-	
+
 	&:after {
 		content: "";
-	}  
+	}
 }
 
 section#bibliography ul {
@@ -937,7 +1046,7 @@ li.subordinateBoxList{
 	margin-bottom: 5px;
 }
 
-.section-box { 
+.section-box {
 	padding-bottom: 19px !important;
 	width: auto;
 }
@@ -969,19 +1078,19 @@ li.subordinateBoxList{
 	height: 30px;
 	text-align: center;
 	background-color: #D50C54;
-	position:absolute; 
-	left: -75px; 
-	top: 25px; 
-	color: white;  
-	-moz-transform:rotate(-45deg); 
-	-webkit-transform: rotate(-45deg); 
-	-ms-transform: rotate(-45deg); 
-	padding-top: 10px; 
-	border-style: solid; 
-	border-color: #FE3A7F; 
-	border-width: 2px; 
-	font-family: Helvetica,Arial,sans-serif; 
-	font-weight: bold; 
+	position:absolute;
+	left: -75px;
+	top: 25px;
+	color: white;
+	-moz-transform:rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	padding-top: 10px;
+	border-style: solid;
+	border-color: #FE3A7F;
+	border-width: 2px;
+	font-family: Helvetica,Arial,sans-serif;
+	font-weight: bold;
 	z-index: 1050;
 
 	&:after {
@@ -1004,46 +1113,46 @@ li.subordinateBoxList{
 	.taxon-page-map{
 		width: auto;
 	}
-	
+
 	.page-banner {
-		position: relative; 
+		position: relative;
 		overflow: hidden;
 		margin-bottom: 20px;
 		/* #gradient > .vertical(@heroBackground, @heroBackgroundHighlight);*/
-        /*
-		background-color: @heroBackground;
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
-		background-repeat: repeat, no-repeat, no-repeat, repeat-x;
-		background-position: center center, bottom right, bottom left, center center;
+		/*
+        background-color: @heroBackground;
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/bamboo-left-small.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
+        background-repeat: repeat, no-repeat, no-repeat, repeat-x;
+        background-position: center center, bottom right, bottom left, center center;
             */
 		.page-header {
 			border-bottom: none
 		}
 	}
-	
-	
+
+
 }
 
 @media (max-width: 767px) {
 	.hero-unit {
 		position: relative;
-		height: @heroUnitHeightMobile;  
+		height: @heroUnitHeightMobile;
 		margin: 0 0 20px;
 		padding: 0;
 		/* #gradient > .vertical(@heroBackground, @heroBackgroundHighlight);*/
-        /*
-		background-color: @heroBackground;
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
-		background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
-		background-repeat: repeat, no-repeat, no-repeat, repeat-x,  no-repeat, repeat-x, repeat-x, no-repeat, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
-		background-position: center center, bottom left, bottom right, bottom center,  bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, center center;
+		/*
+        background-color: @heroBackground;
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -moz-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-gradient(linear, 0 0, 0 100%, from(@heroBackground), to(@heroBackgroundHighlight));
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -webkit-linear-gradient(top,@heroBackground, @heroBackgroundHighlight);
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), -o-linear-gradient(top, @heroBackground, @heroBackgroundHighlight);
+        background-image: url('@{imagePath}/banner/overlay.png'), url('@{imagePath}/banner/bamboo-left-small.png'), url('@{imagePath}/banner/bamboo-right-small.png'), url('@{imagePath}/banner/grass-1.png'), url('@{imagePath}/banner/plant-decoration.png'), url('@{imagePath}/banner/grass-2.png'), url('@{imagePath}/banner/grass-3.png'), url('@{imagePath}/banner/plant-single.png'), url('@{imagePath}/banner/grass-4.png'), url('@{imagePath}/banner/bg-plants.png'), url('@{imagePath}/banner/grass-5.png'), url('@{imagePath}/banner/bg-banner.png'), linear-gradient(to bottom, @heroBackground, @heroBackgroundHighlight);
+        background-repeat: repeat, no-repeat, no-repeat, repeat-x,  no-repeat, repeat-x, repeat-x, no-repeat, repeat-x, repeat-x, repeat-x, repeat-x, repeat-x;
+        background-position: center center, bottom left, bottom right, bottom center,  bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, bottom center, center center;
             */
 		h1 {
 			font-size: 26px;
@@ -1054,11 +1163,11 @@ li.subordinateBoxList{
 		}
 	}
 	footer.navbar{
-	    .navbar-inner {
-	        .container{
-		        width:auto;
-    		}
-	    }
+		.navbar-inner {
+			.container{
+				width:auto;
+			}
+		}
 	}
 }
 
