@@ -27,6 +27,7 @@ import org.emonocot.api.SearchableObjectService;
 import org.emonocot.model.Comment;
 import org.emonocot.model.SearchableObject;
 import org.emonocot.pager.Page;
+import org.emonocot.service.SolrQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,8 @@ public class IndexController {
 
 	private SearchableObjectService searchableObjectService;
 
+	private SolrQueryService solrQueryService;
+
 	@Autowired
 	public void setCommentService(CommentService commentService) {
 		this.commentService = commentService;
@@ -49,6 +52,10 @@ public class IndexController {
 	@Autowired
 	public void setSearchableObjectService(SearchableObjectService searchableObjectService) {
 		this.searchableObjectService = searchableObjectService;
+	}
+	@Autowired
+	public void setSolrQueryService(SolrQueryService solrQueryService) {
+		this.solrQueryService = solrQueryService;
 	}
 
 
@@ -65,6 +72,9 @@ public class IndexController {
 			responseFacets.add("base.class_s");
 			Page<SearchableObject> stats = searchableObjectService.search("", null, 1, 0, responseFacets.toArray(new String[1]), null, null, null, null);
 			uiModel.addAttribute("stats", stats);
+			String query = "taxon.descriptions_not_empty_b:true";
+			Long descriptionsCount = solrQueryService.getResultsCount(query);
+			uiModel.addAttribute("descriptionsCount", descriptionsCount);
 		} catch (SolrServerException sse) {
 
 		}

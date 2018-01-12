@@ -29,20 +29,20 @@ public enum License {
 	/**
 	 *
 	 */
-	ATTRIBUTION("http://creativecommons.org/licenses/by/3.0/"),
+	ATTRIBUTION("http://creativecommons.org/licenses/by/"),
 	/**
 	 *
 	 */
-	ATTRIBUTION_NONCOMMERCIAL("http://creativecommons.org/licenses/by-nc/3.0/"),
+	ATTRIBUTION_NONCOMMERCIAL("http://creativecommons.org/licenses/by-nc/"),
 	/**
 	 *
 	 */
-	ATTRIBUTION_SHAREALIKE("http://creativecommons.org/licenses/by-sa/3.0/"),
+	ATTRIBUTION_SHAREALIKE("http://creativecommons.org/licenses/by-sa/"),
 	/**
 	 *
 	 */
 	ATTRIBUTION_NONCOMMERCIAL_SHAREALIKE(
-			"http://creativecommons.org/licenses/by-nc-sa/3.0/");
+			"http://creativecommons.org/licenses/by-nc-sa/");
 
 	/**
 	 *
@@ -64,7 +64,7 @@ public enum License {
 	 */
 	public static License fromString(final String string) {
 		for (License l : License.values()) {
-			if (l.uri.equals(string)) {
+			if (l.uri.matches(string)) {
 				return l;
 			}
 		}
