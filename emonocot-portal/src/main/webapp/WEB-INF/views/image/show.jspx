@@ -7,7 +7,6 @@
 	xmlns:security="http://www.springframework.org/security/tags"
 	xmlns:spring="http://www.springframework.org/tags">
 
-	<spring:message code="harvester.externalBaseUrl" var="harvesterExternalBaseUrl"/>
 	<tags:pageheader>
 		<h2 id="page-title"><i class="glyphicons-icon picture"><!--  --></i> ${image.title}</h2>
 		<div class="span1 pull-right">
@@ -22,7 +21,7 @@
 			<div class="centeredImage section-box">
 				<div class="inner">
 					<div class="box">
-						<c:url value="${harvesterExternalBaseUrl}/images/fullsize/${image.id}.${image.format}" var="imageUrl"/>
+						<c:url value="/images/fullsize/${image.id}.${image.format}" var="imageUrl"/>
 						<img id="main-img" class="imageSize" src="${imageUrl}" title="${fn:escapeXml(image.title)}" alt="${status.index}" />
 					</div>
 				</div>
@@ -147,12 +146,12 @@
 															</c:otherwise>
 														</c:choose>
 
-														<c:url var="fullsize" value="${harvesterExternalBaseUrl}/images/fullsize/${image.id}.${image.format}" /> <!--TODO: add harvestServer ip for fullsize-->
+														<c:url var="fullsize" value="/images/fullsize/${image.id}.${image.format}" />
 														<c:url var="imageUrl" value="/image/${image.id}"/>
 														<a class="slideshow" href="${fullsize}" 
 															data-link="${imageUrl}" data-icon="icon-white icon-picture" 
 															data-creator="${image.creator}" data-license="${imageLicense}" title="${em:stripXml(image.title)}">
-															<c:url var="thumbnail" value="${harvesterExternalBaseUrl}/images/thumbnails/${image.id}.${image.format}"/>  <!--TODO: add harvestServer ip for thumbnails-->
+															<c:url var="thumbnail" value="/images/thumbnails/${image.id}.${image.format}"/>
 															<img class="thumbnail pull-right" src="${thumbnail}" title="${em:stripXml(image.title)}"/>
 														</a>
 													</li>

@@ -48,8 +48,9 @@ ItemWriter<T> {
 				//Check all taxa?!?
 				Taxon example = new Taxon();
 				example.setNamePublishedIn((Reference) t);
+				logger.debug("Getting the Taxa list for item:" + t.getId());
 				List<Taxon> linkedTaxa = taxonService.searchByExample(example, false, false).getRecords();
-                logger.debug("Getting the Taxa list");
+				logger.debug("Got the Taxa list for item:" + t.getId());
 				for (Taxon taxon : linkedTaxa) {
 					taxon.setNamePublishedIn(null);
 				}
