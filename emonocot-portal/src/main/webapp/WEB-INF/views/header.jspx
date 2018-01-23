@@ -280,9 +280,9 @@
 				<!--</div>-->
 
 			</div>
-			<div id="message-nav">
-				<p><spring:message code="logo.message"/></p>
-			</div>
+			<!--<div id="message-nav">-->
+				<!--<p><spring:message code="logo.message"/></p>-->
+			<!--</div>-->
 		</div>
 	</div>
 </div>
