@@ -53,6 +53,33 @@ class common::mail {
 		subscribe => File['/etc/aliases'],
 		refreshonly => true,
 	}
+	# create user
+	user { 'dovecot':
+		ensure => "present",
+		system => "true",
+		uid    =>  "120",
+	}
+
+	#create group
+	group { 'dovecot':
+		ensure => "present",
+		system => "true",
+		gid    =>  "126",
+	}
+	
+		# create user
+	user { 'dovenull':
+		ensure => "present",
+		system => "true",
+		uid    =>  "121",
+	}
+
+	#create group
+	group { 'dovenull':
+		ensure => "present",
+		system => "true",
+		gid    =>  "127",
+	}
 
 	# Dovecot (IMAP server)
 	package { "dovecot-imapd":

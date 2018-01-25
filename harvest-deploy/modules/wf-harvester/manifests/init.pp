@@ -85,6 +85,7 @@ define wf-harvester::wf-harvester (
 	$document_root = "/var/www"
 	) {
 	include tomcat7
+	include wf-image
 
 	user { 'worldflora':
 		ensure => 'present',
@@ -128,9 +129,9 @@ define wf-harvester::wf-harvester (
 	file { [
 		"${batch_job_dir}",
 		"${harvester_cache_dir}",
-		"${worldflora_base_dir}/images",
-		"${worldflora_base_dir}/images/fullsize",
-		"${worldflora_base_dir}/images/thumbnails",
+		#"${worldflora_base_dir}/images",
+		#"${worldflora_base_dir}/images/fullsize",
+		#"${worldflora_base_dir}/images/thumbnails",
 		"${worldflora_base_dir}/output",
 		"${worldflora_spool_dir}",
 		"${worldflora_spool_dir}/sitemap",
