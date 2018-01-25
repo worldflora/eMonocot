@@ -1,0 +1,7 @@
+# Following line is included only if a proxy is specified
+<% if @proxy != "" %>       
+Acquire::http::Proxy "<%= @proxy %>";
+<% end %>
+
+# Fail immediately if a file could not be retrieved. Comment if connection is poor.
+Acquire::Retries 0;

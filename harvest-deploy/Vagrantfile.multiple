@@ -1,0 +1,70 @@
+# vi: set ft=ruby :
+
+# Vagrantfile for the World Flora Portal.
+
+# 2 represents Vagrant 1.1+ configuration
+Vagrant.configure("2") do |config|
+
+  # Portal - Apache/Tomcat
+  config.vm.define "portal" do |portal|
+    portal.vm.box = "ubuntu/trusty64"
+    portal.vm.host_name = "portal"
+    portal.vm.network "forwarded_port", guest: 80, host: 10080
+    portal.vm.network "forwarded_port", guest: 8080, host: 18080
+
+    portal.vm.provider :virtualbox do |v|
+      # --natdnshostresolver1 may only be needed for OSX but leaving it in
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--name", "portal"]
+    end
+
+    portal.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file  = "wf-portal.pp"
+      puppet.options = "--color=true"
+    end
+  end
+
+  # Database - MySQL/Solr
+  config.vm.define "database" do |database|
+    database.vm.box = "ubuntu/trusty64"
+    database.vm.host_name = "database"
+    database.vm.provider :virtualbox do |v|
+      # --natdnshostresolver1 may only be needed for OSX but leaving it in
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 2048]
+      v.customize ["modifyvm", :id, "--name", "database"]
+    end
+    database.vm.network "forwarded_port", guest: 3306, host: 13306
+    database.vm.network "forwarded_port", guest: 8983, host: 18983
+
+    database.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file  = "wf-database.pp"
+      puppet.options = "--color=true"
+    end
+  end
+
+  # Harvester - Tomcat
+  config.vm.define "harvester" do |harvester|
+    harvester.vm.box = "ubuntu/trusty64"
+    harvester.vm.host_name = "harvester"
+    harvester.vm.provider :virtualbox do |v|
+      # --natdnshostresolver1 may only be needed for OSX but leaving it in
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--name", "harvester"]
+    end
+
+    harvester.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file  = "wf-harvester.pp"
+      puppet.options = "--color=true"
+    end
+  end
+
+end

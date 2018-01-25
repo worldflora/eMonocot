@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>/var/log/tomcat7/world-flora-harvest.log</File>
+		<encoder>
+			<pattern>%d{ISO8601} | %X{req.remoteHost} | %X{req.requestURI} | %X{req.userAgent} | %-5p | %t | %c | %m%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<maxIndex>10</maxIndex>
+			<FileNamePattern>/var/log/tomcat7/world-flora-harvest.log.%i</FileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{ISO8601} | %X{req.remoteHost} | %X{req.requestURI} | %X{req.userAgent}	| %-5p | %t | %c | %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.apache" level="warn"/>
+	<logger name="org.hibernate" level="info"/>
+	<logger name="org.springframework" level="info"/>
+	<logger name="org.springframework.jdbc" level="info"/>
+	<logger name="org.springframework.orm" level="info"/>
+	<logger name="org.emonocot.job.dwc.read.BaseDataFieldSetMapper" level="info"/>
+	<logger name="org.emonocot.job.dwc.taxon.FieldSetMapper" level="info"/>
+
+	<root level="<%= @logging_level %>" additivity="true">
+		<appender-ref ref="<%= @logging_method %>"/>
+	</root>
+
+	<!-- uncomment to see spring integration messages -->
+	<!-- <logger name="org.springframework.integration.handler.LoggingHandler" level="DEBUG" additivity="false">
+		<appender-ref ref="stdout"/>
+	</logger> -->
+
+	<!-- uncomment to see job output -->
+	 <!-- <logger name="org.emonocot.job" level="DEBUG" additivity="false">
+		<appender-ref ref="file"/>
+	</logger>-->
+
+</configuration>
