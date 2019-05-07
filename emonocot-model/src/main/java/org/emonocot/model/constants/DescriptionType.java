@@ -269,7 +269,8 @@ public enum DescriptionType {
 	 */
 	public static DescriptionType fromString(final String string) {
 		for (DescriptionType f : DescriptionType.values()) {
-			if (f.uri.equals(string) || f.term.equals(string)) {
+//			if (f.uri.equals(string) || f.term.equals(string)) {
+			if (f.uri.equals(string) || f.term.toLowerCase().equals(string)) {
 				return f;
 			}
 		}

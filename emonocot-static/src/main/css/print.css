@@ -112,11 +112,13 @@ ul.citations {
 	float: right;
 }	
 ul.citations:before {
-		content: "[";
+		/*content: "[";*/
+	content: "";
 	}
 	
 ul.citations:after {
-		content: "]";
+		/*content: "]";*/
+	content: "";
 	}
 	
 ul.citations li {

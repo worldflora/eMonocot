@@ -23,7 +23,19 @@ public class NomenclaturalCodeConverter implements Converter<String, Nomenclatur
 
 	@Override
 	public NomenclaturalCode convert(String source) {
-		return NomenclaturalCode.fromString(source);
+		if(source == null || source.isEmpty()) {
+			return null;
+		}
+		else {
+			switch (source) {
+				case "ICN":
+					source = "ICBN";
+					break;
+				case "ICNAFP":
+					source = "ICBN";
+					break;
+			}
+			return NomenclaturalCode.fromString(source);
+		}
 	}
-
 }

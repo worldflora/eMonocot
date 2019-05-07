@@ -4,10 +4,38 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:em="http://e-monocot.org/portal/functions"
 	xmlns:spring="http://www.springframework.org/tags">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script  src="https://www.googletagmanager.com/gtag/js?id=UA-114340265-1">/* */</script>
+	<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-114340265-1');
+        // gtag('config', 'UA-112074979-4');
+	</script>
+
+    <script>
+        /**
+         * Function that tracks a click on an outbound link in Analytics.
+         * This function takes a valid URL string as an argument, and uses that URL string
+         * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+         * using 'navigator.sendBeacon' in browser that support it.
+         */
+        var trackOutboundLink = function(url) {
+            gtag('event', 'click', {
+                'event_category': 'outbound',
+                'event_label': url,
+                'transport_type': 'beacon',
+                'event_callback': function(){document.location = url;}
+            });
+        }
+    </script>
+
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
 	<jsp:output omit-xml-declaration="true" />
 	<spring:message code="portal.baseUrl" var="baseUrl"/>
-	<spring:message code="google.analytics.id" var="googleAnalyticsId"/>
+	<!--<spring:message code="google.analytics.id" var="googleAnalyticsId"/>-->
 	<meta charset="utf-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="Content-Language" content="en" />
@@ -34,21 +62,21 @@
 	<script type="text/javascript" src="/js/header.js">/* */</script>
 	
 
-	<c:if test="${not empty googleAnalyticsId}">
+	<!--<c:if test="${not empty googleAnalyticsId}">-->
 	
-		<script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', '${googleAnalyticsId}']);
-			_gaq.push(['_trackPageview']);
-			
-			(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-		</script>
+		<!--<script type="text/javascript">-->
+			<!--var _gaq = _gaq || [];-->
+			<!--_gaq.push(['_setAccount', 'UA-112074979-4']);-->
+			<!--_gaq.push(['_trackPageview']);-->
+			<!---->
+			<!--(function() {-->
+				<!--var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;-->
+				<!--ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';-->
+				<!--var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);-->
+				<!--})();-->
+		<!--</script>-->
 	
-	</c:if>
+	<!--</c:if>-->
 	<noscript>
 		<style>
 			.sortNoJS{display:none;}

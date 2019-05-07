@@ -270,6 +270,7 @@ public class DownloadController {
 				break;
 			}
 			resource.getParameters().put("download.file", downloadFileName.toString());
+			resource.getParameters().put("download.query", query);
 			resourceService.save(resource);
 
 			//Launch the job
@@ -303,7 +304,7 @@ public class DownloadController {
 		if(resource.getBaseUrl() == null) {
 			resource.setExitDescription(messageSource.getMessage("download.being.prepared", new Object[] {}, locale));
 		} else {
-			resource.setExitDescription(messageSource.getMessage("download.will.be.available", new Object[] {messageSource.getMessage("portal.baseUrl", new Object[] {}, locale), downloadFileName}, locale));
+			resource.setExitDescription(messageSource.getMessage("download.will.be.available", new Object[] {messageSource.getMessage("harvester.url", new Object[] {}, locale), downloadFileName}, locale));
 		}
 
 		return "download/progress";
@@ -353,17 +354,27 @@ public class DownloadController {
 					jobExecutionInfo.setExitDescription(messageSource.getMessage("download.will.be.available", new Object[] {resource.getBaseUrl(), downloadFileName}, locale));
 				} else {
 					if(jobExecutionInfo.getExitCode().equals("COMPLETED")) {
-						jobExecutionInfo.setExitDescription(messageSource.getMessage("download.is.available", new Object[] {messageSource.getMessage("portal.baseUrl", new Object[] {}, locale), downloadFileName}, locale));
+						jobExecutionInfo.setExitDescription(messageSource.getMessage("download.is.available", new Object[] {messageSource.getMessage("harvester.url", new Object[] {}, locale), downloadFileName}, locale));
 					} else if(jobExecutionInfo.getExitCode().equals("FAILED")) {
 						jobExecutionInfo.setExitDescription(messageSource.getMessage("download.failed", new Object[] {}, locale));
 					} else {
-						jobExecutionInfo.setExitDescription(messageSource.getMessage("download.will.be.available", new Object[] {messageSource.getMessage("portal.baseUrl", new Object[] {}, locale), downloadFileName}, locale));
+						jobExecutionInfo.setExitDescription(messageSource.getMessage("download.will.be.available", new Object[] {messageSource.getMessage("harvester.url", new Object[] {}, locale), downloadFileName}, locale));
 					}
 				}
 			}
 
 		}
 		return jobExecutionInfo;
+	}
+
+	@RequestMapping(value = "/{downloadId}", method = RequestMethod.GET, produces = "text/html", params = {"!form"})
+	public String show(@PathVariable Long downloadId, Model uiModel) {
+		Resource resource = resourceService.load(downloadId,"job-with-source");
+//		Resource resource1 = resourceService.load(downloadId);
+
+		uiModel.addAttribute("resource", resource);
+		uiModel.addAttribute("query", resource.getParameters().get("download.query"));
+		return "download/show";
 	}
 
 	@RequestMapping(value = "/phylo", params = {"!format"}, method = RequestMethod.GET, produces = {"text/html", "*/*"})

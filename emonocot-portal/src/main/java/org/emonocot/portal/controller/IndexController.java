@@ -75,6 +75,15 @@ public class IndexController {
 			String query = "taxon.descriptions_not_empty_b:true";
 			Long descriptionsCount = solrQueryService.getResultsCount(query);
 			uiModel.addAttribute("descriptionsCount", descriptionsCount);
+
+			String distributionQuery = "taxon.distribution_not_empty_b:true";
+			Long distributionCount = solrQueryService.getResultsCount(distributionQuery);
+			uiModel.addAttribute("distributionCount", distributionCount);
+			String referencesQuery = "taxon.references_not_empty_b:true";
+			Long referencesCount = solrQueryService.getResultsCount(referencesQuery);
+			uiModel.addAttribute("referencesCount", referencesCount);
+
+
 		} catch (SolrServerException sse) {
 
 		}

@@ -69,6 +69,18 @@
             </c:url>
             <spring:message code="delete.resource" var="deleteMessage"/>
             <a href="${deleteUrl}" class="btn btn-danger"><i class="halflings-icon remove white">&#160;</i>&#160;${deleteMessage}</a>
+
+            <c:if test="${resource.resourceType eq 'DOWNLOAD'}">
+              <c:url var="reRunDownloadUrl" value="/search">
+                <c:param name="query" value="${query}" />
+                <c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
+              </c:url>
+              <a href="${reRunDownloadUrl}" class="btn">
+                <spring:message code="Rerun query" />
+              </a>
+            </c:if>
+
+
           </div>
         </div>
       </div>

@@ -57,7 +57,8 @@ import org.gbif.dwc.terms.IucnTerm;
 import org.gbif.ecat.voc.NomenclaturalCode;
 import org.gbif.ecat.voc.NomenclaturalStatus;
 import org.gbif.ecat.voc.Rank;
-import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Where;
@@ -270,7 +271,7 @@ public class Taxon extends SearchableObject {
 	 *            Set the taxonomic name of the taxon
 	 */
 	public void setScientificName(String newName) {
-		this.scientificName = newName;
+		this.scientificName = getScientificNameWithoutAuthor(newName);
 	}
 
 	/**
@@ -403,6 +404,11 @@ public class Taxon extends SearchableObject {
 	 */
 	public void setScientificNameAuthorship(String newAuthorship) {
 		this.scientificNameAuthorship = newAuthorship;
+
+		if (newAuthorship != null && !newAuthorship.isEmpty()) {
+			String scientificNameWithAuthor = String.valueOf(this.scientificName);
+			this.scientificName = getScientificNameWithoutAuthor(scientificNameWithAuthor);
+		}
 	}
 
 	/**
@@ -1005,6 +1011,33 @@ public class Taxon extends SearchableObject {
 	@JsonIgnore
 	public void setTrees(Set<PhylogeneticTree> trees) {
 		this.trees = trees;
+	}
+
+	public String getScientificNameWithoutAuthor(String scientificNameWithAuthor)
+	{
+		String scientificNameWithoutAuthor = scientificNameWithAuthor;
+
+		try {
+			String scientificNameAuthorship = String.valueOf(this.scientificNameAuthorship);
+
+			int authorshipLength = scientificNameAuthorship.length();
+			int scientificNameLength = scientificNameWithAuthor.length();
+
+			if (scientificNameAuthorship != null && !scientificNameAuthorship.isEmpty()) {
+				if (scientificNameLength > authorshipLength) {
+					if (scientificNameWithAuthor.substring(scientificNameLength -
+							authorshipLength).toLowerCase().equals(scientificNameAuthorship.toLowerCase())) {
+						scientificNameWithoutAuthor = scientificNameWithAuthor.substring(0,
+								scientificNameLength - authorshipLength);
+					}
+				}
+			}
+			return scientificNameWithoutAuthor;
+		}
+		catch(Exception e)
+		{
+			return scientificNameWithAuthor;
+		}
 	}
 
 	@Override

@@ -17,6 +17,7 @@
 					<li><a href="#overview">Overview</a></li>
 					<li><a href="#descriptive"><spring:message code="contribute.descriptive.title" /></a></li>
 					<li><a href="#taxonomic"><spring:message code="contribute.taxonomic.title" /></a></li>
+					<li><a href="#nameMatching"><spring:message code="contribute.nameMatching.title" /></a></li>
 				</ul>
 			</div>
 		</header>
@@ -136,7 +137,9 @@
 								A taxonomic resource file extends the World Flora Online taxonomic backbone and must also be provided in Darwin Core Archive format.
 								The guidelines for submitting taxonomic backbone data are provided in the WFO Taxonomic Backbone  Data Contributors Guide, which can be found at <a href="http://about.worldfloraonline.org/wfodocuments.shtml">http://about.worldfloraonline.org/wfodocuments.shtml</a>.
 								Like for descriptive data, each name must have a WFOID assigned by the WFO Consortium.
-								<p>Please <a href="contact@worldfloraonline.org">contact</a> WFO if you are interested to provide updates for a plant group.</p>
+								<!--<p>Please <a href="contact@worldfloraonline.org">contact</a> WFO if you are interested to provide updates for a plant group.</p>-->
+								<p>Please <a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email">contact</a> WFO if you are interested to provide updates for a plant group.</p>
+
 								<!--A taxonomic resource extends the taxonomy (names and relationships between them) of the portal.  Like-->
 								<!--descriptive data, in order to link in to the portal's taxonomy it must use the portal's identifier for a suitable higher taxon (e.g. a family).-->
 							</p>
@@ -212,6 +215,17 @@
 							<!--from the <cite>World Checklist</cite>.  It also contains distributions and some other descriptive data.  The id for the family is-->
 							<!--<code>urn:kew.org:wcs:family:87</code>, which needs to be used to link into the portal's classification.-->
 							<!--</p>-->
+						</div>
+					</div>
+
+					<div class="inner">
+						<div class="box">
+							<h1 id="nameMatching">
+								<spring:message code="contribute.nameMatching.title" />
+							</h1>
+							<p class="justified">
+								The Name matching service for WFO Taxonomic Backbone contributions is work in progress. For the time being, please provide your file to the <a class="contactLinkOverlay" href="mailto:wfo@worldfloraonline.org?subject=Name Matching service request" alt="WFO email">WFO Gatekeeper</a> for checking.
+							</p>
 						</div>
 					</div>
 				</div>

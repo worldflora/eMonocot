@@ -26,7 +26,8 @@ public class TypeStatusConverter implements Converter<String, TypeStatus> {
 		if(source == null || source.isEmpty()) {
 			return null;
 		} else {
-			return TypeStatus.valueOf(source.toLowerCase());
+//			return TypeStatus.valueOf(source.toLowerCase());
+			return TypeStatus.valueOf(source);
 		}
 	}
 

@@ -31,7 +31,7 @@ public enum ResourceType {
 
 	private String jobName;
 
-	private ResourceType(String jobName) {
+    private ResourceType(String jobName) {
 		this.jobName = jobName;
 	}
 

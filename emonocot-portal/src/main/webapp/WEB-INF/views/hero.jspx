@@ -21,7 +21,8 @@
 					<spring:message code="hero.message" />
 				</p>
 				<c:if test="${not empty stats}">
-				  <h4  class="text-center" style="color: white;">
+				  <!--<h4  class="text-center" style="color: white;">-->
+					<h4 class="display-count text-center">
 					<c:forEach var="s" items="${stats.getFacetField('base.class_s').getValues()}">
 						<c:choose>
 							<c:when test="${s.name eq 'org.emonocot.model.Taxon'}">
@@ -41,6 +42,12 @@
 					<c:if test="${not empty descriptionsCount}">
 						<fmt:formatNumber type="NUMBER" groupingUsed="true" var="descriptions" value="${descriptionsCount}"/>
 					</c:if>
+					  <c:if test="${not empty distributionCount}">
+						  <fmt:formatNumber type="NUMBER" groupingUsed="true" var="distributions" value="${distributionCount}"/>
+					  </c:if>
+				     <c:if test="${not empty referencesCount}">
+					      <fmt:formatNumber type="NUMBER" groupingUsed="true" var="references" value="${referencesCount}"/>
+				     </c:if>
 					<c:url var="taxaUrl" value="/search">
 						<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
 					</c:url>
@@ -56,10 +63,16 @@
 					  <c:url var="descriptionsUrl" value="/search">
 						  <c:param name="facet" value="taxon.descriptions_not_empty_b:true"/>
 					  </c:url>
+				<c:url var="distributionUrl" value="/search">
+					<c:param name="facet" value="taxon.distribution_not_empty_b:true"/>
+				</c:url>
+				<c:url var="referencesUrl" value="/search">
+					<c:param name="facet" value="taxon.references_not_empty_b:true"/>
+				</c:url>
 					  <c:url var="familiesUrl" value="/search">
 						  <c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
 					  </c:url>
-					<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}" argumentSeparator="|"/>
+					<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
 				  </h4>
 				</c:if>
 			</div>
@@ -77,7 +90,7 @@
 							.append( $( "<a></a>" ).html( item.label ) )
 							.appendTo( ul );
 						};
-					});
+					});c
 				</script>
 				<form class="form-search" action="search" method="GET">
 					<div class="input form-inline">

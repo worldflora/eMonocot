@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.emonocot.api.match.Match;
 import org.emonocot.api.match.taxon.TaxonMatcher;
 import org.emonocot.harvest.common.AbstractRecordAnnotator;
@@ -50,7 +51,11 @@ public class Processor extends AbstractRecordAnnotator implements ItemProcessor<
 
 	private static final Object SPECIES_ID_FIELD = "species_id";
 
+	private static final Object TAXONID_ID_FIELD = "taxonid";
+
 	public static String GENUS_FIELD = "genus";
+
+	public static String ALTERNATE_GENUS_FIELD = "genus_name";
 
 	public static String SPECIFIC_EPITHET_FIELD = "species";
 
@@ -153,6 +158,9 @@ public class Processor extends AbstractRecordAnnotator implements ItemProcessor<
 			if(map.get(Processor.SPECIES_ID_FIELD) != null) {
 				Integer speciesId = (Integer)map.get(Processor.SPECIES_ID_FIELD);
 				measurementOrFact.setSource(iucnWebsiteUri.replace("${identifier}",speciesId.toString()));
+			}else if(map.get(Processor.TAXONID_ID_FIELD) != null){
+				Integer speciesId = (Integer)map.get(Processor.TAXONID_ID_FIELD);
+				measurementOrFact.setSource(iucnWebsiteUri.replace("${identifier}",speciesId.toString()));
 			}
 			measurementOrFact.setTaxon(taxon);
 			return measurementOrFact;
@@ -179,9 +187,17 @@ public class Processor extends AbstractRecordAnnotator implements ItemProcessor<
 		if(nullSafeContains(map,Processor.GENUS_FIELD)) {
 			String genus = ((String)map.get(Processor.GENUS_FIELD)).trim();
 			nameBuffer.append(genus);
+		}else if (nullSafeContains(map, Processor.ALTERNATE_GENUS_FIELD)) {
+			String genus = ((String)map.get(Processor.ALTERNATE_GENUS_FIELD)).trim();
+			nameBuffer.append(genus);
 		}
 		if(nullSafeContains(map,Processor.SPECIFIC_EPITHET_FIELD)) {
 			String species = ((String)map.get(Processor.SPECIFIC_EPITHET_FIELD)).trim();
+			nameBuffer.append(" ").append(species);
+		}
+		else if((parsedName.specificEpithet != null) && !parsedName.specificEpithet.isEmpty())
+		{
+            String species = parsedName.specificEpithet.toString().trim();
 			nameBuffer.append(" ").append(species);
 		}
 		if(!nullSafeContains(map,Processor.INFRASPECIFIC_EPITHET_FIELD)) {

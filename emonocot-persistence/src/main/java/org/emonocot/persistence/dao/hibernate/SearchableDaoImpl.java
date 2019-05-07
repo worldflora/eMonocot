@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
+import java.util.Collections;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.lucene.analysis.charfilter.HTMLStripCharFilter;
@@ -182,7 +184,7 @@ implements SearchableDao<T> {
 		}
 	}
 
-	public List<Match> autocomplete(String query, Integer pageSize, Map<String, String> selectedFacets) throws SolrServerException {
+	public List<Match> autocomplete(final String query, Integer pageSize, Map<String, String> selectedFacets) throws SolrServerException {
 		SolrQuery solrQuery = new SolrQuery();
 
 		if (query != null && !query.trim().equals("")) {
@@ -196,7 +198,9 @@ implements SearchableDao<T> {
 		solrQuery.addFilterQuery("base.class_searchable_b:" + isSearchableObject());
 
 		// Set additional result parameters
-		solrQuery.setRows(pageSize);
+		//solrQuery.setRows(pageSize);
+		int rows = 100;
+		solrQuery.setRows(rows);
 
 		if(selectedFacets != null && !selectedFacets.isEmpty()) {
 			for(String facetName : selectedFacets.keySet()) {
@@ -213,13 +217,77 @@ implements SearchableDao<T> {
 		solrQuery.set("hl.snippets",3);
 		solrQuery.setHighlightSimplePre("<b>");
 		solrQuery.setHighlightSimplePost("</b>");
+		//solrQuery.setSortField("autocomplete", SolrQuery.ORDER.valueOf("desc"));
+		/*
 		solrQuery.set("group","true");
 		solrQuery.set("group.field", "autocomplete");
+		 */
 
 		QueryResponse queryResponse = solrServer.query(solrQuery);
 
 		List<Match> results = new ArrayList<Match>();
 		Map<String,Match> matchMap = new HashMap<String,Match>();
+
+		for(SolrDocument solrDocument : queryResponse.getResults()) {
+			Match match = new Match();
+			String label = filter((String) solrDocument.get("autocomplete"));
+			match.setLabel(label);
+			match.setValue(label);
+			matchMap.put((String) solrDocument.get("id"), match);
+			results.add(match);
+		}
+
+		List<Match>	distinctResults = removeDuplicates(results);
+
+		List<Match>	subResults1  = new ArrayList<Match>(); //ExactMatch
+		List<Match>	subResults2  = new ArrayList<Match>();
+
+		for(Match item : distinctResults)
+		{
+			if((item.getLabel().toLowerCase().startsWith(query.toLowerCase())))
+			{
+				subResults1.add(item);
+			}
+			else
+			{
+				subResults2.add(item);
+			}
+		}
+
+		if(subResults1.size() > 0)
+		{
+			Collections.sort(subResults1);
+		}
+
+		/*
+		Collections.sort(subResults1, new Comparator() {
+			@Override
+			public int compare(Object matchOne, Object matchTwo) {
+				//use instanceof to verify the references are indeed of the type in question
+				return ((Match)matchOne).getLabel()
+						.compareTo(((Match)matchTwo).getLabel());
+			}
+		});
+		*/
+
+		subResults1.addAll(subResults2);
+		List<Match>	subResults  = subResults1;
+
+		List<Match> finalResults = new ArrayList<Match>();
+
+		if (subResults.size() > 10)
+		{
+			finalResults  = subResults.subList(0,10);
+		}
+		else
+		{
+			finalResults  =  subResults;
+		}
+
+
+		//subResults = finalResults;
+
+		/*
 		for(GroupCommand groupCommand : queryResponse.getGroupResponse().getValues()) {
 			for (Group group : groupCommand.getValues()) {
 				for (SolrDocument solrDocument : group.getResult()) {
@@ -232,6 +300,7 @@ implements SearchableDao<T> {
 				}
 			}
 		}
+		*/
 		for(String documentId : matchMap.keySet()) {
 			if(queryResponse.getHighlighting().containsKey(documentId)) {
 				Map<String, List<String>> highlightedTerms = queryResponse.getHighlighting().get(documentId);
@@ -241,7 +310,28 @@ implements SearchableDao<T> {
 			}
 		}
 
-		return results;
+		//return results;
+		return finalResults;
+	}
+
+	private static List<Match> removeDuplicates(List<Match> list) {
+
+		// Store unique items in result.
+		List<Match> result = new ArrayList<>();
+
+		// Record encountered Strings in HashSet.
+		HashSet<String> hashset = new HashSet<>();
+
+		// Loop over argument list.
+		for (Match item : list) {
+
+			// If String is not in set, add it to the list and the set.
+			if (!hashset.contains(item.getLabel())) {
+				hashset.add(item.getLabel());
+				result.add(item);
+			}
+		}
+		return result;
 	}
 
 	private String filter(String value) {

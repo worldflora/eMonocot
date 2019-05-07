@@ -16,18 +16,22 @@
  */
 package org.emonocot.portal.controller;
 
+import java.sql.BatchUpdateException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.emonocot.api.UserService;
 import org.emonocot.model.auth.User;
 import org.emonocot.portal.controller.form.RegistrationForm;
 import org.emonocot.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +40,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.http.HttpStatus;
 /**
  *
  * @author ben
@@ -120,7 +127,31 @@ public class RegistrationController {
 		user.setCredentialsNonExpired(true);
 		user.setEnabled(false);
 
-		service.createUser(user);
+	//service.createUser(user);
+
+        try{
+            service.createUser(user);
+        }
+        catch(Exception ex) {
+            if(StringUtils.containsIgnoreCase(ex.getMessage(),"ConstraintViolationException"))
+            {
+                if(StringUtils.containsIgnoreCase(ex.getCause().getCause().getMessage(), "identifier" )){
+                    String[] codes = new String[] {"user.username.duplicate" };
+                    Object[] args = new Object[] {user.getIdentifier()};
+                    DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+                    model.addAttribute("error", message);
+                }
+                else
+                {
+                    String[] codes = new String[] {"user.accountName.duplicate" };
+                    Object[] args = new Object[] {user.getAccountName()};
+                    DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+                    model.addAttribute("error", message);
+                }
+                return "register";
+            }
+        }
+
 		String nonce = service.createNonce(user.getUsername());
 
 		Map<String,Object> map = new HashMap<String,Object>();

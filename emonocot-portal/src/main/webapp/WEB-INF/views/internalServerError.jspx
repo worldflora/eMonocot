@@ -12,6 +12,7 @@
 	</tags:pageheader>
 	<div class="container">
 		<div class="row">
+			<div class="span12">
 			<div class="alert block-message error">
 				<h3>
 					<spring:message code="500" />
@@ -21,11 +22,15 @@
 				</p>
 				<div class="alert-actions">
 				    <spring:message code="support.email.address" var="supportEmailAddress"/>
-					<a class="btn small" href="mailto:${supportEmailAddress}">
-					    <spring:message code="send.an.email" /> 	
-					</a>		
+				<!--	<a class="btn small" href="mailto:${supportEmailAddress}">
+					    <spring:message code="send.an.email" />
+					</a>  -->
+					<a class="btn small" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email">
+						<spring:message code="send.an.email" />
+					</a>
 				</div>
 			</div>
+		</div>
 		</div>
 		<div class="row">
 			<h3>${exception.message}</h3>

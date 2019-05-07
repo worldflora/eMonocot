@@ -10,19 +10,22 @@
 	<field name="scientificName" class="java.lang.String"/>
     <field name="scientificNameAuthorship" class="java.lang.String"/>
     <field name="namePublishedInString" class="java.lang.String"/>
-	<field name="taxonomicStatus" class="org.gbif.ecat.voc.TaxonomicStatus"/>
+	<!--<field name="taxonomicStatus" class="org.gbif.ecat.voc.TaxonomicStatus"/>-->
+	<field name="taxonomicStatus" class="org.emonocot.model.constants.TaxonomicStatus"/>
 	<detail>
 		<band height="25">
 			<textField isStretchWithOverflow="true">
 				<reportElement style="AcceptedName" x="0" y="5" width="450" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
+				<!--<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?-->
+				<textFieldExpression><![CDATA[org.emonocot.model.constants.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
                     $F{scientificName} + " " + ($F{scientificNameAuthorship} != null ? $F{scientificNameAuthorship} : "") : ""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement style="Detail" x="0" y="5" width="450" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
+				<!--<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?-->
+				<textFieldExpression><![CDATA[org.emonocot.model.constants.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
                     "" : " = " + $F{scientificName}
                     + ($F{scientificNameAuthorship} != null ? " " + $F{scientificNameAuthorship} : "")
                     + ($F{namePublishedInString} != null ? " " + $F{namePublishedInString} : "")

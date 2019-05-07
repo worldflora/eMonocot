@@ -26,6 +26,7 @@ public class DescriptionTypeConverter implements Converter<String, DescriptionTy
 		if(source == null || source.isEmpty()) {
 			return null;
 		} else {
+			source = source.toLowerCase().trim();
 			return DescriptionType.fromString(source);
 		}
 	}

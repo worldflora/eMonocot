@@ -71,7 +71,8 @@ import org.gbif.dwc.terms.IucnTerm;
 import org.gbif.ecat.voc.EstablishmentMeans;
 import org.gbif.ecat.voc.OccurrenceStatus;
 import org.gbif.ecat.voc.Rank;
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.hibernate.proxy.HibernateProxy;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
@@ -348,6 +349,66 @@ public class Functions {
 		 return null;
 	 }
 
+	public static Boolean isPreferred(Taxon taxon) {
+		boolean isTrue = false;
+		for (VernacularName vernacular : taxon.getVernacularNames()) {
+			if (vernacular.getPreferredName() == true) {
+				isTrue = true;
+			}
+		}
+		return isTrue;
+	}
+
+	public static int getCount(Taxon taxon) {
+		int count = 0;
+		int truecount = 0;
+		int falsecount = 0;
+		for (VernacularName vernacular : taxon.getVernacularNames()) {
+			if (vernacular.getPreferredName() == true) {
+				truecount = 1;
+			}
+			if (vernacular.getPreferredName() == false) {
+				falsecount = 1;
+			}
+		}
+		count = truecount + falsecount;
+		return count;
+	}
+
+	public static int getHomotypicSynonymsCount(Taxon taxon) {
+		int count = 0;
+		for (Taxon t : taxon.getSynonymNameUsages()) {
+			if (t.getTaxonomicStatus().equals(TaxonomicStatus.Homotypic_Synonym)) {
+				count = 1;
+			}
+		}
+		return count;
+	}
+
+	public static int getHeterotypicSynonymsCount(Taxon taxon) {
+		int count = 0;
+		for (Taxon t : taxon.getSynonymNameUsages()) {
+			if (t.getTaxonomicStatus().equals(TaxonomicStatus.Heterotypic_Synonym)) {
+				count = 1;
+			}
+		}
+		return count;
+	}
+
+	public static int getSynonymsCount(Taxon taxon) {
+		int count = 0;
+		for (Taxon t : taxon.getSynonymNameUsages()) {
+			//if (t.getTaxonomicStatus().equals(TaxonomicStatus.Synonym) || t.getTaxonomicStatus().equals(TaxonomicStatus.DeterminationSynonym) || t.getTaxonomicStatus().equals(TaxonomicStatus.Synonym)) {
+			switch (t.getTaxonomicStatus()) {
+				case Synonym:
+				case DeterminationSynonym:
+				case IntermediateRankSynonym:
+				case Proparte_Synonym:
+			count = 1;
+			}
+		}
+		return count;
+	}
 	 /**
 	  * @param taxon
 	  *            Set the taxon
@@ -359,20 +420,53 @@ public class Functions {
 		 } else {
 			 switch (taxon.getTaxonomicStatus()) {
 			 case Synonym:
-			 case Heterotypic_Synonym:
-			 case Homotypic_Synonym:
+//			 case Heterotypic_Synonym:
+//			 case Homotypic_Synonym:
 			 case DeterminationSynonym:
 			 case IntermediateRankSynonym:
 			 case Proparte_Synonym:
 				 return true;
+			 case Heterotypic_Synonym:
+		     case Homotypic_Synonym:
 			 case Accepted:
 			 case Doubtful:
+			 case Unchecked:
 			 case Misapplied:
 			 default:
 				 return false;
 			 }
 		 }
 	 }
+
+	public static Boolean isHeterotypicSynonym(Taxon taxon) {
+		if (taxon.getTaxonomicStatus() == null) {
+			return false;
+		} else {
+			switch (taxon.getTaxonomicStatus()) {
+				case Heterotypic_Synonym:
+//				case heterotypicSynonym:
+					return true;
+				case Homotypic_Synonym:
+				case DeterminationSynonym:
+				case IntermediateRankSynonym:
+				case Proparte_Synonym:
+				case Accepted:
+				case Doubtful:
+				case Unchecked:
+				case Misapplied:
+				default:
+					return false;
+			}
+		}
+	}
+
+	public static Boolean isHomotypicSynonym(Taxon taxon) {
+		if (taxon.getTaxonomicStatus() == null) {
+			return false;
+		} else {
+            return taxon.getTaxonomicStatus().equals(TaxonomicStatus.Homotypic_Synonym);
+		}
+	}
 
 	 /**
 	  * @param taxon
@@ -762,8 +856,16 @@ public class Functions {
 	  * @return the citation key
 	  */
 	 public static String citekey(Bibliography bibliography, Reference reference) {
-		 return bibliography.getKey(reference);
-	 }
+		return bibliography.getKey(reference);
+	}
+
+//	public static String citekeycitation(Bibliography bibliography, Reference reference) {
+//		String key = bibliography.getKey(reference);
+//		String keycitation = "";
+//
+//		keycitation = "Source:[" +key + "]."  ;
+//		return keycitation;
+//	}
 
 	 public static SortedSet<String> citekeys(Bibliography bibliography,
 			 Collection<Distribution> distributions) {
@@ -800,7 +902,8 @@ public class Functions {
 	 }
 
 	 public static String initialtokey(String initial){
-		 return initial.substring(initial.length() - 1).toUpperCase();
+//		 return initial.substring(initial.length() - 1).toUpperCase();
+		 return initial.substring(1,2).toUpperCase();
 	 }
 
 	 /**
@@ -811,7 +914,7 @@ public class Functions {
 	  *            Set the data
 	  * @return the provenance initial
 	  */
-	 public static String provenanceinitial(ProvenanceManager provenance,
+	 /*public static String provenanceinitial(ProvenanceManager provenance,
 			 BaseData data) {
 		 String key = provenance.getKey(data).toUpperCase();
 		 String orgname = data.getAuthority().getTitle();
@@ -824,7 +927,38 @@ public class Functions {
 
 		 initials += "." + key;
 		 return initials;
+	 }*/
+
+
+	 public static String provenanceinitial(ProvenanceManager provenance,
+											BaseData data) {
+		 String key = provenance.getKey(data).toUpperCase();
+		 String orgname = data.getAuthority().getTitle();
+		 String provenanceName = "";
+
+//		 provenanceName = orgname + "." + key;
+         provenanceName = "[" +key +"]" + "." + orgname;
+		 return provenanceName;
 	 }
+
+//	public static String provenancecitation(ProvenanceManager provenance,
+//										   BaseData data) {
+//		String key = provenance.getKey(data).toUpperCase();
+//		String orgname = data.getAuthority().getTitle();
+//		String provenanceName = "";
+//
+//		provenanceName = "Provided by: [" +key + "]" +"." + orgname;
+//		return provenanceName;
+//	}
+
+	public static String provenancename(ProvenanceManager provenance,
+										   BaseData data) {
+		String orgname = data.getAuthority().getTitle();
+		String provenanceName = "";
+
+		provenanceName = orgname;
+		return provenanceName;
+	}
 
 	 public static SortedSet<String> provenanceinitials(ProvenanceManager provenance, Collection<BaseData> data)
 	 {
@@ -1185,7 +1319,9 @@ public class Functions {
 	   */
 	  public static Term[] measurements() {
 		  return new Term[] { WCSPTerm.Habitat, WCSPTerm.Lifeform,
-				  IucnTerm.threatStatus, EmonocotTerm.SRLI };
+				  IucnTerm.threatStatus
+//				  , EmonocotTerm.SRLI
+		  };
 	  }
 
 	  /**
@@ -1208,4 +1344,21 @@ public class Functions {
 
 		  return facts;
 	  }
+
+    public static String modifyToDisplay(String uri) {
+        int txtLen=uri.length();
+        int lastIndex;
+        String finaltext=null;
+        while (txtLen > 40 && uri.lastIndexOf('/', 40)>1) {
+            lastIndex = uri.lastIndexOf('/', 40);
+            String lasttext1=uri.substring(0,(lastIndex+1));
+            String lasttext2=uri.substring(lastIndex+1,uri.length());
+            txtLen=lasttext2.length();
+            uri=lasttext2;
+            if(finaltext!=null){finaltext=finaltext+lasttext1+" ";}else{finaltext=lasttext1+" ";}
+        }
+        if(finaltext!=null){finaltext=finaltext+uri;}else{finaltext=uri;}
+        return finaltext;
+    };
+
 }

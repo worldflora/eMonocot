@@ -16,7 +16,8 @@
  */
 package org.emonocot.model.convert;
 
-import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
 import org.springframework.core.convert.converter.Converter;
 
 public class TaxonomicStatusToStringConverter implements Converter<TaxonomicStatus, String> {
@@ -43,6 +44,8 @@ public class TaxonomicStatusToStringConverter implements Converter<TaxonomicStat
 				return "misapplied";
 			case Proparte_Synonym:
 				return "proParteSynonym";
+			case Unchecked:
+				return "unchecked";
 			case Synonym:
 			default:
 				return "synonym";
