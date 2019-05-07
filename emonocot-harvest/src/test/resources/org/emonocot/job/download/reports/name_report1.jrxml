@@ -12,18 +12,21 @@
     <style name="AcceptedName" fontSize="12" isBold="true" fontName="Museo 500"/>
     <style name="SubDetail" fontSize="8" fontName="Museo 500"/>
     <field name="scientificName" class="java.lang.String"/>
-    <field name="taxonomicStatus" class="org.gbif.ecat.voc.TaxonomicStatus"/>
+    <!--<field name="taxonomicStatus" class="org.gbif.ecat.voc.TaxonomicStatus"/>-->
+    <field name="taxonomicStatus" class="org.emonocot.model.constants.TaxonomicStatus"/>
     <field name="acceptedNameUsage" class="org.emonocot.model.Taxon"/>
     <detail>
         <band height="30">
             <textField isStretchWithOverflow="true"><!-- For accepted taxa, display the name with Authorship -->
                 <reportElement x="15" y="5" width="600" height="20" style="AcceptedName"/>
-                <textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
+                <!--<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?-->
+                <textFieldExpression><![CDATA[org.emonocot.model.constants.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
                     $F{scientificName} : "";]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true"><!-- For synonyms, display the name with Authorship and the accepted name with authorship-->
                 <reportElement x="15" y="5" width="600" height="20"/>
-                <textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ? "" :
+                <!--<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ? "" :-->
+                <textFieldExpression><![CDATA[org.emonocot.model.constants.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
                     $F{scientificName} + " " + ($F{acceptedNameUsage} != null ? " = " + ($F{acceptedNameUsage}).getScientificName() : "");]]>
                 </textFieldExpression>
             </textField>

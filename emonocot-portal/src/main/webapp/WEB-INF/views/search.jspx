@@ -207,7 +207,7 @@
 							<li>
 								<a class="modal-download">
 									<i class="modal-icon">&#160;</i>
-									<span class="modal-caption"><!--  --></span>
+									<span style="text-size:16px;background-color:#ffffff;" class="modal-caption"><!--  --></span>
 								</a>
 							</li>
 							<li>

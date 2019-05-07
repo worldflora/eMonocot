@@ -84,14 +84,49 @@
       <function-signature>java.lang.VernacularName getPreferred(org.emonocot.model.Taxon)</function-signature>
     </function>
     <function>
+        <name>isPreferred</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.Boolean isPreferred(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
+        <name>getCount</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.int getCount(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
       <name>isSynonym</name>
       <function-class>org.emonocot.portal.view.Functions</function-class>
       <function-signature>java.lang.Boolean isSynonym(org.emonocot.model.Taxon)</function-signature>
     </function>
     <function>
+        <name>isHeterotypicSynonym</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.Boolean isHeterotypicSynonym(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
+        <name>isHomotypicSynonym</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.Boolean isHomotypicSynonym(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
       <name>isAccepted</name>
       <function-class>org.emonocot.portal.view.Functions</function-class>
       <function-signature>java.lang.Boolean isAccepted(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
+        <name>getHomotypicSynonymsCount</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.int getHomotypicSynonymsCount(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
+        <name>getHeterotypicSynonymsCount</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.int getHeterotypicSynonymsCount(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
+        <name>getSynonymsCount</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.int getSynonymsCount(org.emonocot.model.Taxon)</function-signature>
     </function>
     <function>
       <name>isStartable</name>
@@ -189,6 +224,11 @@
       <function-signature>java.lang.String citekey(org.emonocot.portal.view.bibliography.Bibliography, org.emonocot.model.Reference)</function-signature>
     </function>
     <function>
+        <name>citekeycitation</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.String citekeycitation(org.emonocot.portal.view.bibliography.Bibliography, org.emonocot.model.Reference)</function-signature>
+    </function>
+    <function>
       <name>citekeys</name>
       <function-class>org.emonocot.portal.view.Functions</function-class>
       <function-signature>java.util.SortedSet citekeys(org.emonocot.portal.view.bibliography.Bibliography, java.util.Collection)</function-signature>
@@ -209,6 +249,11 @@
       <function-signature>java.lang.String provenancekey(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.BaseData)</function-signature>
     </function>
     <function>
+        <name>provenancecitation</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.String provenancecitation(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.BaseData)</function-signature>
+    </function>
+    <function>
       <name>provenancekeys</name>
       <function-class>org.emonocot.portal.view.Functions</function-class>
       <function-signature>java.util.SortedSet provenancekeys(org.emonocot.portal.view.provenance.ProvenanceManager, java.util.Collection)</function-signature>
@@ -217,6 +262,11 @@
       <name>provenanceinitial</name>
       <function-class>org.emonocot.portal.view.Functions</function-class>
       <function-signature>java.lang.String provenanceinitial(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.BaseData)</function-signature>
+    </function>
+    <function>
+        <name>provenancename</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.String provenancename(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.BaseData)</function-signature>
     </function>
     <function>
       <name>initialtokey</name>
@@ -327,5 +377,10 @@
       <name>getDistribution</name>
       <function-class>org.emonocot.portal.view.Functions</function-class>
       <function-signature>java.util.Collection getDistribution(org.emonocot.model.Taxon,org.gbif.ecat.voc.OccurrenceStatus,org.gbif.ecat.voc.EstablishmentMeans)</function-signature>
+    </function>
+    <function>
+        <name>modifyToDisplay</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.String modifyToDisplay(java.lang.String)</function-signature>
     </function>
 </taglib>

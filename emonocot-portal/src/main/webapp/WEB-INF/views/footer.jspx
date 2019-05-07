@@ -1,7 +1,10 @@
 <footer class="navbar navbar-inverse" xmlns:jsp="http://java.sun.com/JSP/Page"
 		xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 		xmlns:spring="http://www.springframework.org/tags">
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
+	<jsp:directive.page import="java.util.Date"/>
+	<jsp:directive.page import="java.text.SimpleDateFormat"/>
 	<jsp:output omit-xml-declaration="true" />
 	<div class="navbar-inner">
 		<div class="container">
@@ -64,6 +67,12 @@
 								<a href="${termsOfUseUrl}"><spring:message code="termsOfUse.title" /></a>
 							</li>
 						</ul>
+					</li>
+					<li>
+								<div style="color:white;">
+									How to cite: World Flora Online,&#160;<a href= "http://www.worldfloraonline.org/" style="color:white;">http://www.worldfloraonline.org/</a>,
+									<jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>
+								</div>
 					</li>
 				</ul>
 			</div>

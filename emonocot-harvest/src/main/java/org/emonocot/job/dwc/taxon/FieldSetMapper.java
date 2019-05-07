@@ -26,7 +26,8 @@ import org.gbif.dwc.terms.DwcTerm;
 import org.gbif.ecat.voc.NomenclaturalCode;
 import org.gbif.ecat.voc.NomenclaturalStatus;
 import org.gbif.ecat.voc.Rank;
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.ConversionException;
@@ -198,13 +199,13 @@ public class FieldSetMapper extends BaseDataFieldSetMapper<Taxon> {
             case taxonID:
             	object.setIdentifier(value);
             	break;
-            case taxonomicStatus:
-            	try {
-            		object.setTaxonomicStatus(conversionService.convert(value, TaxonomicStatus.class));
-            	} catch (ConversionException ce) {
-            		logger.error(ce.getMessage());
-            	}
-            	break;
+			case taxonomicStatus:
+				try {
+					object.setTaxonomicStatus(conversionService.convert(value, TaxonomicStatus.class));
+				} catch (ConversionException ce) {
+					logger.error(ce.getMessage());
+				}
+				break;
             case taxonRank:
             	try {
             		object.setTaxonRank(conversionService.convert(value, Rank.class));

@@ -45,7 +45,8 @@ import org.emonocot.model.registry.Organisation;
 import org.emonocot.pager.Page;
 import org.emonocot.test.DataManagementSupport;
 import org.gbif.ecat.voc.Rank;
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -154,7 +155,7 @@ public class FacetingTest extends DataManagementSupport {
 		Organisation source1 = createSource("test", "http://example.com", "Test Organisation", "test@example.com");
 		Organisation source2 = createSource("source2", "http://source2.com", "Test Organisation 2", "test@example2.com");
 		Taxon taxon1 = createTaxon("Aus", "1", null, null, "Ausaceae", null,
-				null, "(1753)", Rank.GENUS, TaxonomicStatus.Accepted,
+				null, "(1753)", Rank.GENUS, TaxonomicStatus.Accepted ,
 				source1, new Location[] {}, new Organisation[] {source1});
 		Taxon taxon2 = createTaxon("Aus bus", "2", taxon1, null, "Ausaceae",
 				null, null, "(1775)", Rank.SPECIES, TaxonomicStatus.Accepted,

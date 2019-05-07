@@ -88,7 +88,7 @@
 								<c:forEach var="resource" items="${result.records}">
 									<tr>
 										<td>
-										  <spring:url var="resourceUrl" value="/resource/${resource.id}" /> 
+										  <spring:url var="resourceUrl" value="/resource/${resource.id}" />
 										  <a href="${resourceUrl}">${resource.title}</a>
 										</td>										
 										<td><spring:message code="${resource.resourceType}" text="${resource.resourceType}" /></td>										

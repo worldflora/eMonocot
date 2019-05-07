@@ -46,10 +46,12 @@
 					<tiles:insertAttribute name="searchBox" ignore="true"/>
 					<div class="pull-right no-print">
 
-						<a alt="WFO Facebook" href="http://www.facebook.com/WorldFloraOnline">
+						<a alt="WFO Facebook" href="http://www.facebook.com/WorldFloraOnline"
+						   onClick="trackOutboundLink('http://www.facebook.com/WorldFloraOnline'); return false;">
 							<img src="/css/images/facebook.png" style="width: auto; height: auto;"/>
 						</a>
-						<a alt="WFO twitter" href="http://twitter.com/TheWorldFlora">
+						<a alt="WFO twitter" href="http://twitter.com/TheWorldFlora"
+						   onClick="trackOutboundLink('http://twitter.com/TheWorldFlora'); return false;">
 							<img src="/css/images/twitter.png" style="width: auto; height: auto; padding-right: 20px;"/>
 						</a>
 
@@ -133,7 +135,12 @@
 					</li>
 
 					<c:url value="/about" var="aboutUrl"/>
-					<li><a href="http://about.worldfloraonline.org"><spring:message code="about.title"/></a></li>
+					<li>
+						<a href="http://about.worldfloraonline.org"
+						   onClick="trackOutboundLink('http://about.worldfloraonline.org'); return false;">
+							<spring:message code="about.title"/>
+						</a>
+					</li>
 
 					<li><a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email"><spring:message code="contact.title"/></a></li>
 
@@ -280,9 +287,9 @@
 				<!--</div>-->
 
 			</div>
-			<div id="message-nav">
-				<p><spring:message code="logo.message"/></p>
-			</div>
+			<!--<div id="message-nav">-->
+				<!--<p><spring:message code="logo.message"/></p>-->
+			<!--</div>-->
 		</div>
 	</div>
 </div>

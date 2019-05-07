@@ -62,9 +62,11 @@ ItemWriter<T> {
 				for (Taxon taxon : linkedTaxa) {
 					taxon.setNameAccordingTo(null);
 				}
+				logger.debug("Set all NameAccordingTo to null");
 				getHibernateTemplate().saveOrUpdateAll(linkedTaxa);
 			}
 		}
+		getHibernateTemplate().clear();
 		getHibernateTemplate().deleteAll(items);
         logger.debug("Ending write | Deleted all items");
 	}

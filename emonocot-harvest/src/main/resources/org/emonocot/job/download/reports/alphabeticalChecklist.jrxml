@@ -20,7 +20,8 @@
     </parameter>
     <field name="scientificName" class="java.lang.String"/>
     <field name="scientificNameAuthorship" class="java.lang.String"/>
-    <field name="taxonomicStatus" class="org.gbif.ecat.voc.TaxonomicStatus"/>
+    <!--<field name="taxonomicStatus" class="org.gbif.ecat.voc.TaxonomicStatus"/>-->
+    <field name="taxonomicStatus" class="org.emonocot.model.constants.TaxonomicStatus"/>
     <field name="acceptedNameUsage" class="org.emonocot.model.Taxon"/>
     <field name="synonymNameUsages" class="java.util.List"/>
     <field name="license" class="java.lang.String"/>
@@ -42,13 +43,15 @@
             <textField isStretchWithOverflow="true">
                 <reportElement style="AcceptedName" x="15" y="5" width="500" height="20"/>
                 <textElement/>
-                <textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
+                <!--<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?-->
+                <textFieldExpression><![CDATA[org.emonocot.model.constants.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
                     $F{scientificName} + " " + ($F{scientificNameAuthorship} != null ? $F{scientificNameAuthorship} : "") : ""]]></textFieldExpression>
             </textField>
             <textField isStretchWithOverflow="true">
                 <reportElement style="Detail" x="15" y="5" width="500" height="20"/>
                 <textElement/>
-                <textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
+                <!--<textFieldExpression><![CDATA[org.gbif.ecat.voc.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?-->
+                <textFieldExpression><![CDATA[org.emonocot.model.constants.TaxonomicStatus.Accepted == $F{taxonomicStatus} ?
                     "" : $F{scientificName} + " " + ($F{scientificNameAuthorship} != null ? $F{scientificNameAuthorship} : "") + " " +
                     ($F{acceptedNameUsage} != null ? " = " + ($F{acceptedNameUsage}).getScientificName() +
                     (($F{acceptedNameUsage}).getScientificNameAuthorship() != null ? " " + ($F{acceptedNameUsage}).getScientificNameAuthorship() : "")

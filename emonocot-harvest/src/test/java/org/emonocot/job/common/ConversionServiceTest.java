@@ -22,7 +22,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.emonocot.model.convert.TaxonomicStatusConverter;
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.support.ConversionServiceFactoryBean;

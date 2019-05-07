@@ -83,7 +83,7 @@ public class DarwinCorePropertyMap {
 		taxonTerms.put(DwcTerm.scientificName,"scientificName");
 		taxonTerms.put(DwcTerm.scientificNameAuthorship,"scientificNameAuthorship");
 		taxonTerms.put(DwcTerm.scientificNameID,"scientificNameID");
-		taxonTerms.put(DcTerm.references,"source");
+		taxonTerms.put(DcTerm.references,"uri");
 		taxonTerms.put(DwcTerm.specificEpithet,"specificEpithet");
 		taxonTerms.put(EmonocotTerm.subfamily,"subfamily");
 		taxonTerms.put(DwcTerm.subgenus,"subgenus");

@@ -19,9 +19,12 @@
 		    </p>
 		    <div class="alert-actions">
 		      <spring:message code="support.email.address" var="supportEmailAddress"/>
-			  <a class="btn small" href="mailto:${supportEmailAddress}">
+			 <!-- <a class="btn small" href="mailto:${supportEmailAddress}">
 				<spring:message code="send.an.email" /> 	
-			  </a>
+			  </a> -->
+				<a class="btn small" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email">
+					<spring:message code="send.an.email" />
+				</a>
             </div>
 		  </div>
 		</div>

@@ -110,15 +110,13 @@ ul.citations {
 	list-style: none;
 	margin: 0px;
 	float: right;
-}	
+}
 ul.citations:before {
-		content: "[";
-	}
-	
+    content: "";
+}
 ul.citations:after {
-		content: "]";
-	}
-	
+    content: "";
+}
 ul.citations li {
 		display: inline;
 }	

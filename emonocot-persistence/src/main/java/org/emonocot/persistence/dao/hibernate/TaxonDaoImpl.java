@@ -27,14 +27,18 @@ import org.emonocot.pager.DefaultPageImpl;
 import org.emonocot.pager.Page;
 import org.emonocot.persistence.dao.TaxonDao;
 import org.gbif.ecat.voc.Rank;
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import org.hibernate.Session;
 /**
  * @author ben
  */
@@ -44,6 +48,8 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 	/**
 	 *
 	 */
+	private static Logger logger = LoggerFactory.getLogger(TaxonDaoImpl.class);
+
 	private static Map<String, Fetch[]> FETCH_PROFILES;
 
 	static {
@@ -117,7 +123,7 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 				/**
 				 *  ISSUE http://build.e-monocot.org/bugzilla/show_bug.cgi?id=180
 				 *
-                new Fetch("distribution", FetchMode.SELECT),*/
+				new Fetch("distribution", FetchMode.SELECT),*/
 				new Fetch("namePublishedIn", FetchMode.JOIN)});
 	}
 
@@ -185,13 +191,15 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 	 * @return a Page from the resultset
 	 */
 	public final List<Taxon> loadChildren(final String identifier,
-			final Integer pageSize, final Integer pageNumber, final String fetch) {
+										  final Integer pageSize, final Integer pageNumber, final String fetch) {
 		Criteria criteria = getSession().createCriteria(Taxon.class);
 		if (identifier == null) {
 			// return the root taxa
-			criteria.add(Restrictions.isNull("parentNameUsage"));
+////			criteria.add(Restrictions.isNull("parentNameUsage"));
 			criteria.add(Restrictions.isNotNull("scientificName"));
-			criteria.add(Restrictions.eq("taxonomicStatus", TaxonomicStatus.Accepted));
+////		criteria.add(Restrictions.eq("taxonomicStatus", TaxonomicStatus.Accepted));
+			criteria.add(Restrictions.isNotNull("parentNameUsage"));
+			criteria.add(Restrictions.ne("taxonomicStatus", TaxonomicStatus.Synonym));
 			if (rootRank != null) {
 				criteria.add(Restrictions.eq("taxonRank", rootRank));
 			}
@@ -221,7 +229,7 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 	 */
 	@Override
 	public Page<Taxon> searchByExample(Taxon example, boolean ignoreCase,
-			boolean useLike) {
+									   boolean useLike) {
 		Example criterion = Example.create(example);
 		if(ignoreCase) {
 			criterion.ignoreCase();
@@ -229,9 +237,34 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 		if(useLike) {
 			criterion.enableLike();
 		}
-		Criteria criteria = getSession().createCriteria(Taxon.class);
+		Session session = getSession();
+		Criteria criteria = session.createCriteria(Taxon.class);
 		criteria.add(criterion);
+
+		if(example.getNamePublishedIn() != null) {
+			Example criterion2 = Example.create(example.getNamePublishedIn());
+			if(ignoreCase) {
+				criterion2.ignoreCase();
+			}
+			if(useLike) {
+				criterion2.enableLike();
+			}
+			criteria.createCriteria("namePublishedIn").add(criterion2);
+		}
+
+		if(example.getNameAccordingTo() != null) {
+			Example criterion3 = Example.create(example.getNameAccordingTo());
+			if(ignoreCase) {
+				criterion3.ignoreCase();
+			}
+			if(useLike) {
+				criterion3.enableLike();
+			}
+			criteria.createCriteria("nameAccordingTo").add(criterion3);
+		}
+
 		List<Taxon> results = (List<Taxon>) criteria.list();
+		logger.debug("List of taxa:" + results.size());
 		Page<Taxon> page = new DefaultPageImpl<Taxon>(results.size(), null, null, results, null);
 		return page;
 	}

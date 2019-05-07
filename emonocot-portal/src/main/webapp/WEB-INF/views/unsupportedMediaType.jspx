@@ -24,9 +24,12 @@
 					<a class="btn small" href="${searchUrl}"><spring:message
 							code="search" /></a>
 					<spring:message code="support.email.address" var="supportEmailAddress"/>
-			        <a href="mailto:${supportEmailAddress}" class="btn small">
-			          <spring:message code="send.an.email" />
-			        </a>
+			     <!--   <a href="mailto:${supportEmailAddress}" class="btn small">
+			          <spring:message code="send.an.email" />  </a> -->
+						<a class="btn small" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email">
+							<spring:message code="send.an.email" />
+						</a>
+
 				</div>
 			</div>
 		</div>

@@ -139,35 +139,35 @@ public class ResourceController extends GenericController<Resource, ResourceServ
 		 Resource resource = getService().load(resourceId,"job-with-source");
 		 model.addAttribute("resource", resource);
 
-		 Map<String, String> selectedFacets = new HashMap<String, String>();
-		 if (facets != null && !facets.isEmpty()) {
-			 for (FacetRequest facetRequest : facets) {
-				 selectedFacets.put(facetRequest.getFacet(), facetRequest.getSelected());
-			 }
-		 }
+         Map<String, String> selectedFacets = new HashMap<String, String>();
+         if (facets != null && !facets.isEmpty()) {
+             for (FacetRequest facetRequest : facets) {
+                 selectedFacets.put(facetRequest.getFacet(), facetRequest.getSelected());
+             }
+         }
 
-		 selectedFacets.put("base.class_s", "org.emonocot.model.Annotation");
-		 if(resource.getLastHarvestedJobId() == null) {
-			 selectedFacets.put("annotation.job_id_l","0");
-			 String[] codes = new String[] { "resource.not.harvested" };
-			 Object[] args = new Object[] { resource.getTitle() };
-			 DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
-			 model.addAttribute("error", message);
-		 } else {
-			 selectedFacets.put("annotation.job_id_l", new Long(resource.getLastHarvestedJobId()).toString());
-		 }
-		 Page<Annotation> result = annotationService.search(query, null, limit,
-				 start, new String[] {
-				 "annotation.code_s",
-				 "annotation.type_s",
-				 "annotation.record_type_s",
-				 "annotation.job_id_l"
-		 }, null, selectedFacets,
-		 null, "annotated-obj");
-		 result.putParam("query", query);
-		 model.addAttribute("result", result);
+         selectedFacets.put("base.class_s", "org.emonocot.model.Annotation");
+         if(resource.getLastHarvestedJobId() == null) {
+             selectedFacets.put("annotation.job_id_l","0");
+             String[] codes = new String[] { "resource.not.harvested" };
+             Object[] args = new Object[] { resource.getTitle() };
+             DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+             model.addAttribute("error", message);
+         } else {
+             selectedFacets.put("annotation.job_id_l", new Long(resource.getLastHarvestedJobId()).toString());
+         }
+         Page<Annotation> result = annotationService.search(query, null, limit,
+                 start, new String[] {
+                         "annotation.code_s",
+                         "annotation.type_s",
+                         "annotation.record_type_s",
+                         "annotation.job_id_l"
+                 }, null, selectedFacets,
+                 null, "annotated-obj");
+         result.putParam("query", query);
+         model.addAttribute("result", result);
 
-		 return "resource/output";
+         return "resource/output";
 	 }
 
 	 /**
@@ -335,7 +335,14 @@ public class ResourceController extends GenericController<Resource, ResourceServ
 	 public String show(@PathVariable Long resourceId, Model uiModel) {
 		 Resource resource = getService().load(resourceId,"job-with-source");
 		 uiModel.addAttribute("resource", resource);
-		 return "resource/show";
+		 if (resource.getResourceType()!= ResourceType.DOWNLOAD)
+		 {
+		 	return "resource/show";
+		 }
+	     else
+		 {
+			 return "download/show";
+		 }
 	 }
 
 	 /**

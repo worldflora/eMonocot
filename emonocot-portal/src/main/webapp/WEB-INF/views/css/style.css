@@ -4224,6 +4224,13 @@ a.text-success:focus {
 .text-center {
   text-align: center;
 }
+.display-count {
+  color: #0088cc;
+  display: table;
+  margin: 0px auto 0px auto;
+  padding:5px;font-size:20px;
+  background-color:#ffffff;
+}
 h1,
 h2,
 h3,
@@ -10914,10 +10921,10 @@ ul.citations {
   float: right;
 }
 ul.citations:before {
-  content: "[";
+  content: "";
 }
 ul.citations:after {
-  content: "]";
+  content: "";
 }
 ul.citations li {
   display: inline-block;

@@ -16,7 +16,7 @@
  */
 package org.emonocot.api.autocomplete;
 
-public class Match {
+public class Match implements Comparable{
 	private String label;
 
 	private String value;
@@ -49,6 +49,9 @@ public class Match {
 		this.value = value;
 	}
 
-
+	@Override
+	public int compareTo(Object o) {
+		return this.getLabel().toLowerCase().compareTo(((Match) o).getLabel().toLowerCase());
+	}
 
 }

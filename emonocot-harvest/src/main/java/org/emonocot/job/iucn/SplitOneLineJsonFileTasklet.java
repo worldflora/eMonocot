@@ -53,7 +53,7 @@ Tasklet {
 		while (scanner.hasNext()) {
 			String string = scanner.next();
 
-			if (!string.isEmpty()) {
+		/**	if (!string.isEmpty()) {
 				string = string.trim();
 				if (string.startsWith("[{")) {
 					string = string.substring(1);
@@ -64,6 +64,29 @@ Tasklet {
 				if (string.endsWith("}]")) {
 					string = string.substring(0,string.length() - 1);
 				}
+				if (!string.endsWith("}")) {
+					string = string + "}";
+				}
+		 **/
+
+			if (!string.isEmpty()) {
+				string = string.trim();
+				if (string.startsWith("{")) {
+					int intIndex = string.indexOf("result");
+					string = string.substring(intIndex+8);
+				}
+				if (string.startsWith("[{")) {
+					string = string.substring(1);
+				}
+				if (!string.startsWith("{")) {
+					string = "{" + string;
+				}
+				if (string.endsWith("}]}")) {
+					string = string.substring(0,string.length() - 2);
+				}
+                if (string.endsWith("}]")) {
+                    string = string.substring(0,string.length() - 1);
+                }
 				if (!string.endsWith("}")) {
 					string = string + "}";
 				}

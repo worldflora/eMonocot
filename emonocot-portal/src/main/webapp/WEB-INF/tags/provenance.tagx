@@ -11,7 +11,8 @@
 		<a href="${organisationUrl}">${organisation.title}</a>
 	</dt>
 	<dd>
-		<a href="${organisation.uri}">${organisation.uri}</a>
+		<!--<a href="${organisation.uri}">${organisation.uri}</a>-->
+		<a href="${organisation.uri}" onClick="trackOutboundLink('${organisation.uri}'); return false;">${organisation.uri} </a>
 	</dd>
 	<dd>${organisation.bibliographicCitation}</dd>
 	<dd>
@@ -22,40 +23,42 @@
 					${data.rights}
 					<c:choose>
 						<!--<c:when	test="${data.license eq 'http://creativecommons.org/licenses/by/3.0'}">-->
-						<c:when	test="${fn:startsWith(data.license, 'http://creativecommons.org/licenses/by/')}">
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://') , 'http://creativecommons.org/licenses/by/')}">
 							<c:url value="/css/images/creativeCommonsLogos/by.png" var="byImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos" src="${byImg}" alt="by" /></a>
 						</c:when>
 						<!--<c:when	test="${data.license eq 'http://creativecommons.org/licenses/by-sa/3.0'}">-->
-						<c:when	test="${fn:startsWith(data.license, 'http://creativecommons.org/licenses/by-sa/')}">
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://'), 'http://creativecommons.org/licenses/by-sa/')}">
 							<c:url value="/css/images/creativeCommonsLogos/by-sa.png" var="bysaImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos" src="${bysaImg}" alt="by-sa" /></a>
 						</c:when>
 						<!--<c:when	test="${data.license eq 'http://creativecommons.org/licenses/by-nd/3.0'}">-->
-						<c:when	test="${fn:startsWith(data.license, 'http://creativecommons.org/licenses/by-nd/')}">
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://'), 'http://creativecommons.org/licenses/by-nd/')}">
 							<c:url value="/css/images/creativeCommonsLogos/by-nd.png" var="byndImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos" src="${byndImg}" alt="by-nd" /></a>
 						</c:when>
 						<!--<c:when	test="${data.license eq 'http://creativecommons.org/licenses/by-nc/3.0'}">-->
-						<c:when	test="${fn:startsWith(data.license, 'http://creativecommons.org/licenses/by-nc/')}">
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://'), 'http://creativecommons.org/licenses/by-nc/')}">
 							<c:url value="/css/images/creativeCommonsLogos/by-nc.png" var="byncImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos" src="${byncImg}" alt="by-nc" /></a>
 						</c:when>
 						<!--<c:when	test="${data.license eq 'http://creativecommons.org/licenses/by-nc-sa/3.0'}">-->
-						<c:when	test="${fn:startsWith(data.license, 'http://creativecommons.org/licenses/by-nc-sa/')}">
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://'), 'http://creativecommons.org/licenses/by-nc-sa/')}">
 							<c:url value="/css/images/creativeCommonsLogos/by-nc-sa.png" var="byncsaImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos" src="${byncsaImg}" alt="by-nc-sa" /></a>
 						</c:when>
 						<!--<c:when	test="${data.license eq 'http://creativecommons.org/licenses/by-nc-nd/3.0'}">-->
-						<c:when	test="${fn:startsWith(data.license, 'http://creativecommons.org/licenses/by-nc-nd/')}">
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://'), 'http://creativecommons.org/licenses/by-nc-nd/')}">
 							<c:url value="/css/images/creativeCommonsLogos/by-nc-nd.png" var="byncndImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos"	src="${byncndImg}" alt="by-nc-nd" /></a>
 						</c:when>
-						<c:when	test="${data.license eq 'http://creativecommons.org/publicdomain/zero/1.0/'}">
-							<c:url value="/css/images/creativeCommonsLogos/cc-zero.png" var="publicImg" />
+						<!--<c:when	test="${fn:replace(data.license,'https://' ,'http://') eq 'http://creativecommons.org/publicdomain/zero/1.0/'}">-->
+						<c:when	test="${fn:startsWith(fn:replace(data.license,'https://' ,'http://'), 'http://creativecommons.org/publicdomain/zero/')}">
+						   <c:url value="/css/images/creativeCommonsLogos/cc-zero.png" var="publicImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos"	src="${publicImg}" alt="public" /></a>
 						</c:when>
-						<c:when	test="${data.license eq 'http://creativecommons.org/publicdomain/'}">
+						<!--<c:when	test="${fn:replace(data.license,'https://' ,'http://') eq 'http://creativecommons.org/publicdomain/'}">-->
+						<c:when	test="${(fn:replace(fn:replace(data.license,'https://' ,'http://'),'publicdomain/','publicdomain') eq 'http://creativecommons.org/publicdomain')}">
 							<c:url value="/css/images/creativeCommonsLogos/publicdomain.png" var="publicImg" />
 							<a class="licenseLogo" href="${data.license}"><img class="cclogos"	src="${publicImg}" alt="public" /></a>
 						</c:when>

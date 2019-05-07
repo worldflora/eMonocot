@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:em="http://e-monocot.org/portal/functions"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+    xmlns:spring="http://www.springframework.org/tags"
+    xmlns:em="http://e-monocot.org/portal/functions"
+    xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 	<jsp:directive.attribute name="url" type="java.lang.String" required="true" />
 	<jsp:directive.attribute name="sortItems" type="java.util.List" required="false" />
 	<jsp:directive.attribute name="result" type="org.emonocot.pager.Page" required="true" />
@@ -10,8 +10,21 @@
 	<c:if test="${sortItems == null}">
 		<c:set var="sortItems" value="${em:sortItems()}"/>
 	</c:if>
-	<div class="${spanClass} sortOverlay btn-group sortNoJS pull-right">
-		<a class="btn" href="#"><spring:message code="sortBy" /></a>
+	<!--<div class="${spanClass} sortOverlay btn-group sortNoJS pull-right">-->
+		<!--<a class="btn" href="#"><spring:message code="sortBy" /></a>-->
+    <!--<a class="btn" href="#"><spring:message code="${result.sort}" /></a>-->
+
+    <div class="sortOverlay btn-group sortNoJS pull-right">
+        <a class="btn" href="#"><spring:message code="sortBy" /></a>
+        <c:choose>
+            <c:when test="${not empty result.sort}">
+                <a class="btn" href="#"><spring:message code="${result.sort}" /> </a>
+            </c:when>
+            <c:otherwise>
+                <c:out value="${''}"/>
+				<!--<c:out value="${'Recently updated last'}"/>-->
+            </c:otherwise>
+        </c:choose>
 		<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret">&#160;</span></a>
 		<ul id="sorting" class="dropdown-menu">
 			<c:forEach var="sortItem" items="${sortItems}">

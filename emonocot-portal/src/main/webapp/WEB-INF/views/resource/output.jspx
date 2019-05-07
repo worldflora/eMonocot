@@ -117,7 +117,8 @@
 															      ${annotatedObj.description}
 															    </c:when>
 															    <c:otherwise>
-															      ${fn:substring(annotatedObj.description,0,31)} &#8230;
+															      <!--${fn:substring(annotatedObj.description,0,31)} &#8230;-->
+																	${annotatedObj.taxon.scientificName} &#8230;
 															    </c:otherwise>
 															  </c:choose>
 															</a>

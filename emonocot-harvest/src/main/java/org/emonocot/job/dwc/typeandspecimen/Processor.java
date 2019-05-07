@@ -24,6 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
+import java.util.Map;
 /**
  *
  * @author ben
@@ -93,13 +95,52 @@ public class Processor extends NonOwnedProcessor<TypeAndSpecimen, TypeAndSpecime
 	}
 
 	@Override
-	protected TypeAndSpecimen lookupBound(TypeAndSpecimen t) {
+	/*protected TypeAndSpecimen lookupBound(TypeAndSpecimen t) {
 		if (t.getIdentifier() != null) {
 			return boundObjects.get(t.getIdentifier());
 		} else if (t.getCatalogNumber() != null) {
 			return boundObjects.get(t.getCatalogNumber());
 		}
 		return null;
+	}*/
+
+	protected TypeAndSpecimen lookupBound(TypeAndSpecimen t) {
+
+		TypeAndSpecimen t1 =  null;
+
+		if (t.getIdentifier() != null) {
+			t1 = boundObjects.get(t.getIdentifier());
+		}
+		else if (t.getCatalogNumber() != null && !t.getCatalogNumber().isEmpty())
+		{
+			t1 = boundObjects.get(t.getCatalogNumber());
+
+			if (t1 != null && !t1.toString().isEmpty())
+			{
+				if(t.getSource() != null && !t.getSource().isEmpty())
+				{
+					if(!t1.getSource().equals(t.getSource()))
+					{
+						t1 =  null;
+					}
+					else
+					{
+						if(!t1.getTaxa().equals(t.getTaxa()))
+						{
+							t1 = null;
+						}
+					}
+				}
+				else
+				{
+					if(!t1.getTaxa().equals(t.getTaxa()))
+					{
+						t1 = null;
+					}
+				}
+			}
+		}
+		return t1;
 	}
 
 	@Override

@@ -16,7 +16,8 @@
  */
 package org.emonocot.model.convert;
 
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.springframework.core.convert.converter.Converter;
 
 public class TaxonomicStatusConverter implements Converter<String, TaxonomicStatus> {
@@ -25,9 +26,41 @@ public class TaxonomicStatusConverter implements Converter<String, TaxonomicStat
 	public TaxonomicStatus convert(String source) {
 		if(source == null || source.isEmpty()) {
 			return null;
-		} else {
+		}
+		else
+		{
+			switch(source) {
+				case "heterotypicSynonym":
+					source = "heterotypic_Synonym";
+					break;
+				case "HeterotypicSynonym":
+					source = "heterotypic_Synonym";
+					break;
+				case "Heterotypicsynonym":
+					source = "heterotypic_Synonym";
+					break;
+				case "heterotypicsynonym":
+					source = "heterotypic_Synonym";
+					break;
+				case "homotypicSynonym":
+					source = "homotypic_Synonym";
+					break;
+				case "HomotypicSynonym":
+					source = "homotypic_Synonym";
+					break;
+				case "Homotypicsynonym":
+					source = "homotypic_Synonym";
+					break;
+				case "homotypicsynonym":
+					source = "homotypic_Synonym";
+					break;
+			}
 			return TaxonomicStatus.fromString(source);
+		}
+
 		}
 	}
 
-}
+
+
+

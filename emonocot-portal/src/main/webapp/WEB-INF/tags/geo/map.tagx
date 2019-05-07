@@ -128,7 +128,7 @@
 					});
 			
 			var base_layer = new OpenLayers.Layer.TMS(
-					'MapBox Layer', [ "http://e-monocot.org/tiles/" ],
+					'MapBox Layer', [ "http://www.worldfloraonline.org/tiles/" ],
 					{ 'layername': 'eMonocot',
 						'type': 'png',
 						'isBaseLayer' : true,

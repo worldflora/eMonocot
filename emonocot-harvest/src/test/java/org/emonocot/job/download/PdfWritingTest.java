@@ -33,7 +33,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.fill.JRVerticalReportWriter;
 
 import org.emonocot.model.Taxon;
-import org.gbif.ecat.voc.TaxonomicStatus;
+//import org.gbif.ecat.voc.TaxonomicStatus;
+import org.emonocot.model.constants.TaxonomicStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

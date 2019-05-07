@@ -79,14 +79,14 @@ public class PrintMapWriter implements ItemWriter<BaseData> {
 
 				TMSLayer tmsLayer = new TMSLayer();
 				tmsLayer.setLayer("eMonocot");
-				tmsLayer.setBaseURL("http://e-monocot.org/tiles/");
+				tmsLayer.setBaseURL("http://www.worldfloraonline.org/tiles/");
 				tmsLayer.setMaxExtent(new double[] {-20037508.3392,-20037508.3392,20037508.3392,20037508.3392});
 				tmsLayer.setResolutions(new double[] {156543.0339,78271.51695,39135.758475,19567.8792375,9783.93961875,4891.969809375,2445.9849046875});
 				tmsLayer.setFormat("png");
 				mapSpec.getLayers().add(tmsLayer);
 				WMSLayer wmsLayer = new WMSLayer();
 				wmsLayer.setLayers(new String[] {"emonocot:place"});
-				wmsLayer.setBaseURL("http://e-monocot.org/geoserver/wms");
+				wmsLayer.setBaseURL("http://www.worldfloraonline.org/geoserver/wms");
 				wmsLayer.setMaxExtent(new double[] {-20037508.3392,-20037508.3392,20037508.3392,20037508.3392});
 				wmsLayer.setResolutions(new double[] {156543.0339,78271.51695,39135.758475,19567.8792375,9783.93961875,4891.969809375,2445.9849046875});
 				wmsLayer.setFormat("image/png");

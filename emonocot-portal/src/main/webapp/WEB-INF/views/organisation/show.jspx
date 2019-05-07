@@ -43,7 +43,14 @@
 						<br/>
 						<table class="table">
 							<tbody>
-								<tr><th><spring:message code="availableAt" /></th><td><a href="${organisation.uri}" id="organisation-uri">${organisation.uri}</a></td></tr>
+							<tr><th>
+								<spring:message code="availableAt" />
+							</th><td>
+								<a href="${organisation.uri}" id="organisation-uri"
+								   onClick="trackOutboundLink('${organisation.uri}'); return false;">
+									${organisation.uri}
+								</a>
+							</td></tr>
 								<tr>
 									<th><spring:message code="organisation.logoUrl" /></th>
 									<c:choose>
