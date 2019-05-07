@@ -77,6 +77,7 @@ define wf-harvester::wf-harvester (
 	$email_imap_socketfactory_fallback,
 	$email_imap_socketfactory_class,
 	$harvester_baseUrl,
+        $harvester_url,
 	$harvester_admin_password,
 	$harvester_services_client_identifier,
 	$portalWebservice_harvester_password,
@@ -102,7 +103,7 @@ define wf-harvester::wf-harvester (
 		mode   => 755,
 	}
 
-	# • Imagemagick • #
+	# â€¢ Imagemagick â€¢ #
 	package { 'imagemagick':
 		ensure => "present",
 	} ->
@@ -110,7 +111,7 @@ define wf-harvester::wf-harvester (
 		ensure => directory,
 	} ->
 
-	# • Harvester configuration • #
+	# â€¢ Harvester configuration â€¢ #
 	file { "/var/lib/tomcat7/common/classes/META-INF/spring/emonocot-harvest.properties":
 		ensure  => file,
 		content => template('wf-harvester/emonocot-harvest.properties.erb'),
@@ -174,7 +175,7 @@ define wf-harvester::wf-harvester (
 		mode => "0700"
 	}
 
-	# • Static files • #
+	# â€¢ Static files â€¢ #
 	# Set permissions for deployments using Maven & Wagon
 	file { [ "${document_root}",
 		 "${document_root}/js",
