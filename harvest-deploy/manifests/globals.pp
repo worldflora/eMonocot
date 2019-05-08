@@ -15,7 +15,7 @@ $ubuntu_source = "gce.clouds.archive.ubuntu.com"
 # Normal country-code mirror
 #$ubuntu_source = "gb.archive.ubuntu.com"
 
-$database_host = "10.240.0.14"
-$portal_host = "10.240.0.13"
-$harvester_host = "10.240.0.15"
-$image_host = "10.240.0.19"
+$database_host = "localhost"
+$portal_host = "localhost"
+$harvester_host = "localhost"
+$image_host = "localhost"
