@@ -19,10 +19,6 @@
     <put-attribute name="pageTitle" value="worldFlora.contribute" cascade="true" />
     <put-attribute name="body" value="/WEB-INF/views/contribute.jspx" />
   </definition>
-  <definition name="downloadData" extends="default">
-    <put-attribute name="pageTitle" value="worldFlora.download" cascade="true" />
-    <put-attribute name="body" value="/WEB-INF/views/downloadData.jspx" />
-  </definition>
   <definition name="termsOfUse" extends="default">
     <put-attribute name="pageTitle" value="terms.of.use" cascade="true" />
     <put-attribute name="body" value="/WEB-INF/views/termsOfUse.jspx" />
