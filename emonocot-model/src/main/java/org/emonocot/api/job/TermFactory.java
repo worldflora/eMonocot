@@ -88,6 +88,10 @@ public class TermFactory {
 					new String[] {SkosTerm.PREFIX, SkosTerm.NS});
 		}
 		if (term == null) {
+			term = findTermInEnum(normTermName, WFOTerm.values(),
+					new String[] {WFOTerm.PREFIX, WFOTerm.NS});
+		}
+		if (term == null) {
 			term = findTermInEnum(normTermName, unkownTerms);
 		}
 		if (term == null) {

@@ -17,9 +17,11 @@
 package org.emonocot.job.dwc.taxon;
 
 import org.emonocot.api.job.EmonocotTerm;
+import org.emonocot.api.job.WFOTerm;
 import org.emonocot.job.dwc.read.BaseDataFieldSetMapper;
 import org.emonocot.model.Reference;
 import org.emonocot.model.Taxon;
+import org.emonocot.model.TaxonExternalLinks;
 import org.gbif.dwc.terms.Term;
 import org.gbif.dwc.terms.DcTerm;
 import org.gbif.dwc.terms.DwcTerm;
@@ -238,6 +240,42 @@ public class FieldSetMapper extends BaseDataFieldSetMapper<Taxon> {
 				break;
 			default:
 				break;
+			}
+		}
+
+		// WFO Terms
+		if (term instanceof WFOTerm) {
+
+			TaxonExternalLinks taxonExternalLinks = new TaxonExternalLinks();
+
+			if(object.getTaxonExternalLinks() == null) {
+				object.setTaxonExternalLinks(taxonExternalLinks);
+			}
+			WFOTerm wfoTerm = (WFOTerm) term;
+			switch(wfoTerm) {
+				case localID:
+					object.getTaxonExternalLinks().setLocalID(value);
+					break;
+				case tplID:
+					object.getTaxonExternalLinks().setTplID(value);
+					break;
+				case majorGroup:
+					object.getTaxonExternalLinks().setMajorGroup(value);
+					break;
+				case infraSpecificRank:
+					object.getTaxonExternalLinks().setInfraSpecificRank(value);
+					break;
+				case ccrStatus:
+					object.getTaxonExternalLinks().setCcrStatus(value);
+					break;
+				case genusHybridMarker:
+					object.getTaxonExternalLinks().setGenusHybridMarker(value);
+					break;
+				case originalID:
+					object.getTaxonExternalLinks().setOriginalID(value);
+					break;
+				default:
+					break;
 			}
 		}
 	}

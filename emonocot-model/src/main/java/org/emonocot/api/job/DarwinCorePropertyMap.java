@@ -93,6 +93,14 @@ public class DarwinCorePropertyMap {
 		taxonTerms.put(DwcTerm.taxonRemarks,"taxonRemarks");
 		taxonTerms.put(EmonocotTerm.tribe,"tribe");
 		taxonTerms.put(DwcTerm.verbatimTaxonRank,"verbatimTaxonRank");
+		taxonTerms.put(DcTerm.source,"source");
+		taxonTerms.put(WFOTerm.localID,"taxonExternalLinks.localID");
+		taxonTerms.put(WFOTerm.tplID,"taxonExternalLinks.tplID");
+		taxonTerms.put(WFOTerm.majorGroup,"taxonExternalLinks.majorGroup");
+		taxonTerms.put(WFOTerm.infraSpecificRank,"taxonExternalLinks.infraSpecificRank");
+		taxonTerms.put(WFOTerm.genusHybridMarker,"taxonExternalLinks.genusHybridMarker");
+		taxonTerms.put(WFOTerm.ccrStatus,"taxonExternalLinks.ccrStatus");
+		taxonTerms.put(WFOTerm.originalID,"taxonExternalLinks.originalID");
 
 		distributionTerms.put(DcTerm.accessRights,"accessRights");
 		distributionTerms.put(DwcTerm.datasetID,"authority.identifier");

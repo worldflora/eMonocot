@@ -17,5 +17,6 @@
     <mapping class="org.emonocot.model.taxon.Taxon"/>
     <mapping class="org.emonocot.model.user.User"/>
     <mapping class="org.emonocot.model.user.Group"/>
+    <mapping class="org.emonocot.model.TaxonExternalLinks"/>
   </session-factory>
 </hibernate-configuration>

@@ -28,6 +28,7 @@ import org.emonocot.job.dwc.read.DarwinCoreProcessor;
 import org.emonocot.model.Annotation;
 import org.emonocot.model.Reference;
 import org.emonocot.model.Taxon;
+import org.emonocot.model.TaxonExternalLinks;
 import org.emonocot.model.constants.AnnotationCode;
 import org.emonocot.model.constants.AnnotationType;
 import org.emonocot.model.constants.RecordType;
@@ -54,6 +55,8 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 
 	private ReferenceService referenceService;
 
+	TaxonExternalLinks taxonExternalLinks;
+
 	@Autowired
 	public void setReferenceService(ReferenceService referenceService) {
 		this.referenceService = referenceService;
@@ -73,6 +76,12 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			throw new NoIdentifierException(t);
 		}
 
+		if(t.getTaxonExternalLinks() == null) {
+
+			taxonExternalLinks = new TaxonExternalLinks();
+			t.setTaxonExternalLinks(taxonExternalLinks);
+		}
+
 		/**
 		 * replace references with persisted objects or new ones
 		 */
@@ -89,6 +98,15 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			t.getAnnotations().add(annotation);
 			t.setAuthority(getSource());
 			logger.info("Adding taxon " + t);
+
+			t.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
+			t.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
+			t.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
+			t.getTaxonExternalLinks().setInfraSpecificRank(t.getTaxonExternalLinks().getInfraSpecificRank());
+			t.getTaxonExternalLinks().setOriginalID(t.getTaxonExternalLinks().getOriginalID());
+			t.getTaxonExternalLinks().setCcrStatus(t.getTaxonExternalLinks().getCcrStatus());
+			t.getTaxonExternalLinks().setGenusHybridMarker(t.getTaxonExternalLinks().getGenusHybridMarker());
+
 			return t;
 		} else if(boundTaxa.containsKey(t.getIdentifier())) {
 			logger.error(t.getIdentifier() + " was found earlier in this archive");
@@ -99,6 +117,15 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			if (skipUnmodified
 					&& ((persisted.getModified() != null && t.getModified() != null) && !persisted
 							.getModified().isBefore(t.getModified()))) {
+
+				persisted.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
+				persisted.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
+				persisted.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
+				persisted.getTaxonExternalLinks().setInfraSpecificRank(t.getTaxonExternalLinks().getInfraSpecificRank());
+				persisted.getTaxonExternalLinks().setOriginalID(t.getTaxonExternalLinks().getOriginalID());
+				persisted.getTaxonExternalLinks().setCcrStatus(t.getTaxonExternalLinks().getCcrStatus());
+				persisted.getTaxonExternalLinks().setGenusHybridMarker(t.getTaxonExternalLinks().getGenusHybridMarker());
+
 				bindTaxon(persisted);
 				replaceAnnotation(persisted, AnnotationType.Info,
 						AnnotationCode.Skipped);
@@ -142,6 +169,29 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				//persisted.setTaxonRank(t.getTaxonRank());
 	     		persisted.setVerbatimTaxonRank(t.getVerbatimTaxonRank());
 				persisted.setUri(t.getUri());
+
+				if(persisted.getTaxonExternalLinks() == null) {
+					taxonExternalLinks = new TaxonExternalLinks();
+					persisted.setTaxonExternalLinks(taxonExternalLinks);
+				}
+				persisted.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
+				persisted.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
+				persisted.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
+				persisted.getTaxonExternalLinks().setInfraSpecificRank(t.getTaxonExternalLinks().getInfraSpecificRank());
+				persisted.getTaxonExternalLinks().setOriginalID(t.getTaxonExternalLinks().getOriginalID());
+				persisted.getTaxonExternalLinks().setCcrStatus(t.getTaxonExternalLinks().getCcrStatus());
+				persisted.getTaxonExternalLinks().setGenusHybridMarker(t.getTaxonExternalLinks().getGenusHybridMarker());
+
+			/**
+			 * persisted.setLocalID(t.getLocalID());
+			 * persisted.setTplID(t.getTplID());
+				persisted.setMajorGroup(t.getMajorGroup());
+				persisted.setGenusHybridMarker(t.getGenusHybridMarker());
+				persisted.setInfraSpecificRank(t.getInfraSpecificRank());
+				persisted.setCcrStatus(t.getCcrStatus());
+				persisted.setOriginalID(t.getOriginalID());
+			 **/
+
 				validate(t);
 
 				replaceAnnotation(persisted, AnnotationType.Info,
