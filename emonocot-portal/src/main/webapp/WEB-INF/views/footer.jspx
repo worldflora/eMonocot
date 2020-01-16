@@ -1,5 +1,6 @@
 <footer class="navbar navbar-inverse" xmlns:jsp="http://java.sun.com/JSP/Page"
 		xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:em="http://e-monocot.org/portal/functions"
 		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 		xmlns:spring="http://www.springframework.org/tags">
 	<jsp:directive.page contentType="text/html" pageEncoding="UTF-8" />
@@ -69,10 +70,19 @@
 						</ul>
 					</li>
 					<li>
-								<div style="color:white;">
-									How to cite: World Flora Online,&#160;<a href= "http://www.worldfloraonline.org/" style="color:white;">http://www.worldfloraonline.org/</a>,
-									<jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>
-								</div>
+						<div style="color:white;text-align:center;">
+							<c:choose>
+								<c:when test = "${not empty taxon.identifier and not empty taxon.scientificName}">
+									<c:set var="author" value="${em:getAuthor(taxon.scientificNameAuthorship)}" />
+									Cite taxon page as 'WFO (<jsp:expression>new SimpleDateFormat("yyyy").format(new Date())</jsp:expression>):  ${taxon.scientificName}&#160;<span>${author}</span>. Published on the Internet;<br/><a href= "http://www.worldfloraonline.org/taxon/${taxon.identifier}" style="color:white;">http://www.worldfloraonline.org/taxon/${taxon.identifier}</a>.
+									Accessed on: <jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>'
+								</c:when>
+								<c:otherwise>
+									How to cite: 'WFO (<jsp:expression>new SimpleDateFormat("yyyy").format(new Date())</jsp:expression>): World Flora Online. Published on the Internet;<br/> <a href= "http://www.worldfloraonline.org/" style="color:white;">http://www.worldfloraonline.org</a>.
+									Accessed on: <jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>'
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</li>
 				</ul>
 			</div>
