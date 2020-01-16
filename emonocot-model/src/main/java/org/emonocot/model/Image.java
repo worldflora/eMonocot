@@ -38,6 +38,8 @@ import javax.validation.constraints.Size;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.emonocot.model.constants.MediaType;
+import org.emonocot.model.marshall.json.ShapeDeserializer;
+import org.emonocot.model.marshall.json.ShapeSerializer;
 import org.emonocot.model.marshall.json.TaxonDeserializer;
 import org.emonocot.model.marshall.json.TaxonSerializer;
 import org.geotools.geometry.jts.JTSFactoryFinder;
@@ -112,10 +114,12 @@ public class Image extends Multimedia {
 	}
 
 	@Type(type = "spatialType")
+	@JsonSerialize(using = ShapeSerializer.class)
 	public Point getLocation() {
 		return location;
 	}
 
+	@JsonDeserialize(using = ShapeDeserializer.class)
 	public void setLocation(Point location) {
 		this.location = location;
 	}

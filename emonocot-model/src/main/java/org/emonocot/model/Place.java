@@ -162,6 +162,7 @@ public class Place extends SearchableObject {
 	 * @return the point
 	 */
 	@Type(type="spatialType")
+	@JsonSerialize(using=ShapeSerializer.class)
 	public Point getPoint() {
 		return point;
 	}
@@ -169,6 +170,7 @@ public class Place extends SearchableObject {
 	/**
 	 * @param point the point to set
 	 */
+	@JsonDeserialize(using = ShapeDeserializer.class)
 	public void setPoint(Geometry point) {
 		try{
 			if (point instanceof Point){
