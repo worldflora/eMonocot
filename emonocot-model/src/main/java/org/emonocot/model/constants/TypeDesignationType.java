@@ -22,5 +22,7 @@ package org.emonocot.model.constants;
  *
  */
 public enum TypeDesignationType {
-
+    monotypy,
+    originaldesignation,
+    tautonomy;
 }

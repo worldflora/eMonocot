@@ -83,6 +83,11 @@ public class IndexController {
 			Long referencesCount = solrQueryService.getResultsCount(referencesQuery);
 			uiModel.addAttribute("referencesCount", referencesCount);
 
+			String queryString = "taxon.taxon_rank_s:SPECIES";
+			String acceptedSpeciesQuery = "taxon.taxonomic_status_s:Accepted";
+			Long acceptedSpeciesCount = solrQueryService.getResultsCount(queryString, acceptedSpeciesQuery);
+			uiModel.addAttribute("acceptedSpeciesCount", acceptedSpeciesCount);
+
 
 		} catch (SolrServerException sse) {
 

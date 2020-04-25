@@ -40,5 +40,18 @@ public class SolrQueryService {
         return results.getNumFound();
     }
 
-
+    public long getResultsCount(String queryString, String filterQueryString) {
+        SolrQuery solrQuery = new SolrQuery();
+        solrQuery.setQuery(queryString);
+        solrQuery.setFilterQueries(filterQueryString);
+        QueryResponse response = null;
+        try {
+            response = solrServer.query(solrQuery);
+        } catch (SolrServerException e) {
+            logger.error("Unable to process the Solr search query: " + queryString);
+            logger.error(String.valueOf(e.getStackTrace()));
+        }
+        SolrDocumentList results = response.getResults();
+        return results.getNumFound();
+    }
 }

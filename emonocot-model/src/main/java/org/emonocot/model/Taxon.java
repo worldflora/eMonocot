@@ -21,20 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 import org.apache.solr.common.SolrInputDocument;
@@ -44,14 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.emonocot.api.job.WCSPTerm;
 import org.emonocot.model.constants.Location;
-import org.emonocot.model.marshall.json.ImageSerializer;
-import org.emonocot.model.marshall.json.NullDeserializer;
-import org.emonocot.model.marshall.json.ReferenceDeserializer;
-import org.emonocot.model.marshall.json.ReferenceSerializer;
-import org.emonocot.model.marshall.json.TaxonDeserializer;
-import org.emonocot.model.marshall.json.TaxonSerializer;
-import org.emonocot.model.marshall.json.ConceptDeserializer;
-import org.emonocot.model.marshall.json.ConceptSerializer;
+import org.emonocot.model.marshall.json.*;
 import org.emonocot.pager.FacetName;
 import org.gbif.dwc.terms.IucnTerm;
 import org.gbif.ecat.voc.NomenclaturalCode;
@@ -692,6 +672,32 @@ public class Taxon extends SearchableObject {
 		this.bibliographicCitation = bibliographicCitation;
 	}
 
+
+	private TaxonExternalLinks taxonExternalLinks;
+
+
+@OneToOne(fetch = FetchType.LAZY,
+		mappedBy = "taxon",orphanRemoval = true)
+@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.DELETE  })
+@JsonIgnore
+	public TaxonExternalLinks getTaxonExternalLinks() {
+		return taxonExternalLinks;
+	}
+
+	@JsonIgnore
+	public void setTaxonExternalLinks(TaxonExternalLinks taxonExternalLinks) {
+		if (taxonExternalLinks == null) {
+			if (this.taxonExternalLinks != null) {
+				this.taxonExternalLinks.setTaxon(null);
+			}
+		}
+		else {
+			taxonExternalLinks.setTaxon(this);
+		}
+		this.taxonExternalLinks = taxonExternalLinks;
+	}
+
+
 	/**
 	 * @return the annotations
 	 */
@@ -762,14 +768,6 @@ public class Taxon extends SearchableObject {
 	}
 
 	/**
-	 * @param newIdentifier
-	 *            Set the name identifier
-	 */
-	public void setScientificNameID(String newIdentifier) {
-		this.scientificNameID = newIdentifier;
-	}
-
-	/**
 	 *
 	 * @return the name identifier
 	 */
@@ -779,6 +777,14 @@ public class Taxon extends SearchableObject {
 	}
 
 	/**
+	 * @param newIdentifier
+	 *            Set the name identifier
+	 */
+	public void setScientificNameID(String newIdentifier) {
+		this.scientificNameID = newIdentifier;
+	}
+
+	/**s
 	 * @return a list of identifiers the taxon
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "taxon", orphanRemoval = true)
@@ -1026,7 +1032,8 @@ public class Taxon extends SearchableObject {
 			if (scientificNameAuthorship != null && !scientificNameAuthorship.isEmpty()) {
 				if (scientificNameLength > authorshipLength) {
 					if (scientificNameWithAuthor.substring(scientificNameLength -
-							authorshipLength).toLowerCase().equals(scientificNameAuthorship.toLowerCase())) {
+//							authorshipLength).toLowerCase().equals(scientificNameAuthorship.toLowerCase())) {
+							authorshipLength).equals(scientificNameAuthorship)) {
 						scientificNameWithoutAuthor = scientificNameWithAuthor.substring(0,
 								scientificNameLength - authorshipLength);
 					}
@@ -1152,32 +1159,32 @@ public class Taxon extends SearchableObject {
 		for(Distribution d : getDistribution()) {
 			sid.addField("taxon.distribution_ss", d.getLocation().getCode());
 			switch(d.getLocation().getLevel()) {
-			case 0:
-				for(Location r : (Set<Location>)d.getLocation().getChildren()) {
-					for(Location c : (Set<Location>)r.getChildren()) {
+				case 0:
+					for(Location r : (Set<Location>)d.getLocation().getChildren()) {
+						for(Location c : (Set<Location>)r.getChildren()) {
+							for(Location l : (Set<Location>)c.getChildren()) {
+								indexLocality(l,sid);
+							}
+						}
+					}
+					break;
+				case 1:
+					for(Location c : (Set<Location>)d.getLocation().getChildren()) {
 						for(Location l : (Set<Location>)c.getChildren()) {
 							indexLocality(l,sid);
 						}
 					}
-				}
-				break;
-			case 1:
-				for(Location c : (Set<Location>)d.getLocation().getChildren()) {
-					for(Location l : (Set<Location>)c.getChildren()) {
+					break;
+				case 2:
+					for(Location l : (Set<Location>)d.getLocation().getChildren()) {
 						indexLocality(l,sid);
 					}
-				}
-				break;
-			case 2:
-				for(Location l : (Set<Location>)d.getLocation().getChildren()) {
-					indexLocality(l,sid);
-				}
-				break;
-			case 3:
-				indexLocality(d.getLocation(),sid);
-				break;
-			default:
-				break;
+					break;
+				case 3:
+					indexLocality(d.getLocation(),sid);
+					break;
+				default:
+					break;
 			}
 
 			if(d.getAuthority() != null) {

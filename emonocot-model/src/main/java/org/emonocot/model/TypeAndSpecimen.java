@@ -37,6 +37,8 @@ import javax.validation.constraints.Size;
 
 import org.apache.solr.common.SolrInputDocument;
 import org.emonocot.model.constants.TypeDesignationType;
+import org.emonocot.model.marshall.json.ShapeDeserializer;
+import org.emonocot.model.marshall.json.ShapeSerializer;
 import org.emonocot.model.marshall.json.TaxonDeserializer;
 import org.emonocot.model.marshall.json.TaxonSerializer;
 import org.gbif.ecat.voc.Rank;
@@ -146,6 +148,7 @@ public class TypeAndSpecimen extends BaseData implements NonOwned, Searchable {
 	 * @return the location
 	 */
 	@Type(type = "spatialType")
+	@JsonSerialize(using = ShapeSerializer.class)
 	public Point getLocation() {
 		return location;
 	}
@@ -153,6 +156,7 @@ public class TypeAndSpecimen extends BaseData implements NonOwned, Searchable {
 	/**
 	 * @param location the location to set
 	 */
+	@JsonDeserialize(using = ShapeDeserializer.class)
 	public void setLocation(Point location) {
 		this.location = location;
 	}

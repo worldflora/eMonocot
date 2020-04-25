@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:form="http://www.springframework.org/tags/form"
+     xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
+     xmlns:spring="http://www.springframework.org/tags">
+
+    <tags:pageheader>
+    <h1>
+        <spring:message code="worldFlora.download" />
+    </h1>
+    </tags:pageheader>
+
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="inner">
+                    <div class="box">
+                        <h1 id="currentVersion">
+                            Latest Version
+                        </h1>
+                        <p class="justified">
+                             <p>
+                                A static copy of the Taxonomic Backbone data is available for download here. These data are provided as
+                                 <c:url value="/css/images/creativeCommonsLogos/cc-zero.png" var="publicImg" />
+                          <a class="licenseLogo" href="https://creativecommons.org/publicdomain/zero/1.0/"><img class="cclogos"   src="${publicImg}" alt="public" /></a>
+                                Public Domain CC0 1.0 Universal (CC0 1.0).
+                            </p>
+
+                            <p>
+                                Nomenclatural and classification information used for the initial data ingestion into the World Flora Online taxonomic backbone was provided by The Plant List Version 1.1 (September 2013). The data resources used to build The Plant List were contributed by: African Plants Database (Conservatory and Botanical Gardens of the City of Geneva and South African National Biodiversity Institute); GrassBase; The Global Compositae Checklist (International Compositae Alliance); The International Legume Database and Information Service; The International Organisation for Plant Information; International Plant Names Index (Royal Botanic Gardens, Kew, Harvard University Herbaria, and Australian National Herbarium); The iPlants Project (Royal Botanical Gardens, Kew, Missouri Botanical Garden, and New York Botanical Garden); Missouri Botanical Garden (Bryophyte Checklist, Checklist of Bolivia, Flora of China Checklist, Checklist of Ecuador, Flora Mesoamericana, Checklist of Panama, Checklist of Peru); Royal Botanic Garden Edinburgh (Rosaceae), and World Checklist of Selected Plant Families. See <a href="www.theplantlist.org/1.1/about/#collaborators">www.theplantlist.org/1.1/about/#collaborators</a> for further details.
+                            </p>
+                            <p>
+                                This initial backbone is now being actively curated by taxonomic specialists of particular plant groups, with Taxonomic Expert Networks (TENs) given responsibility for updating the classifications of families. The WFO Consortium welcomes participation of the world’s community of botanists to create and join TENs, to help improve the WFO taxonomic backbone and so develop an up-to-date global consensus classification. If you would like to join them or contribute please check the list of current WFO Taxonomic Expert Networks and their contact information in the <a href="http://about.worldfloraonline.org/tens.shtml">About</a> page.
+                            </p>
+                            <div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <td><b>Latest Static Version:</b> </td>
+                                    <td>
+                                        <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
+                                    </td>
+                                    <td>137MB</td>
+                                    <td>v.2019.05</td>
+                                    <td>May 17, 2019</td>
+                                    <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                </tr>
+                                </thead>
+                            </table>
+                           </div>
+                            <p>
+                                When citing the World Flora Online, you may use: "WFO ([Year]): World Flora Online. Version [Year].[Month]. Published on the Internet; http://www.worldfloraonline.org. Accessed on:[Date]".  Please ensure that the [Date] of accession accords with the date for your use of the system and the [Year] and [Month] correspond to the file you are using.
+                            </p>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="inner">
+                    <div class="box">
+                        <h1 id="previousVersions">
+                            Previous Versions
+                        </h1>
+                        <p class="justified">
+                            Copies of previous static versions are available here for citation and archiving purposes:
+                        </p>
+                        <div class="row">
+                            <div class="span11">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th><spring:message code="downloadData.name" /></th>
+                                        <th><spring:message code="downloadData.size" /></th>
+                                        <th><spring:message code="downloadData.versionNumber" /></th>
+                                        <th><spring:message code="downloadData.date" /></th>
+                                        <th><spring:message code="downloadData.description" /></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.1_20190513.zip">WFO Taxonomic Backbone (20190513)</a></td>
+                                        <td>137MB</td>
+                                        <td>v.2019.04</td>
+                                        <td>Apr. 21, 2019</td>
+                                        <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.1_20190420.zip">WFO Taxonomic Backbone (20190420)</a></td>
+                                        <td>93.8MB</td>
+                                        <td>v.2019.03</td>
+                                        <td>Mar. 05, 2019</td>
+                                        <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.1_20190305.zip">WFO Taxonomic Backbone (20190305)</a></td>
+                                        <td>73.5MB</td>
+                                        <td>v.2018.07</td>
+                                        <td>Jul. 11, 2018</td>
+                                        <td>(DwCA) Taxonomic classification.</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

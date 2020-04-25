@@ -1,296 +1,315 @@
 <div class="header container-fluid">
-	<div class="navbar navbar-fixed-top"
-		 xmlns:jsp="http://java.sun.com/JSP/Page"
-		 xmlns:c="http://java.sun.com/jsp/jstl/core"
-		 xmlns:spring="http://www.springframework.org/tags"
-		 xmlns:form="http://www.springframework.org/tags/form"
-		 xmlns:security="http://www.springframework.org/security/tags"
-		 xmlns:tiles="http://tiles.apache.org/tags-tiles">
-		<jsp:directive.page contentType="text/html;charset=UTF-8"/>
-		<jsp:output omit-xml-declaration="yes"/>
+    <!--<div class="navbar"-->
+    <div class="navbar navbar-fixed-top"
+         xmlns:jsp="http://java.sun.com/JSP/Page"
+         xmlns:c="http://java.sun.com/jsp/jstl/core"
+         xmlns:spring="http://www.springframework.org/tags"
+         xmlns:form="http://www.springframework.org/tags/form"
+         xmlns:security="http://www.springframework.org/security/tags"
+         xmlns:tiles="http://tiles.apache.org/tags-tiles">
+        <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+        <jsp:output omit-xml-declaration="yes"/>
 
-		<script>
+        <script>
             $("document").ready(function () {
                 $("ul.dropdown-menu > li > a ").hover(function () {
                     $(this).find('i').toggleClass('white');
                 });
             });
-		</script>
+        </script>
 
-		<!--<script type="text/javascript">-->
-		<!--$("document").ready(function(){-->
-		<!--$.cookieBar({-->
-		<!--message: 'By continuing to use the site, you agree to the use of cookies. <a class="link" target="_blank" href="http://families.e-monocot.org/privacy-cookies">Find out more about cookies.</a>'-->
-		<!--});-->
-		<!--});-->
-		<!--</script>-->
+        <!--<script type="text/javascript">-->
+        <!--$("document").ready(function(){-->
+        <!--$.cookieBar({-->
+        <!--message: 'By continuing to use the site, you agree to the use of cookies. <a class="link" target="_blank" href="http://families.e-monocot.org/privacy-cookies">Find out more about cookies.</a>'-->
+        <!--});-->
+        <!--});-->
+        <!--</script>-->
 
-		<div class="navbar-inner">
-			<div class="container">
-				<c:url value="/" var="brandUrl"/>
-				<a class="brand" href="${brandUrl}">
-					<span><spring:message code="application.title"/></span>
-				</a>
-				<div id="message-nav">
-					<p><spring:message code="logo.message"/></p>
-				</div>
+        <div class="navbar-inner">
+            <div class="container">
+                <c:url value="/" var="brandUrl"/>
+                <a class="brand" href="${brandUrl}">
+                    <span><spring:message code="application.title"/></span>
+                </a>
+                <div id="message-nav">
+                    <p><spring:message code="logo.message"/></p>
+                </div>
 
-				<button type="button" class="btn btn-navbar no-print" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"><!--  --></span>
-					<span class="icon-bar"><!--  --></span>
-					<span class="icon-bar"><!--  --></span>
-				</button>
+                <div id="ham-men">
+                <button type="button" class="btn btn-navbar no-print" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"><!--  --></span>
+                    <span class="icon-bar"><!--  --></span>
+                    <span class="icon-bar"><!--  --></span>
+                </button>
+                </div>
 
-				<div class="no-print">
+                <div class="no-print">
 
-					<tiles:insertAttribute name="searchBox" ignore="true"/>
-					<div class="pull-right no-print">
+                    <tiles:insertAttribute name="searchBox" ignore="true"/>
+                    <div class="pull-right no-print">
 
-						<a alt="WFO Facebook" href="http://www.facebook.com/WorldFloraOnline"
-						   onClick="trackOutboundLink('http://www.facebook.com/WorldFloraOnline'); return false;">
-							<img src="/css/images/facebook.png" style="width: auto; height: auto;"/>
-						</a>
-						<a alt="WFO twitter" href="http://twitter.com/TheWorldFlora"
-						   onClick="trackOutboundLink('http://twitter.com/TheWorldFlora'); return false;">
-							<img src="/css/images/twitter.png" style="width: auto; height: auto; padding-right: 20px;"/>
-						</a>
+                        <a alt="WFO Facebook" href="http://www.facebook.com/WorldFloraOnline"
+                           onClick="trackOutboundLink('http://www.facebook.com/WorldFloraOnline'); return false;">
+                            <img src="/css/images/facebook.png" style="width: auto; height: auto;"/>
+                        </a>
+                        <a alt="WFO twitter" href="http://twitter.com/TheWorldFlora"
+                           onClick="trackOutboundLink('http://twitter.com/TheWorldFlora'); return false;">
+                            <img src="/css/images/twitter.png" style="width: auto; height: auto; padding-right: 20px;"/>
+                        </a>
 
-						<security:authorize access="!isAuthenticated()">
-							<c:url value="/login" var="loginUrl"/>
-							<a href="${loginUrl}" class="btn btn-primary"><spring:message code="login"/></a>
-						</security:authorize>
-						<security:authorize access="isAuthenticated()">
-							<ul class="nav">
-								<li class="dropdown" id="menuUser">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="#menuUser">
-										<security:authentication property="principal.accountName"/>
-										<b class="caret"><!--  --></b>
-									</a>
-									<ul class="dropdown-menu">
-										<li>
-											<c:url value="/logout" var="logoutUrl"/>
-											<a href="${logoutUrl}"><i class="icon-off"><!--  --></i> <spring:message code="logout"/></a>
-										</li>
-										<li>
-											<c:url value="/home" var="homeUrl"/>
-											<a href="${homeUrl}"><i class="icon-home"><!--  --></i> <spring:message code="user.title"/></a>
-										</li>
-										<li>
-											<c:url value="/organisation" var="organisationsUrl"/>
-											<a href="${organisationsUrl}"><i class="icon-user"><!--  --></i> <spring:message code="organisations.title"/></a>
-										</li>
-										<li>
-											<c:url value="/resource" var="resourcesUrl"/>
-											<a href="${resourcesUrl}"><i class="icon-file"><!--  --></i> <spring:message code="resources.title"/></a>
-										</li>
-										<li>
-											<c:url value="/comment" var="commentUrl"/>
-											<a href="${commentUrl}"><i class="halflings-icon comments"><!--  --></i> <spring:message code="comments.title"/></a>
-										</li>
-										<li>
-											<c:url value="/user" var="userUrl"/>
-											<a href="${userUrl}"><spring:message code="users.title"/></a>
-										</li>
-										<li>
-											<c:url value="/group" var="groupsUrl"/>
-											<a href="${groupsUrl}"><spring:message code="group.title"/></a>
-										</li>
+                        <security:authorize access="!isAuthenticated()">
+                            <c:url value="/login" var="loginUrl"/>
+                            <a href="${loginUrl}" class="btn btn-primary"><spring:message code="login"/></a>
+                        </security:authorize>
+                        <security:authorize access="isAuthenticated()">
+                            <ul class="nav">
+                                <li class="dropdown" id="menuUser">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#menuUser">
+                                        <security:authentication property="principal.accountName"/>
+                                        <b class="caret"><!--  --></b>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <c:url value="/logout" var="logoutUrl"/>
+                                            <a href="${logoutUrl}"><i class="icon-off"><!--  --></i> <spring:message code="logout"/></a>
+                                        </li>
+                                        <li>
+                                            <c:url value="/home" var="homeUrl"/>
+                                            <a href="${homeUrl}"><i class="icon-home"><!--  --></i> <spring:message code="user.title"/></a>
+                                        </li>
+                                        <li>
+                                            <c:url value="/organisation" var="organisationsUrl"/>
+                                            <a href="${organisationsUrl}"><i class="icon-user"><!--  --></i> <spring:message code="organisations.title"/></a>
+                                        </li>
+                                        <li>
+                                            <c:url value="/resource" var="resourcesUrl"/>
+                                            <a href="${resourcesUrl}"><i class="icon-file"><!--  --></i> <spring:message code="resources.title"/></a>
+                                        </li>
+                                        <li>
+                                            <c:url value="/comment" var="commentUrl"/>
+                                            <a href="${commentUrl}"><i class="halflings-icon comments"><!--  --></i> <spring:message code="comments.title"/></a>
+                                        </li>
+                                        <li>
+                                            <c:url value="/user" var="userUrl"/>
+                                            <a href="${userUrl}"><spring:message code="users.title"/></a>
+                                        </li>
+                                        <li>
+                                            <c:url value="/group" var="groupsUrl"/>
+                                            <a href="${groupsUrl}"><spring:message code="group.title"/></a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </security:authorize>
+                    </div>
+                </div>
 
-									</ul>
-								</li>
-							</ul>
-						</security:authorize>
+                <div class="collapse nav-collapse">
+                    <ul class="nav">
+                        <li><a href="/">Home</a></li>
+                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle">Browse<b class="caret">&#160;</b></a>
 
-					</div>
-				</div>
+                            <ul class="dropdown-menu">
+                                <c:url value="/classification" var="classifyUrl"/>
+                                <li>
+                                    <a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a>
+                                </li>
+                                <li>
+                                    <c:url value="/search" var="imageSearchUrl">
+                                        <c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>
+                                    </c:url>
+                                    <a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&#160;</i>&#160;<spring:message code="browse.images"/></a>
+                                </li>
+                                <li>
+                                    <c:url value="/search" var="termSearchUrl">
+                                        <c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>
+                                    </c:url>
+                                    <a href="${termSearchUrl}"><i class="halflings-icon book">&#160;</i>&#160;<spring:message code="browse.glossary"/></a>
+                                </li>
+                                <c:url value="/spatial" var="mapSearchUrl"/>
+                                <li><a href="${mapSearchUrl}"><i class="icon-globe">&#160;</i>&#160;<spring:message code="map.search"/></a></li>
+                                <c:url value="/visualise" var="visualiseDataUrl"/>
+                                <li><a href="${visualiseDataUrl}"><i class="icon-signal">&#160;</i>&#160;<spring:message code="visualise.data"/></a></li>
+                            </ul>
+                        </li>
 
+                        <c:url value="/about" var="aboutUrl"/>
+                        <li>
+                            <a href="http://about.worldfloraonline.org"
+                               onClick="trackOutboundLink('http://about.worldfloraonline.org'); return false;">
+                                <spring:message code="about.title"/>
+                            </a>
+                        </li>
 
+                        <li><a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email"><spring:message code="contact.title"/></a></li>
 
-				<ul class="nav">
-					<li><a href="/">Home</a></li>
-					<li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle">Browse<b class="caret">&#160;</b></a>
+                        <!--						<c:url value="/contribute" var="contributeUrl"/>-->
+                        <!--						<li><a href="${contributeUrl}"><spring:message code="contribute.data"/></a></li>-->
 
-						<ul class="dropdown-menu">
-							<c:url value="/classification" var="classifyUrl"/>
-							<li>
-								<a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a>
-							</li>
-							<li>
-								<c:url value="/search" var="imageSearchUrl">
-									<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>
-								</c:url>
-								<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&#160;</i>&#160;<spring:message code="browse.images"/></a>
-							</li>
-							<li>
-								<c:url value="/search" var="termSearchUrl">
-									<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>
-								</c:url>
-								<a href="${termSearchUrl}"><i class="halflings-icon book">&#160;</i>&#160;<spring:message code="browse.glossary"/></a>
-							</li>
-							<c:url value="/spatial" var="mapSearchUrl"/>
-							<li><a href="${mapSearchUrl}"><i class="icon-globe">&#160;</i>&#160;<spring:message code="map.search"/></a></li>
-							<c:url value="/visualise" var="visualiseDataUrl"/>
-							<li><a href="${visualiseDataUrl}"><i class="icon-signal">&#160;</i>&#160;<spring:message code="visualise.data"/></a></li>
-						</ul>
-					</li>
+                        <!--						/////-->
+                        <li class="dropdown"><a data-toggle="dropdown" class="dropdown-toggle">Data<b class="caret">&#160;</b></a>
 
-					<c:url value="/about" var="aboutUrl"/>
-					<li>
-						<a href="http://about.worldfloraonline.org"
-						   onClick="trackOutboundLink('http://about.worldfloraonline.org'); return false;">
-							<spring:message code="about.title"/>
-						</a>
-					</li>
+                            <ul class="dropdown-menu">
+                                <c:url value="/contribute" var="contributeUrl"/>
+                                <li>
+                                    <a href="${contributeUrl}"><i class="halflings-icon up_arrow">&#160;</i>&#160;<spring:message code="contribute.data"/></a>
+                                </li>
 
-					<li><a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email"><spring:message code="contact.title"/></a></li>
-
-					<c:url value="/contribute" var="contributeUrl"/>
-					<li><a href="${contributeUrl}"><spring:message code="contribute.data"/></a></li>
-				</ul>
-
-				<!--<div id="primary-nav" class="nav-collapse no-print">-->
-
-
-
-				<!--<div class="btn-group" style="margin-left: 15%; margin-top: 0; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;">-->
-				<!--<button id="header-button-1" data-toggle="dropdown" class="btn dropdown-toggle">Browse</button>-->
-				<!--<ul class="dropdown-menu">-->
-				<!--<c:url value="/classification" var="classifyUrl"/>-->
-				<!--<li>-->
-				<!--<a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a>-->
-				<!--</li>-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="imageSearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>-->
-				<!--</c:url>-->
-				<!--<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&#160;</i>&#160;<spring:message code="browse.images"/></a>-->
-				<!--</li>-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="termSearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>-->
-				<!--</c:url>-->
-				<!--<a href="${termSearchUrl}"><i class="halflings-icon book">&#160;</i>&#160;<spring:message code="browse.glossary"/></a>-->
-				<!--</li>-->
-				<!--<c:url value="/spatial" var="mapSearchUrl"/>-->
-				<!--<li><a href="${mapSearchUrl}"><i class="icon-globe">&#160;</i>&#160;<spring:message code="map.search"/></a></li>-->
-				<!--<c:url value="/visualise" var="visualiseDataUrl"/>-->
-				<!--<li><a href="${visualiseDataUrl}"><i class="icon-signal">&#160;</i>&#160;<spring:message code="visualise.data"/></a></li>-->
-				<!--</ul>-->
-				<!--<button id="header-button-2" class="btn">-->
-				<!--<c:url value="/about" var="aboutUrl"/>-->
-				<!--<a href="http://www.worldfloraonline.org"><spring:message code="about.title"/></a>-->
-				<!--</button>-->
-				<!--<button id="header-button-3" class="btn">-->
-				<!--<a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email"><spring:message code="contact.title"/></a>-->
-				<!--</button>-->
-				<!--<button id="header-button-4" class="btn">-->
-				<!--<c:url value="/contribute" var="contributeUrl"/><a href="${contributeUrl}"><spring:message code="contribute.data"/></a>-->
-				<!--</button>-->
-				<!--</div>-->
+                                <c:url value="/downloadData" var="downloadDataUrl"/>
+                                <li><a href="${downloadDataUrl}"><i class="halflings-icon down_arrow">&#160;</i>&#160;<spring:message code="download.data"/></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
 
 
-				<!--<ul class="nav">-->
-				<!-- Custom menu begin-->
-				<!--<li class="dropdown" id="menuBrowse">-->
-				<!--<a href="#menuBrowse" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="browse.title"/>-->
-				<!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu">-->
-				<!--<c:url value="/classification" var="classifyUrl"/>-->
-				<!--<li><a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a></li>-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="imageSearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>-->
-				<!--</c:url>-->
-				<!--<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.images"/></a>-->
-				<!--</li>-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="termSearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>-->
-				<!--</c:url>-->
-				<!--<a href="${termSearchUrl}"><i class="halflings-icon book">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.glossary"/></a>-->
-				<!--</li>-->
-				<!--<c:url value="/spatial" var="mapSearchUrl"/>-->
-				<!--<li><a href="${mapSearchUrl}"><i class="icon-globe">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="map.search"/></a></li>-->
-				<!--<c:url value="/visualise" var="visualiseDataUrl"/>-->
-				<!--<li><a href="${visualiseDataUrl}"><i class="icon-signal">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="visualise.data"/></a></li>-->
-				<!--</ul>-->
+                <!--<div id="primary-nav" class="nav-collapse no-print">-->
 
-				<!--</li>-->
-				<!-- Custom menu end-->
-				<!--<li class="dropdown identifyOverlay" id="menuIdentify">-->
-				<!--<a href="#menuIdentifiy" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="identify.title"/>-->
-				<!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu">-->
-				<!---->
-				<!--&lt;!&ndash;<li>&ndash;&gt;-->
-				<!--&lt;!&ndash;<c:url value="/key/425996" var="familyKeyUrl"/>&ndash;&gt;-->
-				<!--&lt;!&ndash;<a href="${familyKeyUrl}"><i class="halflings-icon keys">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="family.key.title"/></a>&ndash;&gt;-->
-				<!--&lt;!&ndash;</li>&ndash;&gt;-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="keySearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.IdentificationKey"/>-->
-				<!--</c:url>-->
-				<!--<a href="${keySearchUrl}"><i class="halflings-icon search_keys">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="search.for.keys"/></a>-->
-				<!--</li>-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="imageSearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>-->
-				<!--</c:url>-->
-				<!--<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.images"/></a>-->
-				<!--</li>-->
-				<!--<li>-->
-				<!--<c:url value="/search" var="termSearchUrl">-->
-				<!--<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>-->
-				<!--</c:url>-->
-				<!--<a href="${termSearchUrl}"><i class="halflings-icon book">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.glossary"/></a>-->
-				<!--</li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li class="dropdown" id="menuClassify">-->
-				<!--<a href="#menuClassify" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="classify.title"/>-->
-				<!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu">-->
-				<!--<c:url value="/classification" var="classifyUrl"/>-->
-				<!--<li><a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a></li>-->
-				<!--<c:url value="/phylo/1" var="phylogenyUrl"/>-->
-				<!--<li><a href="${phylogenyUrl}"><i class="halflings-icon phylogeny">&#160;</i>&#160;<spring:message code="phylogeny.title"/></a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li class="dropdown searchOverlay" id="menuExplore">-->
-				<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#menuExplore">-->
-				<!--<spring:message code="explore.title"/>-->
-				<!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu">-->
-				<!--<c:url value="/search" var="searchUrl"/>-->
-				<!--<li><a href="${searchUrl}"><i class="icon-search">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="search"/></a></li>-->
-				<!--<c:url value="/spatial" var="mapSearchUrl"/>-->
-				<!--<li><a href="${mapSearchUrl}"><i class="icon-globe">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="map.search"/></a></li>-->
-				<!--<c:url value="/visualise" var="visualiseDataUrl"/>-->
-				<!--<li><a href="${visualiseDataUrl}"><i class="icon-signal">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="visualise.data"/></a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--<li class="dropdown searchOverlay" id="menuContribute">-->
-				<!--<a class="dropdown-toggle" data-toggle="dropdown" href="#menuContribute">-->
-				<!--<spring:message code="contribute.title"/>-->
-				<!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
-				<!--</a>-->
-				<!--<ul class="dropdown-menu">-->
-				<!--<c:url value="/contribute" var="contributeUrl"/>-->
-				<!--<li><a href="${contributeUrl}"><i class="icon-upload">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="contribute.data"/></a></li>-->
-				<!--</ul>-->
-				<!--</li>-->
-				<!--</ul>-->
-				<!--</div>-->
 
-			</div>
-			<!--<div id="message-nav">-->
-				<!--<p><spring:message code="logo.message"/></p>-->
-			<!--</div>-->
-		</div>
-	</div>
+
+                <!--<div class="btn-group" style="margin-left: 15%; margin-top: 0; border-bottom-left-radius: 50%; border-bottom-right-radius: 50%;">-->
+                <!--<button id="header-button-1" data-toggle="dropdown" class="btn dropdown-toggle">Browse</button>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<c:url value="/classification" var="classifyUrl"/>-->
+                <!--<li>-->
+                <!--<a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="imageSearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>-->
+                <!--</c:url>-->
+                <!--<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&#160;</i>&#160;<spring:message code="browse.images"/></a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="termSearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>-->
+                <!--</c:url>-->
+                <!--<a href="${termSearchUrl}"><i class="halflings-icon book">&#160;</i>&#160;<spring:message code="browse.glossary"/></a>-->
+                <!--</li>-->
+                <!--<c:url value="/spatial" var="mapSearchUrl"/>-->
+                <!--<li><a href="${mapSearchUrl}"><i class="icon-globe">&#160;</i>&#160;<spring:message code="map.search"/></a></li>-->
+                <!--<c:url value="/visualise" var="visualiseDataUrl"/>-->
+                <!--<li><a href="${visualiseDataUrl}"><i class="icon-signal">&#160;</i>&#160;<spring:message code="visualise.data"/></a></li>-->
+                <!--</ul>-->
+                <!--<button id="header-button-2" class="btn">-->
+                <!--<c:url value="/about" var="aboutUrl"/>-->
+                <!--<a href="http://www.worldfloraonline.org"><spring:message code="about.title"/></a>-->
+                <!--</button>-->
+                <!--<button id="header-button-3" class="btn">-->
+                <!--<a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email"><spring:message code="contact.title"/></a>-->
+                <!--</button>-->
+                <!--<button id="header-button-4" class="btn">-->
+                <!--<c:url value="/contribute" var="contributeUrl"/><a href="${contributeUrl}"><spring:message code="contribute.data"/></a>-->
+                <!--</button>-->
+                <!--</div>-->
+
+
+                <!--<ul class="nav">-->
+                <!-- Custom menu begin-->
+                <!--<li class="dropdown" id="menuBrowse">-->
+                <!--<a href="#menuBrowse" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="browse.title"/>-->
+                <!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<c:url value="/classification" var="classifyUrl"/>-->
+                <!--<li><a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a></li>-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="imageSearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>-->
+                <!--</c:url>-->
+                <!--<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.images"/></a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="termSearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>-->
+                <!--</c:url>-->
+                <!--<a href="${termSearchUrl}"><i class="halflings-icon book">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.glossary"/></a>-->
+                <!--</li>-->
+                <!--<c:url value="/spatial" var="mapSearchUrl"/>-->
+                <!--<li><a href="${mapSearchUrl}"><i class="icon-globe">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="map.search"/></a></li>-->
+                <!--<c:url value="/visualise" var="visualiseDataUrl"/>-->
+                <!--<li><a href="${visualiseDataUrl}"><i class="icon-signal">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="visualise.data"/></a></li>-->
+                <!--</ul>-->
+
+                <!--</li>-->
+                <!-- Custom menu end-->
+                <!--<li class="dropdown identifyOverlay" id="menuIdentify">-->
+                <!--<a href="#menuIdentifiy" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="identify.title"/>-->
+                <!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!---->
+                <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                <!--&lt;!&ndash;<c:url value="/key/425996" var="familyKeyUrl"/>&ndash;&gt;-->
+                <!--&lt;!&ndash;<a href="${familyKeyUrl}"><i class="halflings-icon keys">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="family.key.title"/></a>&ndash;&gt;-->
+                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="keySearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.IdentificationKey"/>-->
+                <!--</c:url>-->
+                <!--<a href="${keySearchUrl}"><i class="halflings-icon search_keys">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="search.for.keys"/></a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="imageSearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>-->
+                <!--</c:url>-->
+                <!--<a href="${imageSearchUrl}"><i class="halflings-icon browse_images">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.images"/></a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<c:url value="/search" var="termSearchUrl">-->
+                <!--<c:param name="facet" value="base.class_s:org.emonocot.model.Concept"/>-->
+                <!--</c:url>-->
+                <!--<a href="${termSearchUrl}"><i class="halflings-icon book">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="browse.glossary"/></a>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="dropdown" id="menuClassify">-->
+                <!--<a href="#menuClassify" class="dropdown-toggle" data-toggle="dropdown"><spring:message code="classify.title"/>-->
+                <!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<c:url value="/classification" var="classifyUrl"/>-->
+                <!--<li><a href="${classifyUrl}"><i class="halflings-icon classify">&#160;</i>&#160;<spring:message code="classification"/></a></li>-->
+                <!--<c:url value="/phylo/1" var="phylogenyUrl"/>-->
+                <!--<li><a href="${phylogenyUrl}"><i class="halflings-icon phylogeny">&#160;</i>&#160;<spring:message code="phylogeny.title"/></a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="dropdown searchOverlay" id="menuExplore">-->
+                <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#menuExplore">-->
+                <!--<spring:message code="explore.title"/>-->
+                <!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<c:url value="/search" var="searchUrl"/>-->
+                <!--<li><a href="${searchUrl}"><i class="icon-search">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="search"/></a></li>-->
+                <!--<c:url value="/spatial" var="mapSearchUrl"/>-->
+                <!--<li><a href="${mapSearchUrl}"><i class="icon-globe">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="map.search"/></a></li>-->
+                <!--<c:url value="/visualise" var="visualiseDataUrl"/>-->
+                <!--<li><a href="${visualiseDataUrl}"><i class="icon-signal">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="visualise.data"/></a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="dropdown searchOverlay" id="menuContribute">-->
+                <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#menuContribute">-->
+                <!--<spring:message code="contribute.title"/>-->
+                <!--<b class="caret">&lt;!&ndash;  &ndash;&gt;</b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                <!--<c:url value="/contribute" var="contributeUrl"/>-->
+                <!--<li><a href="${contributeUrl}"><i class="icon-upload">&lt;!&ndash;  &ndash;&gt;</i>&#160;<spring:message code="contribute.data"/></a></li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</div>-->
+
+            </div>
+            <!--<div id="message-nav">-->
+            <!--<p><spring:message code="logo.message"/></p>-->
+            <!--</div>-->
+        </div>
+    </div>
 </div>
+
+
+
 
