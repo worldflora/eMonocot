@@ -28,4 +28,43 @@
 	${name}.params.STYLES = "${style}";
 	${name}.params.FEATUREID = "${featureId}";
 	map.addLayers([ ${name} ]);
+	var wfsUrl =  location.protocol + '//' + location.host + '/geoserver/wfs?' + 
+		decodeURIComponent(
+			$.param({
+				"request": "GetFeature",
+				"version": "1.1.0",
+				"typeName": "${layer}",
+				"outputFormat": "JSON",
+				"FEATUREID": "${featureId}"
+			})
+	);
+	
+
+	$.ajax({
+		url: wfsUrl,
+		beforeSend: function(xhr){
+                    if (xhr.overrideMimeType)
+                    {
+                      xhr.overrideMimeType("application/json");
+                    }
+        },
+        dataType: 'json',
+		success: function (result) {
+                        jsonObj = new OpenLayers.Format.GeoJSON();
+                        jsonObj = jsonObj.read(result);
+                        var geomCollection = new OpenLayers.Geometry.Collection();
+                        $.each( jsonObj, function( key, value ) {
+                                geomCollection.addComponent(value.geometry);
+                        });
+                        geomCollection.calculateBounds();
+                        map.zoomToExtent(geomCollection.bounds);
+
+		},
+		
+		
+		error: function (data) {
+			console.log(data);
+		}
+	});														
+	
 </jsp:root>
