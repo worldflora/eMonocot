@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="emonocot-portal:war">
+    <output-path>$PROJECT_DIR$/emonocot-portal/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>emonocot-portal</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="emonocot-portal.war">
+      <element id="artifact" artifact-name="emonocot-portal:war exploded" />
+    </root>
+  </artifact>
+</component>
