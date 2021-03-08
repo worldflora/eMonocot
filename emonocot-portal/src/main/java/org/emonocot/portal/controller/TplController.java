@@ -62,40 +62,17 @@ public class TplController extends GenericController<Taxon, TaxonService> {
         }
     }
 
-
-//    @RequestMapping(value = "/{majorGroup}/{tplFamily}/{tplGenus}", method = RequestMethod.GET, produces = {"text/html", "*/*"})
-//    public String tplShowGenus(@PathVariable String majorGroup, @PathVariable String tplFamily, @PathVariable String tplGenus, Model model) throws Exception {
-//        String identifier = null;
-//        Taxon persistedTaxon = getService().findByTplID(majorGroup, tplFamily, tplGenus);
-//
-//        if (persistedTaxon != null) {
-//            identifier = persistedTaxon.getIdentifier();
-//
-//            model.addAttribute(getService().load(identifier, "object-page"));
-//            queryLog.info("Taxon: \'{}\'", new Object[]{identifier});
-//        } else {
-//            //queryLog.error("Cannot find tplID " + tplID);
-//            throw new Exception("exception in TPL redirect");
-//        }
-//        return "redirect:/taxon/" + identifier;
-//    }
-
-
     @RequestMapping(value = "/{majorGroup}", method = RequestMethod.GET, produces = {"text/html", "*/*"})
     public String tplShowSpeciesOrMajorGroup(@PathVariable String majorGroup, Model model) throws Exception {
         String identifier = null;
         Taxon persistedTaxon = getService().findByTplID(majorGroup);
-
         if (persistedTaxon != null) {
             identifier = persistedTaxon.getIdentifier();
-
-            model.addAttribute(getService().load(identifier, "object-page"));
+            model.addAttribute(getService().load(identifier,  "object-page"));
             queryLog.info("Taxon: \'{}\'", new Object[]{identifier});
         } else {
-            //queryLog.error("Cannot find tplID " + tplID);
             throw new Exception("exception in TPL redirect");
         }
         return "redirect:/taxon/" + identifier;
     }
-
 }
