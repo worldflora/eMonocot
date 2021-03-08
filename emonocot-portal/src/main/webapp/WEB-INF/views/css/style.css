@@ -10827,7 +10827,7 @@ footer.navbar .navbar-inner .container ul.nav {
  * page-banner
  */
 #page-title {
-  line-height: 65px;
+  line-height: 50px;
 }
 .page-banner {
   position: relative;
@@ -10880,6 +10880,9 @@ footer.navbar .navbar-inner .container ul.nav {
 /**
  * Taxon Page 
  */
+.WFOID {
+  font-size: 14px;
+}
 .protologueText {
   color: #616668;
 }

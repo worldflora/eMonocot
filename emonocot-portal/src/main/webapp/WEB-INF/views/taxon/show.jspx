@@ -14,6 +14,9 @@
 	<spring:message code="distribution.map" var="messageDistribution"/>
 	<tags:pageheader>
 	<h2 id="page-title">
+<!--		<a href="#WFOID" title="World Flora Online ID" rel="tooltip"></a>-->
+			<a href= "http://www.worldfloraonline.org/taxon/${taxon.identifier}"><b class="WFOID">${taxon.identifier}</b></a><br></br>
+
 	<tags:feedbackLink selector="option:contains(${taxon.scientificName} ${taxon.scientificNameAuthorship})" dataName="${taxon.scientificName}" />
 	<i class="glyphicons-icon leaf"><!--  --></i> <em class="taxonName" itemprop="scientificName">${taxon.scientificName}</em>&#160;<span itemprop="scientificNameAuthorship">${taxon.scientificNameAuthorship}</span>
 	<ul class="unstyled">
@@ -34,8 +37,7 @@
 	</c:if>
 	<p>
 
-
-        <li>
+		<li>
 	<small class="taxonomicStatusText">
 
 		<div id="taxonomicStatus">
@@ -120,10 +122,11 @@
 						</p>
 						</c:when>
 						<c:when test="${taxon.taxonomicStatus == 'Doubtful'}">
-							<spring:message code="isUnplaced" />
+							This name is reported by <c:url var="organisationUrl" value="/organisation/${taxon.authority.identifier}" />
+							<a href="${organisationUrl}">${taxon.authority.title}</a> as ambiguous
 						</c:when>
 						<c:when test="${taxon.taxonomicStatus == 'Unchecked'}">
-							<spring:message code="isUnchecked" />This name is reported by
+							<spring:message code="isUnchecked" />
 						</c:when>
 						<c:when test="${taxon.taxonomicStatus == 'Accepted'}">
 

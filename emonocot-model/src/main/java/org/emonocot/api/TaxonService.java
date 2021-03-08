@@ -16,10 +16,10 @@
  */
 package org.emonocot.api;
 
-import java.util.List;
-
 import org.emonocot.model.Taxon;
 import org.emonocot.pager.Page;
+
+import java.util.List;
 
 
 /**
@@ -57,4 +57,12 @@ public interface TaxonService extends Service<Taxon> {
 	 *         example
 	 */
 	Page<Taxon> searchByExample(Taxon example, boolean ignoreCase, boolean useLike);
+
+	Page<Taxon> findByScientificNameID(String scientificNameID);
+
+	Taxon findByTplID(String tplID);
+
+	Taxon findByTplID(String majorGroup, String tplFamily);
+
+	Taxon findByTplID(String majorGroup, String tplFamily, String tplGenus);
 }

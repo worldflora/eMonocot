@@ -16,15 +16,19 @@
  */
 package org.emonocot.service.impl;
 
-import java.util.List;
-
 import org.emonocot.api.TaxonService;
 import org.emonocot.model.Taxon;
 import org.emonocot.pager.Page;
 import org.emonocot.persistence.dao.TaxonDao;
+import org.hibernate.NonUniqueResultException;
+import org.hibernate.UnresolvableObjectException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  *
@@ -68,6 +72,58 @@ implements TaxonService {
 	public Page<Taxon> searchByExample(Taxon example, boolean ignoreCase,
 			boolean useLike) {
 		return dao.searchByExample(example, ignoreCase, useLike);
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public Page<Taxon> findByScientificNameID(final String scientificNameID) {
+		//return dao.findByScientificNameID(scientificNameID);
+
+		try {
+			Page<Taxon> taxon = dao.findByScientificNameID(scientificNameID);
+			return taxon;
+		} catch (ObjectRetrievalFailureException orfe) {
+			throw new UnresolvableObjectException(scientificNameID, "Object could not be resolved");
+		} catch (NonUniqueResultException nure) {
+			throw new IncorrectResultSizeDataAccessException(
+					"More than one taxon found with IpniId '" + scientificNameID + "'", 1);
+		}
+	}
+
+	@Override
+	public Taxon findByTplID(String tplID) {
+		return dao.findByTplID(tplID);
+		/*try {
+			Taxon taxon = dao.findByTplID(tplID);
+			return taxon;
+		} catch (ObjectRetrievalFailureException orfe) {
+			throw new UnresolvableObjectException(tplID, "Object could not be resolved");
+		} catch (NonUniqueResultException nure) {
+			throw new IncorrectResultSizeDataAccessException(
+					"More than one taxon found with TplId '" + tplID + "'", 1);
+		}*/
+	}
+
+    @Override
+    public Taxon findByTplID(String majorGroup, String tplFamily) {
+       // return dao.findByTplID(majorGroup, tplFamily);
+		try {
+			Taxon taxon = dao.findByTplID(majorGroup, tplFamily);
+			return taxon;
+		} catch (ObjectRetrievalFailureException orfe) {
+			throw new UnresolvableObjectException(tplFamily, "Object could not be resolved");
+		}
+    }
+
+    @Override
+    public Taxon findByTplID(String majorGroup, String tplFamily, String tplGenus) {
+        //return dao.findByTplID(majorGroup, tplFamily, tplGenus);
+		try {
+			Taxon taxon = dao.findByTplID(majorGroup, tplFamily, tplGenus);
+			return taxon;
+		} catch (ObjectRetrievalFailureException orfe) {
+			throw new UnresolvableObjectException(tplGenus, "Object could not be resolved");
+		}
 	}
 
 }

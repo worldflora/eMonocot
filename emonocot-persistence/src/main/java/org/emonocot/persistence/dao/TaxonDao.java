@@ -16,10 +16,10 @@
  */
 package org.emonocot.persistence.dao;
 
-import java.util.List;
-
 import org.emonocot.model.Taxon;
 import org.emonocot.pager.Page;
+
+import java.util.List;
 
 /**
  *
@@ -56,4 +56,11 @@ public interface TaxonDao extends Dao<Taxon> {
 	 */
 	Page<Taxon> searchByExample(Taxon example, boolean ignoreCase, boolean useLike);
 
+	Page<Taxon> findByScientificNameID(String scientificNameID);
+
+	Taxon findByTplID(String tplID);
+
+    Taxon findByTplID(String majorGroup, String tplFamily, String tplGenus);
+
+	Taxon findByTplID(String majorGroup, String tplFamily);
 }

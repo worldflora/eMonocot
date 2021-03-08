@@ -16,13 +16,13 @@
  */
 package org.emonocot.harvest.common;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.solr.client.solrj.SolrServerException;
 import org.emonocot.api.SearchableService;
 import org.emonocot.model.SearchableObject;
 import org.springframework.batch.item.database.AbstractPagingItemReader;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author jk
@@ -56,7 +56,12 @@ public class SolrItemReader<T extends SearchableObject> extends AbstractPagingIt
 		if(selectedFacets != null) {
 			for(String selectedFacet : selectedFacets) {
 				String[] f = selectedFacet.split("\\=");
-				this.selectedFacets.put(f[0],f[1]);
+				if(f.length > 1) {
+					this.selectedFacets.put(f[0], f[1]);
+				}
+				else if(f.length == 1){
+					this.selectedFacets.put(f[0], "");
+				}
 			}
 		}
 	}
