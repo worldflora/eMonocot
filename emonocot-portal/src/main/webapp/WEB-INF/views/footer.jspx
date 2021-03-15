@@ -11,28 +11,6 @@
 		<div class="container">
 			<div class="row">
 				<ul class="nav no-print">
-					<!--<li>-->
-					<!--<ul class="footerColumn span3">-->
-					<!--<li>-->
-					<!--<c:url value="/about" var="aboutUrl" />-->
-					<!--<a href="http://www.worldfloraonline.org"><spring:message code="about.title" /></a>-->
-					<!--</li>-->
-					<!--<li>								-->
-					<!--<a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=WFO Demonstration Portal" alt="WFO email"><spring:message code="contact.title" />&#160;<i class="halflings-icon white envelope">&lt;!&ndash;  &ndash;&gt;</i></a>-->
-					<!--</li>-->
-					<!--<li>-->
-					<!--<c:url var="twitterImageUrl" value="/css/images/glyphicons_white_twitter.png"/>-->
-					<!--<a href="http://twitter.com/TheWorldFlora" alt="WFO twitter"> <spring:message code="twitter.title" /><img src="${twitterImageUrl}"/></a>-->
-					<!--</li>-->
-					<!--<li>-->
-					<!--<c:url var="facebookLogoUrl" value="/css/images/facebook.png"/>-->
-					<!--<a href="http://www.facebook.com/WorldFloraOnline" alt="WFO Facebook"><img src="${facebookLogoUrl}"/></a>-->
-					<!--<c:url var="twitterLogoUrl" value="/css/images/twitter.png"/>-->
-					<!--<a href="http://twitter.com/TheWorldFlora" alt="WFO twitter"><img src="${twitterLogoUrl}"/></a>-->
-					<!--</li>-->
-					<!--</ul>-->
-					<!--</li>-->
-
 					<li>
 						<ul class="footerColumn span3">
 							<li>
@@ -43,22 +21,10 @@
 								<c:url value="/resource" var="resourceUrl" />
 								<a href="${resourceUrl}"><spring:message code="resources.title" />&#160;<i class="halflings-icon white file"><!--  --></i></a>
 							</li>
-							<!--<li>-->
-							<!--<c:url value="/user" var="userUrl" />-->
-							<!--<a href="${userUrl}"><spring:message code="users.title" /></a>-->
-							<!--</li>-->
-							<!--<li>-->
-							<!--<c:url value="/group" var="groupUrl" />-->
-							<!--<a href="${groupUrl}"><spring:message code="group.title" /></a>-->
-							<!--</li>-->
 						</ul>
 					</li>
 					<li>
 						<ul class="footerColumn span3">
-							<!--<li>-->
-							<!--<c:url value="/tour" var="tourUrl" />-->
-							<!--<a href="${tourUrl}"><spring:message code="eMonocot.tools" /></a>-->
-							<!--</li>-->
 							<li>
 								<c:url value="/comment" var="commentUrl" />
 								<a href="${commentUrl}"><spring:message code="comments.title" />&#160;<i class="halflings-icon white comments commentPage"><!--  --></i></a>
@@ -86,13 +52,6 @@
 					</li>
 				</ul>
 			</div>
-			<!--<div class="row">-->
-			<!--<ul class="nav no-print">-->
-			<!--<li>-->
-			<!--<a href="${aboutUrl}"><spring:message code="application.title"/> </a>-->
-			<!--</li>-->
-			<!--</ul>-->
-			<!--</div>-->
 		</div>
 	</div>
 </footer>

@@ -52,7 +52,10 @@ public class SimpleBibliographyImpl implements Bibliography {
 	public final void setReferences(final Taxon taxon) {
 
 		for(Reference reference : taxon.getReferences()) {
-			refs.add(new ReferenceWrapper(reference));
+			if(reference != taxon.getNameAccordingTo())
+			{
+				refs.add(new ReferenceWrapper(reference));
+			}
 		}
 		for (Description d : taxon.getDescriptions()) {
 			for(Reference reference : d.getReferences()) {

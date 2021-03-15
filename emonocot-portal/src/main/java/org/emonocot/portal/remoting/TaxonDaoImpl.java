@@ -16,10 +16,6 @@
  */
 package org.emonocot.portal.remoting;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.emonocot.model.Taxon;
 import org.emonocot.pager.DefaultPageImpl;
 import org.emonocot.pager.Page;
@@ -28,6 +24,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -94,6 +94,26 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 	@Override
 	public final List<Taxon> list(final Integer page, final Integer size, final String fetch) {
 		return this.page(page, size).getRecords();
+	}
+
+	@Override
+	public Page<Taxon> findByScientificNameID(final String scientificNameID) {
+		return null;
+	}
+
+	@Override
+	public Taxon findByTplID(String tplID) {
+		return null;
+	}
+
+	@Override
+	public Taxon findByTplID(String majorGroup, String tplFamily, String tplGenus) {
+		return null;
+	}
+
+	@Override
+	public Taxon findByTplID(String majorGroup, String tplFamily) {
+		return null;
 	}
 
 }
