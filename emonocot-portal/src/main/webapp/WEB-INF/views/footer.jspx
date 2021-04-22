@@ -1,4 +1,4 @@
-<footer class="navbar navbar-inverse" xmlns:jsp="http://java.sun.com/JSP/Page"
+<footer class="navbar navbar-inverse main" xmlns:jsp="http://java.sun.com/JSP/Page"
 		xmlns:c="http://java.sun.com/jsp/jstl/core"
 		xmlns:em="http://e-monocot.org/portal/functions"
 		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
@@ -7,51 +7,88 @@
 	<jsp:directive.page import="java.util.Date"/>
 	<jsp:directive.page import="java.text.SimpleDateFormat"/>
 	<jsp:output omit-xml-declaration="true" />
-	<div class="navbar-inner">
-		<div class="container">
-			<div class="row">
-				<ul class="nav no-print">
-					<li>
-						<ul class="footerColumn span3">
-							<li>
-								<c:url value="/organisation" var="organisationUrl" />
-								<a href="${organisationUrl}"><spring:message code="organisations.title" />&#160;<i class="halflings-icon white user"><!--  --></i></a>
-							</li>
-							<li>
-								<c:url value="/resource" var="resourceUrl" />
-								<a href="${resourceUrl}"><spring:message code="resources.title" />&#160;<i class="halflings-icon white file"><!--  --></i></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<ul class="footerColumn span3">
-							<li>
-								<c:url value="/comment" var="commentUrl" />
-								<a href="${commentUrl}"><spring:message code="comments.title" />&#160;<i class="halflings-icon white comments commentPage"><!--  --></i></a>
-							</li>
-							<li>
-								<c:url value="/termsOfUse" var="termsOfUseUrl" />
-								<a href="${termsOfUseUrl}"><spring:message code="termsOfUse.title" /></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<div style="color:white;text-align:center;">
-							<c:choose>
-								<c:when test = "${not empty taxon.identifier and not empty taxon.scientificName}">
-									<c:set var="author" value="${em:getAuthor(taxon.scientificNameAuthorship)}" />
-									Cite taxon page as 'WFO (<jsp:expression>new SimpleDateFormat("yyyy").format(new Date())</jsp:expression>):  ${taxon.scientificName}&#160;<span>${author}</span>. Published on the Internet;<br/><a href= "http://www.worldfloraonline.org/taxon/${taxon.identifier}" style="color:white;">http://www.worldfloraonline.org/taxon/${taxon.identifier}</a>.
-									Accessed on: <jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>'
-								</c:when>
-								<c:otherwise>
-									How to cite: 'WFO (<jsp:expression>new SimpleDateFormat("yyyy").format(new Date())</jsp:expression>): World Flora Online. Published on the Internet;<br/> <a href= "http://www.worldfloraonline.org/" style="color:white;">http://www.worldfloraonline.org</a>.
-									Accessed on: <jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>'
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</li>
-				</ul>
-			</div>
+	
+	<div class="partner-logos">
+		<div class="logo-item wfo-logo-mono-rev">
+			<img src="/css/images/svgs/wfo_logo_mono_rev.svg" />
 		</div>
+		<div class="logo-item gspc-logo-rev">
+			<img src="/css/images/svgs/GSPC_rev.svg" />
+		</div>
+		<div class="logo-item cobd-logo-rev">
+			<img src="/css/images/svgs/COBD_rev.svg" />
+		</div>
+		<div class="logo-item undob-logo-rev">
+			<img src="/css/images/svgs/UNDoB_mono.svg" />
+		</div>
+	</div>
+			  
+	<nav class="footer-nav">
+		<div class="social">
+			<a href="https://twitter.com/TheWorldFlora" target="_blank">
+				<img src="/css/images/svgs/twitter_rev.svg" />				
+			</a>
+			<a href="https://www.instagram.com/worldfloraonline/" target="_blank">
+				<img src="/css/images/svgs/instagram_rev.svg" />
+			</a>
+			<a href="https://www.facebook.com/WorldFloraOnline" target="_blank">
+				<img src="/css/images/svgs/facebook_rev.svg" />
+			</a>
+		</div>
+
+		<div class="footer-nav-items">
+			<ul class="footer-items">
+				<li class="">
+					<a class="nav-item" href="mailto:contact@worldfloraonline.org">Contact WFO</a>
+				</li>
+				<li>
+					<c:url value="/organisation" var="organisationUrl" />
+					<a href="${organisationUrl}"><spring:message code="organisations.title" />&#160;<i class="halflings-icon white user"><!--  --></i></a>
+				</li>
+				<li>
+					<c:url value="/resource" var="resourceUrl" />
+					<a href="${resourceUrl}"><spring:message code="resources.title" />&#160;<i class="halflings-icon white file"><!--  --></i></a>
+				</li>
+				<li>
+					<c:url value="/comment" var="commentUrl" />
+					<a href="${commentUrl}"><spring:message code="comments.title" />&#160;<i class="halflings-icon white comments commentPage"><!--  --></i></a>
+				</li>
+				<li>
+					<c:url value="/termsOfUse" var="termsOfUseUrl" />
+					<a href="${termsOfUseUrl}"><spring:message code="termsOfUse.title" /></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+	<div class="copyright-and-credits">
+		<p class="copyright">
+			Unless otherwise noted, text and images are licenced: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+		</p>
+		<p class="how-to-cite">
+			<c:choose>
+				<c:when test = "${not empty taxon.identifier and not empty taxon.scientificName}">
+					
+					<c:set var="author" value="${em:getAuthor(taxon.scientificNameAuthorship)}" />
+					Cite taxon page as 'WFO (<jsp:expression>new SimpleDateFormat("yyyy").format(new Date())</jsp:expression>):  ${taxon.scientificName}&#160;<span>${author}</span>. Published on the Internet;<br/><a href= "http://www.worldfloraonline.org/taxon/${taxon.identifier}" style="color:white;">http://www.worldfloraonline.org/taxon/${taxon.identifier}</a>.
+					Accessed on: <jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>'
+				</c:when>
+				<c:otherwise>
+					How to cite: 'WFO (<jsp:expression>new SimpleDateFormat("yyyy").format(new Date())</jsp:expression>): World Flora Online. Published on the Internet;<br/> <a href= "http://www.worldfloraonline.org/" style="color:white;">http://www.worldfloraonline.org</a>.
+					Accessed on: <jsp:expression>new SimpleDateFormat("dd MMM yyyy").format(new Date())</jsp:expression>'
+				</c:otherwise>
+			</c:choose>
+		</p> 
+		<!-- <p class="credits">
+			Website design and development
+			<a href="http://www.dalrymple.eu/nye-hughes">
+				by Nye Hughes</a>
+		</p> -->
+	</div>
+	<ul class="footerColumn span3">
+		
+	</ul>
+	<div>
+	
 	</div>
 </footer>
