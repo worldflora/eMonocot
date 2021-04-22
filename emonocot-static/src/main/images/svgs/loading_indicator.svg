@@ -1,0 +1,8 @@
+<svg class="icon" viewbox="0 0 24 24" preserveaspectratio="xMidYMid" role="img">
+<title>Loading indicator</title>
+	<g id="loading-indicator"	>
+		<path d="M50 15A35 35 0 1 0 74.787 25.213" fill="none" stroke="grey" stroke-width="12px"></path>
+		<path d="M50 0L50 30L66 15L50 0" fill="grey"></path>
+		<animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1.5s" repeatCount="indefinite"></animateTransform>
+	</g>
+</svg>

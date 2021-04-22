@@ -1,0 +1,8 @@
+<svg class="icon" viewbox="0 0 24 24" preserveaspectratio="xMidYMid" role="img">
+<title>Zoom</title>
+<g fill="none" stroke="currentColor" stroke-miterlimit="10">
+	<path d="M9.5 9.5l-5-5M4.5 9V4.5H9"></path></g><g fill="none" stroke="currentColor" stroke-miterlimit="10">
+	<path d="M9.5 14.5l-5 5M9 19.5H4.5V15"></path></g><g fill="none" stroke="currentColor" stroke-miterlimit="10">
+	<path d="M14.5 14.5l5 5M19.5 15v4.5H15"></path></g><g fill="none" stroke="currentColor" stroke-miterlimit="10">
+	<path d="M14.5 9.5l5-5M15 4.5h4.5V9"></path>
+</g>
