@@ -415,7 +415,7 @@
 </div>
 <br />
 
-<div>
+<div class="citation-text">
 	<c:choose>
 		<c:when test = "${not empty taxon.identifier and not empty taxon.scientificName}">
 			<c:set var="author" value="${em:getAuthor(taxon.scientificNameAuthorship)}" />
