@@ -176,7 +176,7 @@
       <plugin>
         <groupId>org.lesscss</groupId>
         <artifactId>lesscss-maven-plugin</artifactId>
-        <version>1.3.0</version>
+        <version>1.7.0.1.1</version>
         <executions>
           <execution>
             <id>generate.css</id>
@@ -186,7 +186,6 @@
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}/compiled-less/</outputDirectory>
-              <lessJs>${basedir}/src/main/js/less-1.3.0.min.js</lessJs>
               <includes>
                 <include>bootstrap.less</include>
               </includes>
