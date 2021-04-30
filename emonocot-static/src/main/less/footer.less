@@ -8,7 +8,7 @@ footer {
 		repeat(5, minmax(2rem, (@pageWidth/5)))
 		minmax(.5rem, 1fr);
 	grid-row-gap: 1rem;
-	background-color: darken(desaturate(@footerBackground, 20%), 10%);
+	background-color: @footerBackground;
 	padding: 2rem 0;
 
 	
@@ -60,6 +60,9 @@ footer {
 				a {
 					display: block;
 					margin: .5rem;
+					&:first-child {
+						margin-left: 0;
+					}
 					img {
 						height: 34px;
 						width: auto;
