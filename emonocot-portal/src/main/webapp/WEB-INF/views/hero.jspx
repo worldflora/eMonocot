@@ -5,7 +5,10 @@
 		xmlns:results="urn:jsptagdir:/WEB-INF/tags/results"
 		xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu"
 		xmlns:spring="http://www.springframework.org/tags"
-		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+		xmlns:em="http://e-monocot.org/portal/functions"
+		>
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
 	
@@ -120,63 +123,30 @@
 		</div>
 	</div>	
 	
-	<!--Carousel-->
-	<div id="myCarousel" class="carousel slide">
-		<!-- Carousel items -->
-		<div class="carousel-inner" style="padding-left: 0px;">
-			<div class="active item" data-slide-number="0">
-				<img class="img-carousel" src="/css/images/Isotria_medeoloides_1.jpg"/>
-				<div class="image-text-left">
-					<p>Isotria medeoloides (Pursh) Raf.</p>
-					<p><em>Vulnerable Species</em></p>
-				</div>
-			</div>
-			<!--<div class="item" data-slide-number="1">-->
-			<!--<img class="img-carousel" src="/css/images/Antirrhinum.jpg"/>-->
-			<!--<div class="image-text-left">-->
-			<!--<p>Antirrhinum subbaeticum Gümes, Mateu &amp; Sánchez-Gómez</p>-->
-			<!--<p><em>Endangered Species</em></p>-->
-			<!--</div>-->
-			<!--</div>-->
-			<div class="item" data-slide-number="1">
-				<img class="img-carousel" src="/css/images/Dryopteris.jpg"/>
-				<div class="image-text-left">
-					<p>Dryopteris filix-mas (L.)</p>
-					<!--<p><em>Endangered Species</em></p>-->
-				</div>
-			</div>
-			<div class="item" data-slide-number="2">
-				<img class="img-carousel" src="/css/images/Larsenianthus.jpg"/>
-				<div class="image-text-left">
-					<p>Larsenianthus wardianus W.J. Kress, Thet Htun &amp; Bordelon</p>
-					<!--<p><em>Endangered Species</em></p>-->
-				</div>
-			</div>
-			<!--<div class="item" data-slide-number="3">-->
-			<!--<img class="img-carousel" src="/css/images/Rhus.jpg"/>-->
-			<!--<div class="image-text-left">-->
-			<!--<p>Rhus michauxii Sarg.</p>-->
-			<!--&lt;!&ndash;<p><em>Endangered Species</em></p>&ndash;&gt;-->
-			<!--</div>-->
-			<!--</div>-->
-			<!--<div class="item" data-slide-number="4">-->
-			<!--<img class="img-carousel" src="/css/images/Serruria.jpg"/>-->
-			<!--<div class="image-text-left">-->
-			<!--<p>Serruia aemula Knight</p>-->
-			<!--<p><em>Critically Endangered Species</em></p>-->
-			<!--</div>-->
-			<!--</div>-->
-
-			<!--<div class="item" data-slide-number="5"><img src="./images/Antirrhinum.jpg"/></div>-->
-		</div>
-	</div>
-	<!-- Carousel nav -->
-	<div class="control-box">
-		<a class="carousel-control left" style="top: 90%;" href="#myCarousel" data-slide="prev">
-			<span class="glyphicons chevron-left"></span>
-		</a>
-		<a class="carousel-control right" style="top: 90%;" href="#myCarousel" data-slide="next">
-			<span class="glyphicons chevron-right"></span>
-		</a>
-	</div>
+	<figure class="hero-image">
+		<c:set var="currentImageIndex" value="${em:getRandom(3)}" scope="session" />
+		<c:choose>
+			<c:when test="${currentImageIndex==0}">
+				<img src="/css/images/Leaves.jpg" />
+				<figcaption>
+					<p>Leaves of endangered rhododendrons</p>
+					<p>Photo © David Purvis / RBGE</p>
+				</figcaption>
+			</c:when>
+			 <c:when test="${currentImageIndex==1}">
+				<img src="/css/images/Stamens.jpg" />
+				<figcaption>
+					<p>Dissected stamens of endangered rhododendrons</p>
+					<p>Photo © David Purvis / RBGE</p>
+				</figcaption>
+			 </c:when>
+			 <c:otherwise>
+				 <img src="/css/images/Petals.jpg" />
+				 <figcaption>
+					 <p>Dissected flowers of endangered rhododendrons</p>
+					 <p>Photo © David Purvis / RBGE</p>
+				 </figcaption>
+			 </c:otherwise>
+		</c:choose>
+	</figure>
 </header>

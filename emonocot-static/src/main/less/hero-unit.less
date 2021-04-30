@@ -11,37 +11,48 @@ header.hero-unit  {
   grid-template-columns: @mainGridColumns;
   
   div.overlay-text {
-    width: 100%;
+    width: 60%;
     grid-column: ~"2/4";
     grid-row: 1;
-    margin-top: 12%;
+    justify-self: center;
+    align-self: center;
     text-align: center;
     color: white;
     text-shadow: 0px 0px 20px black;
     z-index: 100;
+    backdrop-filter: blur(6px);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0.65) 53%,rgba(0,0,0,0) 100%);
+    border-radius: 68px; 
+    padding: 2rem .5rem;
+    
+  @media (max-width:710px) {
+    width: 100%;
+  }
+  
     
     h1 {
       font-size: 4rem;
       font-weight: 200;
       line-height: 1.05;
+      max-width: 33rem;
+      margin: 0 auto 0 auto;
     }
     .subtitle {
       font-weight: 400;
       font-size: 1.3rem;
-      margin-top: 1.5rem;
+      margin-top: .5rem;
     }
     .stats {
       text-shadow: none;
       margin: 2rem auto 0px auto;
       display: table;
-      padding:1.5rem;
       font-size:1.2rem;
       line-height: 1.4;
       border-radius: .25rem;
-      color: white;
-      background-color: rgba(37, 38, 38, .6);
+      color: rgb(235, 177, 98);
+      // background-color: rgba(37, 38, 38, .6);
       a {
-        color: white;
+        color: rgb(235, 177, 98);
       }
     }
     div.search {
@@ -77,46 +88,36 @@ header.hero-unit  {
 
 .ui-widget { font-family: @sansFontFamily !important; }
 
-#myCarousel {
-  margin-bottom: 0px;
+figure.hero-image {
+  margin: 0;
   grid-column: ~"1/-1";
   grid-row: 1;
   width: 100%;
   height: 100%;
   z-index: -1;
-  &:after { // gradient to help text legibility
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(52, 61, 54, .7), transparent);
-    z-index: 10;
-  }
   
-  .image-text-left {
+  figcaption {
     padding-left: 80px;
     position: absolute;
     left: 0;
-    bottom: 14%;
+    bottom: 2%;
     width: 95%;
     text-align: left;
     font-size: 14px;
+    line-height: 1.2;
     color: white;
     text-shadow: 0px 0px 20px black;
+    p {
+      margin: 0;
+      font-weight: 200;
+      color: rgb(205, 205, 205);
+    }
   }
   
-  .carousel-inner {
+  img {
+    object-fit: cover;
+    width: 100%;
     height: 100%;
-    .item {
-      height: 100%;
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
-    }
   }
   
 }
