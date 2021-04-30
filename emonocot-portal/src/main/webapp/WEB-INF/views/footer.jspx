@@ -42,16 +42,20 @@
 					<a class="nav-item" href="mailto:contact@worldfloraonline.org">Contact WFO</a>
 				</li>
 				<li>
+					 <c:url value="/visualise" var="visualiseDataUrl"/>
+					 <a href="${visualiseDataUrl}"><spring:message code="visualise.data"/></a>
+				</li>
+				<li>
 					<c:url value="/organisation" var="organisationUrl" />
-					<a href="${organisationUrl}"><spring:message code="organisations.title" />&#160;<i class="halflings-icon white user"><!--  --></i></a>
+					<a href="${organisationUrl}"><spring:message code="organisations.title" /></a>
 				</li>
 				<li>
 					<c:url value="/resource" var="resourceUrl" />
-					<a href="${resourceUrl}"><spring:message code="resources.title" />&#160;<i class="halflings-icon white file"><!--  --></i></a>
+					<a href="${resourceUrl}"><spring:message code="resources.title" /></a>
 				</li>
 				<li>
 					<c:url value="/comment" var="commentUrl" />
-					<a href="${commentUrl}"><spring:message code="comments.title" />&#160;<i class="halflings-icon white comments commentPage"><!--  --></i></a>
+					<a href="${commentUrl}"><spring:message code="comments.title" /></a>
 				</li>
 				<li>
 					<c:url value="/termsOfUse" var="termsOfUseUrl" />
