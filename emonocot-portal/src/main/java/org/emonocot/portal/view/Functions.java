@@ -1574,10 +1574,9 @@ public class Functions {
 		if(finaltext!=null){finaltext=finaltext+uri;}else{finaltext=uri;}
 		return finaltext;
 	};
-	/**
+	
 	public static int getRandom(int upperbound) {
 		Random rand = new Random();
 		return rand.nextInt(upperbound);
 	};
-	*/
 }
