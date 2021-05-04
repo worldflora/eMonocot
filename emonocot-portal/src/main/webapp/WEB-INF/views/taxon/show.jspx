@@ -378,13 +378,24 @@
 	$(document).ready(function() {
 		$("a[href^='#']").click(function(event) {
 			var targetId = $(this).attr('href');
+			var section = $(targetId);
+			section.css('scroll-margin', '2.5rem');
 			event.preventDefault();
-			window.location.hash = targetId;
-			var dd = $(targetId).parents('dd');
-			var dt = dd.prevAll('dt');
-			dt[0].scrollIntoView();
+			smoothScroll(targetId);
+			if(history.pushState) {
+				history.pushState(null, null, targetId);
+			}
+			else {
+				location.hash = targetId;
+			}
 		});
 	});
+	
+	function smoothScroll(selector){
+	 document.querySelector(selector).scrollIntoView({
+		  behavior: "smooth", block: "start", inline: "nearest"
+	 });
+}
 </script>
 
 <div id="modal-gallery" class="modal modal-gallery hide fade modal-fullscreen modal-fullscreen-stretch no-print">
@@ -656,7 +667,7 @@
 
 							<c:choose>
 								<c:when test="${syncount == 1 and homocount == 0 and heterocount == 0 }">
-										<section id="synonyms" class="section-box">
+										<section class="section-box">
 											<div class="inner">
 												<h2>
 													<spring:message code="synonyms" var="synonymsHeader"/>${synonymsHeader}

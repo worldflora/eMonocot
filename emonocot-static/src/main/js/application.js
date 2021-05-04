@@ -5,7 +5,7 @@
     // fix sub nav on scroll
     var $win = $(window)
       , $nav = $('.subnav')
-      , navTop = $('.subnav').length && $('.subnav').offset().top - 48
+      , navTop = $('.subnav').length && $('.subnav').offset().top
       , isFixed = 0;
 
     processScroll();
@@ -17,6 +17,8 @@
       var i, scrollTop = $win.scrollTop();
       if (scrollTop >= navTop && !isFixed) {
         isFixed = 1;
+        console.log (scrollTop);
+        console.log($('.subnav').offset().top)
         $nav.addClass('subnav-fixed');
       } else if (scrollTop <= navTop && isFixed) {
         isFixed = 0;
