@@ -8,17 +8,15 @@
       , navTop = $('.subnav').length && $('.subnav').offset().top
       , isFixed = 0;
 
-    processScroll();
-
-    $win.on('scroll', processScroll);
-
+    if ($nav.length) {
+      processScroll();
+      $win.on('scroll', processScroll);
+    }
+  
     function processScroll() {
-    	
       var i, scrollTop = $win.scrollTop();
       if (scrollTop >= navTop && !isFixed) {
         isFixed = 1;
-        console.log (scrollTop);
-        console.log($('.subnav').offset().top)
         $nav.addClass('subnav-fixed');
       } else if (scrollTop <= navTop && isFixed) {
         isFixed = 0;
