@@ -30,10 +30,26 @@
 @purple:                #7a43b6;
 
 
-// Scaffolding
+// Text colors
 // -------------------------
-@bodyBackground:        lighten(@navbarBackgroundHighlight, 50%);  //#eff2ea;  // emonocot - was white
 @textColor:             @grayDark;
+
+
+// Background colors
+// -------------------------
+@wfoHeaderColor				:#1d4c67;
+@aboutHeaderColor				:#2e8a88;
+@plantListHeaderColor		:#41a978;
+@footerBackground				:#384648;
+@bodyBackground				:#dddcda;
+
+
+// Other site pallet
+// -------------------------
+@turquoise	:#3d6f76;
+@darkGrey   :#585858;
+@yellow   	:#f2b246;
+@lightTurquoise :#aac2c4;
 
 
 // Links
@@ -44,18 +60,28 @@
 
 // Typography
 // -------------------------
-@sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+@sansFontFamily:        Source Sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+@baseVariableFontFamily: Source Sans Variable, -apple-system, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
-@baseFontSize:          14px;
+@baseFontSize:          16px;
 @baseFontFamily:        @sansFontFamily;
 @baseLineHeight:        20px;
 @altFontFamily:         @serifFontFamily;
 
-@headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
-@headingsFontWeight:    bold;    // instead of browser default, bold
+@headingsFontFamily:    @sansFontFamily; // empty to use BS default, @baseFontFamily
+@headingsFontWeight:    400;    // instead of browser default, bold
 @headingsColor:         inherit; // empty to use BS default, @textColor
+
+// weights
+// -------
+@fwExLight: 			200;
+@fwLight: 				300;
+@fwRegular:				400;
+@fwMedium:				600;
+@fwBold:					700;
+@fwBlack	:				900;
 
 
 // Component sizing
@@ -91,7 +117,7 @@
 @btnBorder:                         #ccc;
 
 @btnPrimaryBackground:              #d8811a;
-@btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 20%);
+@btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 0%);
 
 @btnInfoBackground:                 #5bc0de;
 @btnInfoBackgroundHighlight:        #2f96b4;
@@ -197,7 +223,7 @@
 @navbarLinkColorHover:            @grayDark;
 @navbarLinkColorActive:           @gray;
 @navbarLinkBackgroundHover:       transparent;
-@navbarLinkBackgroundActive:      darken(@navbarBackground, 5%);
+@navbarLinkBackgroundActive:      #cfcfcf;
 
 @navbarBrandColor:                @navbarLinkColor;
 

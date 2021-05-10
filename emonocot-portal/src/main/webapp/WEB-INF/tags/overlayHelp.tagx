@@ -45,7 +45,7 @@
 			});
 			<jsp:doBody />
 			
-			t.start();
+			//t.start();
 			
 			return $(document).on("click",".start:not(.disabled)",
 				function(e){
