@@ -11,7 +11,6 @@
 		>
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	
 	<div class="overlay-text">
 		<!-- title -->
 		<h1 class="text-center">
