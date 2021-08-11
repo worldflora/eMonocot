@@ -1,184 +1,151 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<header id="bs3-hero-unit"
+<header id="bs3-hero-unit" class="hero-unit"
 		xmlns:jsp="http://java.sun.com/JSP/Page"
 		xmlns:c="http://java.sun.com/jsp/jstl/core"
 		xmlns:results="urn:jsptagdir:/WEB-INF/tags/results"
 		xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu"
 		xmlns:spring="http://www.springframework.org/tags"
-		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+		xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+		xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+		xmlns:em="http://e-monocot.org/portal/functions"
+		>
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-
-	<div class="hero-unit-inner" style="padding: 0 0 0 0;">
-		<div id="heroTitle" class="container">
-			<div class="row" style="position: absolute; top: 18%; width:100%;">
-				<h1 class="text-center" style="color: white; font-size: 400%">
-					<spring:message code="hero.title" />
-				</h1>
-			</div>
-			<div class="row" style="position: absolute; top: 28%; width:100%;">
-				<p class="lead text-center" style="color: white;">
-					<spring:message code="hero.message" />
-				</p>
-				<c:if test="${not empty stats}">
-					<!--<h4  class="text-center" style="color: white;">-->
-					<h4 class="display-count text-center">
-						<c:forEach var="s" items="${stats.getFacetField('base.class_s').getValues()}">
-							<c:choose>
-								<c:when test="${s.name eq 'org.emonocot.model.Taxon'}">
-									<fmt:formatNumber type="NUMBER" groupingUsed="true" var="taxa" value="${s.count}"/>
-								</c:when>
-								<c:when test="${s.name eq 'org.emonocot.model.Image'}">
-									<fmt:formatNumber type="NUMBER" groupingUsed="true" var="images" value="${s.count}"/>
-								</c:when>
-								<c:when test="${s.name eq 'org.emonocot.model.IdentificationKey'}">
-									<fmt:formatNumber type="NUMBER" groupingUsed="true" var="keys" value="${s.count}"/>
-								</c:when>
-								<c:when test="${s.name eq 'org.emonocot.model.PhylogeneticTree'}">
-									<fmt:formatNumber type="NUMBER" groupingUsed="true" var="phylogeneticTrees" value="${s.count}"/>
-								</c:when>
-							</c:choose>
-						</c:forEach>
-						<c:if test="${not empty descriptionsCount}">
-							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="descriptions" value="${descriptionsCount}"/>
-						</c:if>
-						<c:if test="${not empty distributionCount}">
-							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="distributions" value="${distributionCount}"/>
-						</c:if>
-						<c:if test="${not empty referencesCount}">
-							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="references" value="${referencesCount}"/>
-						</c:if>
-						<c:if test="${not empty acceptedSpeciesCount}">
-							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="acceptedSpecies" value="${acceptedSpeciesCount}"/>
-						</c:if>
-						<c:url var="taxaUrl" value="/search">
-							<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
-						</c:url>
-						<c:url var="imagesUrl" value="/search">
-							<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>
-						</c:url>
-						<c:url var="keysUrl" value="/search">
-							<c:param name="facet" value="base.class_s:org.emonocot.model.IdentificationKey"/>
-						</c:url>
-						<c:url var="phylogeneticTreesUrl" value="/search">
-							<c:param name="facet" value="base.class_s:org.emonocot.model.PhylogeneticTree"/>
-						</c:url>
-						<c:url var="descriptionsUrl" value="/search">
-							<c:param name="facet" value="taxon.descriptions_not_empty_b:true"/>
-						</c:url>
-						<c:url var="distributionUrl" value="/search">
-							<c:param name="facet" value="taxon.distribution_not_empty_b:true"/>
-						</c:url>
-						<c:url var="referencesUrl" value="/search">
-							<c:param name="facet" value="taxon.references_not_empty_b:true"/>
-						</c:url>
-						<c:url var="acceptedSpeciesUrl" value="/search">
-							<c:param name="facet" value="taxon.taxon_rank_s:SPECIES"/>
-							<c:param name="facet" value="taxon.taxonomic_status_s:Accepted"/>
-						</c:url>
-						<c:url var="familiesUrl" value="/search">
-							<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
-						</c:url>
-						<c:choose>
-							<c:when test="${keys>0}">
-								<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
-							</c:when>
-							<c:otherwise>
-								<spring:message code="hero.stats2" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${imagesUrl}|${images}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
-							</c:otherwise>
-						</c:choose>
-
-						<!--<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}|${acceptedSpeciesUrl}|${acceptedSpecies}" argumentSeparator="|"/>-->
-					</h4>
+	<div class="overlay-text">
+		<!-- title -->
+		<h1 class="text-center">
+			<spring:message code="hero.title" />
+		</h1>
+		
+		<!-- subtitle -->
+		<p class="subtitle">
+			<spring:message code="hero.message" />
+		</p>
+		
+		<!-- statistics -->
+		<c:if test="${not empty stats}">
+			<h4 class="stats">
+				<c:forEach var="s" items="${stats.getFacetField('base.class_s').getValues()}">
+					<c:choose>
+						<c:when test="${s.name eq 'org.emonocot.model.Taxon'}">
+							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="taxa" value="${s.count}"/>
+						</c:when>
+						<c:when test="${s.name eq 'org.emonocot.model.Image'}">
+							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="images" value="${s.count}"/>
+						</c:when>
+						<c:when test="${s.name eq 'org.emonocot.model.IdentificationKey'}">
+							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="keys" value="${s.count}"/>
+						</c:when>
+						<c:when test="${s.name eq 'org.emonocot.model.PhylogeneticTree'}">
+							<fmt:formatNumber type="NUMBER" groupingUsed="true" var="phylogeneticTrees" value="${s.count}"/>
+						</c:when>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${not empty descriptionsCount}">
+					<fmt:formatNumber type="NUMBER" groupingUsed="true" var="descriptions" value="${descriptionsCount}"/>
 				</c:if>
-			</div>
-
-			<div class="row" style="top:48%; position: absolute; width: 100%;">
-				<script type="text/javascript">
-					$(document).ready(function() {
-						$("input#query").autocomplete({
-							source : "autocomplete",
-							minLength : 2
-						});
-						$["ui"]["autocomplete"].prototype["_renderItem"] = function( ul, item) {
-							return $( "<li></li>" )
-									.data( "item.autocomplete", item )
-									.append( $( "<a></a>" ).html( item.label ) )
-									.appendTo( ul );
-						};
+				<c:if test="${not empty distributionCount}">
+					<fmt:formatNumber type="NUMBER" groupingUsed="true" var="distributions" value="${distributionCount}"/>
+				</c:if>
+				<c:if test="${not empty referencesCount}">
+					<fmt:formatNumber type="NUMBER" groupingUsed="true" var="references" value="${referencesCount}"/>
+				</c:if>
+				<c:if test="${not empty acceptedSpeciesCount}">
+					<fmt:formatNumber type="NUMBER" groupingUsed="true" var="acceptedSpecies" value="${acceptedSpeciesCount}"/>
+				</c:if>
+				<c:url var="taxaUrl" value="/search">
+					<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
+				</c:url>
+				<c:url var="imagesUrl" value="/search">
+					<c:param name="facet" value="base.class_s:org.emonocot.model.Image"/>
+				</c:url>
+				<c:url var="keysUrl" value="/search">
+					<c:param name="facet" value="base.class_s:org.emonocot.model.IdentificationKey"/>
+				</c:url>
+				<c:url var="phylogeneticTreesUrl" value="/search">
+					<c:param name="facet" value="base.class_s:org.emonocot.model.PhylogeneticTree"/>
+				</c:url>
+				<c:url var="descriptionsUrl" value="/search">
+					<c:param name="facet" value="taxon.descriptions_not_empty_b:true"/>
+				</c:url>
+				<c:url var="distributionUrl" value="/search">
+					<c:param name="facet" value="taxon.distribution_not_empty_b:true"/>
+				</c:url>
+				<c:url var="referencesUrl" value="/search">
+					<c:param name="facet" value="taxon.references_not_empty_b:true"/>
+				</c:url>
+				<c:url var="acceptedSpeciesUrl" value="/search">
+					<c:param name="facet" value="taxon.taxon_rank_s:SPECIES"/>
+					<c:param name="facet" value="taxon.taxonomic_status_s:Accepted"/>
+				</c:url>
+				<c:url var="familiesUrl" value="/search">
+					<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
+				</c:url>
+				<c:choose>
+					<c:when test="${keys>0}">
+						<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
+					</c:when>
+					<c:otherwise>
+						<spring:message code="hero.stats2" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${imagesUrl}|${images}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
+					</c:otherwise>
+				</c:choose>
+				<!--<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}|${acceptedSpeciesUrl}|${acceptedSpecies}" argumentSeparator="|"/>-->
+			</h4>	
+		</c:if>
+	
+		<!-- search -->
+		<div class="search">
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("input#query").autocomplete({
+						source : "autocomplete",
+						minLength : 2
 					});
-				</script>
-				<form class="form-search" action="search" method="GET">
-					<div class="input form-inline">
-						<spring:message code="search.for" var="placeholderText" />
-						<input id="query" name="query" class="span6 search-query"
-							   type="text" value="" placeholder="${placeholderText}" />
-						<button type="submit" class="btn btn-primary  btn-large">
-							<span class="icon-search icon-white">&#160;</span> Search
-						</button>
-					</div>
-				</form>
-			</div>
-			<!--Carousel-->
-			<div id="myCarousel" class="carousel slide">
-				<!-- Carousel items -->
-				<div class="carousel-inner" style="padding-left: 0px;">
-					<div class="active item" data-slide-number="0">
-						<img class="img-carousel" src="/css/images/Isotria_medeoloides_1.jpg"/>
-						<div class="image-text-left">
-							<p>Isotria medeoloides (Pursh) Raf.</p>
-							<p><em>Vulnerable Species</em></p>
-						</div>
-					</div>
-					<!--<div class="item" data-slide-number="1">-->
-					<!--<img class="img-carousel" src="/css/images/Antirrhinum.jpg"/>-->
-					<!--<div class="image-text-left">-->
-					<!--<p>Antirrhinum subbaeticum Gümes, Mateu &amp; Sánchez-Gómez</p>-->
-					<!--<p><em>Endangered Species</em></p>-->
-					<!--</div>-->
-					<!--</div>-->
-					<div class="item" data-slide-number="1">
-						<img class="img-carousel" src="/css/images/Dryopteris.jpg"/>
-						<div class="image-text-left">
-							<p>Dryopteris filix-mas (L.)</p>
-							<!--<p><em>Endangered Species</em></p>-->
-						</div>
-					</div>
-					<div class="item" data-slide-number="2">
-						<img class="img-carousel" src="/css/images/Larsenianthus.jpg"/>
-						<div class="image-text-left">
-							<p>Larsenianthus wardianus W.J. Kress, Thet Htun &amp; Bordelon</p>
-							<!--<p><em>Endangered Species</em></p>-->
-						</div>
-					</div>
-					<!--<div class="item" data-slide-number="3">-->
-					<!--<img class="img-carousel" src="/css/images/Rhus.jpg"/>-->
-					<!--<div class="image-text-left">-->
-					<!--<p>Rhus michauxii Sarg.</p>-->
-					<!--&lt;!&ndash;<p><em>Endangered Species</em></p>&ndash;&gt;-->
-					<!--</div>-->
-					<!--</div>-->
-					<!--<div class="item" data-slide-number="4">-->
-					<!--<img class="img-carousel" src="/css/images/Serruria.jpg"/>-->
-					<!--<div class="image-text-left">-->
-					<!--<p>Serruia aemula Knight</p>-->
-					<!--<p><em>Critically Endangered Species</em></p>-->
-					<!--</div>-->
-					<!--</div>-->
-
-					<!--<div class="item" data-slide-number="5"><img src="./images/Antirrhinum.jpg"/></div>-->
+					$["ui"]["autocomplete"].prototype["_renderItem"] = function( ul, item) {
+						return $( "<li></li>" )
+								.data( "item.autocomplete", item )
+								.append( $( "<a></a>" ).html( item.label ) )
+								.appendTo( ul );
+					};
+				});
+			</script>
+			<form class="form-search" action="search" method="GET">
+				<div class="input form-inline">
+					<spring:message code="search.for" var="placeholderText" />
+					<input id="query" name="query" class="span6 search-query"
+							type="text" value="" placeholder="${placeholderText}" />
+					<button type="submit" class="btn btn-primary  btn-large">
+						<span class="halflings-icon search white">&#160;</span> Search
+					</button>
 				</div>
-			</div>
-			<!-- Carousel nav -->
-			<div class="control-box">
-				<a class="carousel-control left" style="top: 90%;" href="#myCarousel" data-slide="prev">
-					<span class="glyphicons chevron-left"></span>
-				</a>
-				<a class="carousel-control right" style="top: 90%;" href="#myCarousel" data-slide="next">
-					<span class="glyphicons chevron-right"></span>
-				</a>
-			</div>
-
+			</form>
 		</div>
-	</div>
+	</div>	
+	
+	<figure class="hero-image">
+		<c:set var="currentImageIndex" value="${em:getRandom(3)}" scope="session" />
+		<c:choose>
+			<c:when test="${currentImageIndex==0}">
+				<img src="/css/images/Leaves.jpg" />
+				<figcaption>
+					<p>Leaves of endangered rhododendrons</p>
+					<p>Photo © David Purvis / RBGE</p>
+				</figcaption>
+			</c:when>
+			 <c:when test="${currentImageIndex==1}">
+				<img src="/css/images/Stamens.jpg" />
+				<figcaption>
+					<p>Dissected stamens of endangered rhododendrons</p>
+					<p>Photo © David Purvis / RBGE</p>
+				</figcaption>
+			 </c:when>
+			 <c:otherwise>
+				 <img src="/css/images/Petals.jpg" />
+				 <figcaption>
+					 <p>Dissected flowers of endangered rhododendrons</p>
+					 <p>Photo © David Purvis / RBGE</p>
+				 </figcaption>
+			 </c:otherwise>
+		</c:choose>
+	</figure>
 </header>

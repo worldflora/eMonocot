@@ -32,6 +32,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Random;
 
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.el.ELException;
@@ -1573,5 +1574,9 @@ public class Functions {
 		if(finaltext!=null){finaltext=finaltext+uri;}else{finaltext=uri;}
 		return finaltext;
 	};
-
+	
+	public static int getRandom(int upperbound) {
+		Random rand = new Random();
+		return rand.nextInt(upperbound);
+	};
 }

@@ -1,0 +1,108 @@
+/*
+ * COMMON FOOTER
+ * ----------------------------------------------------------------- */
+footer {
+	display: grid;
+	grid-template-columns: 
+		minmax(1rem, 1fr)
+		repeat(5, minmax(2rem, (@pageWidth/5)))
+		minmax(.5rem, 1fr);
+	grid-row-gap: 1rem;
+	background-color: @footerBackground;
+	padding: 2rem 0;
+
+	
+	.partner-logos {
+		grid-column: ~"2/5";
+		align-self: center;
+		display: flex;
+		align-items: center;
+		height: 4rem;
+		margin-bottom: .8rem;
+		@media (max-width:710px) {
+			grid-column: ~"2/7";
+		}
+		
+		.logo-item {
+			margin-left: 2rem;
+			flex-grow: 1;
+			&:first-child {
+				margin-left: 0
+			}
+			&.wfo-logo-mono-rev {
+				flex-grow: 1.4;
+			}
+			&.gspc-logo-rev {
+			}
+			&.cobd-logo-rev {
+				flex-grow: 1.2;
+			}
+			&.undob-logo-rev {
+				flex-grow: 1.7;
+			}	
+		}
+		
+		  
+		img {
+			max-height: 100%;
+			min-width: 100%;
+			display: block;
+		}
+	}
+	nav {
+			grid-column: ~"6/7";
+			grid-row: ~"1/3";
+			
+			
+			.social {
+				display: flex;
+				justify-items: flex-start;
+				a {
+					display: block;
+					margin: .5rem;
+					&:first-child {
+						margin-left: 0;
+					}
+					img {
+						height: 34px;
+						width: auto;
+						min-width: 100%;
+						display: block;
+					}
+				}
+			}	
+	}
+
+	a, p, ul, li {
+		color: white;
+		list-style: none;
+	}
+	
+	ul.footer-items {
+		margin: .5rem 0 0 0;
+	}
+	
+	.footer-items a {
+		border-bottom: 1px white blue;
+		line-height: 1.5;
+		&:hover {
+			color: lighten(@turquoise, 20%);
+		}
+	}
+	div.copyright-and-credits {
+		grid-column: ~"2/5";
+		grid-row: 2;
+		
+		p, a {
+			font-size: @baseFontSize * 1.05;
+			line-height: @baseLineHeight * 1.15;
+			font-weight: @fwLight;
+			margin: 0;
+			padding: 0;
+		}		
+	}
+	
+	.copyright-and-credits a:hover {
+		color: lighten(@turquoise, 20%);
+	}
+}
