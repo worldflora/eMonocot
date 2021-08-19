@@ -56,9 +56,9 @@ public class LoginController {
 
 	@RequestMapping(value = "/activate/{nonce}", method = RequestMethod.GET)
 	public String verify(@PathVariable("nonce") String nonce,
-			@RequestParam String username,
-			Model model,
-			RedirectAttributes redirectAttributes) {
+						 @RequestParam String username,
+						 Model model,
+						 RedirectAttributes redirectAttributes) {
 
 		if(userService.verifyNonce(username, nonce)) {
 			User user = userService.load(username);
@@ -76,7 +76,5 @@ public class LoginController {
 			redirectAttributes.addFlashAttribute("error",message);
 			return "redirect:/login";
 		}
-
-
 	}
 }

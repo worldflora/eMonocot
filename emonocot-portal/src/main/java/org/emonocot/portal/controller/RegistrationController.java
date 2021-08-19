@@ -127,30 +127,28 @@ public class RegistrationController {
 		user.setCredentialsNonExpired(true);
 		user.setEnabled(false);
 
-	//service.createUser(user);
-
-        try{
-            service.createUser(user);
-        }
-        catch(Exception ex) {
-            if(StringUtils.containsIgnoreCase(ex.getMessage(),"ConstraintViolationException"))
-            {
-                if(StringUtils.containsIgnoreCase(ex.getCause().getCause().getMessage(), "identifier" )){
-                    String[] codes = new String[] {"user.username.duplicate" };
-                    Object[] args = new Object[] {user.getIdentifier()};
-                    DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
-                    model.addAttribute("error", message);
-                }
-                else
-                {
-                    String[] codes = new String[] {"user.accountName.duplicate" };
-                    Object[] args = new Object[] {user.getAccountName()};
-                    DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
-                    model.addAttribute("error", message);
-                }
-                return "register";
-            }
-        }
+		try{
+			service.createUser(user);
+		}
+		catch(Exception ex) {
+			if(StringUtils.containsIgnoreCase(ex.getMessage(),"ConstraintViolationException"))
+			{
+				if(StringUtils.containsIgnoreCase(ex.getCause().getCause().getMessage(), "identifier" )){
+					String[] codes = new String[] {"user.username.duplicate" };
+					Object[] args = new Object[] {user.getIdentifier()};
+					DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+					model.addAttribute("error", message);
+				}
+				else
+				{
+					String[] codes = new String[] {"user.accountName.duplicate" };
+					Object[] args = new Object[] {user.getAccountName()};
+					DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+					model.addAttribute("error", message);
+				}
+				return "register";
+			}
+		}
 
 		String nonce = service.createNonce(user.getUsername());
 

@@ -20,7 +20,9 @@ import javax.validation.Valid;
 
 import org.emonocot.api.UserService;
 import org.emonocot.model.auth.User;
+import org.emonocot.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +32,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -42,6 +47,19 @@ public class HomeController {
 
 	private UserService userService;
 
+	private EmailService emailService;
+
+	private String baseUrl;
+
+	@Autowired
+	public void setEmailService(EmailService emailService) {
+		this.emailService = emailService;
+	}
+
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
 	@Autowired
 	public void setUserService(UserService service) {
 		userService = service;
@@ -52,10 +70,25 @@ public class HomeController {
 	 * @return A model and view containing a user
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = "!form")
-	public String show(Model model) {
+	public String show(Model model, RedirectAttributes redirectAttributes) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) authentication.getPrincipal();
 		model.addAttribute(userService.load(user.getUsername()));
+
+
+		if(!user.isEnabled()) {
+			String nonce = userService.createNonce(user.getUsername());
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("user", user);
+			map.put("nonce", nonce);
+			map.put("baseUrl", baseUrl);
+			emailService.sendEmail("org/emonocot/portal/controller/ActivateAccountRequest.vm", map, user.getUsername(), "Welcome! Your account requires activation");
+			String[] codes = new String[]{"user.not.enabled"};
+			Object[] args = new Object[]{};
+			DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+			redirectAttributes.addFlashAttribute("info", message);
+		}
 		return "user/show";
 	}
 
@@ -69,9 +102,9 @@ public class HomeController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String update(@Valid User user,
-			BindingResult result,
-			Model model,
-			RedirectAttributes redirectAttributes) throws Exception {
+						 BindingResult result,
+						 Model model,
+						 RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User authorizedUser = (User)authentication.getPrincipal();
 		assert authorizedUser.equals(user);
