@@ -32,7 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
  *
  */
 public interface UserService extends SearchableService<User>, UserDetailsManager,
-GroupManager {
+		GroupManager {
 
 	/**
 	 *
@@ -42,7 +42,7 @@ GroupManager {
 	 * @param clazz the class of object
 	 */
 	void addPermission(SecuredObject object, String recipient,
-			Permission permission, Class<? extends SecuredObject> clazz);
+					   Permission permission, Class<? extends SecuredObject> clazz);
 	/**
 	 *
 	 * @param object the object to remove the permission from
@@ -51,7 +51,7 @@ GroupManager {
 	 * @param clazz the class of object
 	 */
 	void deletePermission(SecuredObject object, String recipient,
-			Permission permission, Class<? extends SecuredObject> clazz);
+						  Permission permission, Class<? extends SecuredObject> clazz);
 
 	/**
 	 *
@@ -86,4 +86,6 @@ GroupManager {
 	String makeProfileThumbnail(MultipartFile file, String oldProfileImage) throws Exception;
 
 	UserDetails getUserByApiKey(String apiKey);
+
+	UserDetails loadUserByUsername(String username);
 }

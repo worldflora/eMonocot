@@ -32,7 +32,7 @@ public class TplController extends GenericController<Taxon, TaxonService> {
         String identifier = null;
         Taxon persistedTaxon = getService().findByTplID(majorGroup, tplFamily);
 
-        if (persistedTaxon != null) {
+        if (persistedTaxon != null && persistedTaxon.getIdentifier() != null) {
             identifier = persistedTaxon.getIdentifier();
 
             model.addAttribute(getService().load(identifier, "object-page"));
@@ -50,7 +50,7 @@ public class TplController extends GenericController<Taxon, TaxonService> {
         try {
             Taxon persistedTaxon = getService().findByTplID(majorGroup, tplFamily, tplGenus);
 
-            if (persistedTaxon != null) {
+            if (persistedTaxon != null && persistedTaxon.getIdentifier() != null) {
                 identifier = persistedTaxon.getIdentifier();
 
                 model.addAttribute(getService().load(identifier, "object-page"));
@@ -66,12 +66,12 @@ public class TplController extends GenericController<Taxon, TaxonService> {
     public String tplShowSpeciesOrMajorGroup(@PathVariable String majorGroup, Model model) throws Exception {
         String identifier = null;
         Taxon persistedTaxon = getService().findByTplID(majorGroup);
-        if (persistedTaxon != null) {
+        if (persistedTaxon != null && persistedTaxon.getIdentifier() != null) {
             identifier = persistedTaxon.getIdentifier();
             model.addAttribute(getService().load(identifier,  "object-page"));
-            queryLog.info("Taxon: \'{}\'", new Object[]{identifier});
         } else {
-            throw new Exception("exception in TPL redirect");
+            // throw new Exception("exception in TPL redirect");
+            return "redirect:/search?query="+majorGroup+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
         }
         return "redirect:/taxon/" + identifier;
     }

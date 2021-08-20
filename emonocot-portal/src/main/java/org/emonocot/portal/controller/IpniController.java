@@ -33,7 +33,7 @@ public class IpniController extends GenericController<Taxon, TaxonService> {
         String identifier = null;
         Page<Taxon> persistedTaxon = getService().findByScientificNameID(scientificNameID);
 
-        if (persistedTaxon != null) {
+        if (persistedTaxon != null && persistedTaxon.getSize() > 0) {
             if (persistedTaxon.getSize() > 1) {
                 model.addAttribute("result", persistedTaxon);
                 return "redirect:/search?facet=base.class_s%3aorg.emonocot.model.Taxon";
@@ -44,7 +44,7 @@ public class IpniController extends GenericController<Taxon, TaxonService> {
                 return "redirect:/taxon/" + identifier;
             }
         } else {
-            throw new Exception("exception in IPNI redirect");
+            return "redirect:/search?query="+scientificNameID+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
         }
     }
 
@@ -54,18 +54,23 @@ public class IpniController extends GenericController<Taxon, TaxonService> {
         try {
             Taxon persistedTaxon = getService().findByTplID(tplID);
 
-            if (persistedTaxon != null) {
+            if (persistedTaxon != null && persistedTaxon.getIdentifier() != null) {
                 identifier = persistedTaxon.getIdentifier();
 
                 model.addAttribute(getService().load(identifier, "object-page"));
                 queryLog.info("Taxon: \'{}\'", new Object[]{identifier});
+                return "redirect:/taxon/" + identifier;
+            }
+            else {
+                queryLog.info("\"redirect:/search?query= \'{}\'&facet=base.class_s%3aorg.emonocot.model.Taxon", new Object[]{tplID});
+                return "redirect:/search?query="+tplID+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
             }
         } catch (Exception ex) {
             String[] codes = new String[]{"No row with the given identifier exists {0} "};
             Object[] args = new Object[]{tplID};
             DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
             model.addAttribute("error", message);
+            return null;
         }
-        return "redirect:/taxon/" + identifier;
     }
 }

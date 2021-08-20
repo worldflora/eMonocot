@@ -49,8 +49,13 @@
 			<title>${em:evaluate(pageTitle,pageContext)}</title>
 		</c:otherwise>
 	</c:choose>		
-	<link rel="alternate icon" href="/css/images/favicon.ico"/>
+<!--	<link rel="alternate icon" href="/css/images/favicon.ico"/>
 	<link rel="icon" type="image/svg+xml" href="/css/images/favicon.svg"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>-->
+
+
+	<link rel="alternate icon" href="/css/images/favicon_shadow.ico"/>
+	<link rel="icon" type="image/svg+xml" href="/css/images/svgs/favicon.svg"/>
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>
 	
 	<!-- TODO - remove once there is no need to support ie9 -->

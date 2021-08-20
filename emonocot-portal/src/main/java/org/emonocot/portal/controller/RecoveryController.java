@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.emonocot.api.UserService;
+import org.emonocot.model.auth.User;
 import org.emonocot.portal.controller.form.RecoveryForm;
 import org.emonocot.portal.controller.form.ResetForm;
 import org.emonocot.service.EmailService;
@@ -77,7 +78,7 @@ public class RecoveryController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String reset(@Valid @ModelAttribute RecoveryForm recoveryForm,
-			BindingResult result, RedirectAttributes redirectAttributes) {
+						BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "recovery/show";
 		}
@@ -86,6 +87,23 @@ public class RecoveryController {
 			Object[] args = new Object[] {  };
 			DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
 			redirectAttributes.addFlashAttribute("error", message);
+			return "redirect:/recovery";
+		}
+
+		User user = userService.load(recoveryForm.getUsername());
+
+		if(!user.isEnabled()) {
+			String nonce =  userService.createNonce(recoveryForm.getUsername());
+
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("user", user);
+			map.put("nonce", nonce);
+			map.put("baseUrl", baseUrl);
+			emailService.sendEmail("org/emonocot/portal/controller/ActivateAccountRequest.vm", map, user.getUsername(), "Welcome! Your account requires activation");
+			String[] codes = new String[] { "user.not.enabled" };
+			Object[] args = new Object[] {  };
+			DefaultMessageSourceResolvable message = new DefaultMessageSourceResolvable(codes, args);
+			redirectAttributes.addFlashAttribute("info", message);
 			return "redirect:/recovery";
 		}
 
@@ -112,9 +130,9 @@ public class RecoveryController {
 
 	@RequestMapping(value = "/{nonce}", method = RequestMethod.POST)
 	public String verify(@PathVariable("nonce") String nonce,
-			@Valid @ModelAttribute ResetForm resetForm,
-			Model model,
-			BindingResult result, RedirectAttributes redirectAttributes) {
+						 @Valid @ModelAttribute ResetForm resetForm,
+						 Model model,
+						 BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "recovery/verify";
 		}
