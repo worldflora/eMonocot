@@ -415,7 +415,7 @@ public class Functions {
 	 * @return true if the taxon is a synonym
 	 */
 	public static Boolean isSynonym(Taxon taxon) {
-		if (taxon.getTaxonomicStatus() == null) {
+		if (taxon == null || taxon.getTaxonomicStatus() == null) {
 			return false;
 		} else {
 			switch (taxon.getTaxonomicStatus()) {
