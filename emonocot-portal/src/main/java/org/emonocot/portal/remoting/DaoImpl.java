@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.solr.common.SolrDocument;
 import org.emonocot.api.autocomplete.Match;
 import org.emonocot.model.Base;
+import org.emonocot.model.TaxonExcluded;
 import org.emonocot.pager.Page;
 import org.emonocot.persistence.dao.Dao;
 import org.slf4j.Logger;
@@ -233,6 +234,11 @@ public abstract class DaoImpl<T extends Base> implements Dao<T> {
 		 // TODO Auto-generated method stub
 		 return null;
 	 }
+
+	public final TaxonExcluded loadExcludedName(String identifier) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	 /**
 	  * @param identifier set the identifier

@@ -86,4 +86,8 @@
     <put-attribute name="pageTitle" value="aboutTitle" cascade="true" />
     <put-attribute name="body" value="/WEB-INF/views/about.jspx" />
   </definition>
+  <definition name="taxonExclude" extends="default">
+    <put-attribute name="pageTitle" value="excludedNameTitle" cascade="true" />
+    <put-attribute name="body" value="/WEB-INF/views/taxonExclude.jspx" />
+  </definition>
 </tiles-definitions>

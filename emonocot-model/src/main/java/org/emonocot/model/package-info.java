@@ -39,7 +39,8 @@
 			@org.hibernate.annotations.MetaValue(targetEntity = IdentificationKey.class, value = "IdentificationKey"),
 			@org.hibernate.annotations.MetaValue(targetEntity = PhylogeneticTree.class, value = "PhylogeneticTree"),
 			@org.hibernate.annotations.MetaValue(targetEntity = Concept.class, value = "Concept"),
-			@org.hibernate.annotations.MetaValue(targetEntity = TaxonExternalLinks.class, value = "TaxonExternalLinks")
+			@org.hibernate.annotations.MetaValue(targetEntity = TaxonExternalLinks.class, value = "TaxonExternalLinks"),
+			@org.hibernate.annotations.MetaValue(targetEntity = TaxonExcluded.class, value = "TaxonExcluded")
 	}),
 	@org.hibernate.annotations.AnyMetaDef(name = "CommentMetaDef", idType = "long", metaType = "string", metaValues = {
 			@org.hibernate.annotations.MetaValue(targetEntity = Comment.class, value = "Comment"),
@@ -57,7 +58,8 @@
 			@org.hibernate.annotations.MetaValue(targetEntity = VernacularName.class, value = "VernacularName"),
 			@org.hibernate.annotations.MetaValue(targetEntity = PhylogeneticTree.class, value = "PhylogeneticTree"),
 			@org.hibernate.annotations.MetaValue(targetEntity = Concept.class, value = "Concept"),
-			@org.hibernate.annotations.MetaValue(targetEntity = TaxonExternalLinks.class, value = "TaxonExternalLinks")
+			@org.hibernate.annotations.MetaValue(targetEntity = TaxonExternalLinks.class, value = "TaxonExternalLinks"),
+			@org.hibernate.annotations.MetaValue(targetEntity = TaxonExcluded.class, value = "TaxonExcluded")
 	})
 })
 package org.emonocot.model;

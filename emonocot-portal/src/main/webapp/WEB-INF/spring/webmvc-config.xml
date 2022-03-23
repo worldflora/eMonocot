@@ -81,6 +81,8 @@
 	<mvc:view-controller path="/unsupportedMediaType" view-name="unsupportedMediaType"/>
     <mvc:view-controller path="/internalServerError" view-name="internalServerError"/>
     <mvc:view-controller path="/serviceUnavailable" view-name="serviceUnavailable"/>
+	<mvc:view-controller path="/downloadDatatemp" view-name="downloadDatatemp"/>
+	<mvc:view-controller path="/taxonExclude" view-name="taxonExclude"/>
     
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
 	  <property name="converters">

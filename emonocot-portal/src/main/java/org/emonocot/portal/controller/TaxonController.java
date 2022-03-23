@@ -17,17 +17,31 @@
 package org.emonocot.portal.controller;
 
 import org.emonocot.api.TaxonService;
+import org.emonocot.api.UserService;
 import org.emonocot.model.Taxon;
+import org.emonocot.model.TaxonExcluded;
+import org.emonocot.model.auth.Permission;
+import org.emonocot.model.auth.User;
 import org.gbif.ecat.voc.EstablishmentMeans;
 import org.gbif.ecat.voc.OccurrenceStatus;
+import org.hibernate.UnresolvableObjectException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.orm.hibernate3.HibernateObjectRetrievalFailureException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.Serializable;
+import java.security.Principal;
 
 /**
  *
@@ -39,6 +53,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class TaxonController extends GenericController<Taxon, TaxonService> {
 
 	private static Logger queryLog = LoggerFactory.getLogger("query");
+	private UserService userService;
 
 	/**
 	 *
@@ -57,6 +72,12 @@ public class TaxonController extends GenericController<Taxon, TaxonService> {
 		super.setService(taxonService);
 	}
 
+
+	@Autowired
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	/**
 	 * @param identifier
 	 *            Set the identifier of the taxon
@@ -64,13 +85,47 @@ public class TaxonController extends GenericController<Taxon, TaxonService> {
 	 * @return A model and view containing a taxon
 	 */
 	@RequestMapping(value = "/{identifier}", method = RequestMethod.GET, produces = {"text/html", "*/*"})
-	public String show(@PathVariable String identifier, Model model) {
-		model.addAttribute(getService().load(identifier,"object-page"));
+	public String show(@PathVariable String identifier, Model model, RedirectAttributes redirectAttributes) {
+		Taxon t = getService().load(identifier, "object-page");
+		if (t == null) {
+			TaxonExcluded taxonExcluded = getService().loadExcludedName(identifier);
+
+			String excluded1 = "Identifier " + taxonExcluded.getIdentifier() + " was excluded.";
+
+			String excluded = "Identifier " + taxonExcluded.getIdentifier() + " for " + taxonExcluded.getScientificName() + " " + taxonExcluded.getScientificNameAuthorship() + " was excluded from WFO. Excluded reason:" + taxonExcluded.getReason() + ".";
+
+			if (taxonExcluded != null && taxonExcluded.getIdentifier() != null) {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (authentication.getPrincipal() instanceof String) {
+					/*throw new HibernateObjectRetrievalFailureException(
+							new UnresolvableObjectException(excluded1,
+									""));*/
+					throw new UnresolvableObjectException(excluded1, "");
+				} else {
+					User user = (User) authentication.getPrincipal();
+					User requestingUser = userService.load(user.getUsername());
+					if (requestingUser.getAuthorities().contains(Permission.PERMISSION_ADMINISTRATE)) {
+						throw new HibernateObjectRetrievalFailureException(
+								new UnresolvableObjectException(excluded,
+										""));
+					} else {
+						throw new HibernateObjectRetrievalFailureException(
+								new UnresolvableObjectException(excluded1,
+										""));
+					}
+				}
+			} else {
+				throw new HibernateObjectRetrievalFailureException(
+						new UnresolvableObjectException(identifier,
+								"Object could not be resolved2"));
+			}
+		}
+
 		model.addAttribute("present", OccurrenceStatus.Present);
 		model.addAttribute("absent", OccurrenceStatus.Absent);
 		model.addAttribute("nativ", EstablishmentMeans.Native); // native is a keyword in java so we can't use it as a JSP variable, at least in tomcat
 		model.addAttribute("introduced", EstablishmentMeans.Introduced);
-		queryLog.info("Taxon: \'{}\'", new Object[] {identifier});
+		queryLog.info("Taxon: \'{}\'", new Object[]{identifier});
 		return "taxon/show";
 	}
 

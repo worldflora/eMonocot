@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<div xmlns:jsp="http://java.sun.com/JSP/Page"
+		 xmlns:c="http://java.sun.com/jsp/jstl/core"
+		 xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
+		 xmlns:em="http://e-monocot.org/portal/functions"
+		 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+		 xmlns:security="http://www.springframework.org/security/tags"
+		 xmlns:spring="http://www.springframework.org/tags">
+
+<tags:pageheader>
+	<h2 id="page-title">
+		<spring:message code="excludedNameTitle" />
+	</h2>
+</tags:pageheader>
+
+<div class="container">
+	<div class="row">
+		<div class="span12">
+			<tags:info />
+			<tags:error />
+		</div>
+	</div>
+	<div class="row">
+		<div class="span12">
+			<div class="inner">
+				<div class="box">
+
+					<!--If not admin user-->
+						<p>No row with the given identifier exist. Identifier ${identifier} was excluded</p>
+					identifier: ${identifier}
+					scientificName: ${scientificName}
+					scientificNameAuthorship: ${scientificNameAuthorship}
+					taxonExcluded: ${taxonExcluded}
+					identifier1: ${taxonExcluded.identifier}
+					scientificName1: ${taxonExcluded.scientificName}
+					scientificNameAuthorship1: ${taxonExcluded.scientificNameAuthorship}
+
+
+					<!--If admin user-->
+				<security:authorize access="hasRole('PERMISSION_ADMINISTRATE') or hasRole('PERMISSION_VIEW_BETA')">
+						<!--<p>Identifier ${identifier} for ${scientificName}+' '+${scientificName} was excluded from WFO. </p>
+						<p>reason: ${identifier}</p>-->
+					<p>No row with the given identifier exists. Identifier ${identifier} was excluded</p>
+					</security:authorize>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

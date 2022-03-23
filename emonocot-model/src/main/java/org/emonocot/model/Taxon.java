@@ -675,6 +675,8 @@ public class Taxon extends SearchableObject {
 
 	private TaxonExternalLinks taxonExternalLinks;
 
+//	private TaxonExcluded taxonExcluded;
+
 
 @OneToOne(fetch = FetchType.LAZY,
 		mappedBy = "taxon",orphanRemoval = true)
@@ -696,6 +698,28 @@ public class Taxon extends SearchableObject {
 		}
 		this.taxonExternalLinks = taxonExternalLinks;
 	}
+//
+//	@OneToOne(fetch = FetchType.LAZY,
+//			mappedBy = "taxon",orphanRemoval = true)
+//	@Cascade({ CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.DELETE  })
+//	@JsonIgnore
+//	public TaxonExcluded getTaxonExcluded() {
+//		return taxonExcluded;
+//	}
+//
+//	@JsonIgnore
+//	public void setTaxonExcluded(TaxonExcluded taxonExcluded) {
+//		if (taxonExcluded == null) {
+//			if (this.taxonExcluded != null) {
+//				this.taxonExcluded.setTaxon(null);
+//			}
+//		}
+//		else {
+//			taxonExcluded.setTaxon(this);
+//		}
+//		this.taxonExcluded = taxonExcluded;
+//	}
+
 
 
 	/**
