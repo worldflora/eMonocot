@@ -15,8 +15,8 @@
             <div class="row">
                 <div class="span12">
                     <div class="alert block-message warning">
-                        <h3><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i>
-                            ${exception.message}</h3>
+                        <p><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i>
+                            ${exception.message}</p>
                     </div>
                 </div>
             </div>
@@ -26,6 +26,13 @@
             </div>
         </div>
     </c:if>
+
+<!--
+    <div class="row">
+        <div class="span12">
+            <div class="alert block-message warning">
+                <p>No row with the given identifier exists: [Object could not be resolved#wfo-0000077460zcdsf]; nested exception is org.hibernate.UnresolvableObjectException: No row with the given identifier exists: [Object could not be resolved#wfo-0000077460zcdsf]</p>
+            </div></div></div>-->
 
     <c:if test="${!fn:contains(exceptionMsg, 'excluded')}">
         <tags:pageheader>
@@ -57,8 +64,7 @@
             </div>
             <div class="row">
                 <div class="span12">
-                    <div class="inner">
-                        <div class="box">
+                    <div class="alert block-message warning">
                             <h3>${exception.message}</h3>
                             <!--  display based on admin role-->
                             <security:authorize
@@ -69,7 +75,6 @@
 				            </c:forEach>
 			            </pre>
                             </security:authorize>
-                        </div>
                     </div>
                 </div>
             </div>

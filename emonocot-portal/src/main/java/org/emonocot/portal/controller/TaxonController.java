@@ -105,19 +105,22 @@ public class TaxonController extends GenericController<Taxon, TaxonService> {
 					User user = (User) authentication.getPrincipal();
 					User requestingUser = userService.load(user.getUsername());
 					if (requestingUser.getAuthorities().contains(Permission.PERMISSION_ADMINISTRATE)) {
-						throw new HibernateObjectRetrievalFailureException(
+					/*	throw new HibernateObjectRetrievalFailureException(
 								new UnresolvableObjectException(excluded,
-										""));
+										""));*/
+						throw new UnresolvableObjectException(excluded, "");
 					} else {
-						throw new HibernateObjectRetrievalFailureException(
+/*						throw new HibernateObjectRetrievalFailureException(
 								new UnresolvableObjectException(excluded1,
-										""));
+										""));*/
+						throw new UnresolvableObjectException(excluded1, "");
 					}
 				}
 			} else {
-				throw new HibernateObjectRetrievalFailureException(
+	/*			throw new HibernateObjectRetrievalFailureException(
 						new UnresolvableObjectException(identifier,
-								"Object could not be resolved2"));
+								"Object could not be resolved2"));*/
+				throw new UnresolvableObjectException(identifier, "Object could not be resolved2");
 			}
 		}
 
