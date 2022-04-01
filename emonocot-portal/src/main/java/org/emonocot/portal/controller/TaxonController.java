@@ -91,36 +91,24 @@ public class TaxonController extends GenericController<Taxon, TaxonService> {
 			TaxonExcluded taxonExcluded = getService().loadExcludedName(identifier);
 
 			String excluded1 = "Identifier " + taxonExcluded.getIdentifier() + " was excluded.";
-
-			String excluded = "Identifier " + taxonExcluded.getIdentifier() + " for " + taxonExcluded.getScientificName() + " " + taxonExcluded.getScientificNameAuthorship() + " was excluded from WFO. Excluded reason:" + taxonExcluded.getReason() + ".";
+			String excluded = "Identifier " + taxonExcluded.getIdentifier() + " for " + taxonExcluded.getScientificName() + " " + taxonExcluded.getScientificNameAuthorship() + " was excluded from WFO. ";
+			String excluded_reason = "Excluded reason:" + taxonExcluded.getReason() + ".";
 
 			if (taxonExcluded != null && taxonExcluded.getIdentifier() != null) {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 				if (authentication.getPrincipal() instanceof String) {
-					/*throw new HibernateObjectRetrievalFailureException(
-							new UnresolvableObjectException(excluded1,
-									""));*/
 					throw new UnresolvableObjectException(excluded1, "");
 				} else {
 					User user = (User) authentication.getPrincipal();
 					User requestingUser = userService.load(user.getUsername());
 					if (requestingUser.getAuthorities().contains(Permission.PERMISSION_ADMINISTRATE)) {
-					/*	throw new HibernateObjectRetrievalFailureException(
-								new UnresolvableObjectException(excluded,
-										""));*/
-						throw new UnresolvableObjectException(excluded, "");
+						throw new UnresolvableObjectException(excluded+"<br>"+excluded_reason, "");
 					} else {
-/*						throw new HibernateObjectRetrievalFailureException(
-								new UnresolvableObjectException(excluded1,
-										""));*/
 						throw new UnresolvableObjectException(excluded1, "");
 					}
 				}
 			} else {
-	/*			throw new HibernateObjectRetrievalFailureException(
-						new UnresolvableObjectException(identifier,
-								"Object could not be resolved2"));*/
-				throw new UnresolvableObjectException(identifier, "Object could not be resolved2");
+				throw new UnresolvableObjectException(identifier, "Object could not be resolved");
 			}
 		}
 
