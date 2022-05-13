@@ -67,11 +67,11 @@
                                         <tr>
                                             <td><b>Latest Static Version:</b></td>
                                             <td>
-                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone (loading in progress)</a>
                                             </td>
-                                            <td>137MB</td>
-                                            <td>v.2019.05</td>
-                                            <td>May 17, 2019</td>
+                                            <td>89.5MB</td>
+                                            <td>v.2022.04</td>
+                                            <td>Apr. 08, 2022</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
                                         </tr>
                                         </thead>
@@ -106,6 +106,24 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <tr>included
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.4_20220408.zip">WFO Taxonomic Backbone (20220408)</a>
+                                            </td>
+                                            <td>89.3MB</td>
+                                            <td>v.2021.12</td>
+                                            <td>Dec. 09, 2021</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.2_20191010.zip">WFO Taxonomic Backbone (20211010)</a>
+                                            </td>
+                                            <td>101MB</td>
+                                            <td>v.2019.05</td>
+                                            <td>May 17, 2019</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.1_20190513.zip">WFO Taxonomic Backbone (20190513)</a>
