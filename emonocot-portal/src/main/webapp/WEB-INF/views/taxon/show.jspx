@@ -1633,36 +1633,14 @@
 											<spring:message code="tplv.1.1"/><!--  --></a></li>
 									</c:if>
 								</c:if>
-								<c:if test="${taxon.taxonRank == 'FAMILY' or taxon.taxonRank == 'GENUS'}">
-									<c:if test="${not empty taxon.taxonExternalLinks.tplID}">
+
+								<c:if test="${not empty taxon.taxonExternalLinks.tplID }">
+									<c:if test="${taxon.taxonExternalLinks.tplID.contains('theplantlist.org')}">
 										<c:url var="tplUrl" value="${taxon.taxonExternalLinks.tplID}"></c:url>
 										<li><a id="TPLLink" href="${tplUrl}" onClick="trackOutboundLink('${tplUrl}'); return false;">
 											<spring:message code="tplv.1.1"/><!--  --></a></li>
 									</c:if>
-								</c:if>
-								<!--
-                                <c:if test="${taxon.taxonRank == 'FAMILY'}">
-                                    <c:if test="${not empty taxon.scientificName and not empty taxon.taxonExternalLinks.majorGroup}">
-                                        <c:url var="tplUrl" value="http://www.theplantlist.org/1.1/browse/${taxon.taxonExternalLinks.majorGroup}/${taxon.scientificName}/"></c:url>
-                                        <li><a id="TPLLink" href="${tplUrl}" onClick="trackOutboundLink('${tplUrl}'); return false;">
-                                            <spring:message code="tplv.1.1"/>
-
-                            </a></li>
-                                    </c:if>
-                                </c:if>
-                                <c:if test="${taxon.taxonRank == 'GENUS' }">
-                                    <c:if test="${not empty taxon.scientificName and not empty taxon.taxonExternalLinks.majorGroup and not empty taxon.family}">
-                                        <c:url var="tplUrl" value="http://www.theplantlist.org/1.1/browse/${taxon.taxonExternalLinks.majorGroup}/${taxon.family}/${taxon.scientificName}/"></c:url>
-                                        <li><a id="TPLLink" href="${tplUrl}" onClick="trackOutboundLink('${tplUrl}'); return false;">
-                                            <spring:message code="tplv.1.1"/>
-
-                            </a></li>
-                                    </c:if>
-                                </c:if>
-                                -->
-
-								<c:if test="${taxon.taxonRank != 'PHYLUM' and taxon.taxonRank != 'ORDER' and taxon.taxonRank != 'FAMILY' and taxon.taxonRank != 'GENUS' }">
-									<c:if test="${not empty taxon.taxonExternalLinks.tplID}">
+									<c:if test="${!taxon.taxonExternalLinks.tplID.contains('theplantlist.org')}">
 										<c:url var="tplUrl" value="http://www.theplantlist.org/tpl1.1/record/${taxon.taxonExternalLinks.tplID}"></c:url>
 										<li><a id="TPLLink" href="${tplUrl}" onClick="trackOutboundLink('${tplUrl}'); return false;">
 											<spring:message code="tplv.1.1"/><!--  --></a></li>
