@@ -67,11 +67,11 @@
                                         <tr>
                                             <td><b>Latest Static Version:</b></td>
                                             <td>
-                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone (loading in progress)</a>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
                                             </td>
                                             <td>89.5MB</td>
-                                            <td>v.2022.04</td>
-                                            <td>Apr. 08, 2022</td>
+                                            <td>v.2022.07</td>
+                                            <td>Jul. 12, 2022</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
                                         </tr>
                                         </thead>
@@ -107,6 +107,15 @@
                                         </thead>
                                         <tbody>
                                         <tr>included
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.7_20220712.zip">WFO Taxonomic Backbone (20220712)</a>
+                                            </td>
+                                            <td>89.5MB</td>
+                                            <td>v.2022.04</td>
+                                            <td>Apr. 08, 2022</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.4_20220408.zip">WFO Taxonomic Backbone (20220408)</a>
                                             </td>
