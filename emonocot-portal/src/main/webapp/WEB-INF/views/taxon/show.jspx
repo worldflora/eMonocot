@@ -213,8 +213,16 @@
 													reports it as a misapplied
 													name</c:when>
 
-												<c:when test="${taxon.taxonomicStatus == 'Synonym'}">reports it as a
-													synonym
+<!--												<c:when test="${taxon.taxonomicStatus == 'Synonym'}">reports it as a-->
+<!--													synonym-->
+<!--												</c:when>-->
+
+												<c:when test="${taxon.taxonomicStatus == 'Synonym' and taxon.acceptedNameUsage != null}">
+													reports it as a synonym of
+														<c:url var="acceptedUrl" value="/taxon/${taxon.acceptedNameUsage.identifier}" />
+														<a href="${acceptedUrl}">${taxon.acceptedNameUsage.scientificName}
+															${taxon.acceptedNameUsage.scientificNameAuthorship}
+														</a>
 												</c:when>
 												<c:otherwise>reports it as a ${taxon.taxonomicStatus} name</c:otherwise>
 											</c:choose>
