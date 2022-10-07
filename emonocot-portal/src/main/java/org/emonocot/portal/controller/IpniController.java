@@ -44,7 +44,8 @@ public class IpniController extends GenericController<Taxon, TaxonService> {
                 return "redirect:/taxon/" + identifier;
             }
         } else {
-            return "redirect:/search?query="+scientificNameID+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
+           // return "redirect:/search?query="+scientificNameID+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
+            return "redirect:/";
         }
     }
 
@@ -63,7 +64,8 @@ public class IpniController extends GenericController<Taxon, TaxonService> {
             }
             else {
                 queryLog.info("\"redirect:/search?query= \'{}\'&facet=base.class_s%3aorg.emonocot.model.Taxon", new Object[]{tplID});
-                return "redirect:/search?query="+tplID+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
+               // return "redirect:/search?query="+tplID+"&facet=base.class_s%3aorg.emonocot.model.Taxon";
+                return "redirect:/";
             }
         } catch (Exception ex) {
             String[] codes = new String[]{"No row with the given identifier exists {0} "};

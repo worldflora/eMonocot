@@ -18,5 +18,6 @@
     <mapping class="org.emonocot.model.user.User"/>
     <mapping class="org.emonocot.model.user.Group"/>
     <mapping class="org.emonocot.model.TaxonExternalLinks"/>
+    <mapping class="org.emonocot.model.TaxonExcluded"/>
   </session-factory>
 </hibernate-configuration>

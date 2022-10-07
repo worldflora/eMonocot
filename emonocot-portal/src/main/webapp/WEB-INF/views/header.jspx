@@ -20,7 +20,7 @@
             <li class="wfo-portal active"><a  href="/">Explore the data</a></li>
             <!-- <li class="wfo-about" ><a  href="https://about.worldfloraonline.org">Find out about</a></li> -->
             <li class="wfo-about" ><a  href="https://wfo-about.rbge.info/">Find out about</a></li>
-            <li class="wfo-plant-list wfo-plant-list"><a  href="https://wfo-about.rbge.info/plant-list/">Check a plant name</a></li>
+            <li class="wfo-plant-list wfo-plant-list"><a  href="https://wfoplantlist.org/">Check a plant name</a></li>
         </ul>
     </nav>
     <div class="masthead">

@@ -1,45 +1,83 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:em="http://e-monocot.org/portal/functions"
-	xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
-	xmlns:spring="http://www.springframework.org/tags">
-	<tags:pageheader>
-		<h2><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i><spring:message code="an.error.has.occurred" /></h2>
-	</tags:pageheader>
-	<div class="container">
-		<div class="row">
-		  <div class="span12">
-			<div class="alert block-message warning">
-				<h3><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i><spring:message code="404" /></h3>
-				<p><spring:message code="404.message" /></p>
-				<div class="alert-actions">
-					<c:url value="/search" var="searchUrl" />
-					<a class="btn small" href="${searchUrl}"><spring:message code="search" /></a>
-					<spring:message code="support.email.address" var="supportEmailAddress"/>
-			     <!--   <a href="mailto:${supportEmailAddress}" class="btn small">
-			          <spring:message code="send.an.email" />
-			        </a> -->
-					<a class="btn small" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email">
-						<spring:message code="send.an.email" />
-					</a>
-				</div>
-			</div>
-	      </div>
-		</div>
-		<div class="row">
-		  <div class="span12">
-		    <div class="inner">
-			  <div class="box">
-			    <h3>${exception.message}</h3>
-			    <pre>
-				  <c:forEach var="stackTraceElement" items="${exception.stackTrace}">
-					  ${stackTraceElement}
-				  </c:forEach>
-			    </pre>
-			  </div>
-			</div>
-	       </div>
-		</div>
-	</div>
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:em="http://e-monocot.org/portal/functions"
+     xmlns:tags="urn:jsptagdir:/WEB-INF/tags"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:security="http://www.springframework.org/security/tags"
+     xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+    <c:set var="exceptionMsg" value="${exception.message}"/>
+    <c:if test="${fn:contains(exceptionMsg, 'excluded')}">
+        <tags:pageheader>
+        </tags:pageheader>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="alert block-message warning">
+                        <p><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i>
+                            ${exception.message}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                </div>
+            </div>
+        </div>
+    </c:if>
+
+<!--
+    <div class="row">
+        <div class="span12">
+            <div class="alert block-message warning">
+                <p>No row with the given identifier exists: [Object could not be resolved#wfo-0000077460zcdsf]; nested exception is org.hibernate.UnresolvableObjectException: No row with the given identifier exists: [Object could not be resolved#wfo-0000077460zcdsf]</p>
+            </div></div></div>-->
+
+    <c:if test="${!fn:contains(exceptionMsg, 'excluded')}">
+        <tags:pageheader>
+            <h2><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i><spring:message
+                    code="an.error.has.occurred"/></h2>
+        </tags:pageheader>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="alert block-message warning">
+                        <h3><i class="glyphicons-icon circle_exclamation_mark"><!--  --></i><spring:message code="404"/>
+                        </h3>
+                        <p><spring:message code="404.message"/></p>
+                        <div class="alert-actions">
+                            <c:url value="/search" var="searchUrl"/>
+                            <a class="btn small" href="${searchUrl}"><spring:message code="search"/></a>
+                            <spring:message code="support.email.address" var="supportEmailAddress"/>
+                            <!--   <a href="mailto:${supportEmailAddress}" class="btn small">
+                                 <spring:message code="send.an.email" />
+                               </a> -->
+                            <a class="btn small"
+                               href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question"
+                               alt="WFO email">
+                                <spring:message code="send.an.email"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12">
+                    <div class="alert block-message warning">
+                            <h3>${exception.message}</h3>
+                            <!--  display based on admin role-->
+                            <security:authorize
+                                    access="hasRole('PERMISSION_ADMINISTRATE') or hasRole('PERMISSION_VIEW_BETA')">
+                        <pre>
+                            <c:forEach var="stackTraceElement" items="${exception.stackTrace}">
+					             ${stackTraceElement}
+				            </c:forEach>
+			            </pre>
+                            </security:authorize>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </c:if>
 </div>

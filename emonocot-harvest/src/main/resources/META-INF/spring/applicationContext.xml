@@ -116,6 +116,7 @@
         <value>org.emonocot.model.Comment</value>
         <value>org.emonocot.model.Concept</value>
         <value>org.emonocot.model.TaxonExternalLinks</value>
+        <value>org.emonocot.model.TaxonExcluded</value>
       </list>
     </property>
     <property name="eventListeners">

@@ -23,6 +23,7 @@ import java.util.Set;
 import org.emonocot.api.Service;
 import org.emonocot.model.Base;
 import org.emonocot.pager.Page;
+import org.hibernate.UnresolvableObjectException;
 import org.restdoc.api.GlobalHeader;
 import org.restdoc.api.MethodDefinition;
 import org.restdoc.api.ParamValidation;
@@ -290,6 +291,14 @@ SERVICE extends Service<T>> {
 	@ExceptionHandler(HibernateObjectRetrievalFailureException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	public ModelAndView handleObjectNotFoundException(HibernateObjectRetrievalFailureException orfe) {
+		ModelAndView modelAndView = new ModelAndView("resourceNotFound");
+		modelAndView.addObject("exception", orfe);
+		return modelAndView;
+	}
+
+	@ExceptionHandler(UnresolvableObjectException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public ModelAndView handleObjectNotFoundException(UnresolvableObjectException orfe) {
 		ModelAndView modelAndView = new ModelAndView("resourceNotFound");
 		modelAndView.addObject("exception", orfe);
 		return modelAndView;

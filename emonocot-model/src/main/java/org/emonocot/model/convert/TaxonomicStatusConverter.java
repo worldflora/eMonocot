@@ -29,7 +29,7 @@ public class TaxonomicStatusConverter implements Converter<String, TaxonomicStat
 		}
 		else
 		{
-			switch(source) {
+			switch(source.toLowerCase()) {
 				case "heterotypicSynonym":
 					source = "heterotypic_Synonym";
 					break;

@@ -59,7 +59,7 @@
                                 </p>
                                 <p>
                                     This initial backbone is now being actively curated by taxonomic specialists of particular plant groups, with Taxonomic Expert Networks (TENs) given responsibility for updating the classifications of families. The WFO Consortium welcomes participation of the world’s community of botanists to create and join TENs, to help improve the WFO taxonomic backbone and so develop an up-to-date global consensus classification. If you would like to join them or contribute please check the list of current WFO Taxonomic Expert Networks and their contact information in the
-                                    <a href="http://about.worldfloraonline.org/tens.shtml">About</a> page.
+                                    <a href="https://about.worldfloraonline.org/tens">About</a> page.
                                 </p>
                                 <div>
                                     <table class="table">
@@ -69,9 +69,9 @@
                                             <td>
                                                 <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
                                             </td>
-                                            <td>137MB</td>
-                                            <td>v.2019.05</td>
-                                            <td>May 17, 2019</td>
+                                            <td>89.5MB</td>
+                                            <td>v.2022.07</td>
+                                            <td>Jul. 12, 2022</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
                                         </tr>
                                         </thead>
@@ -106,6 +106,33 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <tr>included
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.7_20220712.zip">WFO Taxonomic Backbone (20220712)</a>
+                                            </td>
+                                            <td>89.5MB</td>
+                                            <td>v.2022.04</td>
+                                            <td>Apr. 08, 2022</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.4_20220408.zip">WFO Taxonomic Backbone (20220408)</a>
+                                            </td>
+                                            <td>89.3MB</td>
+                                            <td>v.2021.12</td>
+                                            <td>Dec. 09, 2021</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.2_20191010.zip">WFO Taxonomic Backbone (20211010)</a>
+                                            </td>
+                                            <td>101MB</td>
+                                            <td>v.2019.05</td>
+                                            <td>May 17, 2019</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.1_20190513.zip">WFO Taxonomic Backbone (20190513)</a>

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 import org.emonocot.api.Service;
 import org.emonocot.model.Base;
+import org.emonocot.model.TaxonExcluded;
 import org.emonocot.pager.DefaultPageImpl;
 import org.emonocot.pager.Page;
 import org.emonocot.persistence.dao.Dao;
@@ -53,6 +54,12 @@ implements Service<T> {
 	public T load(String identifier, String fetch) {
 		return dao.load(identifier, fetch);
 	}
+
+	@Transactional(readOnly = true)
+	public TaxonExcluded loadExcludedName(String identifier) {
+		return dao.loadExcludedName(identifier);
+	}
+
 
 	/**
 	 * @param id

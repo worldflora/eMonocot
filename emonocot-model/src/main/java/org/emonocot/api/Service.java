@@ -17,6 +17,7 @@
 package org.emonocot.api;
 
 import org.emonocot.model.Base;
+import org.emonocot.model.TaxonExcluded;
 import org.emonocot.pager.Page;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -82,6 +83,8 @@ public interface Service<T extends Base> {
 	 * @return the object or throw and exception if that object does not exist
 	 */
 	T load(String identifier, String fetch);
+
+	TaxonExcluded loadExcludedName(String identifier);
 
 	/**
 	 *

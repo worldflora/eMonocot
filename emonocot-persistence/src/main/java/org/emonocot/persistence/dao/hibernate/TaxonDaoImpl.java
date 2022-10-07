@@ -274,9 +274,14 @@ public class TaxonDaoImpl extends DaoImpl<Taxon> implements TaxonDao {
 
     @Override
     public Page<Taxon> findByScientificNameID(final String scientificNameID) {
+        String ipniId = scientificNameID;
+        if (!scientificNameID.contains("urn:lsid:ipni.org:names:")) {
+            ipniId = "urn:lsid:ipni.org:names:"+scientificNameID;
+        }
+
         Criteria criteria = getSession()
                 .createCriteria(type)
-                .add(Restrictions.eq("scientificNameID", scientificNameID));
+                .add(Restrictions.eq("scientificNameID", ipniId));
         List<Taxon> results = (List<Taxon>) criteria.list();
         logger.debug("List of taxa:" + results.size());
         Page<Taxon> page = new DefaultPageImpl<Taxon>(results.size(), null, null, results, null);

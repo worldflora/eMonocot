@@ -16,20 +16,16 @@
  */
 package org.emonocot.persistence.dao.hibernate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.emonocot.model.Base;
+import org.emonocot.model.NonOwned;
+import org.emonocot.model.Taxon;
+import org.emonocot.model.TaxonExcluded;
 import org.emonocot.model.hibernate.Fetch;
 import org.emonocot.persistence.dao.Dao;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.SessionFactory;
-import org.hibernate.UnresolvableObjectException;
+import org.hibernate.*;
 import org.hibernate.collection.PersistentCollection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -283,14 +279,35 @@ implements Dao<T> {
 
 		T t = (T) criteria.uniqueResult();
 
-		if (t == null) {
+/*		if (t == null) {
 			throw new HibernateObjectRetrievalFailureException(
 					new UnresolvableObjectException(identifier,
 							"Object could not be resolved"));
-		}
+		}*/
 		enableProfilePostQuery(t, fetch);
 		return t;
 	}
+
+	public TaxonExcluded loadExcludedName(final String identifier) {
+		//String scientificName = null;
+
+		TaxonExcluded taxonExcluded = new TaxonExcluded();
+		//search in excluded names list
+		if (identifier!= null) {
+			String hql = "select t from TaxonExcluded t where t.identifier = :identifier";
+			Query query = getSession().createQuery(hql);
+			query.setParameter("identifier", identifier);
+
+			List<TaxonExcluded> list = (List<TaxonExcluded>)query.list();
+			Iterator itr = list.iterator();
+
+			while (itr.hasNext()) {
+				taxonExcluded = (TaxonExcluded)itr.next();
+			}
+		}
+		return taxonExcluded;
+	}
+
 
 	/**
 	 * @param identifier

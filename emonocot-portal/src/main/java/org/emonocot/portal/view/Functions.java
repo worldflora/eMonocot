@@ -377,8 +377,8 @@ public class Functions {
 
 	public static int getHomotypicSynonymsCount(Taxon taxon) {
 		int count = 0;
-		for (Taxon t : taxon.getSynonymNameUsages()) {
-			if (t.getTaxonomicStatus().equals(TaxonomicStatus.Homotypic_Synonym)) {
+		for (Taxon t : taxon.getSynonymNameUsages()) {//add null check for taxonomicstatus  wfo-0001023263
+			if (t.getTaxonomicStatus() != null && t.getTaxonomicStatus().equals(TaxonomicStatus.Homotypic_Synonym)) {
 				count = 1;
 			}
 		}
@@ -388,7 +388,7 @@ public class Functions {
 	public static int getHeterotypicSynonymsCount(Taxon taxon) {
 		int count = 0;
 		for (Taxon t : taxon.getSynonymNameUsages()) {
-			if (t.getTaxonomicStatus().equals(TaxonomicStatus.Heterotypic_Synonym)) {
+			if (t.getTaxonomicStatus() != null && t.getTaxonomicStatus().equals(TaxonomicStatus.Heterotypic_Synonym)) {
 				count = 1;
 			}
 		}
@@ -399,12 +399,14 @@ public class Functions {
 		int count = 0;
 		for (Taxon t : taxon.getSynonymNameUsages()) {
 			//if (t.getTaxonomicStatus().equals(TaxonomicStatus.Synonym) || t.getTaxonomicStatus().equals(TaxonomicStatus.DeterminationSynonym) || t.getTaxonomicStatus().equals(TaxonomicStatus.Synonym)) {
+			if (t.getTaxonomicStatus() != null){
 			switch (t.getTaxonomicStatus()) {
 				case Synonym:
 				case DeterminationSynonym:
 				case IntermediateRankSynonym:
 				case Proparte_Synonym:
 					count = 1;
+			}
 			}
 		}
 		return count;
@@ -415,7 +417,7 @@ public class Functions {
 	 * @return true if the taxon is a synonym
 	 */
 	public static Boolean isSynonym(Taxon taxon) {
-		if (taxon.getTaxonomicStatus() == null) {
+		if (taxon == null || taxon.getTaxonomicStatus() == null) {
 			return false;
 		} else {
 			switch (taxon.getTaxonomicStatus()) {
