@@ -32,6 +32,8 @@ import org.emonocot.model.TaxonExternalLinks;
 import org.emonocot.model.constants.AnnotationCode;
 import org.emonocot.model.constants.AnnotationType;
 import org.emonocot.model.constants.RecordType;
+import org.emonocot.model.registry.Organisation;
+import org.gbif.ecat.voc.Rank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ChunkListener;
@@ -96,7 +98,19 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			validate(t);
 			Annotation annotation = createAnnotation(t, RecordType.Taxon, AnnotationCode.Create, AnnotationType.Info);
 			t.getAnnotations().add(annotation);
-			t.setAuthority(getSource());
+
+			Map<String, Rank> hashMap = new HashMap<>();
+			hashMap.putAll(Rank.RANK_MARKER_MAP_SUPRAGENERIC);
+			hashMap.putAll(Rank.RANK_MARKER_MAP_INFRAGENERIC);
+			hashMap.remove("fam");
+			Organisation org = getSource();
+			//t.getFamily() != null
+			if((t.getFamily() != null) && (t.getFamily() != org.getIdentifier()) && (hashMap.containsValue(t.getTaxonRank())))
+			{
+				logger.info("Source and family not equal " + t.getFamily());
+				org = getSource(t.getFamily());
+			}
+			t.setAuthority(org);
 			logger.info("Adding taxon " + t);
 
 			t.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
