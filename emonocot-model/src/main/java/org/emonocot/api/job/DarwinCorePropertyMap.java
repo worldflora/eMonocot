@@ -137,6 +137,7 @@ public class DarwinCorePropertyMap {
 		descriptionTerms.put(DcTerm.references, "source");
 		descriptionTerms.put(DcTerm.source, "references");
 		descriptionTerms.put(DcTerm.type, "type");
+		descriptionTerms.put(WFOTerm.isPreferredDescription, "preferredDescription");
 
 		referenceTerms.put(DcTerm.accessRights,"accessRights");
 		referenceTerms.put(DwcTerm.datasetID,"authority.identifier");

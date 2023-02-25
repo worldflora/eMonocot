@@ -50,10 +50,7 @@ import org.emonocot.model.Reference;
 import org.emonocot.model.Taxon;
 import org.emonocot.model.TypeAndSpecimen;
 import org.emonocot.model.VernacularName;
-import org.emonocot.model.compare.AlphabeticalTaxonComparator;
-import org.emonocot.model.compare.DistributionComparator;
-import org.emonocot.model.compare.LocationComparator;
-import org.emonocot.model.compare.ReferenceBasedDescriptionComparator;
+import org.emonocot.model.compare.*;
 import org.emonocot.model.constants.*;
 import org.emonocot.model.convert.ClassToStringConverter;
 import org.emonocot.model.convert.PermissionToStringConverter;
@@ -349,6 +346,18 @@ public class Functions {
 		return null;
 	}
 
+	public static Description getPreferredDescriptions(Taxon taxon) {
+		for (Description description : taxon.getDescriptions()) {
+			if (description.getPreferredDescription() == true) {
+				return description;
+			}
+		}
+		for (Description description : taxon.getDescriptions()) {
+			return description;
+		}
+		return null;
+	}
+
 	public static Boolean isPreferred(Taxon taxon) {
 		boolean isTrue = false;
 		for (VernacularName vernacular : taxon.getVernacularNames()) {
@@ -356,6 +365,24 @@ public class Functions {
 				isTrue = true;
 			}
 		}
+		return isTrue;
+	}
+
+	public static Boolean isPreferredDescription(Taxon taxon) {
+		boolean isTrue = false;
+		for (Description description : taxon.getDescriptions()) {
+			if (description.getPreferredDescription() == true) {
+				isTrue = true;
+			}
+		}
+		return isTrue;
+	}
+
+	public static Boolean isPreferredDescription(Description description) {
+		boolean isTrue = false;
+			if (description.getPreferredDescription() == true) {
+				isTrue = true;
+			}
 		return isTrue;
 	}
 
@@ -368,6 +395,22 @@ public class Functions {
 				truecount = 1;
 			}
 			if (vernacular.getPreferredName() == false) {
+				falsecount = 1;
+			}
+		}
+		count = truecount + falsecount;
+		return count;
+	}
+
+	public static int getDescriptionsCount(Taxon taxon) {
+		int count = 0;
+		int truecount = 0;
+		int falsecount = 0;
+		for (Description description : taxon.getDescriptions()) {
+			if (description.getPreferredDescription() == true) {
+				truecount = 1;
+			}
+			if (description.getPreferredDescription() == false) {
 				falsecount = 1;
 			}
 		}
@@ -521,15 +564,114 @@ public class Functions {
 		}
 	}
 
-	/**
-	 *
-	 * @param taxon
-	 *            Set the taxon
-	 * @param feature
-	 *            Set the feature
-	 * @return a Content object, or null
-	 */
-	public static List<Description> content(Taxon taxon, DescriptionType feature) {
+	public static List<Description> content(Taxon taxon, DescriptionType type) {
+		List<Description> descriptions = new ArrayList<Description>();
+		HashSet<Organisation> organisations = new HashSet<>();
+
+		for (Description d : taxon.getDescriptions()) {
+			if (d.getType().equals(type)) {
+				descriptions.add(d);
+				organisations.add(d.getAuthority());
+			}
+		}
+
+		HashMap<String, Description> descriptionsMap = new HashMap<>();
+		for (Description d : descriptions) {
+			if(descriptionsMap.containsKey(d.getAuthority().getId().toString())) {
+				//add desc
+				Description dm = descriptionsMap.get(d.getAuthority().getId().toString());
+				String descConcat = dm.getDescription() +" "+ d.getDescription();
+				dm.setDescription(descConcat);
+				descriptionsMap.remove(d.getType().toString());
+				descriptionsMap.put(d.getAuthority().getId().toString(), dm);
+			} else {
+				descriptionsMap.put(d.getAuthority().getId().toString(), d);
+			}
+		}
+
+		//convert map to list of ob
+		Collection<Description> values = descriptionsMap.values();
+
+		// Creating an ArrayList of values
+		ArrayList<Description> listOfDesc = new ArrayList<>(values);
+
+		Collections.sort(listOfDesc,new ReferenceBasedDescriptionComparator());
+		return listOfDesc;
+	}
+
+	public static List<Description> preferredContent(Taxon taxon, DescriptionType type) {
+		List<Description> descriptions = new ArrayList<Description>();
+		HashSet<Organisation> organisations = new HashSet<>();
+
+		for (Description d : taxon.getDescriptions()) {
+			if (d.getType().equals(type) && d.getPreferredDescription() == true) {
+				descriptions.add(d);
+				organisations.add(d.getAuthority());
+			}
+		}
+
+		HashMap<String, Description> descriptionsMap = new HashMap<>();
+		for (Description d : descriptions) {
+			if(descriptionsMap.containsKey(d.getAuthority().getId().toString())) {
+				//add desc
+				Description dm = descriptionsMap.get(d.getAuthority().getId().toString());
+				String descConcat = dm.getDescription() +" "+ d.getDescription();
+				dm.setDescription(descConcat);
+				descriptionsMap.remove(d.getType().toString());
+				descriptionsMap.put(d.getAuthority().getId().toString(), dm);
+			} else {
+				descriptionsMap.put(d.getAuthority().getId().toString(), d);
+			}
+		}
+
+		//convert map to list of ob
+		Collection<Description> values = descriptionsMap.values();
+
+		// Creating an ArrayList of values
+		ArrayList<Description> listOfDesc = new ArrayList<>(values);
+
+		Collections.sort(listOfDesc,new ReferenceBasedDescriptionComparator());
+		return listOfDesc;
+	}
+
+	public static List<Description> localContent(Taxon taxon, DescriptionType type) {
+		List<Description> descriptions = new ArrayList<Description>();
+		HashSet<Organisation> organisations = new HashSet<>();
+
+		for (Description d : taxon.getDescriptions()) {
+			if (d.getType().equals(type) && d.getPreferredDescription() == false) {
+				descriptions.add(d);
+				organisations.add(d.getAuthority());
+			}
+		}
+
+		HashMap<String, Description> descriptionsMap = new HashMap<>();
+		for (Description d : descriptions) {
+			if(descriptionsMap.containsKey(d.getAuthority().getId().toString())) {
+				//add desc
+				Description dm = descriptionsMap.get(d.getAuthority().getId().toString());
+				String descConcat = dm.getDescription() +" "+ d.getDescription();
+				dm.setDescription(descConcat);
+				descriptionsMap.remove(d.getType().toString());
+				descriptionsMap.put(d.getAuthority().getId().toString(), dm);
+			} else {
+				descriptionsMap.put(d.getAuthority().getId().toString(), d);
+			}
+		}
+
+		//convert map to list of ob
+		Collection<Description> values = descriptionsMap.values();
+
+		// Creating an ArrayList of values
+		ArrayList<Description> listOfDesc = new ArrayList<>(values);
+
+		Collections.sort(listOfDesc,new ReferenceBasedDescriptionComparator());
+		return listOfDesc;
+	}
+
+
+
+	public static List<Description> content1(Taxon taxon, DescriptionType feature) {
 		List<Description> descriptions = new ArrayList<Description>();
 		for (Description d : taxon.getDescriptions()) {
 			if (d.getType().equals(feature)) {
@@ -538,6 +680,120 @@ public class Functions {
 		}
 		Collections.sort(descriptions,new ReferenceBasedDescriptionComparator());
 		return descriptions;
+	}
+
+	//Descriptions order by Source
+	public static List<Description> contentBySource(Taxon taxon, Organisation feature) {
+		List<Description> descriptions = new ArrayList<>();
+       // Description description = new Description();
+		HashSet<DescriptionType> descriptionTypes = new HashSet<>();
+
+        for (Description d : taxon.getDescriptions()) {
+            if (d.getAuthority().getId()== feature.getId() ) {
+                    descriptions.add(d);
+                    descriptionTypes.add(d.getType());
+            }
+        }
+
+		HashMap<String, Description> descriptionsMap = new HashMap<>();
+		for (Description d : descriptions) {
+			if(descriptionsMap.containsKey(d.getType().toString())) {//check desc type contains in map
+				//add desc
+				Description dm = descriptionsMap.get(d.getType().toString());
+				String descConcat = dm.getDescription() +" "+ d.getDescription();
+				dm.setDescription(descConcat);
+				descriptionsMap.remove(d.getType().toString());
+				descriptionsMap.put(d.getType().toString(), dm);
+			} else {
+				descriptionsMap.put(d.getType().toString(), d);
+			}
+		}
+
+		//convert map to list of ob
+		// Getting Collection of values from HashMap
+		Collection<Description> values = descriptionsMap.values();
+
+		// Creating an ArrayList of values
+		ArrayList<Description> listOfDesc = new ArrayList<>(values);
+
+		//Collections.sort(listOfDesc,new SourceBasedDescriptionComparator());
+		return listOfDesc;
+	}
+
+	//Descriptions order by Source
+	public static List<Description> preferredContentBySource(Taxon taxon, Organisation feature) {
+		List<Description> descriptions = new ArrayList<>();
+		// Description description = new Description();
+		HashSet<DescriptionType> descriptionTypes = new HashSet<>();
+
+		for (Description d : taxon.getDescriptions()) {
+			if (d.getAuthority().getId()== feature.getId()  && d.getPreferredDescription() == true) {
+				descriptions.add(d);
+				descriptionTypes.add(d.getType());
+			}
+		}
+
+		HashMap<String, Description> descriptionsMap = new HashMap<>();
+		for (Description d : descriptions) {
+			if(descriptionsMap.containsKey(d.getType().toString())) {//check desc type contains in map
+				//add desc
+				Description dm = descriptionsMap.get(d.getType().toString());
+				String descConcat = dm.getDescription() +" "+ d.getDescription();
+				dm.setDescription(descConcat);
+				descriptionsMap.remove(d.getType().toString());
+				descriptionsMap.put(d.getType().toString(), dm);
+			} else {
+				descriptionsMap.put(d.getType().toString(), d);
+			}
+		}
+
+		//convert map to list of ob
+		// Getting Collection of values from HashMap
+		Collection<Description> values = descriptionsMap.values();
+
+		// Creating an ArrayList of values
+		ArrayList<Description> listOfDesc = new ArrayList<>(values);
+
+		//Collections.sort(listOfDesc,new SourceBasedDescriptionComparator());
+		return listOfDesc;
+	}
+
+	//Descriptions order by Source
+	public static List<Description> localContentBySource(Taxon taxon, Organisation feature) {
+		List<Description> descriptions = new ArrayList<>();
+		// Description description = new Description();
+		HashSet<DescriptionType> descriptionTypes = new HashSet<>();
+
+		for (Description d : taxon.getDescriptions()) {
+			if (d.getAuthority().getId()== feature.getId()  && d.getPreferredDescription() == false) {
+				descriptions.add(d);
+				descriptionTypes.add(d.getType());
+			}
+		}
+
+		HashMap<String, Description> descriptionsMap = new HashMap<>();
+		for (Description d : descriptions) {
+			if(descriptionsMap.containsKey(d.getType().toString())) {//check desc type contains in map
+				//add desc
+				Description dm = descriptionsMap.get(d.getType().toString());
+				String descConcat = dm.getDescription() +" "+ d.getDescription();
+				dm.setDescription(descConcat);
+				descriptionsMap.remove(d.getType().toString());
+				descriptionsMap.put(d.getType().toString(), dm);
+			} else {
+				descriptionsMap.put(d.getType().toString(), d);
+			}
+		}
+
+		//convert map to list of ob
+		// Getting Collection of values from HashMap
+		Collection<Description> values = descriptionsMap.values();
+
+		// Creating an ArrayList of values
+		ArrayList<Description> listOfDesc = new ArrayList<>(values);
+
+		Collections.sort(listOfDesc,new ReferenceBasedDescriptionComparator());
+		return listOfDesc;
 	}
 
 	/**
@@ -1167,7 +1423,15 @@ public class Functions {
 //		return provenanceName;
 //	}
 
-	public static String provenancename(ProvenanceManager provenance,
+	public static String provenancename(ProvenanceManager provenance, Organisation organisation) {
+		String orgname = organisation.getTitle();
+		String provenanceName = "";
+
+		provenanceName = orgname;
+		return provenanceName;
+	}
+
+	public static String provenancename1(ProvenanceManager provenance,
 										BaseData data) {
 		String orgname = data.getAuthority().getTitle();
 		String provenanceName = "";
@@ -1219,7 +1483,7 @@ public class Functions {
 	}
 
 	public static Set<Organisation> sources(Taxon taxon) {
-		Set<Organisation> sources = new HashSet<Organisation>();
+		Set<Organisation> sources = new HashSet<>();
 		sources.add(taxon.getAuthority());
 		for (Description d : taxon.getDescriptions()) {
 			sources.add(d.getAuthority());
@@ -1252,8 +1516,18 @@ public class Functions {
 		for (VernacularName n : taxon.getVernacularNames()) {
 			sources.add(n.getAuthority());
 		}
-
 		return sources;
+	}
+
+	public static List<Organisation> descriptionSources(Taxon taxon) {
+		Set<Organisation> sources = new HashSet<>();
+		sources.add(taxon.getAuthority());
+		for (Description d : taxon.getDescriptions()) {
+			sources.add(d.getAuthority());
+		}
+		ArrayList<Organisation> listOfDesc = new ArrayList<>(sources);
+		Collections.sort(listOfDesc,new SourceBasedDescriptionComparator());
+		return listOfDesc;
 	}
 
 	private static OccurrenceStatus toPresentAbsent(OccurrenceStatus o) {

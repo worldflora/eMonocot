@@ -76,6 +76,16 @@ public class Description extends OwnedEntity {
 
 	private Long id;
 
+	private Boolean preferredDescription = Boolean.FALSE;
+
+	public Boolean getPreferredDescription() {
+		return preferredDescription;
+	}
+
+	public void setPreferredDescription(Boolean preferredDescription) {
+		this.preferredDescription = preferredDescription;
+	}
+
 	private Set<Annotation> annotations = new HashSet<Annotation>();
 
 	private Set<Reference> references = new HashSet<Reference>();

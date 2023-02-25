@@ -18,10 +18,12 @@ package org.emonocot.job.dwc.description;
 
 import java.util.Locale;
 
+import org.emonocot.api.job.WFOTerm;
 import org.emonocot.job.dwc.read.OwnedEntityFieldSetMapper;
 import org.emonocot.model.Description;
 import org.emonocot.model.Reference;
 import org.emonocot.model.constants.DescriptionType;
+import org.gbif.dwc.terms.GbifTerm;
 import org.gbif.dwc.terms.Term;
 import org.gbif.dwc.terms.DcTerm;
 import org.slf4j.Logger;
@@ -94,6 +96,17 @@ public class FieldSetMapper extends OwnedEntityFieldSetMapper<Description> {
 				break;
 			default:
 				break;
+			}
+		}
+
+		if (term instanceof WFOTerm) {
+			WFOTerm wfoTerm = (WFOTerm) term;
+			switch (wfoTerm) {
+				case isPreferredDescription:
+					object.setPreferredDescription(conversionService.convert(value, Boolean.class));
+					break;
+				default:
+					break;
 			}
 		}
 	}
