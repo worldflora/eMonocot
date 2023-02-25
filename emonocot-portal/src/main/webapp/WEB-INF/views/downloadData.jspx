@@ -69,16 +69,20 @@
                                             <td>
                                                 <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
                                             </td>
-                                            <td>89.5MB</td>
-                                            <td>v.2022.07</td>
-                                            <td>Jul. 12, 2022</td>
-                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td>103MB</td>
+                                            <td>v.2022.12</td>
+                                            <td>Dec. 22, 2022</td>
+                                            <td>(DwCA) Taxonomic classification.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7467360">10.5281/zenodo.7467360</a></td>
                                         </tr>
                                         </thead>
                                     </table>
                                 </div>
                                 <p>
                                     When citing the World Flora Online, you may use: "WFO ([Year]): World Flora Online. Version [Year].[Month]. Published on the Internet; http://www.worldfloraonline.org. Accessed on:[Date]". Please ensure that the [Date] of accession accords with the date for your use of the system and the [Year] and [Month] correspond to the file you are using.
+                                </p>
+                                <p>
+                                    You can cite all versions by using the DOI <a href="https://doi.org/10.5281/zenodo.7460141">10.5281/zenodo.7460141</a>. This DOI represents all versions, and will always resolve to the latest one.
                                 </p>
                             </p>
 
@@ -103,10 +107,21 @@
                                             <th><spring:message code="downloadData.versionNumber"/></th>
                                             <th><spring:message code="downloadData.date"/></th>
                                             <th><spring:message code="downloadData.description"/></th>
+                                            <th><spring:message code="downloadData.doi"/></th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>included
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.12_20221221.zip">WFO Taxonomic Backbone (20221221)</a>
+                                            </td>
+                                            <td>89.5MB</td>
+                                            <td>v.2022.07</td>
+                                            <td>Jul. 07, 2022</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7462490">10.5281/zenodo.7462490</a></td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.7_20220712.zip">WFO Taxonomic Backbone (20220712)</a>
                                             </td>
@@ -114,6 +129,7 @@
                                             <td>v.2022.04</td>
                                             <td>Apr. 08, 2022</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7462427">10.5281/zenodo.7462427</a></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -123,6 +139,17 @@
                                             <td>v.2021.12</td>
                                             <td>Dec. 09, 2021</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7462229">10.5281/zenodo.7462229</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://104.198.143.165/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.1.3_20211209.zip">WFO Taxonomic Backbone (20211209)</a>
+                                            </td>
+                                            <td>89.3MB</td>
+                                            <td>v.2019.10</td>
+                                            <td>Oct. 10, 2019</td>
+                                            <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -132,6 +159,7 @@
                                             <td>v.2019.05</td>
                                             <td>May 17, 2019</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7462137">10.5281/zenodo.7462137</a></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -141,6 +169,7 @@
                                             <td>v.2019.04</td>
                                             <td>Apr. 21, 2019</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7461831">10.5281/zenodo.7461831</a></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -150,6 +179,7 @@
                                             <td>v.2019.03</td>
                                             <td>Mar. 05, 2019</td>
                                             <td>(DwCA) Taxonomic classification and bibliographic references.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7460932">10.5281/zenodo.7460932</a></td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -159,6 +189,7 @@
                                             <td>v.2018.07</td>
                                             <td>Jul. 11, 2018</td>
                                             <td>(DwCA) Taxonomic classification.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.7460142">10.5281/zenodo.7460142</a></td>
                                         </tr>
 
                                         </tbody>
