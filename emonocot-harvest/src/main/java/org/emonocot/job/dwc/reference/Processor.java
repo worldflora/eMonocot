@@ -16,14 +16,24 @@
  */
 package org.emonocot.job.dwc.reference;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.emonocot.api.ReferenceService;
+import org.emonocot.api.TaxonService;
 import org.emonocot.job.dwc.exception.RequiredFieldException;
 import org.emonocot.job.dwc.read.NonOwnedProcessor;
 import org.emonocot.model.Reference;
+import org.emonocot.model.Taxon;
 import org.emonocot.model.constants.RecordType;
+import org.emonocot.model.registry.Organisation;
+import org.emonocot.persistence.dao.hibernate.ReferenceDaoImpl;
+import org.emonocot.service.impl.TaxonServiceImpl;
+import org.gbif.ecat.voc.Rank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.*;
 
 /**
  *
@@ -33,6 +43,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Processor extends NonOwnedProcessor<Reference, ReferenceService> {
 
 	private Logger logger = LoggerFactory.getLogger(Processor.class);
+
+//	private TaxonService taxonService = new TaxonServiceImpl();
+//
+//	@Autowired
+//	public void setTaxonService(TaxonService taxonService) {
+//		this.taxonService = taxonService;
+//	}
 
 	@Autowired
 	public void setReferenceService(ReferenceService service) {
@@ -52,6 +69,77 @@ public class Processor extends NonOwnedProcessor<Reference, ReferenceService> {
 		persisted.setTitle(t.getTitle());
 		persisted.setType(t.getType());
 		persisted.setUri(t.getUri());
+		updateAuthority(t, persisted);
+		//persisted.setAuthority(updateReferenceAuthority(t));
+	}
+
+//	private Organisation updateAuthority(Reference ref) {
+//		//Taxon t = new Taxon();
+//		Organisation org = new Organisation();
+//		org.setId(66136L);
+//		//t.setAuthority(org);
+//		logger.info("Processing updateAuthority: " + org.getId());
+//		return org;
+//	}
+//
+	private void updateAuthority(Reference ref, Reference persisted) {
+
+		//ReferenceDaoImpl impl = new ReferenceDaoImpl();
+		Set<Taxon> taxa = ref.getTaxa();
+		logger.info(" taxa.size(): " + taxa.size());
+		if (taxa.size() > 0) {
+		List<Taxon> list = new ArrayList<>(taxa);
+			Taxon t = list.get(0);
+		logger.info("list.get(0). Taxon: " + t);
+		String family = t.getFamily();
+		Organisation authority = t.getAuthority();
+			logger.info("list.get(0). family: " + family);
+			logger.info("list.get(0). authority: " + authority);
+
+		//Taxon t = impl.loadTaxon(list.get(0).getIdentifier());
+			//Taxon t = taxonService.load(list.get(0).getIdentifier());
+			//Taxon t = service.load(list.get(0).getIdentifier());
+
+		logger.info("Source and family not equal. TaxonId: " + t.getIdentifier() + "Family: " + t.getFamily());
+		Map<String, Rank> hashMap = new HashMap<>();
+		//hashMap.putAll(Rank.RANK_MARKER_MAP_SUPRAGENERIC);
+		//hashMap.putAll(Rank.RANK_MARKER_MAP_INFRAGENERIC);
+			hashMap.putAll(Rank.RANK_MARKER_MAP);
+		hashMap.remove("fam");
+		Organisation org = getSource();
+		//if((StringUtils.isNotBlank(family)) &&
+			//	(!family.equalsIgnoreCase(org.getIdentifier()) && (hashMap.containsValue(t.getTaxonRank()))))
+		if((t.getFamily() != null) && (t.getFamily() != org.getIdentifier()))
+			{
+			logger.info("Source and family not equal:  " + t.getFamily());
+			org = getSource(t.getFamily());
+		}
+		logger.info("persisted setAuthority======");
+		persisted.setAuthority(org);
+		}
+		//return org;
+	}
+
+	public Organisation updateReferenceAuthority(Reference r) {
+		logger.info("Entered updateReferenceAuthority----");
+		Organisation org = getSource();
+		if (r.getIdentifier().contains("database") || r.getIdentifier().contains("person")
+				|| r.getIdentifier().contains("literature") || r.getIdentifier().contains("specimen")
+		) {
+			Set<Taxon> taxa = r.getTaxa();
+			logger.info(" taxa.size()--: " + taxa.size());
+			if (taxa.size() > 0) {
+				List<Taxon> list = new ArrayList<>(taxa);
+				Taxon t = list.get(0);
+				logger.info("list.get(0). Taxon--: " + t);
+				String family = t.getFamily();
+				if (!family.equalsIgnoreCase(org.getIdentifier())) {
+					logger.info("updateReferenceAuthority --- Source and family not equal. Source: " + r.getAuthority().getIdentifier() + "and family: " + family);
+					org = getSource(family);
+				}
+			}
+		}
+		return org;
 	}
 
 	@Override
