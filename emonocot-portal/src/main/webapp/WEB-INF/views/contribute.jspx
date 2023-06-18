@@ -37,10 +37,6 @@
 				<div class="span12">
 					<div class="inner">
 						<div class="box">
-							<!--<div class="pull-right">-->
-							<!--<c:url value="/css/images/identify.png" var="identifyImg" />-->
-							<!--<img src="${identifyImg}" height="160" width="260" alt="" />-->
-							<!--</div>-->
 							<h1 id="overview">
 								Overview
 							</h1>
@@ -48,173 +44,45 @@
 								Data is read into the World Flora Online Portal in Darwin Core Archive format, a
 								zip-file that follows a format developed by the Global Biodiversity Information Facility (GBIF).
 								Guidelines for submitting both descriptive and taxonomic data
-								<!--are provided in the WFO Data Contributors Guide which-->
 								can be found at <a href="http://about.worldfloraonline.org/documents">http://about.worldfloraonline.org/documents</a>
-								<!--Data is read into the <spring:message code="application.title" /> portal in &lt;!&ndash;a href=""&ndash;&gt;Darwin Core Archive&lt;!&ndash;/a&ndash;&gt; format.-->
-								<!--A Darwin Core Archive is a zip file containing one or more delimited (e.g. CSV) files, and a metadata file which defines-->
-								<!--what data type each column contains.  Darwin Core Archive can be produced by Scratchpads, BioCASe, the GBIF IPT system,-->
-								<!--or manually.  GBIF provides a <a href="http://tools.gbif.org/dwca-validator/">Darwin Core Archive Validator</a>.-->
-							</p>
-							<!--<p class="justified">-->
-							<!--Darwin Core defines many terms (data types / column headings).  The portal only recognises some terms; these-->
-							<!--are described below.-->
-							<!--</p>-->
-							<!--<p class="justified">-->
-							<!--Darwin Core Archive records have a star-like structure: a single central record (e.g. a name) can have multiple records-->
-							<!--of other types linked from it — descriptions, distributions, and so on.  The central name record should be of type-->
-							<!--<code>http://rs.tdwg.org/dwc/terms/Taxon</code>, and needs to include these Darwin Core terms:-->
-							<!--</p>-->
-							<!--<ul>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/taxonID</code>: an identifier for the taxon/name</li>-->
-							<!--<li><code>http://purl.org/dc/terms/type</code>: set to "Taxon".</li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/datasetName</code>: set to the name of your dataset</li>-->
-							<!--<li><code>http://purl.org/dc/terms/license</code>: the license the data is supplied under</li>-->
-							<!--<li><code>http://purl.org/dc/terms/language</code>: the language code (e.g. "en") for any descriptive data</li>-->
-							<!--</ul>-->
+</p>
 						</div>
 					</div>
 
 					<div class="inner">
 						<div class="box">
-							<!--<div class="pull-right">-->
-							<!--<c:url value="/css/images/explore.png" var="exploreImg" />-->
-							<!--<img src="${exploreImg}" height="160" width="260" alt="" />-->
-							<!--</div>-->
 							<h1 id="descriptive">
 								<spring:message code="contribute.descriptive.title" />
 							</h1>
 							<p class="justified">
-								Descriptive data of all kinds need to be linked to a name known to the portal.
+								Content data (descriptions, images, distributions, etc.) need to be linked to a name known to the portal.
 								For the portal to recognize a name, it needs to use a WFO identifier (WFOID).
 								All plant names are assigned WFOIDs by the WFO Consortium.
 								For example, the WFOID for Solanum tuberosum L. is wfo-0001031908.
 								A WFOID must be used in the taxonID column in the core Taxon CSV file of the Darwin Core Archive.
 								Note: The term taxonID is a Darwin Core term used to identify a name, not a taxonomic concept.
-								<!--Descriptive data of all kinds needs to be linked to a taxon-->
-								<!--known to the portal.  For the portal to recognise a taxon, it needs to use an identifier-->
-								<!--from a taxonomic resource imported into the portal.  For example, the identifier-->
-								<!--for <i>Nervilia ballii</i> G. Will. is <code>urn:kew.org:wcs:taxon:135257</code>.-->
-								<!--Use these identifiers in the <code>http://rs.tdwg.org/dwc/terms/taxonID</code> column of the-->
-								<!--central taxon record.-->
 							</p>
 							<p class="justified">
 								<c:url value="/css/data/wcs-amborellaceae.zip" var="wcsAmborellaceae" />
 								<c:url value="/taxon/urn:kew.org:wcs:family:87" var="amborellaceaeInPortal" />
-								Descriptive text is provided to WFO by using the Darwin Core Archive Descriptions extension, as defined by GBIF.
+								Any content data is provided to WFO by using the Darwin Core Archive Descriptions extension, as defined by GBIF.
 								Please refer to the WFO Content Data Contributors Guide which can be found at <a href="http://about.worldfloraonline.org/documents">http://about.worldfloraonline.org/documents</a>.
-
-								<!--Descriptive data is included using Darwin Core Archive extensions.  Create one with the type-->
-								<!--<code>http://rs.gbif.org/terms/1.0/Description</code>, and use these terms:-->
 							</p>
-							<!--<ul>-->
-							<!--<li><code>http://purl.org/dc/terms/type</code>: the type of description, one of "general", "distribution", "habitat", "morphology", "literature".</li>-->
-							<!--<li><code>http://purl.org/dc/terms/source</code>: the source of the description text</li>-->
-							<!--<li><code>http://purl.org/dc/terms/description</code>: the descriptive text</li>-->
-							<!--</ul>-->
-							<!--<p class="justified">Additional terms can be included, they will be ignored.</p>-->
-							<!--<h2>Example dataset</h2>-->
-							<!--<p class="justified">-->
-							<!--<c:url value="/css/data/fz-nervilia-ballii.zip" var="fzSingle" />-->
-							<!--<c:url value="/taxon/urn:kew.org:wcs:taxon:135257" var="fzInPortal" />-->
-							<!--<a href="${fzSingle}">This example Darwin Core Archive</a> contains a single species record from <cite>Flora Zambesiaca</cite>-->
-							<!--with general, distribution, habitat, morphology, and literature descriptions, as well as references.  Compare the-->
-							<!--<a href="http://apps.kew.org/efloras/namedetail.do?flora=fz&amp;taxon=9342&amp;nameid=24415">record on the online version of-->
-							<!--Flora Zambesiaca</a>, or the <a href="${fzInPortal}">record as it appears in this portal</a>.-->
-							<!--</p>-->
 						</div>
 					</div>
 
 					<div class="inner">
 						<div class="box">
-							<!--<div class="pull-right">-->
-							<!--<c:url value="/css/images/classify.png" var="classifyImg" />-->
-							<!--<img src="${classifyImg}" height="160" width="260" alt="" />-->
-							<!--</div>-->
 							<h1 id="taxonomic">
 								<spring:message code="contribute.taxonomic.title" />
 							</h1>
 							<p class="justified">
-								A taxonomic resource file extends the World Flora Online taxonomic backbone and must also be provided in Darwin Core Archive format.
-								The guidelines for submitting taxonomic backbone data are provided in the WFO Taxonomic Backbone  Data Contributors Guide, which can be found at <a href="http://about.worldfloraonline.org/documents">http://about.worldfloraonline.org/documents</a>.
+								A taxonomic resource file updates or extends the World Flora Online taxonomic backbone and must also be provided in Darwin Core Archive format.
+								The guidelines for submitting taxonomic backbone data are provided in the WFO Taxonomic Backbone Data Contributors Guide, which can be found at <a href="http://about.worldfloraonline.org/documents">http://about.worldfloraonline.org/documents</a>.
 								Like for descriptive data, each name must have a WFOID assigned by the WFO Consortium.
 								<!--<p>Please <a href="contact@worldfloraonline.org">contact</a> WFO if you are interested to provide updates for a plant group.</p>-->
 								<p>Please <a class="contactLinkOverlay" href="mailto:contact@worldfloraonline.org?subject=World Flora Organization Question" alt="WFO email">contact</a> WFO if you are interested to provide updates for a plant group.</p>
-
-								<!--A taxonomic resource extends the taxonomy (names and relationships between them) of the portal.  Like-->
-								<!--descriptive data, in order to link in to the portal's taxonomy it must use the portal's identifier for a suitable higher taxon (e.g. a family).-->
-							</p>
-
-							<!--<h2>Recognised Darwin Core terms</h2>-->
-							<!--<p>These terms are recognised by the portal for a Taxon:</p>-->
-							<!--<ul>-->
-							<!--<li><code>http://purl.org/dc/terms/accessRights</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/created</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/license</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/modified</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/rights</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/rightsHolder</code></li>-->
-
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/bibliographicCitation</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/class</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/family</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/genus</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/infraspecificEpithet</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/kingdom</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/nameAccordingTo</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/namePublishedIn</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/namePublishedInString</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/namePublishedInYear</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/nomenclaturalCode</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/nomenclaturalStatus</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/order</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/phylum</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/scientificName</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/scientificNameAuthorship</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/scientificNameID</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/source</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/specificEpithet</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/subfamily</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/subgenus</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/subtribe</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/taxonomicStatus</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/taxonRank</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/taxonRemarks</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/tribe</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/taxonRank</code></li>-->
-
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/parentNameUsage</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/acceptedNameUsage</code></li>-->
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/originalNameUsage</code></li>-->
-
-							<!--<li><code>http://e-monocot.org/subfamily</code></li>-->
-							<!--<li><code>http://e-monocot.org/tribe</code></li>-->
-							<!--<li><code>http://e-monocot.org/subtribe</code></li>-->
-							<!--</ul>-->
-
-							<!--<p>These terms are recognised by the portal for a Reference:</p>-->
-							<!--<ul>-->
-							<!--<li><code>http://purl.org/dc/terms/bibliographicCitation</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/creator</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/date</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/description</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/language</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/source</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/subject</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/title</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/type</code></li>-->
-							<!--<li><code>http://purl.org/dc/terms/uri</code></li>-->
-
-							<!--<li><code>http://rs.tdwg.org/dwc/terms/taxonRemarks</code></li>-->
-							<!--</ul>-->
-
-							<!--<h2>Example dataset</h2>-->
-							<!--<p class="justified">-->
-
-							<!--<a href="${wcsAmborellaceae}">This example Darwin Core Archive</a> contains two Solanum names from the WFO taxonomic backbone.-->
-							<!--<a href="${wcsAmborellaceae}">This example Darwin Core Archive</a> contains the two taxa in <a href="${amborellaceaeInPortal}"><i>Amborellaceae</i></a>,-->
-							<!--from the <cite>World Checklist</cite>.  It also contains distributions and some other descriptive data.  The id for the family is-->
-							<!--<code>urn:kew.org:wcs:family:87</code>, which needs to be used to link into the portal's classification.-->
-							<!--</p>-->
+</p>
 						</div>
 					</div>
 
@@ -224,7 +92,26 @@
 								<spring:message code="contribute.nameMatching.title" />
 							</h1>
 							<p class="justified">
-								The Name matching service for WFO Taxonomic Backbone contributions is work in progress. For the time being, please provide your file to the <a class="contactLinkOverlay" href="mailto:wfo@worldfloraonline.org?subject=Name Matching service request" alt="WFO email">WFO Gatekeeper</a> for checking.
+								<p>
+									The standardisation of plant names is a critical step in various fields of biology, including biodiversity, biogeography, and vegetation research. The
+									<b>WorldFlora</b> R package (Kindt 2020) matches lists of plant names using the static copy of the World Flora Online (WFO) taxonomic backbone available <a
+										href="http://www.worldfloraonline.org/downloadData">here</a>.
+								</p>
+								<p>
+									WorldFlora offers a straightforward pipeline for semi‐automatic plant name checking. For the four test data sets (Kindt 2020), the success rate of credible name matches ranged from 94.7% to 99.9%. Package
+									<b>RcmdrPlugin.WorldFlora</b> provides a graphical user interface for WorldFlora as
+									<a href="https://www.researchgate.net/publication/342657019_WORLDFLORA_User_Guide_for_Graphical_User_Interface" target="_blank">documented in this manual</a>.
+								</p>
+								<p>
+									Available at <a
+										href="https://cran.r-project.org/package=WorldFlora" target="_blank">https://cran.r-project.org/package=WorldFlora</a> ;
+									<a href="https://cran.r-project.org/package=RcmdrPlugin.WorldFlora" target="_blank">https://cran.r-project.org/package=RcmdrPlugin.WorldFlora</a>
+								</p>
+								<p>
+									Kindt, R. 2020. WorldFlora: An R package for exact and fuzzy matching of plant names against the World Flora Online taxonomic backbone data.
+									<i>Applications in Plant Sciences</i> 8( 9): e11388.<a
+										href="https://doi.org/10.1002/aps3.11388" target="_blank">https://doi.org/10.1002/aps3.11388</a>[Open Access]
+								</p>
 							</p>
 						</div>
 					</div>
