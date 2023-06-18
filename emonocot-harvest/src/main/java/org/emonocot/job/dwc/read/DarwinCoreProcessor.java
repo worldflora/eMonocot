@@ -17,6 +17,8 @@
 package org.emonocot.job.dwc.read;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -30,11 +32,7 @@ import org.emonocot.job.dwc.exception.InvalidValuesException;
 import org.emonocot.job.dwc.exception.OutOfScopeTaxonException;
 import org.emonocot.job.dwc.exception.RequiredFieldException;
 import org.emonocot.job.dwc.exception.WrongAuthorityException;
-import org.emonocot.model.Annotated;
-import org.emonocot.model.Annotation;
-import org.emonocot.model.Base;
-import org.emonocot.model.BaseData;
-import org.emonocot.model.Taxon;
+import org.emonocot.model.*;
 import org.emonocot.model.constants.AnnotationCode;
 import org.emonocot.model.constants.AnnotationType;
 import org.emonocot.model.constants.RecordType;
@@ -143,11 +141,44 @@ ItemProcessor<T, T>, ChunkListener {
 	}
 
 	protected void  checkAuthority(RecordType recordType, Base record, Organisation authority) throws DarwinCoreProcessingException {
-		if(authority.getIdentifier().equals(getSource().getIdentifier())) {
+		logger.info("checkAuthority authority" + authority);
+		logger.info("checkAuthority getSource()" + getSource());
+		if (authority != null && getSource()!= null) {
+			if(authority.getIdentifier().equals(getSource().getIdentifier())) {
 		} else {
 			throw new WrongAuthorityException("Expected content at line " + getLineNumber() +  " to belong to " + getSource().getIdentifier() + " but found content belonging to " + authority.getIdentifier(), recordType, getLineNumber());
 		}
+		} else {
+			throw new RequiredFieldException(record + " at line " + getLineNumber() +  " has authority null", recordType, getStepExecution().getReadCount());
+		}
 	}
+
+	protected void  updateTaxonAuthority( Taxon t) throws DarwinCoreProcessingException {
+		logger.info("Entered updateTaxonAuthority");
+		if(!t.getAuthority().getIdentifier().equalsIgnoreCase(getSource().getIdentifier())) {
+			logger.info("updateTaxonAuthority - Source and family not equal. Source: " + t.getAuthority().getIdentifier() + "and family: " + t.getFamily());
+			t.setAuthority(getSource(t.getFamily()));
+		}
+	}
+
+//	protected Organisation updateReferenceAuthority( Reference r) throws DarwinCoreProcessingException {
+//		logger.info("Entered updateReferenceAuthority");
+//		Organisation org = getSource();
+//
+//		Set<Taxon> taxa = r.getTaxa();
+//		logger.info(" taxa.size(): " + taxa.size());
+//		if (taxa.size() > 0) {
+//			List<Taxon> list = new ArrayList<>(taxa);
+//			Taxon t = list.get(0);
+//			logger.info("list.get(0). Taxon: " + t);
+//			String family = t.getFamily();
+//			if(!family.equalsIgnoreCase(org.getIdentifier())) {
+//				logger.info("updateReferenceAuthority - Source and family not equal. Source: " + r.getAuthority().getIdentifier() + "and family: " + family);
+//				org = getSource(family);
+//			}
+//		}
+//		return org;
+//	}
 
 	public void afterChunk() {
 		logger.info("After Chunk");
