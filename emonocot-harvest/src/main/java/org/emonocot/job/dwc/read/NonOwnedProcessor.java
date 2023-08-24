@@ -191,8 +191,8 @@ ChunkListener {
 	private void updateReferenceAuthority( Reference ref) {
 		Organisation org = getSource();
 
-		if (ref.getIdentifier().contains("database") || ref.getIdentifier().contains("person")
-				|| ref.getIdentifier().contains("literature") || ref.getIdentifier().contains("specimen")
+		if (ref.getIdentifier().toLowerCase().contains("database") || ref.getIdentifier().toLowerCase().contains("person")
+				|| ref.getIdentifier().toLowerCase().contains("literature") || ref.getIdentifier().toLowerCase().contains("specimen")
 				) {
 		Set<Taxon> taxa = ref.getTaxa();
 		logger.info(" taxa.size()  : " + taxa.size());
