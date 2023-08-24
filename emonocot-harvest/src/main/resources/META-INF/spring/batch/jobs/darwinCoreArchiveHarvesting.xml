@@ -1867,6 +1867,7 @@
     <property name="subfamily" value="#{jobParameters['subfamily']}" />
     <property name="tribe" value="#{jobParameters['tribe']}" />
     <property name="subtribe" value="#{jobParameters['subtribe']}" />
+    <property name="taxonService" ref="taxonServiceImpl"/>
   </bean>
 
   <bean id="referenceRecordSeparatorPolicy" class="org.springframework.batch.item.file.separator.DefaultRecordSeparatorPolicy"
