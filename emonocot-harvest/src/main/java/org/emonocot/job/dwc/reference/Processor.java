@@ -123,8 +123,8 @@ public class Processor extends NonOwnedProcessor<Reference, ReferenceService> {
 	public Organisation updateReferenceAuthority(Reference r) {
 		logger.info("Entered updateReferenceAuthority----");
 		Organisation org = getSource();
-		if (r.getIdentifier().contains("database") || r.getIdentifier().contains("person")
-				|| r.getIdentifier().contains("literature") || r.getIdentifier().contains("specimen")
+		if (r.getIdentifier().toLowerCase().contains("database") || r.getIdentifier().toLowerCase().contains("person")
+				|| r.getIdentifier().toLowerCase().contains("literature") || r.getIdentifier().toLowerCase().contains("specimen")
 		) {
 			Set<Taxon> taxa = r.getTaxa();
 			logger.info(" taxa.size()--: " + taxa.size());
