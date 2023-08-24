@@ -40,16 +40,7 @@ import javax.servlet.jsp.el.ELException;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.emonocot.api.job.EmonocotTerm;
 import org.emonocot.api.job.WCSPTerm;
-import org.emonocot.model.BaseData;
-import org.emonocot.model.Description;
-import org.emonocot.model.Distribution;
-import org.emonocot.model.Identifier;
-import org.emonocot.model.Image;
-import org.emonocot.model.MeasurementOrFact;
-import org.emonocot.model.Reference;
-import org.emonocot.model.Taxon;
-import org.emonocot.model.TypeAndSpecimen;
-import org.emonocot.model.VernacularName;
+import org.emonocot.model.*;
 import org.emonocot.model.compare.*;
 import org.emonocot.model.constants.*;
 import org.emonocot.model.convert.ClassToStringConverter;
@@ -1516,6 +1507,11 @@ public class Functions {
 		for (VernacularName n : taxon.getVernacularNames()) {
 			sources.add(n.getAuthority());
 		}
+
+		for (IdentificationKey k : taxon.getKeys()) {
+			sources.add(k.getAuthority());
+		}
+
 		return sources;
 	}
 
