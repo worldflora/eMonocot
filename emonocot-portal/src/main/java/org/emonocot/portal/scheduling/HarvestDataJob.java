@@ -80,29 +80,33 @@ public class HarvestDataJob extends QuartzJobBean {
 			ResourceService resourceService = (ResourceService) applicationContext.getBean(resourceServiceName);
 			JobLauncher jobLauncher = (JobLauncher) applicationContext.getBean(jobLauncherName);
 			logger.info("HarvestDataJob - cronExpressions: "+ cronExpressions);
-			logger.info("HarvestDataJob - cronExpressions string: "+ cronExpressions.toString());
+			//logger.info("HarvestDataJob - cronExpressions string: "+ cronExpressions.toString());
 			for (String cronExpression : cronExpressions) {
 				CronExpression expression = new CronExpression(cronExpression);
 				DateTime now = new DateTime();
-
+				//logger.info("HarvestDataJob - expression.isSatisfiedBy(now.toDate()): "+ expression.isSatisfiedBy(now.toDate()));
+				//logger.info("HarvestDataJob - resourceService.isHarvesting(): "+ !resourceService.isHarvesting());
+				//logger.info("HarvestDataJob - if block: "+ (expression.isSatisfiedBy(now.toDate()) && !resourceService.isHarvesting()));
 				if (expression.isSatisfiedBy(now.toDate())	&& !resourceService.isHarvesting()) {
 				//if (expression.isSatisfiedBy(now.toDate())) {
 					DateTime nextInvalidDate = new DateTime(expression.getNextInvalidTimeAfter(now.toDate()));
 					logger.info(" nextInvalidDate:-------- " + nextInvalidDate);
 					logger.info(cronExpression + " is satisfied and resourceService is not harvesting, looking for jobs to harvest . . .");
-					List<Resource> resourcesToHarvest = resourceService.listResourcesToHarvest(10, now,"job-with-source");
+					List<Resource> resourcesToHarvest = resourceService.listResourcesToHarvest(100, now,"job-with-source");
 					Resource resource = null;
 					for (Resource r : resourcesToHarvest) {
 						DateTime probableFinishingTime = now.plus(r.getDuration());
-						logger.info("probableFinishingTime: " + probableFinishingTime);
+						//logger.info("resourcesToHarvest r: " + r.getTitle());
+						//logger.info("probableFinishingTime: " + probableFinishingTime);
 						if (r.getLastAttempt() != null) {
 							logger.info("r.getLastAttempt().plusHours(MINIMAL_INTERVAL): " + r.getLastAttempt().plusHours(MINIMAL_INTERVAL));
 							logger.info("r.getLastAttempt().plusHours(MINIMAL_INTERVAL).isBefore(now):---- " + r.getLastAttempt().plusHours(MINIMAL_INTERVAL).isBefore(now));
 						}
 						logger.info("now:---- " + now);
-						logger.info("probableFinishingTime.isBefore(nextInvalidDate):---- " + probableFinishingTime.isBefore(nextInvalidDate));
+						//logger.info("probableFinishingTime.isBefore(nextInvalidDate):---- " + probableFinishingTime.isBefore(nextInvalidDate));
 						if (probableFinishingTime.isBefore(nextInvalidDate) && (r.getLastAttempt() == null || r.getLastAttempt().plusHours(MINIMAL_INTERVAL).isBefore(now))) {
 							resource = r;
+							logger.info("resourcesToHarvest resource:=========== " + resource.getTitle());
 							break;
 						}
 					}
@@ -150,7 +154,7 @@ public class HarvestDataJob extends QuartzJobBean {
 					}
 
 				} else {
-					logger.info(now + " is not within " + cronExpression + "or resourceService is harvesting, skipping!");
+					logger.info(now + " is not within " + cronExpression + " or resourceService is harvesting, skipping!");
 				}
 			}
 		} catch (ParseException pe) {
