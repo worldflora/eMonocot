@@ -126,6 +126,7 @@ public class RegistrationController {
 		user.setAccountNonExpired(true);
 		user.setCredentialsNonExpired(true);
 		user.setEnabled(false);
+		//user.setCreated(new DateTime());
 
 		try{
 			service.createUser(user);
