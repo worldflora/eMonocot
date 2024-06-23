@@ -16,12 +16,7 @@
  */
 package org.emonocot.job.taxonmatch;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.emonocot.api.SearchableObjectService;
@@ -41,6 +36,8 @@ import org.emonocot.model.constants.TaxonomicStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.gbif.ecat.voc.Rank.*;
 
 /**
  * @author jk00kg
@@ -83,9 +80,12 @@ public class DefaultTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 	 */
 	public List<Match<Taxon>> match(ParsedName<String> parsed) {
 		StringBuilder stringBuilder = new StringBuilder();
+		logger.debug("DefaultTaxonMatcher parsed " + parsed);
 		if (parsed.getSpecificEpithet() == null) {
 			stringBuilder.append("searchable.label_sort:" + parsed.getGenusOrAbove());
+			logger.debug("DefaultTaxonMatcher parsed.getRank() " + parsed.getRank());
 			if(parsed.getAuthorship() != null) {
+				logger.debug("DefaultTaxonMatcher parsed.getAuthorship() != null) " + parsed.getAuthorship());
 				stringBuilder.append(" AND taxon.scientific_name_authorship_s:"
 						+ parsed.getAuthorship());
 			}
@@ -106,14 +106,38 @@ public class DefaultTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 				stringBuilder.append(" AND -taxon.infraspecific_epithet_s:[* TO *]");
 			}
 			if (parsed.getRank() != null) {
-				if (parsed.getRank().equals(Rank.SPECIES)) {
-					stringBuilder.append(" AND taxon.taxon_rank_s:SPECIES");
-				} else {
+				Map<String, Rank> treeMap = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+				treeMap.putAll(RANK_MARKER_MAP_SUPRAGENERIC);
+				treeMap.putAll(RANK_MARKER_MAP_INFRAGENERIC);
+				treeMap.putAll(RANK_MARKER_MAP_INFRASPECIFIC);
+				logger.debug("parsed.getRank() " + parsed.getRank());
+				logger.debug("treeMap.containsKey(parsed.getRank()) " + treeMap.containsKey(parsed.getRank().toString().toLowerCase()));
+				logger.debug("treeMap.containsValue(parsed.getRank()) " + treeMap.containsValue(parsed.getRank()));
 
+				/*for (Map.Entry<String, Rank> entry : treeMap.entrySet()){
+					logger.debug("entry.getKey(): " + entry.getKey() + "entry.getValue()" +entry.getValue());
+			}
+*/
+
+			if (treeMap.containsValue(parsed.getRank())) {
+					stringBuilder.append(" AND taxon.taxon_rank_s:"+ parsed.getRank());
 				}
+
+				/*if (parsed.getRank().equals(Rank.SPECIES)) {
+					stringBuilder.append(" AND taxon.taxon_rank_s:SPECIES");
+				} else if (parsed.getRank().equals(Rank.SUBSPECIES)) {
+					stringBuilder.append(" AND taxon.taxon_rank_s:SUBSPECIES");
+				} else if(parsed.getRank().equals(Rank.Subvariety)) {
+					stringBuilder.append(" AND taxon.taxon_rank_s:SUBVARIETY");
+				} else if(parsed.getRank().equals(Rank.Subform)) {
+					stringBuilder.append(" AND taxon.taxon_rank_s:SUBFORM");
+				} else if(parsed.getRank().equals(Rank.SPECIES_OR_BELOW)) {
+					stringBuilder.append(" AND taxon.taxon_rank_s:FORM");
+				}*/
 
 			}
 			if(parsed.getAuthorship() != null) {
+				logger.debug("DefaultTaxonMatcher parsed.getAuthorship() not null) " + parsed.getAuthorship());
 				stringBuilder.append(" AND taxon.scientific_name_authorship_s:"
 						+ parsed.getAuthorship());
 			}
@@ -167,7 +191,10 @@ public class DefaultTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 				matches.add(m);
 				String name = (new NameParser().parseToCanonical(((Taxon)eTaxon).getScientificName()));
 				logger.debug("Name is " + name);
-				if (parsed.canonicalName().equals(name)) {
+				logger.debug("Actual Name is " + ((Taxon)eTaxon).getScientificName());
+				if (parsed.canonicalName().equals(name) && parsed.equals(((Taxon)eTaxon).getScientificName())) {
+					//add check again
+
 					m.setStatus(MatchStatus.EXACT);
 					exactMatches.add(m);
 				} else {
@@ -205,8 +232,13 @@ public class DefaultTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 	}
 
 	@Override
-	public List<Match<Taxon>> match(String name) throws UnparsableException {
+	public List<Match<Taxon>> match(String name, String scientificNameAuthorship) throws UnparsableException {
 		ParsedName<String> parsed = nameParser.parse(name);
+		logger.debug("match scientificNameAuthorship is " + scientificNameAuthorship);
+		if (scientificNameAuthorship != "" && scientificNameAuthorship != null) {
+			logger.debug("scientificNameAuthorship is " + scientificNameAuthorship);
+			parsed.setAuthorship(scientificNameAuthorship);
+		}
 		return match(parsed);
 	}
 
@@ -217,6 +249,25 @@ public class DefaultTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 	public List<Match<Taxon>> getMatches(String input) {
 		try {
 			return match(input);
+		} catch (UnparsableException e) {
+			logger.error("Couldn't parse the string");
+			return null;
+		}
+	}
+
+	@Override
+	public List<Match<Taxon>> match(String name) throws UnparsableException {
+		ParsedName<String> parsed = nameParser.parse(name);
+		return match(parsed);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.emonocot.api.match.Matcher#findMatches(java.lang.Object)
+	 */
+	@Override
+	public List<Match<Taxon>> getMatches(String input, String scientificNameAuthorship) {
+		try {
+			return match(input, scientificNameAuthorship);
 		} catch (UnparsableException e) {
 			logger.error("Couldn't parse the string");
 			return null;

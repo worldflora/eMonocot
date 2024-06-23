@@ -104,7 +104,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 
 			t.setNameAccordingTo(resolveReference(t.getNameAccordingTo(), t.getAuthority()));
 			t.setNamePublishedIn(resolveReference(t.getNamePublishedIn(), t.getAuthority()));
-
+			//logger.info("processor persisted getMajorGroup======: " + t.getTaxonExternalLinks().getMajorGroup());
 			t.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
 			t.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
 			t.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
@@ -125,7 +125,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			if (skipUnmodified
 					&& ((persisted.getModified() != null && t.getModified() != null) && !persisted
 							.getModified().isBefore(t.getModified()))) {
-
+				//logger.info("else processor persisted getMajorGroup======: " + t.getTaxonExternalLinks().getMajorGroup());
 				persisted.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
 				persisted.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
 				persisted.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
@@ -134,7 +134,9 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				persisted.getTaxonExternalLinks().setCcrStatus(t.getTaxonExternalLinks().getCcrStatus());
 				persisted.getTaxonExternalLinks().setGenusHybridMarker(t.getTaxonExternalLinks().getGenusHybridMarker());
 
-				bindTaxon(persisted);
+				//bindTaxon(persisted);
+				bindRelationships(t, persisted);
+			//	logger.info("Overwriting taxon getParentNameUsage after bindTaxon $$$" + persisted.getParentNameUsage());
 				replaceAnnotation(persisted, AnnotationType.Info,
 						AnnotationCode.Skipped);
 			} else {
@@ -186,6 +188,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 					taxonExternalLinks = new TaxonExternalLinks();
 					persisted.setTaxonExternalLinks(taxonExternalLinks);
 				}
+				//logger.info("processor persisted getMajorGroup======-------------: " + t.getTaxonExternalLinks().getMajorGroup());
 				persisted.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
 				persisted.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
 				persisted.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
@@ -209,6 +212,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				replaceAnnotation(persisted, AnnotationType.Info,
 						AnnotationCode.Update);
 			}
+			//logger.info("final processor persisted getMajorGroup======: " + persisted.getTaxonExternalLinks().getMajorGroup());
 			logger.info("Overwriting taxon " + persisted);
 			return persisted;
 
@@ -223,7 +227,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 		hashMap.remove("fam");
 		Organisation org = getSource();
 		//t.getFamily() != null
-		if((t.getFamily() != null) && (t.getFamily() != org.getIdentifier()) && (hashMap.containsValue(t.getTaxonRank())))
+		if((t.getFamily() != null && t.getFamily() != "") && (t.getFamily() != org.getIdentifier()) && (hashMap.containsValue(t.getTaxonRank())))
 		{
 			logger.info("Source and family not equal " + t.getFamily());
 			org = getSource(t.getFamily());

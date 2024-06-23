@@ -89,8 +89,9 @@ ChunkListener {
 				validate(t);
 				bind(t);
 				logger.info("doProcess setAuthority=====");
-			//	t.setAuthority(getSource());
-				updateReferenceAuthority((Reference)t);
+				t.setAuthority(getSource());//////uncommented for 500 error
+				//updateReferenceAuthority((Reference)t);////////uncomment for backbone harvest
+
 				Annotation annotation = createAnnotation(t, getRecordType(), AnnotationCode.Create, AnnotationType.Info);
 				t.getAnnotations().add(annotation);
 				logger.info("Adding object " + t.getIdentifier());
@@ -98,7 +99,7 @@ ChunkListener {
 			} else {
 				logger.info("doProcess persisted: " + persisted);
 				logger.info("doProcess persisted.getAuthority() : " + persisted.getAuthority());
-				checkAuthority(getRecordType(), t, persisted.getAuthority());
+				////checkAuthority(getRecordType(), t, persisted.getAuthority());////////uncomment for backbone harvest
 				// We've seen this object before, but not in this chunk
 				if (skipUnmodified && ((persisted.getModified() != null && t.getModified() != null)
 						&& !persisted.getModified().isBefore(t.getModified()))) {
@@ -191,9 +192,9 @@ ChunkListener {
 	private void updateReferenceAuthority( Reference ref) {
 		Organisation org = getSource();
 
-		if (ref.getIdentifier().toLowerCase().contains("database") || ref.getIdentifier().toLowerCase().contains("person")
+		if (ref != null && (ref.getIdentifier().toLowerCase().contains("database") || ref.getIdentifier().toLowerCase().contains("person")
 				|| ref.getIdentifier().toLowerCase().contains("literature") || ref.getIdentifier().toLowerCase().contains("specimen")
-				) {
+		)) {
 		Set<Taxon> taxa = ref.getTaxa();
 		logger.info(" taxa.size()  : " + taxa.size());
 		if (taxa.size() > 0) {

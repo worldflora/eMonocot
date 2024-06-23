@@ -94,6 +94,7 @@ public class ImageThumbnailGeneratorImpl implements ItemProcessor<Image, Image>,
 	 */
 	@Override
 	public final Image process(final Image image) throws Exception {
+		logger.debug("Entered ImageThumbnailGeneratorImpl process----");
 		String thumbnailFileName = thumbnailDirectory + File.separatorChar
 				+ image.getId() + '.' + image.getFormat();
 

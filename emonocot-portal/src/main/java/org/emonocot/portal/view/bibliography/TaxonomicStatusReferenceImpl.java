@@ -5,6 +5,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.emonocot.model.Reference;
 import org.emonocot.model.Taxon;
 import org.emonocot.model.compare.ReferenceComparator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -18,6 +20,8 @@ public class TaxonomicStatusReferenceImpl implements TaxonomicStatusReference {
     List<Reference> references = new ArrayList<Reference>();
 
     SortedSet<ReferenceWrapper> refs = new TreeSet<ReferenceWrapper>(new ReferenceWrapperComparator());
+
+    private static Logger queryLog = LoggerFactory.getLogger("TaxonomicStatusReferenceImpl");
 
     /**
      *
@@ -40,6 +44,7 @@ public class TaxonomicStatusReferenceImpl implements TaxonomicStatusReference {
      }
      * **/
     public final void setReferences(final Taxon taxon) {
+       // queryLog.info("Entered TaxonomicStatusReferenceImpl =========================");
         if(taxon.getNameAccordingTo() != null)
         {
             for(Reference reference : taxon.getReferences()) {

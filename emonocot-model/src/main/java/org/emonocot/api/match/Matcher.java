@@ -31,5 +31,6 @@ public interface Matcher<I, O> {
 	 * @return - A list of matches, typed for convenience
 	 */
 	List<Match<O>> getMatches(I input);
+	List<Match<O>> getMatches(I input, String author);
 
 }
