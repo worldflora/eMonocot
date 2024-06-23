@@ -37,6 +37,5 @@ public interface TaxonMatcher {
 	 *         partial matches to optionally be returned
 	 */
 	List<Match<Taxon>> match(String name) throws UnparsableException;
-	List<Match<Taxon>> match(String name, String scientificNameAuthorship) throws UnparsableException;
 
 }

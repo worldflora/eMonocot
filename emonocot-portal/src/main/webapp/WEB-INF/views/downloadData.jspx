@@ -69,11 +69,11 @@
                                             <td>
                                                 <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
                                             </td>
-                                            <td>108MB</td>
-                                            <td>v.2023.12</td>
-                                            <td>Dec. 22, 2023</td>
+                                            <td>103MB</td>
+                                            <td>v.2023.03</td>
+                                            <td>Mar. 04, 2023</td>
                                             <td>(DwCA) Taxonomic classification.</td>
-                                            <td><a href="https://doi.org/10.5281/zenodo.10425161">10.5281/zenodo.10425161</a></td>
+                                            <!-- <td><a href="https://doi.org/10.5281/zenodo.7467360">10.5281/zenodo.7467360</a></td>-->
                                         </tr>
                                         </thead>
                                     </table>
@@ -112,26 +112,6 @@
                                         </thead>
                                         <tbody>
                                         <!--<tr>included-->
-                                        <tr>
-                                            <td>
-                                                <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.2.1_20240309.zip">WFO Taxonomic Backbone (20231222)</a>
-                                            </td>
-                                            <td>105MB</td>
-                                            <td>v.2023.06</td>
-                                            <td>Jun. 25, 2023</td>
-                                            <td>(DwCA) Taxonomic classification.</td>
-                                            <td><a href="https://doi.org/10.5281/zenodo.8079052">10.5281/zenodo.8079052</a></td>
-                                        </tr>
-                                         <tr>
-                                            <td>
-                                                <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.2.1_20231222.zip">WFO Taxonomic Backbone (20230625)</a>
-                                            </td>
-                                            <td>103MB</td>
-                                            <td>v.2023.03</td>
-                                            <td>Mar. 04, 2023</td>
-                                            <td>(DwCA) Taxonomic classification.</td><!-- no zenodo for this version -->
-                                        </tr>
-
                                         <tr>
                                             <td>
                                                 <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.2.1_20230304.zip">WFO Taxonomic Backbone (20230304)</a>

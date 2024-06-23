@@ -185,7 +185,7 @@ ItemProcessor<T, T>, ChunkListener {
 	}
 
 	public void beforeChunk() {
-		logger.info("Before Chunk");/////
+		logger.info("Before Chunk");
 		itemsRead = super.getStepExecution().getReadCount() + super.getStepExecution().getReadSkipCount();
 	}
 

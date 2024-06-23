@@ -100,7 +100,7 @@ public class Processor extends NonOwnedProcessor<Reference, ReferenceService> {
 			//Taxon t = taxonService.load(list.get(0).getIdentifier());
 			//Taxon t = service.load(list.get(0).getIdentifier());
 
-		logger.info("updateAuthority- TaxonId: " + t.getIdentifier() + "Family: " + t.getFamily());
+		logger.info("Source and family not equal. TaxonId: " + t.getIdentifier() + "Family: " + t.getFamily());
 		Map<String, Rank> hashMap = new HashMap<>();
 		//hashMap.putAll(Rank.RANK_MARKER_MAP_SUPRAGENERIC);
 		//hashMap.putAll(Rank.RANK_MARKER_MAP_INFRAGENERIC);
@@ -109,7 +109,7 @@ public class Processor extends NonOwnedProcessor<Reference, ReferenceService> {
 		Organisation org = getSource();
 		//if((StringUtils.isNotBlank(family)) &&
 			//	(!family.equalsIgnoreCase(org.getIdentifier()) && (hashMap.containsValue(t.getTaxonRank()))))
-		if((t.getFamily() != null && t.getFamily() != "") && (t.getFamily() != org.getIdentifier()))
+		if((t.getFamily() != null) && (t.getFamily() != org.getIdentifier()))
 			{
 			logger.info("Source and family not equal:  " + t.getFamily());
 			org = getSource(t.getFamily());

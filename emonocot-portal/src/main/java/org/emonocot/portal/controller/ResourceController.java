@@ -335,15 +335,14 @@ public class ResourceController extends GenericController<Resource, ResourceServ
 	 public String show(@PathVariable Long resourceId, Model uiModel) {
 		 Resource resource = getService().load(resourceId,"job-with-source");
 		 uiModel.addAttribute("resource", resource);
-		 return "resource/show";
-/*		 if (resource.getResourceType()!= ResourceType.DOWNLOAD)
+		 if (resource.getResourceType()!= ResourceType.DOWNLOAD)
 		 {
 		 	return "resource/show";
 		 }
 	     else
 		 {
 			 return "download/show";
-		 }*/
+		 }
 	 }
 
 	 /**

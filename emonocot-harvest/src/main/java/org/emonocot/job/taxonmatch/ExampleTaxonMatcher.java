@@ -145,11 +145,6 @@ public class ExampleTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 	}
 
 	@Override
-	public List<Match<Taxon>> match(String name, String scientificNameAuthorship) throws UnparsableException {
-		return null;
-	}
-
-	@Override
 	public List<Match<Taxon>> getMatches(String input) {
 		try {
 			return match(input);
@@ -157,10 +152,5 @@ public class ExampleTaxonMatcher implements TaxonMatcher, Matcher<String, Taxon>
 			logger.error("Couldn't parse the string");
 			return null;
 		}
-	}
-
-	@Override
-	public List<Match<Taxon>> getMatches(String input, String author) {
-		return null;
 	}
 }

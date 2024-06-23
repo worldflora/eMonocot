@@ -117,12 +117,8 @@
                             <a href="${contributeUrl}"><spring:message code="contribute.data"/></a>
                         </li>
                         <li>
-                        <c:url value="/downloadData" var="downloadDataUrl"/>
-                        <a href="${downloadDataUrl}"><spring:message code="download.data"/></a>
-                        </li>
-                        <li>
-                            <a href="https://about.worldfloraonline.org/articles">
-                            <spring:message code="stories"/></a>
+                            <c:url value="/downloadData" var="downloadDataUrl"/>
+                            <a href="${downloadDataUrl}"><spring:message code="download.data"/></a>
                         </li>
                     </ul>
                 </div>

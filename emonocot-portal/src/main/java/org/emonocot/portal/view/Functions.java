@@ -1221,9 +1221,6 @@ public class Functions {
 			case "P":
 				mgName = "Pteridophytes";
 				break;
-			default:
-				mgName = majorGroup;
-				break;
 		}
 		return mgName;
 	}

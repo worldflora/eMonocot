@@ -260,9 +260,7 @@ public class FieldSetMapper extends BaseDataFieldSetMapper<Taxon> {
 					object.getTaxonExternalLinks().setTplID(value);
 					break;
 				case majorGroup:
-					//logger.info("MajorGroup value======= " + value);
 					object.getTaxonExternalLinks().setMajorGroup(value);
-					//logger.info("object.getTaxonExternalLinks().getMajorGroup()=== " + object.getTaxonExternalLinks().getMajorGroup());
 					break;
 				case infraSpecificRank:
 					object.getTaxonExternalLinks().setInfraSpecificRank(value);

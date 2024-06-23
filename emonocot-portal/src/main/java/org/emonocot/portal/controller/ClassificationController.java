@@ -44,7 +44,7 @@ public class ClassificationController {
 	 */
 	private TaxonService taxonService;
 
-	//private IdentificationKeyService identificationKeyService;
+	private IdentificationKeyService identificationKeyService;
 
 	private static final int NUM_CHILDREN=585; //TODO: the number of classifications on classification page.
 
@@ -56,22 +56,22 @@ public class ClassificationController {
 		this.taxonService = service;
 	}
 
-	/*public final IdentificationKeyService getIdentificationKeyService() {
+	public final IdentificationKeyService getIdentificationKeyService() {
 		return identificationKeyService;
 	}
 
 	@Autowired
 	public final void setIdentificationKeyService(final IdentificationKeyService identificationKeyService) {
 		this.identificationKeyService=identificationKeyService;
-	}*/
+	}
 
 	@RequestMapping(value = "/classification" , method = RequestMethod.GET)
 	public final String classification(final Model model){
 		List<Taxon> results = taxonService.loadChildren(null, NUM_CHILDREN, 0, "classification-tree");
 
 		//keys count
-		//List<IdentificationKey> keys = getIdentificationKeyService().list(null, null, null).getRecords();
-		//model.addAttribute("count", keys.size());
+		List<IdentificationKey> keys = getIdentificationKeyService().list(null, null, null).getRecords();
+		model.addAttribute("count", keys.size());
 
 		model.addAttribute("result", results);
 		return "classification";

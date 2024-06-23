@@ -19,16 +19,16 @@
 							value="/css/images/glyphicons/halfsize/glyphicons_044_keys.png"
 							var="keyIconUrl" />
 
-						<!--<c:set var="keyCount" value="${count}" />
+						<c:set var="keyCount" value="${count}" />
 						
-						<c:if test="${not empty keyCount}">-->
+						<c:if test="${not empty keyCount}">
 							<div class="row pull-right">
 								<img src="${keyIconUrl}" class="no-print" alt="KeyLegend" />
 								<div class="span4 pull-right">
 									<spring:message code="keyLegend" />
 								</div>
 							</div>
-						<!--</c:if>-->
+						</c:if>
 
 						<div id="classification" class="jstree-default">&#160;</div>
 						<c:url var="identificationKeyLink" value="/key/" />

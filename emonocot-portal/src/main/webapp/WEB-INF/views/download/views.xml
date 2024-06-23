@@ -9,12 +9,12 @@
     <put-attribute name="pageTitle" value="download_title" cascade="true"/>    
     <put-attribute name="body" value="/WEB-INF/views/download/progress.jspx" />
   </definition>
-<!--  <definition name="download/output" extends="default">
+  <definition name="download/output" extends="default">
     <put-attribute name="pageTitle" value="download_title" cascade="true"/>
     <put-attribute name="body" value="/WEB-INF/views/download/output.jspx" />
-  </definition>-->
-  <!--<definition name="download/show" extends="default">
+  </definition>
+  <definition name="download/show" extends="default">
     <put-attribute name="pageTitle" value="download_title" cascade="true"/>
     <put-attribute name="body" value="/WEB-INF/views/download/show.jspx" />
-  </definition>-->
+  </definition>
 </tiles-definitions>

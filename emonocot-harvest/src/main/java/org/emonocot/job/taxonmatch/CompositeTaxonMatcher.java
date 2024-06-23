@@ -81,9 +81,4 @@ public class CompositeTaxonMatcher implements TaxonMatcher {
 		}
 	}
 
-	@Override
-	public List<Match<Taxon>> match(String name, String scientificNameAuthorship) throws UnparsableException {
-		return null;
-	}
-
 }

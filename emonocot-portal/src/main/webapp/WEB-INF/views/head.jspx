@@ -6,13 +6,13 @@
 	xmlns:spring="http://www.springframework.org/tags">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script src="https://www.googletagmanager.com/gtag/js?id=G-ZPPZDJMM4D" defer="true">/* */</script>
+	<script  src="https://www.googletagmanager.com/gtag/js?id=UA-114340265-1">/* */</script>
 	<script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-		gtag('config', 'G-ZPPZDJMM4D');
-        //gtag('config', 'UA-114340265-1');
+        gtag('config', 'UA-114340265-1');
+        // gtag('config', 'UA-112074979-4');
 	</script>
 
     <script>
@@ -48,12 +48,20 @@
 		<c:otherwise>
 			<title>${em:evaluate(pageTitle,pageContext)}</title>
 		</c:otherwise>
-	</c:choose>
+	</c:choose>		
+<!--	<link rel="alternate icon" href="/css/images/favicon.ico"/>
+	<link rel="icon" type="image/svg+xml" href="/css/images/favicon.svg"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>-->
+
 
 	<link rel="alternate icon" href="/css/images/favicon_shadow.ico"/>
 	<link rel="icon" type="image/svg+xml" href="/css/images/svgs/favicon.svg"/>
-	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" async="true"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>
 
+<!--	<link rel="alternate icon" href="/css/images/favicon_shadow.ico"/>
+	<link rel="icon" type="image/svg+xml" href="/css/images/svgs/favicon.svg"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/style.css"/>-->
+	
 	<!-- TODO - remove once there is no need to support ie9 -->
 	&lt;!--[if lt IE 10]&gt;
 	<link rel="stylesheet" type="text/css" media="all" href="/css/ie9.css"/>
@@ -61,7 +69,7 @@
 	<link rel="stylesheet" type="text/css" media="print" href="/css/print.css"/>
 	
 	
-	<script type="text/javascript" src="/js/header.js" defer="true">/* */</script>
+	<script type="text/javascript" src="/js/header.js">/* */</script>
 	
 
 	<!--<c:if test="${not empty googleAnalyticsId}">-->

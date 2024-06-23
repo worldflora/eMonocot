@@ -37,11 +37,8 @@ import org.emonocot.model.Taxon;
 import org.emonocot.model.TypeAndSpecimen;
 import org.emonocot.model.VernacularName;
 import org.emonocot.model.registry.Organisation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ProvenanceManagerImpl implements ProvenanceManager {
-	private static Logger logger = LoggerFactory.getLogger(ProvenanceManagerImpl.class);
 	SortedSet<Organisation> organisations = new TreeSet<Organisation>();
 
 	Map<String, SortedSet<ProvenanceHolderImpl>> provenance = new HashMap<String,SortedSet<ProvenanceHolderImpl>>();
@@ -115,18 +112,13 @@ public class ProvenanceManagerImpl implements ProvenanceManager {
 		}
 	}
 
-	private void addProvenance(BaseData data) {///check here
-		///	logger.info(" addProvenance data.getAuthority() " + data.getAuthority());
-		if (data.getAuthority()!= null && data.getAuthority().getIdentifier() != null) {
-			///	logger.info(" addProvenance data.getAuthority().getIdentifier() " + data.getAuthority().getIdentifier());
-			if(!provenance.keySet().contains(data.getAuthority().getIdentifier())) {
-				///	logger.info(" addProvenance provenance contains " + data.getAuthority().getIdentifier());
-				organisations.add(data.getAuthority());
-				provenance.put(data.getAuthority().getIdentifier(), new TreeSet<ProvenanceHolderImpl>());
-			}
-
-			provenance.get(data.getAuthority().getIdentifier()).add(new ProvenanceHolderImpl(data));
+	private void addProvenance(BaseData data) {
+		if(!provenance.keySet().contains(data.getAuthority().getIdentifier())) {
+			organisations.add(data.getAuthority());
+			provenance.put(data.getAuthority().getIdentifier(), new TreeSet<ProvenanceHolderImpl>());
 		}
+
+		provenance.get(data.getAuthority().getIdentifier()).add(new ProvenanceHolderImpl(data));
 	}
 
 

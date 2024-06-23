@@ -31,8 +31,6 @@ import org.emonocot.model.Reference;
 import org.emonocot.model.Taxon;
 import org.emonocot.model.Description;
 import org.emonocot.model.compare.ReferenceComparator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -47,29 +45,16 @@ public class SimpleBibliographyImpl implements Bibliography {
 
 	SortedSet<ReferenceWrapper> refs = new TreeSet<ReferenceWrapper>(new ReferenceWrapperComparator());
 
-	private static Logger queryLog = LoggerFactory.getLogger("SimpleBibliographyImpl");
-
 	/**
 	 *
 	 * @param taxon Set the taxon
 	 */
 	public final void setReferences(final Taxon taxon) {
-		//queryLog.info("Entered SimpleBibliographyImpl =========================");
+
 		for(Reference reference : taxon.getReferences()) {
 			if(reference != taxon.getNameAccordingTo())
 			{
 				refs.add(new ReferenceWrapper(reference));
-
-				/*String refIdentifier = reference.getIdentifier().toLowerCase();
-				queryLog.info("SimpleBibliographyImpl: \'{}\'", new Object[] {reference.getIdentifier()});
-				queryLog.info("SimpleBibliographyImpl: \'{}\'", new Object[] {!refIdentifier.contains("literature")});
-				//reference.getIdentifier().contains("literature");
-
-				if (!refIdentifier.contains("taxon-database") && !refIdentifier.contains("name-person")) {
-					queryLog.info("SimpleBibliographyImpl:  adding " + reference.getIdentifier());
-					refs.add(new ReferenceWrapper(reference));
-				}*/
-
 			}
 		}
 		for (Description d : taxon.getDescriptions()) {
@@ -82,12 +67,9 @@ public class SimpleBibliographyImpl implements Bibliography {
 				refs.add(new ReferenceWrapper(reference));
 			}
 		}
-		//queryLog.info("SimpleBibliographyImpl:  refs.size() " + refs.size());
 		for(ReferenceWrapper ref : refs) {
 			references.add(ref.reference);
 		}
-
-		//queryLog.info("SimpleBibliographyImpl: references.size() " + references.size());
 	}
 
 	/**
