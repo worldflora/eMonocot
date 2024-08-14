@@ -1725,36 +1725,28 @@
 								<li><a id="GBIFLink" href="${gbifUrl}" onClick="trackOutboundLink('${gbifUrl}'); return false;">
 									<spring:message code="gbif"/><!--  --></a></li>
 
-				<!--				<c:if test="${not empty taxon.scientificNameID}">
-									<c:url var="ipniUrl" value="http://www.ipni.org/ipni/idPlantNameSearch.do">
-										<c:param name="id" value="${taxon.scientificNameID}"/>
-									</c:url>
-									<li><a id="IPNILink" href="${ipniUrl}" onClick="trackOutboundLink('${ipniUrl}'); return false;">
-										<spring:message code="ipni"/>${taxon.scientificNameID}&lt;!&ndash;  &ndash;&gt;</a></li>
-									&lt;!&ndash;IPNI - http://ipni.org/urn:lsid:ipni.org:names:${taxon.scientificNameID}&ndash;&gt;
-								</c:if>-->
-
 								<c:if test="${(not empty taxon.scientificNameID) and (not empty taxon.taxonExternalLinks.majorGroup)}">
+									<c:set var="bryophytaList" value="${em:getBryophytesList()}"/>
 									<c:choose>
-										<c:set var="bryophytaList" value = "${['Bryophyta','Anthocerotophyta','marchantiophyta']}" />
-										<c:forEach var="item" items="${bryophytaList}">
-											<c:when test="${fn:containsIgnoreCase(taxon.taxonExternalLinks.majorGroup, item)}">
-												<c:url var="tropicosUrl" value="http://www.tropicos.org/Name/${taxon.scientificNameID}">
-												</c:url>
-												<li><a id="tropicosLink" href="${tropicosUrl}" onClick="trackOutboundLink('${tropicosUrl}'); return false;">
-													<spring:message code="tropicos"/>${taxon.scientificNameID}<!--  --></a></li>
-											</c:when>
-										</c:forEach>
-
-										<c:when test="${fn:containsIgnoreCase(taxon.scientificNameID, 'ipni')}">
+										<c:when test="${fn:containsIgnoreCase(taxon.scientificNameID, 'urn:lsid:ipni')}">
 											<c:url var="ipniUrl" value="http://www.ipni.org/ipni/idPlantNameSearch.do">
 												<c:param name="id" value="${taxon.scientificNameID}"/>
 											</c:url>
 											<li><a id="IPNILink" href="${ipniUrl}" onClick="trackOutboundLink('${ipniUrl}'); return false;">
 												<spring:message code="ipni"/>${taxon.scientificNameID}<!--  --></a></li>
-											<!--IPNI - http://ipni.org/urn:lsid:ipni.org:names:${taxon.scientificNameID}-->
-
 										</c:when>
+
+										<c:when test="${fn:containsIgnoreCase(bryophytaList, taxon.taxonExternalLinks.majorGroup)}">
+											<c:forEach var="bryophyte" items="${bryophytaList}">
+												<c:if test="${bryophyte eq fn:toUpperCase(taxon.taxonExternalLinks.majorGroup)}">
+													<c:url var="tropicosUrl" value="http://www.tropicos.org/Name/${taxon.scientificNameID}">
+													</c:url>
+													<li><a id="tropicosLink" href="${tropicosUrl}" onClick="trackOutboundLink('${tropicosUrl}'); return false;">
+													<spring:message code="tropicos"/>${taxon.scientificNameID}<!--  --></a></li>
+												</c:if>
+											</c:forEach>
+										</c:when>
+
 									</c:choose>
 								</c:if>
 

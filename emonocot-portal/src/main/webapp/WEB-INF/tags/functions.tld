@@ -319,6 +319,11 @@
         <function-signature>java.lang.String majorGroupName(java.lang.String)</function-signature>
     </function>
     <function>
+        <name>getBryophytesList</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.List getBryophytesList()</function-signature>
+    </function>
+    <function>
         <name>provenancename</name>
         <function-class>org.emonocot.portal.view.Functions</function-class>
         <function-signature>java.lang.String provenancename(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.registry.Organisation)</function-signature>

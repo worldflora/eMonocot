@@ -1228,6 +1228,10 @@ public class Functions {
 		return mgName;
 	}
 
+	public static List<String> getBryophytesList() {
+		return Arrays.asList("BRYOPHYTA", "ANTHOCEROTOPHYTA", "MARCHANTIOPHYTA");
+	}
+
 	public static String getAncestorsWFOId(Taxon t, String name) {
 		String wfoId = "";
 
