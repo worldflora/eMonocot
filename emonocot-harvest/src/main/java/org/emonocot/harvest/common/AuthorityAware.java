@@ -23,6 +23,9 @@ import org.emonocot.model.constants.AnnotationCode;
 import org.emonocot.model.constants.AnnotationType;
 import org.emonocot.model.constants.RecordType;
 import org.emonocot.model.registry.Organisation;
+import org.emonocot.persistence.dao.hibernate.TaxonDaoImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
@@ -43,6 +46,8 @@ public class AuthorityAware implements StepExecutionListener {
 	 *
 	 */
 	private OrganisationService organisationService;
+
+	private static Logger logger = LoggerFactory.getLogger(AuthorityAware.class);
 	/**
 	 *
 	 */
@@ -69,6 +74,12 @@ public class AuthorityAware implements StepExecutionListener {
 			source = organisationService.load(sourceName);
 		}
 		return source;
+	}
+
+	public final Organisation getSource(String org) {
+		logger.info("Processing getSource resourceId: " + org);
+		return organisationService.load(org);
+		//return source;
 	}
 
 	/**

@@ -16,18 +16,16 @@
  */
 package org.emonocot.job.dwc.read;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import org.emonocot.api.Service;
-import org.emonocot.model.Annotation;
-import org.emonocot.model.BaseData;
-import org.emonocot.model.NonOwned;
-import org.emonocot.model.Taxon;
+import org.emonocot.job.dwc.exception.DarwinCoreProcessingException;
+import org.emonocot.model.*;
 import org.emonocot.model.constants.AnnotationCode;
 import org.emonocot.model.constants.AnnotationType;
 import org.emonocot.model.constants.RecordType;
+import org.emonocot.model.registry.Organisation;
+import org.gbif.ecat.voc.Rank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ChunkListener;
@@ -90,13 +88,18 @@ ChunkListener {
 				doPersist(t);
 				validate(t);
 				bind(t);
-				t.setAuthority(getSource());
+				logger.info("doProcess setAuthority=====");
+				t.setAuthority(getSource());//////uncommented for 500 error
+				//updateReferenceAuthority((Reference)t);////////uncomment for backbone harvest
+
 				Annotation annotation = createAnnotation(t, getRecordType(), AnnotationCode.Create, AnnotationType.Info);
 				t.getAnnotations().add(annotation);
 				logger.info("Adding object " + t.getIdentifier());
 				return t;
 			} else {
-				checkAuthority(getRecordType(), t, persisted.getAuthority());
+				logger.info("doProcess persisted: " + persisted);
+				logger.info("doProcess persisted.getAuthority() : " + persisted.getAuthority());
+				////checkAuthority(getRecordType(), t, persisted.getAuthority());////////uncomment for backbone harvest
 				// We've seen this object before, but not in this chunk
 				if (skipUnmodified && ((persisted.getModified() != null && t.getModified() != null)
 						&& !persisted.getModified().isBefore(t.getModified()))) {
@@ -158,6 +161,7 @@ ChunkListener {
 		}
 	}
 
+
 	protected abstract boolean doFilter(T t);
 
 	protected abstract void doUpdate(T persisted, T t);
@@ -183,5 +187,38 @@ ChunkListener {
 		super.beforeChunk();
 		logger.info("Before Chunk");
 		boundObjects = new HashMap<String, T>();
+	}
+
+	private void updateReferenceAuthority( Reference ref) {
+		Organisation org = getSource();
+
+		if (ref != null && (ref.getIdentifier().toLowerCase().contains("database") || ref.getIdentifier().toLowerCase().contains("person")
+				|| ref.getIdentifier().toLowerCase().contains("literature") || ref.getIdentifier().toLowerCase().contains("specimen")
+		)) {
+		Set<Taxon> taxa = ref.getTaxa();
+		logger.info(" taxa.size()  : " + taxa.size());
+		if (taxa.size() > 0) {
+			List<Taxon> list = new ArrayList<>(taxa);
+			Taxon t = list.get(0);
+			logger.info("list.get(0). Taxon: " + t);
+			String family = t.getFamily();
+			Organisation authority = t.getAuthority();
+			logger.info("list.get(0). family: " + family);
+			logger.info("list.get(0). authority: " + authority);
+			logger.info("Source and family not equal. TaxonId   : " + t.getIdentifier() + "Family: " + t.getFamily());
+			Map<String, Rank> hashMap = new HashMap<>();
+			//hashMap.putAll(Rank.RANK_MARKER_MAP_SUPRAGENERIC);
+			//hashMap.putAll(Rank.RANK_MARKER_MAP_INFRAGENERIC);
+			hashMap.putAll(Rank.RANK_MARKER_MAP);
+			hashMap.remove("fam");
+			if((t.getFamily() != null) && (t.getFamily() != org.getIdentifier()))
+			{
+				logger.info("Source and family not equal   :  " + t.getFamily());
+				org = getSource(t.getFamily());
+			}
+			logger.info("persisted setAuthority   ======");
+			ref.setAuthority(org);
+		}
+	}
 	}
 }

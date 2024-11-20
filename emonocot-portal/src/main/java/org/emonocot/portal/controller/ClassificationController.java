@@ -22,16 +22,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.emonocot.api.IdentificationKeyService;
 import org.emonocot.api.TaxonService;
 import org.emonocot.model.IdentificationKey;
 import org.emonocot.model.Taxon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -45,6 +43,9 @@ public class ClassificationController {
 	 *
 	 */
 	private TaxonService taxonService;
+
+	//private IdentificationKeyService identificationKeyService;
+
 	private static final int NUM_CHILDREN=585; //TODO: the number of classifications on classification page.
 
 	/**
@@ -55,9 +56,23 @@ public class ClassificationController {
 		this.taxonService = service;
 	}
 
+	/*public final IdentificationKeyService getIdentificationKeyService() {
+		return identificationKeyService;
+	}
+
+	@Autowired
+	public final void setIdentificationKeyService(final IdentificationKeyService identificationKeyService) {
+		this.identificationKeyService=identificationKeyService;
+	}*/
+
 	@RequestMapping(value = "/classification" , method = RequestMethod.GET)
 	public final String classification(final Model model){
 		List<Taxon> results = taxonService.loadChildren(null, NUM_CHILDREN, 0, "classification-tree");
+
+		//keys count
+		//List<IdentificationKey> keys = getIdentificationKeyService().list(null, null, null).getRecords();
+		//model.addAttribute("count", keys.size());
+
 		model.addAttribute("result", results);
 		return "classification";
 	}
@@ -121,6 +136,7 @@ public class ClassificationController {
 			data.put("title", taxon.getScientificName());
 			Map<String, Object> dataAttr = new HashMap<String, Object>();
 			dataAttr.put("href", "taxon/" + taxon.getIdentifier());
+			dataAttr.put("target", "_blank");
 			Set<IdentificationKey> keys = taxon.getKeys();
 			if (keys != null && keys.size() > 0) {
 				dataAttr.put("class", "key");
@@ -169,6 +185,7 @@ public class ClassificationController {
 			data.put("title", name);
 			Map<String, String> dataAttr = new HashMap<String, String>();
 			dataAttr.put("href", "taxon/" + identifier);
+			dataAttr.put("target", "_blank");
 			data.put("attr", dataAttr);
 			attr.put("id", identifier);
 		}

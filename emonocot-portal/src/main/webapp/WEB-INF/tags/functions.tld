@@ -64,9 +64,39 @@
         <function-signature>java.lang.String formatRank(org.gbif.ecat.voc.Rank)</function-signature>
     </function>
     <function>
+        <name>preferredContent</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.Collection preferredContent(org.emonocot.model.Taxon,org.emonocot.model.constants.DescriptionType)</function-signature>
+    </function>
+    <function>
+        <name>localContent</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.Collection localContent(org.emonocot.model.Taxon,org.emonocot.model.constants.DescriptionType)</function-signature>
+    </function>
+    <function>
         <name>content</name>
         <function-class>org.emonocot.portal.view.Functions</function-class>
         <function-signature>java.util.Collection content(org.emonocot.model.Taxon,org.emonocot.model.constants.DescriptionType)</function-signature>
+    </function>
+    <function>
+        <name>contentBySource</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.Collection contentBySource(org.emonocot.model.Taxon,org.emonocot.model.registry.Organisation)</function-signature>
+    </function>
+    <function>
+        <name>localContentBySource</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.Collection localContentBySource(org.emonocot.model.Taxon,org.emonocot.model.registry.Organisation)</function-signature>
+    </function>
+    <function>
+        <name>preferredContentBySource</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.Collection preferredContentBySource(org.emonocot.model.Taxon,org.emonocot.model.registry.Organisation)</function-signature>
+    </function>
+    <function>
+        <name>descriptionSources</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.Collection descriptionSources(org.emonocot.model.Taxon)</function-signature>
     </function>
     <function>
         <name>evaluate</name>
@@ -89,9 +119,19 @@
         <function-signature>java.lang.Boolean isPreferred(org.emonocot.model.Taxon)</function-signature>
     </function>
     <function>
-        <name>getCount</name>
+        <name>isPreferredDescription</name>
         <function-class>org.emonocot.portal.view.Functions</function-class>
-        <function-signature>java.lang.int getCount(org.emonocot.model.Taxon)</function-signature>
+        <function-signature>java.lang.Boolean isPreferredDescription(org.emonocot.model.Taxon)</function-signature>
+    </function>
+    <function>
+    <name>getCount</name>
+    <function-class>org.emonocot.portal.view.Functions</function-class>
+    <function-signature>java.lang.int getCount(org.emonocot.model.Taxon)</function-signature>
+</function>
+    <function>
+        <name>getDescriptionsCount</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.int getDescriptionsCount(org.emonocot.model.Taxon)</function-signature>
     </function>
     <function>
         <name>isSynonym</name>
@@ -279,9 +319,19 @@
         <function-signature>java.lang.String majorGroupName(java.lang.String)</function-signature>
     </function>
     <function>
+        <name>getBryophytesList</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.util.List getBryophytesList()</function-signature>
+    </function>
+    <function>
         <name>provenancename</name>
         <function-class>org.emonocot.portal.view.Functions</function-class>
-        <function-signature>java.lang.String provenancename(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.BaseData)</function-signature>
+        <function-signature>java.lang.String provenancename(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.registry.Organisation)</function-signature>
+    </function>
+    <function>
+        <name>provenancename1</name>
+        <function-class>org.emonocot.portal.view.Functions</function-class>
+        <function-signature>java.lang.String provenancename1(org.emonocot.portal.view.provenance.ProvenanceManager, org.emonocot.model.BaseData)</function-signature>
     </function>
     <function>
         <name>initialtokey</name>

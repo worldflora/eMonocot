@@ -32,6 +32,8 @@ import org.emonocot.model.TaxonExternalLinks;
 import org.emonocot.model.constants.AnnotationCode;
 import org.emonocot.model.constants.AnnotationType;
 import org.emonocot.model.constants.RecordType;
+import org.emonocot.model.registry.Organisation;
+import org.gbif.ecat.voc.Rank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.ChunkListener;
@@ -85,8 +87,8 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 		/**
 		 * replace references with persisted objects or new ones
 		 */
-		t.setNameAccordingTo(resolveReference(t.getNameAccordingTo()));
-		t.setNamePublishedIn(resolveReference(t.getNamePublishedIn()));
+//		t.setNameAccordingTo(resolveReference(t.getNameAccordingTo(), t.getAuthority()));
+//		t.setNamePublishedIn(resolveReference(t.getNamePublishedIn(), t.getAuthority()));
 
 		Taxon persisted = getTaxonService().find(t.getIdentifier());
 
@@ -96,9 +98,13 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			validate(t);
 			Annotation annotation = createAnnotation(t, RecordType.Taxon, AnnotationCode.Create, AnnotationType.Info);
 			t.getAnnotations().add(annotation);
-			t.setAuthority(getSource());
+
+			updateAuthority(t);
 			logger.info("Adding taxon " + t);
 
+			t.setNameAccordingTo(resolveReference(t.getNameAccordingTo(), t.getAuthority()));
+			t.setNamePublishedIn(resolveReference(t.getNamePublishedIn(), t.getAuthority()));
+			//logger.info("processor persisted getMajorGroup======: " + t.getTaxonExternalLinks().getMajorGroup());
 			t.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
 			t.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
 			t.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
@@ -113,11 +119,13 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 			createAnnotation(boundTaxa.get(t.getIdentifier()), RecordType.Taxon, AnnotationCode.AlreadyProcessed, AnnotationType.Warn);
 			return null;
 		} else {
+			logger.info("processor persisted: " + persisted);
+			logger.info("processor persisted.getAuthority(): " + persisted.getAuthority());
 			checkAuthority(RecordType.Taxon, t, persisted.getAuthority());
 			if (skipUnmodified
 					&& ((persisted.getModified() != null && t.getModified() != null) && !persisted
 							.getModified().isBefore(t.getModified()))) {
-
+				//logger.info("else processor persisted getMajorGroup======: " + t.getTaxonExternalLinks().getMajorGroup());
 				persisted.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
 				persisted.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
 				persisted.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
@@ -126,7 +134,9 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				persisted.getTaxonExternalLinks().setCcrStatus(t.getTaxonExternalLinks().getCcrStatus());
 				persisted.getTaxonExternalLinks().setGenusHybridMarker(t.getTaxonExternalLinks().getGenusHybridMarker());
 
-				bindTaxon(persisted);
+				//bindTaxon(persisted);
+				bindRelationships(t, persisted);
+			//	logger.info("Overwriting taxon getParentNameUsage after bindTaxon $$$" + persisted.getParentNameUsage());
 				replaceAnnotation(persisted, AnnotationType.Info,
 						AnnotationCode.Skipped);
 			} else {
@@ -169,11 +179,16 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				//persisted.setTaxonRank(t.getTaxonRank());
 	     		persisted.setVerbatimTaxonRank(t.getVerbatimTaxonRank());
 				persisted.setUri(t.getUri());
+				updateAuthority(persisted);
+
+				persisted.setNameAccordingTo(resolveReference(t.getNameAccordingTo(), t.getAuthority()));
+				persisted.setNamePublishedIn(resolveReference(t.getNamePublishedIn(), t.getAuthority()));
 
 				if(persisted.getTaxonExternalLinks() == null) {
 					taxonExternalLinks = new TaxonExternalLinks();
 					persisted.setTaxonExternalLinks(taxonExternalLinks);
 				}
+				//logger.info("processor persisted getMajorGroup======-------------: " + t.getTaxonExternalLinks().getMajorGroup());
 				persisted.getTaxonExternalLinks().setLocalID(t.getTaxonExternalLinks().getLocalID());
 				persisted.getTaxonExternalLinks().setTplID(t.getTaxonExternalLinks().getTplID());
 				persisted.getTaxonExternalLinks().setMajorGroup(t.getTaxonExternalLinks().getMajorGroup());
@@ -197,10 +212,28 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				replaceAnnotation(persisted, AnnotationType.Info,
 						AnnotationCode.Update);
 			}
+			//logger.info("final processor persisted getMajorGroup======: " + persisted.getTaxonExternalLinks().getMajorGroup());
 			logger.info("Overwriting taxon " + persisted);
 			return persisted;
 
 		}
+	}
+
+	private void updateAuthority(Taxon t) {
+		Map<String, Rank> hashMap = new HashMap<>();
+		//hashMap.putAll(Rank.RANK_MARKER_MAP_SUPRAGENERIC);
+		//hashMap.putAll(Rank.RANK_MARKER_MAP_INFRAGENERIC);
+		hashMap.putAll(Rank.RANK_MARKER_MAP);
+		hashMap.remove("fam");
+		Organisation org = getSource();
+		//t.getFamily() != null
+		if((t.getFamily() != null && t.getFamily() != "") && (t.getFamily() != org.getIdentifier()) && (hashMap.containsValue(t.getTaxonRank())))
+		{
+			logger.info("Source and family not equal " + t.getFamily());
+			org = getSource(t.getFamily());
+		}
+		logger.info("persisted setAuthority=====");
+		t.setAuthority(org);
 	}
 
 	private void bindTaxon(Taxon persisted) {
@@ -246,6 +279,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 				Annotation annotation = createAnnotation(taxon, RecordType.Taxon,
 						AnnotationCode.Create, AnnotationType.Info);
 				taxon.getAnnotations().add(annotation);
+				logger.info("resolveTaxon setAuthority=====");
 				taxon.setAuthority(getSource());
 				taxon.setIdentifier(identifier);
 				taxon.setScientificName(scientificName);
@@ -266,7 +300,7 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 	 * @param value
 	 *            the source of the reference to resolve
 	 */
-	private Reference resolveReference(Reference reference) {
+	private Reference resolveReference(Reference reference, Organisation org) {
 		if (reference == null) {
 			return null;
 		} else {
@@ -286,7 +320,8 @@ public class Processor extends DarwinCoreProcessor<Taxon> implements ChunkListen
 								RecordType.Reference, AnnotationCode.Create,
 								AnnotationType.Info);
 						r.getAnnotations().add(annotation);
-						r.setAuthority(getSource());
+						logger.info("resolveReference setAuthority=====");
+						r.setAuthority(org);
 					}
 					boundReferences.put(identifier, r);
 					return r;

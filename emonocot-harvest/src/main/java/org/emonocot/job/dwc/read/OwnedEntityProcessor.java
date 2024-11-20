@@ -60,7 +60,8 @@ public abstract class OwnedEntityProcessor<T extends OwnedEntity, SERVICE extend
 			}
 
 			if (persisted != null) {
-
+				logger.info("doProcess persisted:: " + persisted);
+				logger.info("doProcess persisted.getAuthority(): " + persisted.getAuthority());
 				checkAuthority(getRecordType(), t, persisted.getAuthority());
 
 				if (skipUnmodified && ((persisted.getModified() != null && t.getModified() != null) && !persisted
@@ -92,6 +93,7 @@ public abstract class OwnedEntityProcessor<T extends OwnedEntity, SERVICE extend
 				Annotation annotation = createAnnotation(t, getRecordType(),
 						AnnotationCode.Create, AnnotationType.Info);
 				t.getAnnotations().add(annotation);
+				logger.info("ownedEntityProcessor doProcess setAuthority=====");
 				t.setAuthority(getSource());
 				return t;
 			}

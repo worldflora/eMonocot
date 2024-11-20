@@ -72,6 +72,7 @@ public class IndexController {
 			responseFacets.add("base.class_s");
 			Page<SearchableObject> stats = searchableObjectService.search("", null, 1, 0, responseFacets.toArray(new String[1]), null, null, null, null);
 			uiModel.addAttribute("stats", stats);
+
 			String query = "taxon.descriptions_not_empty_b:true";
 			Long descriptionsCount = solrQueryService.getResultsCount(query);
 			uiModel.addAttribute("descriptionsCount", descriptionsCount);
@@ -79,6 +80,7 @@ public class IndexController {
 			String distributionQuery = "taxon.distribution_not_empty_b:true";
 			Long distributionCount = solrQueryService.getResultsCount(distributionQuery);
 			uiModel.addAttribute("distributionCount", distributionCount);
+
 			String referencesQuery = "taxon.references_not_empty_b:true";
 			Long referencesCount = solrQueryService.getResultsCount(referencesQuery);
 			uiModel.addAttribute("referencesCount", referencesCount);
@@ -87,6 +89,12 @@ public class IndexController {
 			String acceptedSpeciesQuery = "taxon.taxonomic_status_s:Accepted";
 			Long acceptedSpeciesCount = solrQueryService.getResultsCount(queryString, acceptedSpeciesQuery);
 			uiModel.addAttribute("acceptedSpeciesCount", acceptedSpeciesCount);
+
+			String contentNamesQueryString = "(taxon.descriptions_not_empty_b:true OR taxon.distribution_not_empty_b:true OR taxon.images_not_empty_b:true OR taxon.references_not_empty_b:true)";
+			//String contentFilterQuery = "(taxon.descriptions_not_empty_b%3Atrue%20OR%20taxon.distribution_not_empty_b%3Atrue%20OR%20taxon.images_not_empty_b%3Atrue%20OR%20taxon.references_not_empty_b%3Atrue)";//condition
+			//String contentFilterQuery = "(taxon.descriptions_not_empty_b:true OR taxon.distribution_not_empty_b:true OR taxon.images_not_empty_b:true OR taxon.references_not_empty_b:true)";//condition
+			Long contentNamesCount = solrQueryService.getResultsCount(contentNamesQueryString);
+			uiModel.addAttribute("contentNamesCount", contentNamesCount);
 
 
 		} catch (SolrServerException sse) {

@@ -367,7 +367,7 @@ public class DownloadController {
 		return jobExecutionInfo;
 	}
 
-	@RequestMapping(value = "/{downloadId}", method = RequestMethod.GET, produces = "text/html", params = {"!form"})
+/*	@RequestMapping(value = "/{downloadId}", method = RequestMethod.GET, produces = "text/html", params = {"!form"})
 	public String show(@PathVariable Long downloadId, Model uiModel) {
 		Resource resource = resourceService.load(downloadId,"job-with-source");
 //		Resource resource1 = resourceService.load(downloadId);
@@ -375,7 +375,7 @@ public class DownloadController {
 		uiModel.addAttribute("resource", resource);
 		uiModel.addAttribute("query", resource.getParameters().get("download.query"));
 		return "download/show";
-	}
+	}*/
 
 	@RequestMapping(value = "/phylo", params = {"!format"}, method = RequestMethod.GET, produces = {"text/html", "*/*"})
 	public String getDownloadPage(@RequestParam(value = "id", required = true) Long id, Model model) {

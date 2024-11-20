@@ -25,11 +25,12 @@
 			  
 	<nav class="footer-nav">
 		<div class="social">
+			<!--<a href="#" id="dummy">Dummy</a>-->
+			<a href="https://www.instagram.com/worldfloraonline/" target="_blank" style="display:none">
+				<img src="/css/images/svgs/instagram_rev.svg" />
+			</a>
 			<a href="https://twitter.com/TheWorldFlora" target="_blank">
 				<img src="/css/images/svgs/twitter_rev.svg" />				
-			</a>
-			<a href="https://www.instagram.com/worldfloraonline/" target="_blank">
-				<img src="/css/images/svgs/instagram_rev.svg" />
 			</a>
 			<a href="https://www.facebook.com/WorldFloraOnline" target="_blank">
 				<img src="/css/images/svgs/facebook_rev.svg" />
@@ -89,9 +90,6 @@
 				by Nye Hughes</a>
 		</p> -->
 	</div>
-	<ul class="footerColumn span3">
-		
-	</ul>
 	<div>
 	
 	</div>

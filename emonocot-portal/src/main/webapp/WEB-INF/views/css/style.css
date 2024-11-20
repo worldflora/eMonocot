@@ -11160,7 +11160,7 @@ li.subordinateBoxList {
 /* Subnav */
 .subnav {
   width: 100%;
-  height: 36px;
+  /*height: 36px;*/
   background-color: #eeeeee;
   /* Old browsers */
 
