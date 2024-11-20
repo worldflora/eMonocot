@@ -69,11 +69,11 @@
                                             <td>
                                                 <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/WFO_Backbone.zip">World Flora Online Taxonomic Backbone</a>
                                             </td>
-                                            <td>108MB</td>
-                                            <td>v.2023.12</td>
-                                            <td>Dec. 22, 2023</td>
+                                            <td>118MB</td>
+                                            <td>v.2024.06</td>
+                                            <td>Jun. 22, 2024</td>
                                             <td>(DwCA) Taxonomic classification.</td>
-                                            <td><a href="https://doi.org/10.5281/zenodo.10425161">10.5281/zenodo.10425161</a></td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.12171908">10.5281/zenodo.12171908</a></td>
                                         </tr>
                                         </thead>
                                     </table>
@@ -112,6 +112,17 @@
                                         </thead>
                                         <tbody>
                                         <!--<tr>included-->
+
+                                        <tr>
+                                            <td>
+                                                <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.2.1_20241001.zip">World Flora Online Taxonomic Backbone</a>
+                                            </td>
+                                            <td>108MB</td>
+                                            <td>v.2023.12</td>
+                                            <td>Dec. 22, 2023</td>
+                                            <td>(DwCA) Taxonomic classification.</td>
+                                            <td><a href="https://doi.org/10.5281/zenodo.10425161">10.5281/zenodo.10425161</a></td>
+                                        </tr>
                                         <tr>
                                             <td>
                                                 <a href="https://files.worldfloraonline.org/files/WFO_Backbone/_WFOCompleteBackbone/archive/WFOTaxonomicBackbone_v.2.1_20240309.zip">WFO Taxonomic Backbone (20231222)</a>
