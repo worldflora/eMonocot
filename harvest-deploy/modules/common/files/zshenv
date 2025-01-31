@@ -1,0 +1,11 @@
+# ~/.zshenv
+#
+# environment variables for zsh
+
+# Start of $PATH
+for d in ~/bin; do
+	if [[ -d $d ]]; then
+		PATH=$d:$PATH
+	fi
+done
+export PATH

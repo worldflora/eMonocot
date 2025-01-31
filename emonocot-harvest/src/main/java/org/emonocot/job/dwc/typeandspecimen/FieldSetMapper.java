@@ -50,6 +50,7 @@ public class FieldSetMapper extends  NonOwnedFieldSetMapper<TypeAndSpecimen> {
 	private Logger logger = LoggerFactory.getLogger(FieldSetMapper.class);
 
 
+	//add specimen count on Home page
 	@Override
 	public final void mapField(final TypeAndSpecimen object, final String fieldName,
 			final String value) throws BindException {
