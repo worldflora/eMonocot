@@ -1,0 +1,29 @@
+# vi: set ft=ruby :
+
+# Vagrantfile for the World Flora Portal.
+
+# 2 represents Vagrant 1.1+ configuration
+Vagrant.configure("2") do |config|
+
+    config.vm.box = "ubuntu/trusty64"
+    config.vm.host_name = "localhost"
+    config.vm.network "forwarded_port", guest: 80, host: 10080
+    config.vm.network "forwarded_port", guest: 8080, host: 18080
+    config.vm.network "forwarded_port", guest: 3306, host: 13306
+    config.vm.network "forwarded_port", guest: 8983, host: 18983
+
+
+    config.vm.provider :virtualbox do |v|
+      # --natdnshostresolver1 may only be needed for OSX but leaving it in
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 4096]
+      v.customize ["modifyvm", :id, "--name", "localhost"]
+    end
+
+    config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file  = "wf-singleton.pp"
+      puppet.options = "--color=true"
+    end
+end
