@@ -217,8 +217,9 @@
 			if(feature.cluster[0].attributes.locality !== undefined &amp;&amp; feature.cluster[0].attributes.locality != "") {
 				contents += "<dt>Locality:</dt><dd>" + feature.cluster[0].attributes.locality + "</dd>";
 		    }
-		    
-			contents += "<dt>&lt;a href='" + feature.cluster[0].attributes.source + "'&gt;Source Link&lt;/a&gt;</dt></dl>"
+
+<!--	contents += "<dt>&lt;a href='" + feature.cluster[0].attributes.source + "'&gt;Source Link&lt;/a&gt;</dt></dl>"-->
+	"</dl>"
 			popup = new OpenLayers.Popup.FramedCloud(
 				"specimenPopup",
 				feature.geometry.getBounds().getCenterLonLat(),
