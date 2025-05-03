@@ -129,6 +129,9 @@ public class CommentServiceImpl extends SearchableServiceImpl<Comment, CommentDa
 			for(BaseData datum : ((Taxon) baseData).getVernacularNames()) {
 				destinations.addAll(datum.getAuthority().getCommentDestinations());
 			}
+			for(BaseData datum : ((Taxon) baseData).getKeys()) {
+				destinations.addAll(datum.getAuthority().getCommentDestinations());
+			}
 		} else if (baseData instanceof NonOwned) {
 			for(Taxon t : ((NonOwned) baseData).getTaxa()) {
 				destinations.addAll(t.getAuthority().getCommentDestinations());

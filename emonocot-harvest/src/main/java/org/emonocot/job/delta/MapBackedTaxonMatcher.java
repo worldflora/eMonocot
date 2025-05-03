@@ -25,6 +25,7 @@ import org.emonocot.api.match.Match;
 import org.emonocot.api.match.MatchStatus;
 import org.emonocot.api.match.taxon.TaxonMatcher;
 import org.emonocot.model.Taxon;
+import org.gbif.ecat.parser.UnparsableException;
 import org.springframework.batch.item.ItemWriter;
 
 public class MapBackedTaxonMatcher implements TaxonMatcher, ItemWriter<Taxon> {
@@ -44,6 +45,11 @@ public class MapBackedTaxonMatcher implements TaxonMatcher, ItemWriter<Taxon> {
 			matches.add(match);
 		}
 		return matches;
+	}
+
+	@Override
+	public List<Match<Taxon>> match(String name, String scientificNameAuthorship) throws UnparsableException {
+		return null;
 	}
 
 	@Override

@@ -190,6 +190,7 @@
 				<div class="modal-body">
 					<div class="modal-image"><!--  --></div>
 					<div class="carousel-caption modal-title">
+						<label style="text-align:center">Press ESC to exit</label>
 						<label id="clickMe" class="pull-right">Hide details</label>
 						<ul id="textBox" class="unstyled" style="text-align:left;">
 							<li>

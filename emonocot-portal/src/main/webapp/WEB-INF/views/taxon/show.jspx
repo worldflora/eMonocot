@@ -14,8 +14,8 @@
 	<spring:message code="distribution.map" var="messageDistribution"/>
 	<tags:pageheader>
 		<h2 id="page-title">
-			<!--		<a href="#WFOID" title="World Flora Online ID" rel="tooltip"></a>-->
-			<a href= "http://www.worldfloraonline.org/taxon/${taxon.identifier}"><b class="WFOID">${taxon.identifier}</b></a><br></br>
+
+			<a href= "https://list.worldfloraonline.org/${taxon.identifier}"><b class="WFOID">${taxon.identifier}</b></a><br></br>
 
 			<tags:feedbackLink selector="option:contains(${taxon.scientificName} ${taxon.scientificNameAuthorship})" dataName="${taxon.scientificName}" />
 			<i class="glyphicons-icon leaf"><!--  --></i> <em class="taxonName" itemprop="scientificName">${taxon.scientificName}</em>&#160;<span itemprop="scientificNameAuthorship">${taxon.scientificNameAuthorship}</span>
@@ -141,7 +141,7 @@
 												</p>
 											</c:when>
 											<c:when test="${em:isSynonym(taxon) and taxon.acceptedNameUsage == null}">
-                                                							<p>
+												<p>
 													<spring:message code="isNotAcceptedBy" />
 													<c:url var="organisationUrl" value="/organisation/${taxon.authority.identifier}" />
 													<a href="${organisationUrl}">${taxon.authority.title}
@@ -213,16 +213,16 @@
 													reports it as a misapplied
 													name</c:when>
 
-<!--												<c:when test="${taxon.taxonomicStatus == 'Synonym'}">reports it as a-->
-<!--													synonym-->
-<!--												</c:when>-->
+												<!--												<c:when test="${taxon.taxonomicStatus == 'Synonym'}">reports it as a-->
+												<!--													synonym-->
+												<!--												</c:when>-->
 
 												<c:when test="${taxon.taxonomicStatus == 'Synonym' and taxon.acceptedNameUsage != null}">
 													reports it as a synonym of
-														<c:url var="acceptedUrl" value="/taxon/${taxon.acceptedNameUsage.identifier}" />
-														<a href="${acceptedUrl}">${taxon.acceptedNameUsage.scientificName}
-															${taxon.acceptedNameUsage.scientificNameAuthorship}
-														</a>
+													<c:url var="acceptedUrl" value="/taxon/${taxon.acceptedNameUsage.identifier}" />
+													<a href="${acceptedUrl}">${taxon.acceptedNameUsage.scientificName}
+														${taxon.acceptedNameUsage.scientificNameAuthorship}
+													</a>
 												</c:when>
 												<c:otherwise>reports it as a ${taxon.taxonomicStatus} name</c:otherwise>
 											</c:choose>
@@ -305,8 +305,24 @@
 							<li><a  href="#images"><spring:message code="images" /></a></li>
 						</c:if>
 						<c:if test="${not empty taxon.descriptions}">
-							<li><a  href="#description"><spring:message code="description" /></a></li>
+							<c:set var="count" value="${em:getDescriptionsCount(taxon)}" />
+							<c:if test= "${count == 1 || count== 0}">
+								<c:set var="isTrue" value="${em:isPreferredDescription(taxon)}" />
+								<c:choose>
+									<c:when test = "${isTrue == true}">
+										<li><a  href="#preferred"><spring:message code="preferred" /></a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a  href="#local"><spring:message code="local" /></a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+							<c:if test= "${count == 2}">
+								<li><a  href="#preferred"><spring:message code="preferred" /></a></li>
+								<li><a  href="#local"><spring:message code="local" /></a></li>
+							</c:if>
 						</c:if>
+
 						<c:if test="${not empty taxon.distribution}">
 							<li><a  href="#distributionMap"><spring:message code="distributionMap" /></a></li>
 						</c:if>
@@ -440,6 +456,7 @@
 			<div class="modal-body">
 				<div class="modal-image"><!--  --></div>
 				<div class="carousel-caption modal-title">
+					<label style="text-align:center">Press ESC to exit</label>
 					<label id="clickMe" class="pull-right">Hide details</label>
 					<ul id="textBox" class="unstyled" style="text-align:left;">
 						<li>
@@ -483,45 +500,66 @@
 		<div class="row">
 			<div class="span8">
 				<c:if test="${not empty taxon.descriptions}">
-					<section id="description" class="section-box">
-						<c:forEach var="feature" items="${em:features()}">
-							<c:set var="descriptions" value="${em:content(taxon,feature)}" />
-							<c:if test="${not empty descriptions}">
-								<div class="inner">
-									<div id="${feature}" class="box">
-										<spring:message code="${feature}" var="featureHeader"/>
-										<h2>
-											<span>${featureHeader}</span>
-											<tags:feedbackLink selector="option:contains(${featureHeader})" dataName="${featureHeader}" />
-										</h2>
-										<c:forEach var="description" items="${descriptions}">
-											<div class="description-with-citations">
-												<p class="justified">${description.description}</p>
-												<li style="list-style: none;  margin: 0px;  float: right; color: #888;">
-													<c:set var="provenancekey" value="${em:provenancekey(provenance, description)}"/>
-													<c:set var="provenancename" value="${em:provenancename(provenance, description)}"/>
-													<spring:message code="citation.provenance" arguments="${provenancekey}|${provenancekey}|${provenancekey}|${provenancename}" argumentSeparator="|"/>
-												</li>
-												<ul class="citations">
-													<c:if test="${not empty description.references}">
-														<spring:message code="citation.source"/>
+					<div class="inner" style="padding-bottom: 19px !important;">
+						<!--						<div class="box clearfix">-->
+						<c:set var="count" value="${em:getDescriptionsCount(taxon)}"/>
+						<c:if test="${count == 1 || count== 0}">
+							<c:set var="isTrue" value="${em:isPreferredDescription(taxon)}"/>
+							<c:choose>
+								<c:when test="${isTrue == true}">
+									<details open="true" >
+										<summary>
+											<h4 style="display:inline-block;"><spring:message code="preferred"
+																							  var="descriptionHeader"/>${descriptionHeader}
+											</h4></summary>
+										<!--<tags:feedbackLink selector="option:contains(${descriptionHeader})"
+                                                           dataName="${descriptionHeader}"/>-->
 
-														<c:forEach var="reference" items="${description.references}">
-															<li>
-																<c:set var="citationKey" value="${em:citekey(bibliography, reference)}"/>
-																<a href="#citation${citationKey}">${citationKey}</a>
-															</li>
-														</c:forEach>
-														<spring:message code="]."/>&#160;
-													</c:if>
-												</ul>
-											</div>
-										</c:forEach>
-									</div>
-								</div>
-							</c:if>
-						</c:forEach>
-					</section>
+										<p>
+											<tags:preferredDescriptions taxon="${taxon}"/>
+										</p>
+									</details>
+								</c:when>
+
+								<c:otherwise>
+									<details open="true">
+										<summary>
+											<h4 style="display:inline-block;"><spring:message code="local"
+																							  var="descriptionHeader"/>${descriptionHeader}</h4>
+										</summary>
+										<p>
+											<tags:localDescriptions taxon="${taxon}"/>
+										</p>
+									</details>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+
+						<c:if test="${count == 2}">
+
+							<details open="true" >
+								<summary>
+									<h4 style="display:inline-block;"><spring:message code="preferred"
+																					  var="descriptionHeader"/>${descriptionHeader}
+									</h4></summary>
+								<!--<tags:feedbackLink selector="option:contains(${descriptionHeader})"
+												   dataName="${descriptionHeader}"/>-->
+
+								<p>
+									<tags:preferredDescriptions taxon="${taxon}"/>
+								</p>
+							</details>
+							<details>
+								<summary>
+									<h4 style="display:inline-block;"><spring:message code="local"
+												var="descriptionHeader"/>${descriptionHeader}</h4>
+								</summary>
+									<p> <tags:localDescriptions taxon="${taxon}"/>
+									</p>
+							</details>
+						</c:if>
+						<!--						</div>-->
+					</div>
 				</c:if>
 
 				<c:if test="${not empty taxon.distribution}">
@@ -531,46 +569,56 @@
 							<div class="box clearfix">
 								<h2>
 									<i class="glyphicons-icon globe"><!--  --></i> ${messageDistribution}
-									<tags:feedbackLink selector="option:contains(${messageDistribution})" dataName="${messageDistribution}" />
+									<tags:feedbackLink selector="option:contains(${messageDistribution})"
+													   dataName="${messageDistribution}"/>
 								</h2>
 								<c:set var="hasNativeDistribution" value="false"/>
 								<c:set var="hasIntroducedDistribution" value="false"/>
 								<div id="map-wrapper">
-									<geo:map bounds="${em:boundingBox(taxon,present)}"	mapClass="taxon-page-map">
+									<geo:map bounds="${em:boundingBox(taxon,present)}" mapClass="taxon-page-map">
 										<c:if test="${em:hasLevel1Features(taxon,present,nativ)}">
 											<c:set var="hasNativeDistribution" value="true"/>
-											<geo:layer name="level1_native" layer="tdwg:level1" style="eMonocot1_native" featureId="${em:getLevel1Features(taxon,present,nativ)}" />
+											<geo:layer name="level1_native" layer="tdwg:level1" style="eMonocot1_native"
+													   featureId="${em:getLevel1Features(taxon,present,nativ)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel1Features(taxon,present,introduced)}">
 											<c:set var="hasIntroducedDistribution" value="true"/>
-											<geo:layer name="level1_introduced" layer="tdwg:level1" style="eMonocot1_introduced" featureId="${em:getLevel1Features(taxon,present,introduced)}" />
+											<geo:layer name="level1_introduced" layer="tdwg:level1" style="eMonocot1_introduced"
+													   featureId="${em:getLevel1Features(taxon,present,introduced)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel2Features(taxon,present,nativ)}">
 											<c:set var="hasNativeDistribution" value="true"/>
-											<geo:layer name="level2_native" layer="tdwg:level2" style="eMonocot2_native" featureId="${em:getLevel2Features(taxon,present,nativ)}" />
+											<geo:layer name="level2_native" layer="tdwg:level2" style="eMonocot2_native"
+													   featureId="${em:getLevel2Features(taxon,present,nativ)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel2Features(taxon,present,introduced)}">
 											<c:set var="hasIntroducedDistribution" value="true"/>
-											<geo:layer name="level2_introduced" layer="tdwg:level2" style="eMonocot2_introduced" featureId="${em:getLevel2Features(taxon,present,introduced)}" />
+											<geo:layer name="level2_introduced" layer="tdwg:level2" style="eMonocot2_introduced"
+													   featureId="${em:getLevel2Features(taxon,present,introduced)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel3Features(taxon,present,nativ)}">
 											<c:set var="hasNativeDistribution" value="true"/>
-											<geo:layer name="level3_native" layer="tdwg:level3" style="eMonocot3_native" featureId="${em:getLevel3Features(taxon,present,nativ)}" />
+											<geo:layer name="level3_native" layer="tdwg:level3" style="eMonocot3_native"
+													   featureId="${em:getLevel3Features(taxon,present,nativ)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel3Features(taxon,present,introduced)}">
 											<c:set var="hasIntroducedDistribution" value="true"/>
-											<geo:layer name="level3_introduced" layer="tdwg:level3" style="eMonocot3_introduced" featureId="${em:getLevel3Features(taxon,present,introduced)}" />
+											<geo:layer name="level3_introduced" layer="tdwg:level3" style="eMonocot3_introduced"
+													   featureId="${em:getLevel3Features(taxon,present,introduced)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel4Features(taxon,present,nativ)}">
 											<c:set var="hasNativeDistribution" value="true"/>
-											<geo:layer name="level4_native" layer="tdwg:level4" style="eMonocot4_native" featureId="${em:getLevel4Features(taxon,present,nativ)}" />
+											<geo:layer name="level4_native" layer="tdwg:level4" style="eMonocot4_native"
+													   featureId="${em:getLevel4Features(taxon,present,nativ)}"/>
 										</c:if>
 										<c:if test="${em:hasLevel4Features(taxon,present,introduced)}">
 											<c:set var="hasIntroducedDistribution" value="true"/>
-											<geo:layer name="level4_introduced" layer="tdwg:level4" style="eMonocot4_introduced" featureId="${em:getLevel4Features(taxon,present,introduced)}" />
+											<geo:layer name="level4_introduced" layer="tdwg:level4" style="eMonocot4_introduced"
+													   featureId="${em:getLevel4Features(taxon,present,introduced)}"/>
 										</c:if>
 										<c:if test="${not empty taxon.typesAndSpecimens}">
-											<geo:vector_layer typesAndSpecimens="${taxon.typesAndSpecimens}" name="typesAndSpecimens" />
+											<geo:vector_layer typesAndSpecimens="${taxon.typesAndSpecimens}"
+															  name="typesAndSpecimens"/>
 										</c:if>
 									</geo:map>
 								</div>
@@ -579,10 +627,16 @@
 										<div class="span7">
 											<ul id="distribution-map-key">
 												<c:if test="${hasNativeDistribution}">
-													<li><div class="distribution-map-key" style="background-color: #6F9449"><!--  --></div><spring:message code="native.distribution"/></li>
+													<li>
+														<div class="distribution-map-key"
+															 style="background-color: #6F9449"><!--  --></div>
+														<spring:message code="native.distribution"/></li>
 												</c:if>
 												<c:if test="${hasIntroducedDistribution}">
-													<li><div class="distribution-map-key" style="background-color: #9A9261"><!--  --></div><spring:message code="introduced.distribution"/></li>
+													<li>
+														<div class="distribution-map-key"
+															 style="background-color: #9A9261"><!--  --></div>
+														<spring:message code="introduced.distribution"/></li>
 												</c:if>
 											</ul>
 										</div>
@@ -591,10 +645,11 @@
 								<c:if test="${not empty taxon.typesAndSpecimens}">
 									<div class="row">
 										<div class="span7">
-											<span><spring:message code="specimenMessage" /></span>
+											<span><spring:message code="specimenMessage"/></span>
 											<ul class="citations">
 												<spring:message code="citation.providedby"/>
-												<c:forEach var="provenanceHolder" items="${em:provenanceinitials(provenance,taxon.typesAndSpecimens)}">
+												<c:forEach var="provenanceHolder"
+														   items="${em:provenanceinitials(provenance,taxon.typesAndSpecimens)}">
 													<li>
 														<a href="#${em:initialtokey(provenanceHolder)}">${provenanceHolder}</a>
 													</li>
@@ -609,8 +664,11 @@
 											<h5><spring:message code="present.native"/></h5>
 											<ul class="distribution-textual">
 												<c:set var="previousDistribution" value="${null}"/>
-												<c:forEach var="distribution" items="${em:getDistribution(taxon,present,nativ)}">
-													<li><tags:distribution distribution="${distribution}" occurrenceStatus="Present" previousDistribution="${previousDistribution}"/></li>
+												<c:forEach var="distribution"
+														   items="${em:getDistribution(taxon,present,nativ)}">
+													<li><tags:distribution distribution="${distribution}"
+																		   occurrenceStatus="Present"
+																		   previousDistribution="${previousDistribution}"/></li>
 													<c:set var="previousDistribution" value="${distribution}"/>
 												</c:forEach>
 											</ul>
@@ -623,8 +681,11 @@
 											<h5><spring:message code="present.introduced"/></h5>
 											<ul class="distribution-textual">
 												<c:set var="previousDistribution" value="${null}"/>
-												<c:forEach var="distribution" items="${em:getDistribution(taxon,present,introduced)}">
-													<li><tags:distribution distribution="${distribution}" occurrenceStatus="Present" previousDistribution="${previousDistribution}"/></li>
+												<c:forEach var="distribution"
+														   items="${em:getDistribution(taxon,present,introduced)}">
+													<li><tags:distribution distribution="${distribution}"
+																		   occurrenceStatus="Present"
+																		   previousDistribution="${previousDistribution}"/></li>
 													<c:set var="previousDistribution" value="${distribution}"/>
 												</c:forEach>
 											</ul>
@@ -638,7 +699,9 @@
 											<ul class="distribution-textual">
 												<c:set var="previousDistribution" value="${null}"/>
 												<c:forEach var="distribution" items="${em:getDistribution(taxon,absent,nativ)}">
-													<li><tags:distribution distribution="${distribution}" occurrenceStatus="Absent" previousDistribution="${previousDistribution}"/></li>
+													<li><tags:distribution distribution="${distribution}"
+																		   occurrenceStatus="Absent"
+																		   previousDistribution="${previousDistribution}"/></li>
 													<c:set var="previousDistribution" value="${distribution}"/>
 												</c:forEach>
 											</ul>
@@ -647,7 +710,8 @@
 								</div>
 								<ul class="citations">
 									<spring:message code="citation.providedby"/>
-									<c:forEach var="provenanceHolder" items="${em:provenanceinitials(provenance,taxon.distribution)}">
+									<c:forEach var="provenanceHolder"
+											   items="${em:provenanceinitials(provenance,taxon.distribution)}">
 										<li>
 											<a href="#${em:initialtokey(provenanceHolder)}">${provenanceHolder}</a>
 										</li>
@@ -669,19 +733,22 @@
 							<div class="box clearfix">
 								<h2>
 									${childrenHeader}${childrenRank}
-									<tags:feedbackLink selector="option:contains(${childrenHeader})" dataName="${childrenHeader}" />
+									<tags:feedbackLink selector="option:contains(${childrenHeader})"
+													   dataName="${childrenHeader}"/>
 								</h2>
 								<ul class="unstyled">
 									<c:forEach var="child" items="${em:sort(taxon.childNameUsages)}">
 										<li>
 											<c:url value="/taxon/${child.identifier}" var="childUrl"/>
-											<a href="${childUrl}"><em>${child.scientificName}</em> ${child.scientificNameAuthorship}</a>
+											<a href="${childUrl}"><em>${child.scientificName}</em> ${child.scientificNameAuthorship}
+											</a>
 										</li>
 									</c:forEach>
 								</ul>
 								<ul class="citations">
 									<spring:message code="citation.providedby"/>
-									<c:forEach var="provenanceHolder" items="${em:provenanceinitials(provenance,taxon.childNameUsages)}">
+									<c:forEach var="provenanceHolder"
+											   items="${em:provenanceinitials(provenance,taxon.childNameUsages)}">
 										<li>
 											<a href="#${em:initialtokey(provenanceHolder)}">${provenanceHolder}</a>
 										</li>
@@ -696,9 +763,9 @@
 						<div class="inner">
 							<div class="box clearfix">
 
-								<c:set var="homocount" value="${em:getHomotypicSynonymsCount(taxon)}" />
-								<c:set var="heterocount" value="${em:getHeterotypicSynonymsCount(taxon)}" />
-								<c:set var="syncount" value="${em:getSynonymsCount(taxon)}" />
+								<c:set var="homocount" value="${em:getHomotypicSynonymsCount(taxon)}"/>
+								<c:set var="heterocount" value="${em:getHeterotypicSynonymsCount(taxon)}"/>
+								<c:set var="syncount" value="${em:getSynonymsCount(taxon)}"/>
 
 								<c:choose>
 									<c:when test="${syncount == 1 and homocount == 0 and heterocount == 0 }">
@@ -706,49 +773,81 @@
 											<div class="inner">
 												<h2>
 													<spring:message code="synonyms" var="synonymsHeader"/>${synonymsHeader}
-													<tags:feedbackLink selector="option:contains(${synonymsHeader})" dataName="${synonymsHeader}" />
+													<tags:feedbackLink selector="option:contains(${synonymsHeader})"
+																	   dataName="${synonymsHeader}"/>
 												</h2>
 												<ul class="unstyled">
 													<c:forEach var="synonym" items="${em:sort(taxon.synonymNameUsages)}">
 														<li>
 															<c:url value="/taxon/${synonym.identifier}" var="synonymUrl"/>
 
-															<c:set var="isTrue" value="${em:isSynonym(synonym)}" />
-															<c:if test = "${isTrue == true}">
+															<c:set var="isTrue" value="${em:isSynonym(synonym)}"/>
+															<c:if test="${isTrue == true}">
 																<c:choose>
 																	<c:when test="${not empty synonym.descriptions or not empty synonym.distribution or not empty synonym.typesAndSpecimens or not empty synonym.vernacularNames or not empty synonym.measurementsOrFacts or not empty synonym.images}">
 
 																		<div>
-																			<a href="${synonymUrl}">&#160;&#160;&#160;<b><em>${synonym.scientificName}</em> ${synonym.scientificNameAuthorship}</b></a>&#160;
+																			<a href="${synonymUrl}">&#160;&#160;&#160;<b><em>${synonym.scientificName}</em> ${synonym.scientificNameAuthorship}
+																			</b></a>&#160;
 																			<c:if test="${not empty synonym.descriptions}">
-																				<c:url value="/css/images/content/description.png" var="descriptionImg" />
-																				<a href="${synonymUrl}#description" title="Descriptions"><img src="${descriptionImg}" alt="WFO descriptions" style="width: 16px; height: 16px; " /></a>&#160;
+																				<c:url value="/css/images/content/description.png"
+																					   var="descriptionImg"/>
+																				<a href="${synonymUrl}#description"
+																				   title="Descriptions"><img
+																						src="${descriptionImg}"
+																						alt="WFO descriptions"
+																						style="width: 16px; height: 16px; "/></a>&#160;
 																			</c:if>
 																			<c:if test="${not empty synonym.images}">
-																				<c:url value="/css/images/content/image.png" var="imageImg" />
-																				<a href="${synonymUrl}#images" title="Images"><img src="${imageImg}" alt="WFO Images" style="width: 16px; height: 16px; " /></a>&#160;
+																				<c:url value="/css/images/content/image.png"
+																					   var="imageImg"/>
+																				<a href="${synonymUrl}#images"
+																				   title="Images"><img src="${imageImg}"
+																									   alt="WFO Images"
+																									   style="width: 16px; height: 16px; "/></a>&#160;
 																			</c:if>
 																			<c:if test="${not empty synonym.vernacularNames}">
-																				<c:url value="/css/images/content/vernacularName.jpg" var="vernacularNameImg" />
-																				<a href="${synonymUrl}#vernacularNames" title="VernacularNames"><img src="${vernacularNameImg}" alt="WFO vernacularNames" style="width: 16px; height: 16px; " /></a>&#160;
+																				<c:url value="/css/images/content/vernacularName.jpg"
+																					   var="vernacularNameImg"/>
+																				<a href="${synonymUrl}#vernacularNames"
+																				   title="VernacularNames"><img
+																						src="${vernacularNameImg}"
+																						alt="WFO vernacularNames"
+																						style="width: 16px; height: 16px; "/></a>&#160;
 																			</c:if>
 																			<c:if test="${not empty synonym.measurementsOrFacts}">
-																				<c:url value="/css/images/content/measurementsOrFact.png" var="measurementsOrFactImg" />
-																				<a href="${synonymUrl}#taxonData" title="MeasurementsOrFacts"><img src="${measurementsOrFactImg}" alt="WFO measurementsOrFacts" style="width: 16px; height: 16px; " /></a>&#160;
+																				<c:url value="/css/images/content/measurementsOrFact.png"
+																					   var="measurementsOrFactImg"/>
+																				<a href="${synonymUrl}#taxonData"
+																				   title="MeasurementsOrFacts"><img
+																						src="${measurementsOrFactImg}"
+																						alt="WFO measurementsOrFacts"
+																						style="width: 16px; height: 16px; "/></a>&#160;
 																			</c:if>
 																			<c:if test="${not empty synonym.typesAndSpecimens}">
-																				<c:url value="/css/images/content/typesAndSpecimen.png" var="typesAndSpecimenImg" />
-																				<a href="${synonymUrl}#distributionMap" title="TypesAndSpecimens"><img src="${typesAndSpecimenImg}" alt="WFO TypesAndSpecimens" style="width: 16px; height: 16px; " /></a>&#160;
+																				<c:url value="/css/images/content/typesAndSpecimen.png"
+																					   var="typesAndSpecimenImg"/>
+																				<a href="${synonymUrl}#distributionMap"
+																				   title="TypesAndSpecimens"><img
+																						src="${typesAndSpecimenImg}"
+																						alt="WFO TypesAndSpecimens"
+																						style="width: 16px; height: 16px; "/></a>&#160;
 																				<!--<a href="${synonymUrl}#specimenMessage" title="TypesAndSpecimens"><img src="${typesAndSpecimenImg}" alt="WFO TypesAndSpecimens" style="width: 16px; height: 16px; " /></a>&#160;-->
 																			</c:if>
 																			<c:if test="${not empty synonym.distribution}">
-																				<c:url value="/css/images/content/distribution.png" var="distributionImg" />
-																				<a href="${synonymUrl}#distributionMap" title="Distributions"><img src="${distributionImg}" alt="WFO distributions" style="width: 16px; height: 16px; " /></a>
+																				<c:url value="/css/images/content/distribution.png"
+																					   var="distributionImg"/>
+																				<a href="${synonymUrl}#distributionMap"
+																				   title="Distributions"><img
+																						src="${distributionImg}"
+																						alt="WFO distributions"
+																						style="width: 16px; height: 16px; "/></a>
 																			</c:if>
 																		</div>
 																	</c:when>
 																	<c:otherwise>
-																		<a href="${synonymUrl}">&#160;&#160;&#160;<em>${synonym.scientificName}</em> ${synonym.scientificNameAuthorship}</a>&#160;
+																		<a href="${synonymUrl}">&#160;&#160;&#160;<em>${synonym.scientificName}</em> ${synonym.scientificNameAuthorship}
+																		</a>&#160;
 																	</c:otherwise>
 																</c:choose>
 															</c:if>
@@ -758,7 +857,8 @@
 
 												<ul class="citations">
 													<spring:message code="citation.providedby"/>
-													<c:forEach var="provenanceHolder" items="${em:provenanceinitials(provenance,taxon.synonymNameUsages)}">
+													<c:forEach var="provenanceHolder"
+															   items="${em:provenanceinitials(provenance,taxon.synonymNameUsages)}">
 														<li>
 															<a href="#${em:initialtokey(provenanceHolder)}">${provenanceHolder}</a>
 														</li>
@@ -771,7 +871,7 @@
 									<c:when test="${homocount == 1 || heterocount == 1 }">
 										<ul class="nav nav-tabs">
 											<li class="active">
-												<a  href="#1" data-toggle="tab"><b>Synonyms</b></a>
+												<a href="#1" data-toggle="tab"><b>Synonyms</b></a>
 											</li>
 											<li>
 												<a href="#2" data-toggle="tab"><b>Synonyms Groups</b></a>
@@ -1625,14 +1725,31 @@
 								<li><a id="GBIFLink" href="${gbifUrl}" onClick="trackOutboundLink('${gbifUrl}'); return false;">
 									<spring:message code="gbif"/><!--  --></a></li>
 
-								<c:if test="${not empty taxon.scientificNameID}">
-									<c:url var="ipniUrl" value="http://www.ipni.org/ipni/idPlantNameSearch.do">
-										<c:param name="id" value="${taxon.scientificNameID}"/>
-									</c:url>
-									<li><a id="IPNILink" href="${ipniUrl}" onClick="trackOutboundLink('${ipniUrl}'); return false;">
-										<spring:message code="ipni"/>${taxon.scientificNameID}<!--  --></a></li>
-									<!--IPNI - http://ipni.org/urn:lsid:ipni.org:names:${taxon.scientificNameID}-->
+								<c:if test="${(not empty taxon.scientificNameID) and (not empty taxon.taxonExternalLinks.majorGroup)}">
+									<c:set var="bryophytaList" value="${em:getBryophytesList()}"/>
+									<c:choose>
+										<c:when test="${fn:containsIgnoreCase(taxon.scientificNameID, 'urn:lsid:ipni')}">
+											<c:url var="ipniUrl" value="http://www.ipni.org/ipni/idPlantNameSearch.do">
+												<c:param name="id" value="${taxon.scientificNameID}"/>
+											</c:url>
+											<li><a id="IPNILink" href="${ipniUrl}" onClick="trackOutboundLink('${ipniUrl}'); return false;">
+												<spring:message code="ipni"/>${taxon.scientificNameID}<!--  --></a></li>
+										</c:when>
+
+										<c:when test="${fn:containsIgnoreCase(bryophytaList, taxon.taxonExternalLinks.majorGroup)}">
+											<c:forEach var="bryophyte" items="${bryophytaList}">
+												<c:if test="${bryophyte eq fn:toUpperCase(taxon.taxonExternalLinks.majorGroup)}">
+													<c:url var="tropicosUrl" value="http://www.tropicos.org/Name/${taxon.scientificNameID}">
+													</c:url>
+													<li><a id="tropicosLink" href="${tropicosUrl}" onClick="trackOutboundLink('${tropicosUrl}'); return false;">
+													<spring:message code="tropicos"/>${taxon.scientificNameID}<!--  --></a></li>
+												</c:if>
+											</c:forEach>
+										</c:when>
+
+									</c:choose>
 								</c:if>
+
 
 								<c:if test="${taxon.taxonRank == 'PHYLUM'}">
 									<c:if test="${not empty taxon.taxonExternalLinks.majorGroup}">

@@ -53,6 +53,9 @@
 				<c:if test="${not empty acceptedSpeciesCount}">
 					<fmt:formatNumber type="NUMBER" groupingUsed="true" var="acceptedSpecies" value="${acceptedSpeciesCount}"/>
 				</c:if>
+				<c:if test="${not empty contentNamesCount}">
+					<fmt:formatNumber type="NUMBER" groupingUsed="true" var="contentNames" value="${contentNamesCount}"/>
+				</c:if>
 				<c:url var="taxaUrl" value="/search">
 					<c:param name="facet" value="base.class_s:org.emonocot.model.Taxon"/>
 				</c:url>
@@ -83,14 +86,13 @@
 				</c:url>
 				<c:choose>
 					<c:when test="${keys>0}">
-						<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
+						<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${contentNames}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
 					</c:when>
 					<c:otherwise>
-						<spring:message code="hero.stats2" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${imagesUrl}|${images}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
+						<spring:message code="hero.stats2" arguments="${taxaUrl}|${taxa}|${acceptedSpeciesUrl}|${acceptedSpecies}|${contentNames}|${imagesUrl}|${images}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}" argumentSeparator="|"/>
 					</c:otherwise>
 				</c:choose>
-				<!--<spring:message code="hero.stats" arguments="${taxaUrl}|${taxa}|${imagesUrl}|${images}|${keysUrl}|${keys}|${descriptionsUrl}|${descriptions}|${distributionUrl}|${distributions}|${referencesUrl}|${references}|${acceptedSpeciesUrl}|${acceptedSpecies}" argumentSeparator="|"/>-->
-			</h4>	
+			</h4>
 		</c:if>
 	
 		<!-- search -->

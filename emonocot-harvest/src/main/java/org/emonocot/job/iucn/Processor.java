@@ -69,6 +69,8 @@ public class Processor extends AbstractRecordAnnotator implements ItemProcessor<
 
 	public static String CRITERIA_FIELD = "criteria";
 
+	public static String TAXONOMIC_AUTHORITY_FIELD = "taxonomic_authority";
+
 	private String accessRights;
 
 	private String license;
@@ -175,82 +177,129 @@ public class Processor extends AbstractRecordAnnotator implements ItemProcessor<
 	private Taxon doMatchTaxon(Map<String, Object> map) {
 		ParsedName<String> parsedName = null;
 		if(map.get(Processor.SCIENTIFIC_NAME_FIELD) != null) {
+			logger.info("IUCN processor name map.get(Processor.SCIENTIFIC_NAME_FIELD): "+map.get(Processor.SCIENTIFIC_NAME_FIELD));
 			try {
 				parsedName = nameParser.parse(StringEscapeUtils.unescapeXml((String)map.get(Processor.SCIENTIFIC_NAME_FIELD)));
+				logger.info("IUCN processor name parsedName: "+parsedName);
 			} catch (UnparsableException e) {
 				logger.error("Unable to parse scientific_name");
 			}
 		}
 
 		StringBuffer nameBuffer = new StringBuffer();
+		String scientificNameAuthorship = "";
 
 		if(nullSafeContains(map,Processor.GENUS_FIELD)) {
+			logger.info("IUCN processor - nullSafeContains(map,Processor.GENUS_FIELD)");
 			String genus = ((String)map.get(Processor.GENUS_FIELD)).trim();
+			logger.info("IUCN processor genus: "+genus);
 			nameBuffer.append(genus);
 		}else if (nullSafeContains(map, Processor.ALTERNATE_GENUS_FIELD)) {
+			logger.info("IUCN processor - nullSafeContains(map,Processor.ALTERNATE_GENUS_FIELD)");
 			String genus = ((String)map.get(Processor.ALTERNATE_GENUS_FIELD)).trim();
+			logger.info("IUCN processor genus: "+genus);
 			nameBuffer.append(genus);
 		}
 		if(nullSafeContains(map,Processor.SPECIFIC_EPITHET_FIELD)) {
+			logger.info("IUCN processor - nullSafeContains(map,Processor.SPECIFIC_EPITHET_FIELD)");
 			String species = ((String)map.get(Processor.SPECIFIC_EPITHET_FIELD)).trim();
+			logger.info("IUCN processor species: "+species);
 			nameBuffer.append(" ").append(species);
 		}
 		else if((parsedName.specificEpithet != null) && !parsedName.specificEpithet.isEmpty())
 		{
+			logger.info("IUCN processor - specificEpithet not null and not empty");
             String species = parsedName.specificEpithet.toString().trim();
+			logger.info("IUCN processor species: "+species);
 			nameBuffer.append(" ").append(species);
 		}
 		if(!nullSafeContains(map,Processor.INFRASPECIFIC_EPITHET_FIELD)) {
+			logger.info("IUCN processor - !nullSafeContains(map,Processor.INFRASPECIFIC_EPITHET_FIELD)");
 			if(parsedName == null || parsedName.getInfraSpecificEpithet() == null) {
+				logger.info("IUCN processor - parsedName null or getInfraSpecificEpithet null");
 				// Assume species, and use the "authority" field
 				if(nullSafeContains(map,Processor.AUTHORITY_FIELD)) {
+					logger.info("IUCN processor - nullSafeContains(map,Processor.AUTHORITY_FIELD)");
 					String authority = StringEscapeUtils.unescapeXml(((String)map.get("authority")).trim());
+					logger.info("IUCN processor authority: "+authority);
 					nameBuffer.append(" ").append(authority);
 				}
 			} else {
 				// The parsed json fields do not contain information about the
 				// infraspecies, but the scientific_name field does contain this
 				// information
+				logger.info("IUCN processor parsedName: "+parsedName);
+				logger.info("IUCN processor parsedName.getInfraSpecificEpithet(): "+parsedName.getInfraSpecificEpithet());
 				if(parsedName.getRankMarker() != null) {
+					logger.info("IUCN processor - getRankMarker= "+ parsedName.getRankMarker());
 					String infraspecificRank = parsedName.getRankMarker().trim();
+					logger.info("IUCN processor infraspecificRank: "+infraspecificRank);
 					nameBuffer.append(" ").append(infraspecificRank);
 				}
-
+				logger.info("IUCN processor getRankMarker is null");
 				String infraspecificEpithet = parsedName.getInfraSpecificEpithet().trim();
+				logger.info("IUCN processor infraspecificEpithet: "+infraspecificEpithet);
 				nameBuffer.append(" ").append(infraspecificEpithet);
-
+				logger.info("IUCN processor nameBuffer: "+nameBuffer);
 				if(parsedName.getAuthorship() != null) {
+					logger.info("IUCN processor - getAuthorship : "+parsedName.getAuthorship());
 					String infraspecificAuthority = parsedName.getAuthorship().trim();
+					logger.info("IUCN processor infraspecificAuthority: "+infraspecificAuthority);
 					nameBuffer.append(" ").append(infraspecificAuthority);
 				}
 			}
 		} else {
+			logger.info("IUCN processor nullSafeContains(map,Processor.INFRASPECIFIC_EPITHET_FIELD)");
 			// Assume infraspecies, try to use the infra_rank, infra_name and  "infra_authority" fields
 			if(nullSafeContains(map,Processor.INFRASPECIFIC_RANK_FIELD)) {
+				logger.info("IUCN processor - map.get(Processor.INFRASPECIFIC_RANK_FIELD) : " + map.get(Processor.INFRASPECIFIC_RANK_FIELD));
 				String infraspecificRank = ((String)map.get(Processor.INFRASPECIFIC_RANK_FIELD)).trim();
+				logger.info("IUCN processor infraspecificRank: "+infraspecificRank);
 				nameBuffer.append(" ").append(infraspecificRank);
 			}
 
 			if(nullSafeContains(map,Processor.INFRASPECIFIC_EPITHET_FIELD)) {
+				logger.info("IUCN processor - map.get(Processor.INFRASPECIFIC_EPITHET_FIELD) : "+ map.get(Processor.INFRASPECIFIC_EPITHET_FIELD));
 				String infraspecificEpithet = ((String)map.get(Processor.INFRASPECIFIC_EPITHET_FIELD)).trim();
+				logger.info("IUCN processor infraspecificEpithet: "+infraspecificEpithet);
 				nameBuffer.append(" ").append(infraspecificEpithet);
 			}
 
 			if(nullSafeContains(map,Processor.INFRASPECIFIC_AUTHORITY_FIELD)) {
+				logger.info("IUCN processor - map.get(Processor.INFRASPECIFIC_AUTHORITY_FIELD) : "+ map.get(Processor.INFRASPECIFIC_AUTHORITY_FIELD));
 				String infraspecificAuthority = StringEscapeUtils.unescapeXml(((String)map.get(Processor.INFRASPECIFIC_AUTHORITY_FIELD)).trim());
+				logger.info("IUCN processor infraspecificAuthority: "+infraspecificAuthority);
 				nameBuffer.append(" ").append(infraspecificAuthority);
 			}
 		}
 
-		String name = nameBuffer.toString();
+		if(nullSafeContains(map,Processor.TAXONOMIC_AUTHORITY_FIELD)) {
+			logger.info("IUCN processor - nullSafeContains(map,Processor.TAXONOMIC_AUTHORITY_FIELD)");
+			scientificNameAuthorship = ((String)map.get(Processor.TAXONOMIC_AUTHORITY_FIELD)).trim();
+			logger.info("IUCN processor scientificNameAuthorship: "+scientificNameAuthorship);
+			nameBuffer.append(" ").append(scientificNameAuthorship);
+		}
 
+		logger.info("IUCN processor nameBuffer===: "+nameBuffer);
+		String name = nameBuffer.toString();
+		logger.info("IUCN processor name===: "+name);
 		List<Match<Taxon>> results;
 		try {
-			results = taxonMatcher.match(name);
+			results = taxonMatcher.match(name, scientificNameAuthorship);
+
 			if(results.size() == 1) {
+				logger.info("IUCN processor name: results size 1");
 				return results.get(0).getInternal();
 			} else if(results.size() > 1) {
 				logger.info(name + " multiple matches");
+
+				for(Match<Taxon> result : results) {
+					logger.info("IUCN processor name: result.getInternal().getScientificName()" + result.getInternal().getScientificName());
+					logger.info("IUCN processor name: result.getInternal().getInternal()" + result.getInternal().getIdentifier());
+
+				}
+
+
 				Annotation annotation = new Annotation();
 				annotation.setJobId(stepExecution.getJobExecutionId());
 				annotation.setAnnotatedObj(null);

@@ -21,10 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.emonocot.model.Image;
-import org.emonocot.model.Reference;
-import org.emonocot.model.Taxon;
-import org.emonocot.model.TypeAndSpecimen;
+import org.emonocot.model.*;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 
 public class ManyToManyWriter extends FlatFileItemWriter<Taxon> {
@@ -61,6 +58,13 @@ public class ManyToManyWriter extends FlatFileItemWriter<Taxon> {
 					if(o.getLicense() != null && !o.getLicense().isEmpty()) {
 						o.setTaxa(taxaList);
 						items.add(o);
+					}
+				}
+			} else if(type.equals(IdentificationKey.class)) {
+				for(IdentificationKey k : t.getKeys()) {
+					if(k.getLicense() != null && !k.getLicense().isEmpty()) {
+						k.setTaxa(taxaList);
+						items.add(k);
 					}
 				}
 			}

@@ -9,7 +9,8 @@ public enum WFOTerm implements Term {
     infraSpecificRank,
     genusHybridMarker,
     ccrStatus,
-    originalID
+    originalID,
+    isPreferredDescription
     ;
 
     public static final String NS = "http://rs.worldfloraonline/terms/";

@@ -14,23 +14,24 @@
  * The complete text of the GNU Affero General Public License is in the source repository as the file
  * ‘COPYING’.  It is also available from <http://www.gnu.org/licenses/>.
  */
-package org.emonocot.api.match;
+package org.emonocot.model.compare;
 
-import java.util.List;
+import org.emonocot.model.Description;
+import org.emonocot.model.Reference;
+import org.emonocot.model.registry.Organisation;
 
-import org.emonocot.api.match.Match;
+import java.util.Comparator;
 
-/**
- * @author jk00kg
- */
-public interface Matcher<I, O> {
+public class SourceBasedDescriptionComparator implements	Comparator<Organisation> {
 
-	/**
-	 * For a given type input (I), return a list of matches to a given output (O)
-	 * @param input - The input for the matching service. This could be a string, identifier or example object
-	 * @return - A list of matches, typed for convenience
-	 */
-	List<Match<O>> getMatches(I input);
-	List<Match<O>> getMatches(I input, String author);
+	Comparator<Organisation> sourceComparator = new SourceComparator();
 
+	@Override
+	public int compare(Organisation o1, Organisation o2) {
+		if(o1.getAuthority() == null) {
+			return 0;
+		} else {
+			return sourceComparator.compare(o1, o2);
+		}
+	}
 }

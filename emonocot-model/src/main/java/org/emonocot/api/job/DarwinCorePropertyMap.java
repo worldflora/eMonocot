@@ -47,6 +47,8 @@ public class DarwinCorePropertyMap {
 
 	public static Map<Term,String> measurementOrFactTerms = new HashMap<Term,String>();
 
+	public static Map<Term,String> identificationKeys = new HashMap<Term,String>();
+
 	public static Map<Term,String> skosTerms = new HashMap<Term,String>();
 
 	static {
@@ -137,6 +139,7 @@ public class DarwinCorePropertyMap {
 		descriptionTerms.put(DcTerm.references, "source");
 		descriptionTerms.put(DcTerm.source, "references");
 		descriptionTerms.put(DcTerm.type, "type");
+		descriptionTerms.put(WFOTerm.isPreferredDescription, "preferredDescription");
 
 		referenceTerms.put(DcTerm.accessRights,"accessRights");
 		referenceTerms.put(DwcTerm.datasetID,"authority.identifier");
@@ -270,6 +273,26 @@ public class DarwinCorePropertyMap {
 		typeAndSpecimenTerms.put(DwcTerm.verbatimLatitude, "verbatimLatitude");
 		typeAndSpecimenTerms.put(DwcTerm.verbatimLongitude, "verbatimLongitude");
 
+		identificationKeys.put(DcTerm.accessRights,"accessRights");//
+		identificationKeys.put(DcTerm.created,"created");//
+		identificationKeys.put(DcTerm.source,"source");//
+		identificationKeys.put(DcTerm.references,"uri");////
+		identificationKeys.put(DcTerm.license,"license");//
+		identificationKeys.put(DcTerm.modified,"modified");//
+		identificationKeys.put(DcTerm.rights,"rights");//
+		identificationKeys.put(DcTerm.rightsHolder,"rightsHolder");//
+		identificationKeys.put(DcTerm.identifier, "identifier");//
+		identificationKeys.put(DwcTerm.taxonID, "taxa[0].identifier");////
+		identificationKeys.put(DcTerm.creator, "creator");//
+		identificationKeys.put(DcTerm.title, "title");//
+		identificationKeys.put(DcTerm.audience, "audience");//
+		identificationKeys.put(DcTerm.format, "format");//
+		identificationKeys.put(DcTerm.publisher, "publisher");//
+		identificationKeys.put(DcTerm.contributor, "contributor");//
+		identificationKeys.put(DcTerm.accessRights,"accessRights");//
+		identificationKeys.put(DcTerm.description, "description");//
+		//identificationKeys.put(GbifTerm.matrix, "matrix");//
+
 		skosTerms.put(DcTerm.accessRights,"accessRights");
 		skosTerms.put(DwcTerm.datasetID,"authority.identifier");
 		skosTerms.put(DwcTerm.datasetName,"authority.title");
@@ -309,6 +332,8 @@ public class DarwinCorePropertyMap {
 			return imageTerms;
 		} else if(conceptTerm.equals(GbifTerm.TypesAndSpecimen)) {
 			return typeAndSpecimenTerms;
+		} else if(conceptTerm.equals(DwcTerm.Identification)) {//check term
+			return identificationKeys;
 		} else if(conceptTerm.equals(GbifTerm.Reference)) {
 			return referenceTerms;
 		} else if(conceptTerm.equals(SkosTerm.Concept)) {
